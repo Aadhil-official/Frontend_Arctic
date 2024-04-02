@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
+// import { Login } from '@mui/icons-material';
+// import NewJobWithJobID from './Pages/NewJobWithJobID';
+// import NewJob from './Pages/NewJob';
+import Contacts from './Pages/Contacts';
+import Logins from './Pages/Logins';
 import './App.css';
+import Welcome from './Pages/Welcome';
+// import ForPassword from './Pages/Forpassword';
+import Homes from './Pages/Homes';
+// import JobAllocation from './Pages/Joballocation';
+// import JobDetails1 from './Pages/Jobdetails1';
+// import JobDetails2 from './Pages/Jobdetails2';
+// import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {/* <Homes/> */}
+    {/* <Contacts/> */}
+    {/* <Logins/> */}
+    {/* <ForPassword/> */}
+      <Welcome/>
+      {/* <JobAllocation/> */}
+      {/* <JobDetails1/> */}
+      {/* <JobDetails2/> */}
+      {/* <NewJob/> */}
+      {/* <NewJobWithJobID/> */}
+    </>
   );
 }
 
