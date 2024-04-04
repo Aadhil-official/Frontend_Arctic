@@ -2,48 +2,48 @@ import React from 'react';
 import NormalHeaderBar from '../Components/NormalHeaderBar';
 import { Link } from 'react-router-dom';
 import '../Style/Login.css';
-import Form from '../Components/Form';
-import Button from '../Components/Button';
-import { Typography } from '@mui/material';
-
-export default function Logins() {
+import Button from '../Components/ButtonSignup';
+import FormSignup from '../Components/FormSignup';
+import { Grid, Typography } from '@mui/material';
+import ButtonSignup from '../Components/ButtonSignup';
+export default function Signup() {
 
   return (
-    <>
+    <div>
   <NormalHeaderBar />
- 
+   
     <div className="text">
-    <Typography variant='h3' sx={{fontWeight:'bold'}}><center>Sign in</center></Typography>
+       <Typography variant='h3' sx={{fontWeight:'bold'}}><center>Create New User</center></Typography>
       </div>
+      
   <div>
-   <p><h4><center>Sign in to your account</center></h4></p>
+   <p><Typography variant='h4'><center>Enter account details</center></Typography></p>
       </div>
      
       <br />
-
       <div className="box">
 
         <div className="box-content">
-        <Form/>
+        <FormSignup/>
 
         </div> 
       </div>
 
       <div>
-        <p><h4><center>Forget Password?  
-          <Link to={"/login/forgetpassword"} style={{color:'red'}}>
+        <p><h4><center>  
+          <Link to={"/signup"} style={{color:'red'}}>
              Click here to Reset
              </Link>
              </center></h4></p>
-    
+     
        </div>
+
       <ul className="footer">
         <div className="footer-text">
           <p>© 2023 • All Rights Reserved</p>
         </div>
       </ul>
-    </>
+    </div>
   );
 }
-
-//  export default Logins;
+//  export default Signup;

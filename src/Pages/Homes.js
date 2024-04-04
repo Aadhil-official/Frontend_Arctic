@@ -24,7 +24,7 @@ const Homes = () => {
     <div className="home-container">
       
  
-      <ResponsiveAppBar></ResponsiveAppBar>
+      <ResponsiveAppBar/>
       <ThemeProvider/>
       <div className="slideshow-container">
         <div className={`mySlides ${slideIndex === 0 ? 'active' : ''}`}>
@@ -41,7 +41,7 @@ const Homes = () => {
           <img
             src="https://www.bowersoxair.com/wp-content/uploads/2019/06/airconditionertrends-1.jpeg"
             width="100%"
-            height="500px"
+            height="375px"
             alt="Slide 1"
           />
         </div>
@@ -58,7 +58,7 @@ const Homes = () => {
           <img
             src="https://parkerairconditioning.com.au/wp-content/uploads/2016/06/specials.jpg"
             width="100%"
-            height="500px"
+            height="375px"
             alt="Slide 2"
           />
         </div>
@@ -76,7 +76,7 @@ const Homes = () => {
           <img
             src="https://th.bing.com/th/id/R.82e6c1f15cf388268662de8e766a3d6b?rik=JKnBZ%2bXBf4Q9Qg&riu=http%3a%2f%2fimg.zhuangxiutp.com%2fupload%2fnews%2f2019%2f0802%2fphotos%2fmiddle%2f20190802131211_8qt_5g2bavbo.jpg&ehk=0Lji%2bh24pKiLBzU5%2fsY2AuJr6ffM7Ye4MeZAc0HCFQc%3d&risl=&pid=ImgRaw&r=0"
             width="100%"
-            height="500px"
+            height="375px"
             alt="Slide 3"
           />
         </div>

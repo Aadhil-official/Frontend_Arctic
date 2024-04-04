@@ -12,9 +12,9 @@ const Welcome = () => {
     { label: 'Item Details' },
     { label: 'Unit Details' },
     { label: 'Vehicle Details' },
-    { label: 'Job Details' },//, link: '/jd1'
+    { label: 'Job Details' },
     { label: 'Service Agreement' },
-    { label: 'Calendar'},//,link: '/cl' 
+    { label: 'Calendar'}, 
     { label: 'Schedule a Site Visit' },
     { label: 'Job Allocation' },
   ];

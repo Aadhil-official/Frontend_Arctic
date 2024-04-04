@@ -11,7 +11,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Grid } from '@mui/material';
 
 export default function MenuAppBar() {
   const [auth, setAuth] = React.useState(true);
@@ -30,7 +31,7 @@ export default function MenuAppBar() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <>
       <FormGroup>
         <FormControlLabel
           control={
@@ -45,14 +46,19 @@ export default function MenuAppBar() {
           
       </FormGroup>
       <AppBar position="static">
-        <Toolbar>
-        {/* <Link to={"/"}style={{ color: 'white' }}>  */}
-        <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', Color: 'blue' }}/>
-    {/* </Link> */}
-        
-          <Typography variant="h3" component="div" sx={{ flexGrow: 1 }}>
+        {/* <Toolbar> */}
+        <Grid container spacing={2}>
+          <Grid item lg={4.9} md={5} sm={5} xs={2.5}>
+        <Link to={"/"}> 
+        <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity:'0.5'}}/>
+    </Link>
+    </Grid>
+    <Grid item lg={2} md={2} sm={2} xs={2}>
+          <Typography variant="h3">
           Welcome!
-          </Typography>
+          </Typography></Grid>
+          <Grid item lg={4.1} md={4} sm={4} xs={4.7}></Grid>
+          <Grid item lg={1} md={1} sm={1} xs={1} >
           {auth && (
             <div>
              
@@ -63,7 +69,7 @@ export default function MenuAppBar() {
                 aria-haspopup="true"
                 onClick={handleMenu}
                 color="inherit"
-                style={{ width: '40px', height: '40px' }}
+                style={{ width: '40px', height: '40px' ,marginTop:'10px'}}
               >
                <AccountCircle style={{ width: '60px', height: '60px' }} />
               </IconButton>
@@ -90,8 +96,10 @@ export default function MenuAppBar() {
              
             </div>
           )}
-        </Toolbar>
+          </Grid>
+          </Grid>
+        {/* </Toolbar> */}
       </AppBar>
-    </Box>
+    </>
   );
 }
