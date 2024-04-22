@@ -1,9 +1,7 @@
 import React from 'react';
 import Profiles from '../Components/Profiles'; 
 import '../Style/Welcome.css';
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Tabs from '../Components/Tabs';
-
 
 
 const Welcome = () => {

@@ -2,14 +2,15 @@ import React from 'react';
 import NormalHeaderBar from '../Components/NormalHeaderBar';
 import { Link } from 'react-router-dom';
 import '../Style/Login.css';
-import Button from '../Components/ButtonSignup';
 import FormSignup from '../Components/FormSignup';
-import { Grid, Typography } from '@mui/material';
-import ButtonSignup from '../Components/ButtonSignup';
+import { Typography } from '@mui/material';
+
 export default function Signup() {
 
+
+
   return (
-    <div>
+    <>
   <NormalHeaderBar />
    
     <div className="text">
@@ -17,7 +18,7 @@ export default function Signup() {
       </div>
       
   <div>
-   <p><Typography variant='h4'><center>Enter account details</center></Typography></p>
+   <Typography variant='h4'><center>Enter account details</center></Typography>
       </div>
      
       <br />
@@ -30,11 +31,11 @@ export default function Signup() {
       </div>
 
       <div>
-        <p><h4><center>  
+        <h4><center>  
           <Link to={"/signup"} style={{color:'red'}}>
              Click here to Reset
              </Link>
-             </center></h4></p>
+             </center></h4>
      
        </div>
 
@@ -43,7 +44,6 @@ export default function Signup() {
           <p>© 2023 • All Rights Reserved</p>
         </div>
       </ul>
-    </div>
+    </>
   );
 }
-//  export default Signup;

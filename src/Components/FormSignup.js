@@ -1,89 +1,98 @@
-import * as React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import axios from "axios";
+import Button from '@mui/material/Button';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import ButtonSignup from './ButtonSignup';
 
+export default function FormSignup() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [role, setRole] = useState(''); // State to hold the selected role
+  const navigate = useNavigate();
 
-function FormSignup() {
-    
-const [username, setUsername] = useState('');
-const [password, setPassword] = useState('');
+  const handleSubmit = () => {
+    if (!username || !password || !email || !role) {
+      alert('Please fill in all required fields.');
+      return;
+    }
 
+    // Validate role against allowed roles
+    const allowedRoles = ['admin', 'mod', 'user'];
+    if (!allowedRoles.includes(role)) {
+      alert('Invalid role. Please choose either admin, mod, or user.');
+      return;
+    }
 
-function HandleSubmit()
-{
+    const userData = {
+      username: username,
+      password: password,
+      email: email,
+      roles: [role] // Send role as an array containing the selected role
+    };
 
-
-const navigate = useNavigate();
-
-const data = {
-  username: username,
-  password: password
-}
-
-  if(username!=null && password!=null)
-  {
-    axios.post('http://localhost:8080/api/auth/signup', data)
-    .then((response) => {
-      console.log(response);
-      navigate('/login');
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  }
-}
+    axios.post('http://localhost:8080/api/auth/signup', userData)
+      .then(() => {
+        alert('Signup successful!');
+        navigate('/');
+      })
+      .catch((error) => {
+        alert(error.response.data.message || 'Signup failed. Please try again.');
+      });
+  };
 
   return (
-    <div>
-        <Box
-    component="form"
-    sx={{
-      '& .MuiTextField-root': { m: 1, width: '25ch' },
-    }}
-    noValidate
-    autoComplete="off"
-  >
-    <div>
-      {/* <form onSubmit={(e)=>onSubmit(e)}> */}
+    <>
+    <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
       <TextField
-        id="outlined-required"
         label="Name"
-        // value={username}
-        // onChange={(e)=>onInputChange(e)}
-      />
-     
-     <TextField 
-        label="Email"
-        id="outlined-required"
-        // value={email}
-        // onChange={(e)=>onInputChange(e)}
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        required
       />
 
       <TextField
-        label="Role"
-        id="outlined-required"
-        // value={roles}
-        // onChange={(e)=>onInputChange(e)}
-      />
-
-      <TextField
-        id="outlined-password-input"
         label="Password"
         type="password"
-        autoComplete="current-password"
-        // value={password}
-        // onChange={(e)=>onInputChange(e)}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
       />
-    {/* </form> */}
-    </div>
-  </Box>
-  <ButtonSignup/>
-    </div>
-  )
-}
 
-export default FormSignup
+      <TextField
+        label="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+
+      <TextField
+        select
+        label="Role"
+        value={role}
+        onChange={(e) => setRole(e.target.value)}
+        required
+        SelectProps={{ native: true }}
+      >
+        <option value=""></option>
+        <option value="admin">Admin</option>
+        <option value="mod">Moderator</option>
+        <option value="user">User</option>
+      </TextField>
+
+    </Box>
+    
+    <Button variant="contained" onClick={handleSubmit}>
+    Signup
+  </Button>
+  </>
+  );
+}

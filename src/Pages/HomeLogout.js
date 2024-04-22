@@ -4,7 +4,7 @@ import ResponsiveAppBar from '../Components/ResponsiveAppBar';
 import ThemeProvider from '../Components/ThemeProvider';
 
 
-const Homes = () => {
+const HomeLogout = () => {
   const [slideIndex, setSlideIndex] = useState(0);
 
   useEffect(() => {
@@ -93,4 +93,4 @@ const Homes = () => {
   );
 };
 
-export default Homes;
+export default HomeLogout;

@@ -3,7 +3,6 @@ import NormalHeaderBar from '../Components/NormalHeaderBar';
 import { Link } from 'react-router-dom';
 import '../Style/Login.css';
 import Form from '../Components/Form';
-import Button from '../Components/Button';
 import { Typography } from '@mui/material';
 
 export default function Logins() {
@@ -16,7 +15,7 @@ export default function Logins() {
     <Typography variant='h3' sx={{fontWeight:'bold'}}><center>Sign in</center></Typography>
       </div>
   <div>
-   <p><h4><center>Sign in to your account</center></h4></p>
+   <h4><center>Sign in to your account</center></h4>
       </div>
      
       <br />
@@ -30,11 +29,11 @@ export default function Logins() {
       </div>
 
       <div>
-        <p><h4><center>Forget Password?  
+        <h4><center>Forget Password?  
           <Link to={"/login/forgetpassword"} style={{color:'red'}}>
              Click here to Reset
              </Link>
-             </center></h4></p>
+             </center></h4>
     
        </div>
       <ul className="footer">
@@ -45,5 +44,3 @@ export default function Logins() {
     </>
   );
 }
-
-//  export default Logins;

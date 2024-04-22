@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import '../Style/Forpassword.css';
 // import { BrowserRouter as Browser,Router,Route,Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -7,11 +7,11 @@ import { Grid } from '@mui/material';
 
 function ForPassword() {
 
-  const [user, setUser] = useState(
-    {
-      email: ""
-    }
-  )
+  // const [user, setUser] = useState(
+  //   {
+  //     email: ""
+  //   }
+  // )
 
   return (
     <>
@@ -33,7 +33,6 @@ function ForPassword() {
 
 
             <div>
-              {/* form to enter email and submit it */}
               <form action="/submit_form_endpoint" method="post">
                 <input type="email" id="email" name="email" required /><br /><br />
                 <input type="submit" value="Submit" />
@@ -41,12 +40,11 @@ function ForPassword() {
             </div>
             <br />
 
-            {/* link the login page to this */}
-            <p><h4><center>
+            <h4><center>
               Back To Login?<Link to={"/login"} style={{ color: 'red' }} >
                 Click here to login
               </Link>
-            </center></h4></p>
+            </center></h4>
           </div>
           <div>
           </div>

@@ -13,20 +13,12 @@ import Switch from '@mui/material/Switch';
 // import Menu from '@mui/material/Menu';, useNavigate
 import { Link, useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
-import ButtonComplain from './ButtonComplain';
 
 // const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
-export default function MenuAppBar() {
-  // const [auth, setAuth] = React.useState(true);
-  // const [anchorEl, setAnchorEl] = React.useState(null);
+function ProfilesAdmin() {
 
-  // const navigate = useNavigate;
-
-  // const handleChange = (event) => {
-  //   setAuth(event.target.checked);
-  // };
-  const [checked, setChecked] = React.useState(false);
+    const [checked, setChecked] = React.useState(false);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -41,9 +33,10 @@ export default function MenuAppBar() {
 
   // const variableToPass = checked;
 
+
   return (
-    <>
-      <AppBar position="static">
+    <div>
+        <AppBar position="static">
         <Grid container spacing={2}>
           <Grid item lg={4.9} md={5} sm={5} xs={2.5}>
             <Link to={"/"}>
@@ -54,12 +47,7 @@ export default function MenuAppBar() {
             <Typography variant="h3">
               Welcome!
             </Typography></Grid>
-          <Grid item lg={2.3} md={2.3} sm={2.3} xs={2.3}></Grid>
-          <Grid item lg={1.2} md={1.2} sm={1.2} xs={1.2} sx={{ color: 'orange', marginTop: '10px' }} variant="h5">
-           <Link to={'/login/complaint'}>
-             <ButtonComplain/>
-                </Link>
-          </Grid>
+          <Grid item lg={3.5} md={3.5} sm={3.5} xs={3.5}></Grid>
           <Grid item lg={0.7} md={0.7} sm={0.7} xs={0.7} >
             <Typography variant="h5" sx={{ color: 'orange', marginTop: '10px' }}>logout</Typography>
           </Grid>
@@ -75,6 +63,8 @@ export default function MenuAppBar() {
           </Grid>
         </Grid>
       </AppBar>
-      </>
-  );
+    </div>
+  )
 }
+
+export default ProfilesAdmin

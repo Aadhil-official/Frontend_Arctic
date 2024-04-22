@@ -17,11 +17,6 @@ const Tabs = ({ buttonData }) => {
           variant="contained"
           style={{ width: '40%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}
         >{button.label}
-          {/* {button.link ? (
-            <Link to={button.link}>{button.label}</Link>
-          ) : (
-            button.label
-          )} */}
         </Button>
       ))}
     </Stack>
