@@ -1,45 +1,59 @@
 import React from 'react'
-import NormalHeaderBar from '../Components/NormalHeaderBar';
+import {NormalHeaderBar,ComplaintForm, Footer} from '../Components/index';
 import { Link } from 'react-router-dom';
 import '../Style/Login.css';
-import ComplaintForm from '../Components/ComplaintForm';
-import { Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
+import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
+
 
 function Usercomplaint() {
+
+  let theme = createTheme();
+  theme = responsiveFontSizes(theme);
+
+  theme.typography.h5 = {
+    fontSize: '1.1rem'
+  }
+
   return (
     <>
       <NormalHeaderBar />
 
-      <div className="text">
-        <Typography variant='h3' sx={{ fontWeight: 'bold' }}><center>Complaints</center></Typography>
-      </div>
-      <div>
-        <h4><center>Enter your complaint here</center></h4>
-      </div>
-
+      <Grid container className="text">
+        <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
+          <ThemeProvider theme={theme}>
+            <Typography variant='h3' sx={{fontWeight:'bold'}}>Complaints</Typography>
+          </ThemeProvider>
+        </Grid>
+      </Grid>
+      <Grid container>
+        <ThemeProvider theme={theme}>
+          <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
+            <Typography variant='h6'>Enter your complaint here</Typography>
+          </Grid>
+        </ThemeProvider>
+      </Grid>
       <br />
-
-      <div className="box">
-
-        <div className="box-content">
+      <Grid container>
+        <Grid item xl={5.25} lg={4.65} md={4} xs={1} sm={3}></Grid>
+        <Grid item xl={1.5} lg={2.7} md={4} xs={10.5} sm={6} className="box">
           <ComplaintForm />
-
-        </div>
-      </div>
-
-      <div>
-        <h4><center>To ignore?
+          </Grid>
+        <Grid item xl={2} lg={3} md={4} xs={0.5} sm={3}></Grid>
+      </Grid><br />
+      <Grid container>
+        <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
+          <ThemeProvider theme={theme}>
+            <Typography variant='h5' fontWeight='bold'>
+      To ignore?
           <Link to={"/login/welcome"} style={{ color: 'red' }}>
             Click here
           </Link>
-        </center></h4>
-
-      </div>
-      <ul className="footer">
-        <div className="footer-text">
-          <p>© 2023 • All Rights Reserved</p>
-        </div>
-      </ul>
+          </Typography>
+          </ThemeProvider>
+        </Grid>
+      </Grid><br/>
+      <Footer/>
 
     </>
   )

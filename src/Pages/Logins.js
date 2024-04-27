@@ -1,46 +1,64 @@
 import React from 'react';
-import NormalHeaderBar from '../Components/NormalHeaderBar';
+import { NormalHeaderBar, Form, Footer } from '../Components/index';
 import { Link } from 'react-router-dom';
 import '../Style/Login.css';
-import Form from '../Components/Form';
-import { Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
+import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
+
 
 export default function Logins() {
 
+  let theme = createTheme();
+  theme = responsiveFontSizes(theme);
+
+  theme.typography.h5 = {
+    fontSize: '1.1rem'
+  }
+
   return (
     <>
-  <NormalHeaderBar />
- 
-    <div className="text">
-    <Typography variant='h3' sx={{fontWeight:'bold'}}><center>Sign in</center></Typography>
-      </div>
-  <div>
-   <h4><center>Sign in to your account</center></h4>
-      </div>
-     
+      <NormalHeaderBar />
+
+      <Grid container className="text">
+        <Grid item xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
+        <ThemeProvider theme={theme}>
+        <Typography variant='h3' sx={{fontWeight:'bold'}}>
+          Sign in
+          </Typography>
+          </ThemeProvider>
+        </Grid>
+      </Grid>
+      <Grid container>
+      <ThemeProvider theme={theme}>
+        <Grid item xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
+          <Typography variant='h6'>Sign in to your account</Typography>
+        </Grid>
+        </ThemeProvider>
+      </Grid>
+
       <br />
+      <Grid container>
+        <Grid item xl={4.75} lg={4.65} md={4} xs={1} sm={3}></Grid>
+        <Grid item xl={1.5} lg={2.7} md={4} xs={10.5} sm={6} className="box">
 
-      <div className="box">
+          <Form />
 
-        <div className="box-content">
-        <Form/>
+        </Grid>
+        <Grid item xl={2} lg={3} md={4} xs={0.5} sm={3}></Grid>
+      </Grid><br />
+      <Grid container>
+        <Grid item xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
+          <ThemeProvider theme={theme}>
+            <Typography variant='h5' fontWeight='bold'>
 
-        </div> 
-      </div>
-
-      <div>
-        <h4><center>Forget Password?  
-          <Link to={"/login/forgetpassword"} style={{color:'red'}}>
-             Click here to Reset
-             </Link>
-             </center></h4>
-    
-       </div>
-      <ul className="footer">
-        <div className="footer-text">
-          <p>© 2023 • All Rights Reserved</p>
-        </div>
-      </ul>
+              Forgetpassword?<Link to={"/login/forgetpassword"} style={{ color: 'red' }}>
+                Click here to Reset
+              </Link>
+            </Typography>
+          </ThemeProvider>
+        </Grid>
+      </Grid><br/>
+      <Footer />
     </>
   );
 }

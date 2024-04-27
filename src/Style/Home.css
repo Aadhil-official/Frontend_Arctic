@@ -82,11 +82,11 @@
   
   /* slideshow */
   /* Slideshow container */
-  .slideshow-container {
+  /* .slideshow-container {
     position: relative;
     max-width: 100%;
     margin: auto;
-  }
+  } */
   
   /* Hide the images by default */
   .mySlides {
@@ -99,10 +99,10 @@
   }
   
   /* Navigation dots container */
-  .dot-container {
+  /* .dot-container {
     text-align: center;
     margin-top: 20px;
-  }
+  } */
   
   /* Styling for individual dots */
   .dot {

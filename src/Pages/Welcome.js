@@ -1,7 +1,7 @@
 import React from 'react';
-import Profiles from '../Components/Profiles'; 
+import { Footer, Profiles, Tabs } from '../Components/index';
 import '../Style/Welcome.css';
-import Tabs from '../Components/Tabs';
+import { Grid } from '@mui/material';
 
 
 const Welcome = () => {
@@ -12,25 +12,25 @@ const Welcome = () => {
     { label: 'Vehicle Details' },
     { label: 'Job Details' },
     { label: 'Service Agreement' },
-    { label: 'Calendar'}, 
+    { label: 'Calendar' },
     { label: 'Schedule a Site Visit' },
     { label: 'Job Allocation' },
   ];
 
   return (
-    <div>
-      <Profiles />
-      <div className="header-margin"></div>
+    <>
+      <Grid container>
+        <Grid items xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mb: 3 }}>
+          <Profiles />
+        </Grid>
+      </Grid>
       <Tabs buttonData={buttonData} />
-      <div className="footer-margin"></div>
-
-      {/* Footer */}
-      <div className="footer">
-        <div className="footer-text">
-          <p>© 2023 • All Rights Reserved</p>
-        </div>
-      </div>
-    </div>
+      <Grid container>
+        <Grid items xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mt: 3 }}>
+          <Footer />
+        </Grid>
+      </Grid>
+    </>
   );
 };
 

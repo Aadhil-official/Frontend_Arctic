@@ -15,7 +15,7 @@ const Tabs = ({ buttonData }) => {
         <Button
           key={index}
           variant="contained"
-          style={{ width: '40%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}
+          style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}
         >{button.label}
         </Button>
       ))}

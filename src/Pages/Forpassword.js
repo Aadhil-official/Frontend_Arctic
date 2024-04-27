@@ -1,8 +1,6 @@
-// import { useState } from 'react';
 import '../Style/Forpassword.css';
-// import { BrowserRouter as Browser,Router,Route,Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import NormalHeaderBar from '../Components/NormalHeaderBar';
+import {NormalHeaderBar,Footer} from '../Components/index';
 import { Grid } from '@mui/material';
 
 function ForPassword() {
@@ -15,8 +13,9 @@ function ForPassword() {
 
   return (
     <>
+            <NormalHeaderBar/><br/>
       <Grid container spacing={2}>
-        <NormalHeaderBar/>
+
         
         <div class="box">
 
@@ -40,21 +39,19 @@ function ForPassword() {
             </div>
             <br />
 
-            <h4><center>
-              Back To Login?<Link to={"/login"} style={{ color: 'red' }} >
-                Click here to login
-              </Link>
-            </center></h4>
+           
           </div>
           <div>
           </div>
         </div>
         </Grid>
-        <div class="footer">
-          <div class="footer-text">
-            <p>© 2023 • All Rights Reserved</p>
-          </div>
-        </div>
+        <h4><center>
+              Back To Login?<Link to={"/login"} style={{ color: 'red' }} >
+                Click here to login
+              </Link>
+            </center></h4>
+
+        <Footer/>
       </>
       );
 }

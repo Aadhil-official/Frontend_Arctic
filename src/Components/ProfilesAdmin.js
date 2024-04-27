@@ -1,24 +1,16 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-// import Box from '@mui/material/Box';
-// import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-// import IconButton from '@mui/material/IconButton';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import AccountCircle from '@mui/icons-material/AccountCircle';
 import Switch from '@mui/material/Switch';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import FormGroup from '@mui/material/FormGroup';
-// import MenuItem from '@mui/material/MenuItem';
-// import Menu from '@mui/material/Menu';, useNavigate
 import { Link, useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
-
-// const label = { inputProps: { 'aria-label': 'Switch demo' } };
+import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
+import Notify from '@mui/icons-material/MarkEmailUnread';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 function ProfilesAdmin() {
 
-    const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(false);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -28,38 +20,47 @@ function ProfilesAdmin() {
       setTimeout(() => {
         navigate('/');
       }, 500);
-    } 
+    }
   };
 
-  // const variableToPass = checked;
+  let theme = createTheme();
+  theme = responsiveFontSizes(theme);
 
 
   return (
     <div>
-        <AppBar position="static">
+      <AppBar position="static">
         <Grid container spacing={2}>
-          <Grid item lg={4.9} md={5} sm={5} xs={2.5}>
+          <Grid item lg={4.9} md={5} sm={4.5} xs={4}>
             <Link to={"/"}>
               <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.5' }} alt='Back' />
             </Link>
           </Grid>
-          <Grid item lg={2} md={2} sm={2} xs={2}>
-            <Typography variant="h3">
-              Welcome!
-            </Typography></Grid>
-          <Grid item lg={3.5} md={3.5} sm={3.5} xs={3.5}></Grid>
-          <Grid item lg={0.7} md={0.7} sm={0.7} xs={0.7} >
-            <Typography variant="h5" sx={{ color: 'orange', marginTop: '10px' }}>logout</Typography>
+          <ThemeProvider theme={theme}>
+            <Grid item lg={2} md={2} sm={1.6} xs={2.25}>
+              <Typography variant="h3">
+                Welcome!
+              </Typography>
+            </Grid>
+          </ThemeProvider>
+          <Grid item lg={2.9} md={2.8} sm={2.6} xs={2}></Grid>
+
+          <Grid item lg={0.5} md={0.5} sm={0.8} xs={0.8} sx={{ marginTop: '12px' }}>
+            <Link to={'/login/complaintread'}>
+              <Notify fontSize='medium' sx={{ position: 'absolute', marginTop: '2px' }} />
+              <NotificationsIcon color='error' fontSize='string' sx={{ marginBottom: '10px', marginLeft: '10px', position: 'absolute' }} />
+            </Link>
           </Grid>
-          <Grid item lg={0.5} md={0.5} sm={0.5} xs={0.5} >
-          {/* <Link to={'/homes'}> */}
+          <Grid item lg={0.7} md={0.8} sm={1.2} xs={1.5}>
+            <Typography variant="h5" sx={{ marginTop: '10px' }}>logout</Typography>
+          </Grid>
+          <Grid item lg={0.5} md={0.5} sm={1} xs={0.5}>
             <Switch
               checked={checked}
               onChange={handleChange}
               inputProps={{ 'aria-label': 'controlled' }}
-              color="warning" sx={{ marginTop: '10px' }}
+              color='error' sx={{ marginTop: '10px' }}
             />
-            {/* </Link> */}
           </Grid>
         </Grid>
       </AppBar>

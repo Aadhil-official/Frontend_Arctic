@@ -4,6 +4,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { z } from 'zod';
+import { error, success } from '../util/Toastify';
 
 export default function FormSignup() {
   const [username, setUsername] = useState('');
@@ -13,17 +15,17 @@ export default function FormSignup() {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    if (!username || !password || !email || !role) {
-      alert('Please fill in all required fields.');
-      return;
-    }
 
-    // Validate role against allowed roles
     const allowedRoles = ['admin', 'mod', 'user'];
-    if (!allowedRoles.includes(role)) {
-      alert('Invalid role. Please choose either admin, mod, or user.');
-      return;
-    }
+
+    const validateForm = z.object({
+      username: z.string().min(1, { message: "Enter your name" }),
+      password: z.string().min(8, 'Password must be at least 8 characters long'),
+      email: z.string().email('Invalid email address'),
+      roles: z.array(z.string().refine((role) => allowedRoles.includes(role), {
+        message: 'Invalid role. Please choose either admin, moderator, or user.'
+      }))
+    });
 
     const userData = {
       username: username,
@@ -32,67 +34,75 @@ export default function FormSignup() {
       roles: [role] // Send role as an array containing the selected role
     };
 
-    axios.post('http://localhost:8080/api/auth/signup', userData)
-      .then(() => {
-        alert('Signup successful!');
-        navigate('/');
-      })
-      .catch((error) => {
-        alert(error.response.data.message || 'Signup failed. Please try again.');
-      });
+    const result = validateForm.safeParse(userData);
+    if (result.success) {
+      axios.post('http://localhost:8080/api/auth/signup', userData)
+        .then(() => {
+          navigate('/');
+          success('User created successfully!')
+        })
+        .catch(() => error("Server Error"))
+    } else {
+      const formattedError = result.error.format();
+      if (formattedError.username?._errors) {
+        error(String(formattedError.username?._errors));
+      } else if (formattedError.password?._errors) {
+        error(String(formattedError.password?._errors));
+      } else if (formattedError.email?._errors) {
+        error(String(formattedError.email?._errors));
+      } else if (formattedError.roles?._errors) {
+        error(String(formattedError.roles?._errors));
+      }
+    }
+
   };
 
   return (
     <>
-    <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField
-        label="Name"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        required
-      />
-
-      <TextField
-        label="Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-
-      <TextField
-        label="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-
-      <TextField
-        select
-        label="Role"
-        value={role}
-        onChange={(e) => setRole(e.target.value)}
-        required
-        SelectProps={{ native: true }}
+      <Box
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '25ch' },
+          textAlign: 'center',
+          mt: 3
+        }}
+        noValidate
+        autoComplete="off"
       >
-        <option value=""></option>
-        <option value="admin">Admin</option>
-        <option value="mod">Moderator</option>
-        <option value="user">User</option>
-      </TextField>
+        <TextField
+          label="Name"
+          onChange={(e) => setUsername(e.target.value)}
+        />
 
-    </Box>
-    
-    <Button variant="contained" onClick={handleSubmit}>
-    Signup
-  </Button>
-  </>
+        <TextField
+          label="Password"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <TextField
+          label="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+
+        <TextField
+          select
+          label="Role"
+          onChange={(e) => setRole(e.target.value)}
+          SelectProps={{ native: true }}
+        >
+          <option value=""></option>
+          <option value="admin">Admin</option>
+          <option value="mod">Moderator</option>
+          <option value="user">User</option>
+        </TextField><br /><br />
+        <Button variant="contained" onClick={handleSubmit}>
+          Signup
+        </Button><br /><br />
+      </Box>
+
+
+    </>
+
   );
 }

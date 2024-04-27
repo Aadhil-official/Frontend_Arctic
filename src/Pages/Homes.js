@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import '../Style/Home.css';
-import ResponsiveAppBar from '../Components/ResponsiveAppBar';
-import ThemeProvider from '../Components/ThemeProvider';
+// import '../Style/Home.css';
+import { ResponsiveAppBar, Footer } from '../Components/index';
+import { Grid } from '@mui/material';
 
 
 const Homes = () => {
@@ -20,12 +20,11 @@ const Homes = () => {
   };
 
   return (
-    <div className="home-container">
-      
- 
-      <ResponsiveAppBar/>
-      <ThemeProvider/>
-      <div className="slideshow-container">
+    <>
+
+
+      <ResponsiveAppBar />
+
         <div className={`mySlides ${slideIndex === 0 ? 'active' : ''}`}>
           <div className="text-overlay">
             <p>
@@ -78,18 +77,19 @@ const Homes = () => {
             alt="Slide 3"
           />
         </div>
-        <div className="dot-container">
-          <span className={`dot ${slideIndex === 0 ? 'active' : ''}`}></span>
-          <span className={`dot ${slideIndex === 1 ? 'active' : ''}`}></span>
-          <span className={`dot ${slideIndex === 2 ? 'active' : ''}`}></span>
-        </div>
-      </div>
-      <div className="tab-labels">
-        <div className="footer-text">
-          <p>© 2023 • All Rights Reserved</p>
-        </div>
-      </div>
-    </div>
+
+        <Grid container>
+          <Grid item lg={5.5} md={5.5} sm={5.5} xs={5.5}></Grid>
+          <Grid sx={{ margin: '7px' }}>
+            <span className={`dot ${slideIndex === 0 ? 'active' : ''}`}></span>
+            <span className={`dot ${slideIndex === 1 ? 'active' : ''}`}></span>
+            <span className={`dot ${slideIndex === 2 ? 'active' : ''}`}></span>
+          </Grid>
+        </Grid>
+
+
+      <Footer />
+    </>
   );
 };
 
