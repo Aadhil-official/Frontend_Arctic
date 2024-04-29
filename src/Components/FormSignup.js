@@ -22,9 +22,9 @@ export default function FormSignup() {
       username: z.string().min(1, { message: "Enter your name" }),
       password: z.string().min(8, 'Password must be at least 8 characters long'),
       email: z.string().email('Invalid email address'),
-      roles: z.array(z.string().refine((role) => allowedRoles.includes(role), {
-        message: 'Invalid role. Please choose either admin, moderator, or user.'
-      }))
+      roles: z.array(z.string()).nonempty('Please select a role!').refine((role) => allowedRoles.includes(role[0]), {
+        message: 'Role is not defined.'
+      })
     });
 
     const userData = {
@@ -71,6 +71,7 @@ export default function FormSignup() {
       >
         <TextField
           label="Name"
+          type='text'
           onChange={(e) => setUsername(e.target.value)}
         />
 
@@ -82,6 +83,7 @@ export default function FormSignup() {
 
         <TextField
           label="Email"
+          type='email'
           onChange={(e) => setEmail(e.target.value)}
         />
 

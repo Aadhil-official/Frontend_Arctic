@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import '../Style/Home.css';
+import '../Style/Home.css';
 import { ResponsiveAppBar, Footer } from '../Components/index';
 import { Grid } from '@mui/material';
 

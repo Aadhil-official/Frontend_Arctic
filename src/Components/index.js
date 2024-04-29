@@ -8,3 +8,5 @@ export { default as Profiles } from './Profiles';
 export { default as ProfilesAdmin } from './ProfilesAdmin';
 export { default as ResponsiveAppBar } from './ResponsiveAppBar';
 export { default as Tabs } from './Tabs';
+export { default as FormForgotPass } from './FormForgotPass';
+export { default as FormResetPass } from './FormResetPass'

@@ -2,6 +2,7 @@ import {Contacts, Logins , Welcome, ForPassword, Homes, Usercomplaint, Welcomead
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import ResetPass from './Pages/ResetPass';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/login/welcomeadmin' element={<Welcomeadmin/>} />
         <Route path='/login/complaint' element={<Usercomplaint/>} />
         <Route path='/login/complaintread' element={<Admcomred/>} />
+        <Route path='/login/forgetpassword/resetpass' element={<ResetPass/>} />
       </Routes>   
     </>
   );

@@ -18,16 +18,19 @@ export default function FormPropsTextFields() {
     password: z.string().min(8, { message: 'Password must be at least 8 characters long' }),
   });
   const handleSubmit = () => {
+
     const data = {
       username: username,
       password: password
     };
+
     const result = validateForm.safeParse(data);
     if (result.success) {
       axios.post('http://localhost:8080/api/auth/signin', data)
         .then((response) => {
           const role = response.data.roles[0]; // This will be 'ADMIN'
-          if (role === "ADMIN") {
+          
+          if(role ===  'ADMIN'){
             navigate('/login/welcomeadmin');
             success('Login successful!')
 
