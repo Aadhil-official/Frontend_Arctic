@@ -9,7 +9,7 @@ import { error, success } from '../util/Toastify';
 
 export default function FormSignup() {
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  // const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState(''); // State to hold the selected role
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function FormSignup() {
 
     const validateForm = z.object({
       username: z.string().min(1, { message: "Enter your name" }),
-      password: z.string().min(8, 'Password must be at least 8 characters long'),
+      // password: z.string().min(8, 'Password must be at least 8 characters long'),
       email: z.string().email('Invalid email address'),
       roles: z.array(z.string()).nonempty('Please select a role!').refine((role) => allowedRoles.includes(role[0]), {
         message: 'Role is not defined.'
@@ -29,7 +29,7 @@ export default function FormSignup() {
 
     const userData = {
       username: username,
-      password: password,
+      // password: password,
       email: email,
       roles: [role] // Send role as an array containing the selected role
     };
@@ -46,8 +46,6 @@ export default function FormSignup() {
       const formattedError = result.error.format();
       if (formattedError.username?._errors) {
         error(String(formattedError.username?._errors));
-      } else if (formattedError.password?._errors) {
-        error(String(formattedError.password?._errors));
       } else if (formattedError.email?._errors) {
         error(String(formattedError.email?._errors));
       } else if (formattedError.roles?._errors) {
@@ -74,12 +72,12 @@ export default function FormSignup() {
           type='text'
           onChange={(e) => setUsername(e.target.value)}
         />
-
+{/* 
         <TextField
           label="Password"
           type="password"
           onChange={(e) => setPassword(e.target.value)}
-        />
+        /> */}
 
         <TextField
           label="Email"

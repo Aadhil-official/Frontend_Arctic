@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { error, success} from '../util/Toastify';
 
+
 export default function FormPropsTextFields() {
 
   const [username, setUsername] = useState('');
@@ -17,7 +18,9 @@ export default function FormPropsTextFields() {
     username: z.string().min(1, { message: "Enter your name" }),
     password: z.string().min(8, { message: 'Password must be at least 8 characters long' }),
   });
-  const handleSubmit = () => {
+
+
+  const handleSubmit =  () => {
 
     const data = {
       username: username,
@@ -28,7 +31,9 @@ export default function FormPropsTextFields() {
     if (result.success) {
       axios.post('http://localhost:8080/api/auth/signin', data)
         .then((response) => {
-          const role = response.data.roles[0]; // This will be 'ADMIN'
+          const tempdata =   response.data;
+          
+          const role = tempdata.roles[0]; // This will be 'ADMIN'
           
           if(role ===  'ADMIN'){
             navigate('/login/welcomeadmin');
@@ -52,7 +57,7 @@ export default function FormPropsTextFields() {
   };
 
   return (
-    <>
+    <>   
       <Box
         component="form"
         sx={{
@@ -63,6 +68,7 @@ export default function FormPropsTextFields() {
         noValidate
         autoComplete="off"
       >
+      
         <TextField
           label="Name"
           type='text'
@@ -78,9 +84,6 @@ export default function FormPropsTextFields() {
           Signin
         </Button><br /><br />
       </Box>
-
-
-
     </>
   );
 }

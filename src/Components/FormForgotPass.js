@@ -3,9 +3,11 @@ import React, { useState } from 'react'
 import { z } from 'zod';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { error, success} from '../util/Toastify';
+import { error, success, loading } from '../util/Toastify';
+
 
 function FormForgotPass() {
+
     const [email, setEmail] = useState('');
 
 
@@ -15,27 +17,30 @@ function FormForgotPass() {
         email: z.string().email('Invalid email address.')
     });
 
-
     const handleSubmit = () => {
 
         const data = {
-          email:email
+            email: email
         };
-    
-        const result = validateForm.safeParse(data);
-        if (result.success) {
-            axios.post('http://localhost:8080/api/auth/send-otp', data)
-        .then(() => {
-          navigate('/login/forgetpassword/resetpass');
-          success('OTP sended successfully!')
-        })
-        .catch(() => error("Server Error"))
-    } else {
-      const formattedError = result.error.format();
-      if (formattedError.email?._errors) {
-        error(String(formattedError.email?._errors));
-      }
-    }
+
+
+            const result = validateForm.safeParse(data);
+            if (result.success) {
+                loading('Sending OTP...')
+                axios.post('http://localhost:8080/api/auth/send-otp', data)
+                    .then(() => {
+                        navigate('/login/forgetpassword/resetpass');
+                        success('OTP sended successfully!')
+                    })
+                    .catch(() => {
+                        error("Check your connection!...")
+                    })
+            } else {
+                const formattedError = result.error.format();
+                if (formattedError.email?._errors) {
+                    error(String(formattedError.email?._errors));
+                }
+            }
     };
 
     return (

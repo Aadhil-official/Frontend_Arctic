@@ -3,15 +3,53 @@ import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Switch from '@mui/material/Switch';
 import { Link, useNavigate } from 'react-router-dom';
-import { Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import Notify from '@mui/icons-material/MarkEmailUnread';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import axios from 'axios';
+import { error } from '../util/Toastify';
 
-function ProfilesAdmin() {
+const ProfilesAdmin = () => {
 
   const [checked, setChecked] = React.useState(false);
+  const [complaindata, setComplaindata] = React.useState([]);
+  const [iconcolor, setIconcolor] = React.useState("");
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    handleView();
+  }, [complaindata]);
+
+  const handleIcon = async () => {
+    try {
+      const result = await axios.get('http://localhost:8080/api/auth/complaints/updates');
+      if(result && result.data.length > complaindata.length){
+        setIconcolor("error");
+    }else {
+      setIconcolor("secondary");
+    }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  
+  React.useEffect(() => {
+    handleIcon();
+  }, [complaindata]);
+
+  const handleView = async () => {
+    try {
+      const result = await axios.post('http://localhost:8080/api/auth/findcomplaint')
+      const response = await result.data;
+
+      setComplaindata(response)
+
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -22,6 +60,8 @@ function ProfilesAdmin() {
       }, 500);
     }
   };
+
+
 
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
@@ -46,12 +86,12 @@ function ProfilesAdmin() {
           <Grid item lg={2.9} md={2.8} sm={2.6} xs={2}></Grid>
 
           <Grid item lg={0.5} md={0.5} sm={0.8} xs={0.8} sx={{ marginTop: '12px' }}>
-            <Link to={'/login/complaintread'}>
+            <Link to={'/login/complaintread'} state={{ complaindata: complaindata }} >
               <Notify fontSize='medium' sx={{ position: 'absolute', marginTop: '2px' }} />
-              <NotificationsIcon color='error' fontSize='string' sx={{ marginBottom: '10px', marginLeft: '10px', position: 'absolute' }} />
+              <NotificationsIcon color={iconcolor} fontSize='string' sx={{ marginBottom: '10px', marginLeft: '10px', position: 'absolute' }} />
             </Link>
           </Grid>
-          <Grid item lg={0.7} md={0.8} sm={1.2} xs={1.5}>
+          <Grid item lg={0.8} md={0.8} sm={1.2} xs={1.5}>
             <Typography variant="h5" sx={{ marginTop: '10px' }}>logout</Typography>
           </Grid>
           <Grid item lg={0.5} md={0.5} sm={1} xs={0.5}>
@@ -63,6 +103,16 @@ function ProfilesAdmin() {
             />
           </Grid>
         </Grid>
+        <Grid container sx={{ marginTop: '12px' }}>
+          <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign={'right'} sx={{ marginBottom: '10px', marginRight: '20px' }}>
+            <Link to={'/signup'}>
+              <Button sx={{ backgroundColor: '#6C94F8' }} variant="contained" size='medium'>
+                Sign Up
+              </Button>
+            </Link>
+          </Grid>
+        </Grid>
+        {/* </Grid> */}
       </AppBar>
     </div>
   )

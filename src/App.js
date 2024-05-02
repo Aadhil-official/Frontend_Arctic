@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import ResetPass from './Pages/ResetPass';
 
+
 function App() {
   return (
     <>
@@ -13,7 +14,7 @@ function App() {
         
     //   },}}
     />
-      
+  
         <Routes>
         <Route path="/" element={<Homes/>} /> 
         <Route path='/contact'element={<Contacts/>} />

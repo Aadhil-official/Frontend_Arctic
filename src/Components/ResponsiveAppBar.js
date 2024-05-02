@@ -69,11 +69,6 @@ theme.typography.h5 = {
               <Typography variant='h5'>Sign In</Typography>
             </NavLink>
           </li>
-          <li>
-            <NavLink to={"/signup"} style={notActive} >
-              <Typography variant='h5'>Sign Up</Typography>
-            </NavLink>
-          </li>
           </ThemeProvider>
         </ul>
       </nav>

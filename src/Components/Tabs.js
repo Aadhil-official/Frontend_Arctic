@@ -14,6 +14,7 @@ const Tabs = ({ buttonData }) => {
       {buttonData.map((button, index) => (
         <Button
           key={index}
+          // disabled
           variant="contained"
           style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}
         >{button.label}
