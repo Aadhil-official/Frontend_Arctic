@@ -3,10 +3,9 @@ import { Footer, Profiles, Tabs } from '../Components/index';
 import '../Style/Welcome.css';
 import { Grid } from '@mui/material';
 
-
 const Welcome = () => {
   const buttonData = [
-    { label: 'Employee Details' },
+    { label: 'Employee Details', link: '/login/welcome/employeelist' },
     { label: 'Item Details' },
     { label: 'Unit Details' },
     { label: 'Vehicle Details' },
@@ -20,13 +19,13 @@ const Welcome = () => {
   return (
     <>
       <Grid container>
-        <Grid items xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mb: 3 }}>
+        <Grid item xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mb: 3 }}>
           <Profiles />
         </Grid>
-      </Grid>
-      <Tabs buttonData={buttonData} />
-      <Grid container>
-        <Grid items xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mt: 3 }}>
+        <Grid item xs={12}>
+          <Tabs buttonData={buttonData} />
+        </Grid>
+        <Grid item xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mt: 3 }}>
           <Footer />
         </Grid>
       </Grid>

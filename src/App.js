@@ -1,8 +1,8 @@
-import {Contacts, Logins , Welcome, ForPassword, Homes, Usercomplaint, Welcomeadmin, Signup, Admcomred} from './Pages/index';
+import { EmployeeList, EmployeeListAd, Contacts, Logins , Welcome, ForPassword, Homes, Usercomplaint, Welcomeadmin, Signup, Admcomred, ResetPass} from './Pages/index';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import ResetPass from './Pages/ResetPass';
+// import ResetPass from './Pages/ResetPass';
 
 
 function App() {
@@ -22,6 +22,8 @@ function App() {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/login/forgetpassword' element={<ForPassword/>} />        
         <Route path='/login/welcome' element={<Welcome/>} />
+        <Route path='/login/welcome/employeelist' element={<EmployeeList/>} />
+        <Route path='/login/welcome/employeelistad' element={<EmployeeListAd/>} />
         <Route path='/login/welcomeadmin' element={<Welcomeadmin/>} />
         <Route path='/login/complaint' element={<Usercomplaint/>} />
         <Route path='/login/complaintread' element={<Admcomred/>} />

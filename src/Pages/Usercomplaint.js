@@ -18,7 +18,13 @@ function Usercomplaint() {
   return (
     <>
       <NormalHeaderBar />
-
+      <Grid container spacing={2}>
+        <Grid item>
+          <Link to={"/login/welcome"}>
+            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6',position:'absolute',margin:'5px' }} alt='Back' />
+          </Link>
+        </Grid>
+      </Grid>
       <Grid container className="text">
         <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
           <ThemeProvider theme={theme}>

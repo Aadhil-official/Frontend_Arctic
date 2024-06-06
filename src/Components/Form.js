@@ -33,6 +33,15 @@ export default function FormPropsTextFields() {
         .then((response) => {
           const tempdata =   response.data;
           
+          // const token = tempdata.token;
+          
+          // if (token) {
+          //   localStorage.removeItem('jwtToken');
+          //   // localStorage.setItem('jwtToken', token); // Store token in localStorage
+          // } else {
+          //   console.error('No token found in response');
+          // }
+          
           const role = tempdata.roles[0]; // This will be 'ADMIN'
           
           if(role ===  'ADMIN'){
@@ -66,7 +75,7 @@ export default function FormPropsTextFields() {
           mt: 3
         }}
         noValidate
-        autoComplete="off"
+        autoComplete='off'
       >
       
         <TextField

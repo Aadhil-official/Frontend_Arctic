@@ -12,14 +12,19 @@ export default function FormSignup() {
   // const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState(''); // State to hold the selected role
+  const [address, setAddress] = useState('');
+  const [usergroup, setUsergroup] = useState('');
+  const [tel, setTel] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = () => {
 
-    const allowedRoles = ['admin', 'mod', 'user'];
+    const allowedRoles = ['admin', 'user'];
 
     const validateForm = z.object({
       username: z.string().min(1, { message: "Enter your name" }),
+      address: z.string().min(1, { message: "Enter your address" }),
+      tel: z.string().min(1, { message: "Enter your contact number" }),
       // password: z.string().min(8, 'Password must be at least 8 characters long'),
       email: z.string().email('Invalid email address'),
       roles: z.array(z.string()).nonempty('Please select a role!').refine((role) => allowedRoles.includes(role[0]), {
@@ -31,6 +36,9 @@ export default function FormSignup() {
       username: username,
       // password: password,
       email: email,
+      address: address,
+      usergroup: usergroup,
+      tel: tel,
       roles: [role] // Send role as an array containing the selected role
     };
 
@@ -41,7 +49,7 @@ export default function FormSignup() {
           navigate('/');
           success('User created successfully!')
         })
-        .catch(() => error("Server Error"))
+        .catch(() => error("Username or email already exist!"))
     } else {
       const formattedError = result.error.format();
       if (formattedError.username?._errors) {
@@ -50,6 +58,10 @@ export default function FormSignup() {
         error(String(formattedError.email?._errors));
       } else if (formattedError.roles?._errors) {
         error(String(formattedError.roles?._errors));
+      } else if (formattedError.address?._errors) {
+        error(String(formattedError.address?._errors));
+      } else if (formattedError.tel?._errors) {
+        error(String(formattedError.tel?._errors));
       }
     }
 
@@ -60,7 +72,7 @@ export default function FormSignup() {
       <Box
         component="form"
         sx={{
-          '& .MuiTextField-root': { m: 1, width: '25ch' },
+          '& .MuiTextField-root': { m: 1,width:'80%' },
           textAlign: 'center',
           mt: 3
         }}
@@ -68,16 +80,25 @@ export default function FormSignup() {
         autoComplete="off"
       >
         <TextField
-          label="Name"
+          label="Username"
           type='text'
           onChange={(e) => setUsername(e.target.value)}
         />
-{/* 
+
         <TextField
-          label="Password"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        /> */}
+          label="Address"
+          type="text"
+          multiline
+          rows={4}
+          onChange={(e) => setAddress(e.target.value)}
+        />
+
+        <TextField
+          label="User group"
+          type="text"
+          onChange={(e) => setUsergroup(e.target.value)}
+        />
+
 
         <TextField
           label="Email"
@@ -86,14 +107,19 @@ export default function FormSignup() {
         />
 
         <TextField
+          label="Contact No"
+          type='text'
+          onChange={(e) => setTel(e.target.value)}
+        />
+
+        <TextField
           select
-          label="Role"
+          label="Designation"
           onChange={(e) => setRole(e.target.value)}
           SelectProps={{ native: true }}
         >
           <option value=""></option>
           <option value="admin">Admin</option>
-          <option value="mod">Moderator</option>
           <option value="user">User</option>
         </TextField><br /><br />
         <Button variant="contained" onClick={handleSubmit}>
