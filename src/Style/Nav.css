@@ -1,0 +1,36 @@
+/* ImageCropper.css */
+.crop-container {
+    width: 50vw; /* width of the cropped area as a percentage of viewport width */
+    height: 50vw; /* height of the cropped area as a percentage of viewport width */
+    max-width: 300px; /* maximum width of the cropped area */
+    max-height: 300px; /* maximum height of the cropped area */
+    overflow: hidden; /* hide overflow */
+    position: relative;
+    border: 2px solid #ddd; /* optional: for better visualization */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* optional: for better visualization */
+  }
+  
+  .cropped-image {
+    position: absolute;
+    top: -25%; /* adjust based on the portion you want to show */
+    left: -25%; /* adjust based on the portion you want to show */
+    width: 150%; /* make sure this is larger than the container to accommodate different screen sizes */
+    height: auto; /* maintain aspect ratio */
+  }
+  
+  /* Optional: Adjust the cropping area and image positioning for smaller screens */
+  @media (max-width: 768px) {
+    .crop-container {
+      width: 70vw; /* width of the cropped area as a percentage of viewport width */
+      height: 70vw; /* height of the cropped area as a percentage of viewport width */
+      max-width: 200px; /* maximum width of the cropped area */
+      max-height: 200px; /* maximum height of the cropped area */
+    }
+  
+    .cropped-image {
+      top: -20%; /* adjust based on the portion you want to show */
+      left: -20%; /* adjust based on the portion you want to show */
+      width: 140%; /* make sure this is larger than the container to accommodate different screen sizes */
+    }
+  }
+  

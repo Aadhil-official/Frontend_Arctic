@@ -7,4 +7,7 @@ export { default as Usercomplaint } from './Usercomplaint';
 export { default as Welcomeadmin } from './Welcomeadmin';
 export { default as Signup } from './Signup';
 export { default as Admcomred } from './Admcomred';
-export { default as ResetPass } from './ResetPass'
+export { default as ResetPass } from './ResetPass';
+export { default as EmployeeListAd } from './EmployeeListAd';
+export { default as EmployeeList } from './EmployeeList';
+

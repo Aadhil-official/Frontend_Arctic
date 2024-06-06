@@ -5,8 +5,9 @@ import { Grid } from '@mui/material';
 
 function Welcomeadmin() {
 
+
   const buttonData = [
-    { label: 'Employee Details' },
+    { label: 'Employee Details',link:'/login/welcome/employeelistad' },
     { label: 'Item Details' },
     { label: 'Unit Details' },
     { label: 'Vehicle Details' },
@@ -23,9 +24,9 @@ function Welcomeadmin() {
         <Grid items xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mb: 3 }}>
           <ProfilesAdmin />
         </Grid>
-      </Grid>
-      <Tabs buttonData={buttonData} />
-      <Grid container>
+        <Grid item xs={12}>
+          <Tabs buttonData={buttonData} />
+        </Grid>
         <Grid items xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mt: 3 }}>
           <Footer />
         </Grid>

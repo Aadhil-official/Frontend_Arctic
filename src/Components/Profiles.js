@@ -6,21 +6,35 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import ButtonComplain from './ButtonComplain';
 import { createTheme, ThemeProvider, responsiveFontSizes} from '@mui/material/styles';
+import axios from 'axios';
+import { success } from '../util/Toastify';
 
 export default function MenuAppBar() {
 
   const [checked, setChecked] = React.useState(false);
+  const [message, setMessage] = React.useState('');
+
+
   const navigate = useNavigate();
 
-  const handleChange = (event) => {
+  const handleChange = async (event) => {
+    console.log("Switch toggled");
     setChecked(event.target.checked);
-    if (checked === false) {
-
-      setTimeout(() => {
-        navigate('/');
-      }, 500);
+    // Use the updated value of checked instead of the stale one
+    if (!event.target.checked) {
+      setTimeout(async () => {
+        try {
+          await axios.post('/api/auth/signout', { checked: event.target.checked });
+          success(message);
+          setMessage("Signed out successfully!");
+          navigate('/'); // Assuming navigate is available in the scope
+        } catch (error) {
+          console.error('Sign out error:', error);
+        }
+      }, 500); // 500ms delay
     }
   };
+  
 
   let theme = createTheme();
   theme = responsiveFontSizes(theme);

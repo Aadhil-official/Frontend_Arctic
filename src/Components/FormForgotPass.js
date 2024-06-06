@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { z } from 'zod';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { error, success, loading } from '../util/Toastify';
+import { error, success } from '../util/Toastify';
 
 
 function FormForgotPass() {
@@ -26,14 +26,14 @@ function FormForgotPass() {
 
             const result = validateForm.safeParse(data);
             if (result.success) {
-                loading('Sending OTP...')
+                // loading('Sending OTP...')
                 axios.post('http://localhost:8080/api/auth/send-otp', data)
                     .then(() => {
                         navigate('/login/forgetpassword/resetpass');
                         success('OTP sended successfully!')
                     })
                     .catch(() => {
-                        error("Check your connection!...")
+                        error("Your internet connection is unstable!...")
                     })
             } else {
                 const formattedError = result.error.format();

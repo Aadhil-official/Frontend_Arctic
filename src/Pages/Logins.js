@@ -23,7 +23,7 @@ export default function Logins() {
         <Grid item xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
           <ThemeProvider theme={theme}>
             <Typography variant='h3' sx={{ fontWeight: 'bold' }}>
-              Sign in
+             Sign in
             </Typography>
           </ThemeProvider>
         </Grid>

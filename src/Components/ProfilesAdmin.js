@@ -8,64 +8,78 @@ import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/s
 import Notify from '@mui/icons-material/MarkEmailUnread';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import axios from 'axios';
-import { error } from '../util/Toastify';
+import { success } from '../util/Toastify';
+// kjsdkj
 
 const ProfilesAdmin = () => {
-
   const [checked, setChecked] = React.useState(false);
   const [complaindata, setComplaindata] = React.useState([]);
-  const [iconcolor, setIconcolor] = React.useState("");
+  const [iconColor, setIconColor] = React.useState('secondary');
+  const [message, setMessage] = React.useState('');
+
   const navigate = useNavigate();
 
   React.useEffect(() => {
     handleView();
-  }, [complaindata]);
 
-  const handleIcon = async () => {
-    try {
-      const result = await axios.get('http://localhost:8080/api/auth/complaints/updates');
-      if(result && result.data.length > complaindata.length){
-        setIconcolor("error");
-    }else {
-      setIconcolor("secondary");
-    }
-    } catch (error) {
-      console.error(error)
-    }
-  }
-  
-  React.useEffect(() => {
-    handleIcon();
-  }, [complaindata]);
+    const eventSource = new EventSource(`http://localhost:8080/api/auth/newupdates`);
+
+    eventSource.onopen = (event) => {
+      console.log('SSE connection opened:', event);
+    };
+
+    eventSource.onmessage = (event) => {
+      console.log('Received new complaint event:', event);
+      setIconColor('error');
+      console.log('colorchanged')
+      handleView();
+    };
+
+    eventSource.onerror = (error) => {
+      console.error('SSE error:', error);
+      eventSource.close();
+    };
+
+    return () => {
+      eventSource.close();
+    };
+  }, []);
+
+
+
 
   const handleView = async () => {
     try {
-      const result = await axios.post('http://localhost:8080/api/auth/findcomplaint')
+      const result = await axios.post('http://localhost:8080/api/auth/findcomplaint');
       const response = await result.data;
-
-      setComplaindata(response)
-
+      console.log('Complaints fetched:', response);
+      setComplaindata(response);
     } catch (error) {
-      console.error(error)
-    }
-  }
-
-
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
-    if (checked === false) {
-
-      setTimeout(() => {
-        navigate('/');
-      }, 500);
+      console.error('Error fetching complaints:', error);
     }
   };
 
-
-
+  const handleChange = async (event) => {
+    console.log("Switch toggled");
+    setChecked(event.target.checked);
+    // Use the updated value of checked instead of the stale one
+    if (!event.target.checked) {
+      setTimeout(async () => {
+        try {
+          await axios.post('/api/auth/signout', { checked: event.target.checked });
+          success(message);
+          setMessage("Signed out successfully!");
+          navigate('/');
+        } catch (error) {
+          console.error('Sign out error:', error);
+        }
+      }, 500); // 500ms delay
+    }
+  };
+  
+  
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
-
 
   return (
     <div>
@@ -88,7 +102,7 @@ const ProfilesAdmin = () => {
           <Grid item lg={0.5} md={0.5} sm={0.8} xs={0.8} sx={{ marginTop: '12px' }}>
             <Link to={'/login/complaintread'} state={{ complaindata: complaindata }} >
               <Notify fontSize='medium' sx={{ position: 'absolute', marginTop: '2px' }} />
-              <NotificationsIcon color={iconcolor} fontSize='string' sx={{ marginBottom: '10px', marginLeft: '10px', position: 'absolute' }} />
+              <NotificationsIcon color={iconColor} fontSize='small' sx={{ marginBottom: '10px', marginLeft: '10px', position: 'absolute' }} />
             </Link>
           </Grid>
           <Grid item lg={0.8} md={0.8} sm={1.2} xs={1.5}>
@@ -115,7 +129,7 @@ const ProfilesAdmin = () => {
         {/* </Grid> */}
       </AppBar>
     </div>
-  )
+  );
 }
 
-export default ProfilesAdmin
+export default ProfilesAdmin;

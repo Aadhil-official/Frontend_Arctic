@@ -11,16 +11,19 @@ function FormResetPass() {
 
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
-  const [newpass, setNewpass] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [conformpass, setConformpass] = useState('');
 
   const navigate = useNavigate();
 
   const validateForm = z.object({
-    email: z.string().email('Invalid email!'),
-    otp: z.string().min(6, "Must be at least 6 characters"),
-    newpass: z.string().min(8, "Must be at least 8 characters"),
-    conformpass: z.string().min(8, "Must be at least 8 characters").refine(data => data === newpass, {
+    email: z.string().email('Invalid email!..'),
+    otp: z.string().min(6, "Invalid OTP"),
+    newPassword: z.string().min(8, "Must be at least 8 characters").refine(data => data === conformpass, {
+      message: "Passwords do not match",
+      path: ['conformpass']
+    }),
+    conformpass: z.string().min(8, "Must be at least 8 characters").refine(data => data === newPassword, {
       message: "Passwords do not match",
       path: ['conformpass']
     })
@@ -32,7 +35,7 @@ function FormResetPass() {
     const data = {
       email: email,
       otp: otp,
-      newpass: newpass,
+      newPassword: newPassword,
       conformpass: conformpass
     };
 
@@ -43,18 +46,16 @@ function FormResetPass() {
           navigate('/login');
           success('Changed the password successfully!')
         })
-        .catch(() => error("Server Error"))
+        .catch(() => error("Enter your correct email and OTP!.."))
     } else {
       const formattedError = result.error.format();
-      if (formattedError.newpass?._errors) {
-        error(String(formattedError.newpass?._errors));
+      if (formattedError.newPassword?._errors) {
+        error(String(formattedError.newPassword?._errors));
       } else if (formattedError.conformpass?._errors) {
         error(String(formattedError.conformpass?._errors));
       } else if (formattedError.email?._errors) {
         error(String(formattedError.email?._errors));
       } else if (formattedError.otp?._errors) {
-        error(String(formattedError.otp?._errors));
-      } else if(formattedError.otp?._errors){
         error(String(formattedError.otp?._errors));
       }
     }
@@ -93,7 +94,7 @@ function FormResetPass() {
           id="newpass"
           label="New password"
           type='password'
-          onChange={(e) => setNewpass(e.target.value)}
+          onChange={(e) => setNewPassword(e.target.value)}
         /><br />
 
         <TextField
