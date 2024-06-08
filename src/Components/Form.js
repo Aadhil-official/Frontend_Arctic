@@ -45,6 +45,7 @@ export default function FormPropsTextFields() {
           const role = tempdata.roles[0]; // This will be 'ADMIN'
           
           if(role ===  'ADMIN'){
+            // checkForNewComplaints();
             navigate('/login/welcomeadmin');
             success('Login successful!')
 
@@ -65,8 +66,18 @@ export default function FormPropsTextFields() {
     }
   };
 
+  // const checkForNewComplaints = async () => {
+  //   const lastChecked = localStorage.getItem('lastChecked');
+  //   const newTimestamp = new Date().toISOString();
+  //   if (!lastChecked || new Date(lastChecked) < new Date(newTimestamp)) {
+  //     localStorage.setItem('newComplaints', 'true');
+  //   }
+  // };
+
+
   return (
-    <>   
+    <> 
+    <></>  
       <Box
         component="form"
         sx={{

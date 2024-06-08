@@ -12,6 +12,7 @@ function ComplaintForm() {
 
   const navigate = useNavigate();
 
+
   const [subject, setSubject] = useState('');
   const [object, setObject] = useState('');
   const [email, setEmail] = useState('');
@@ -89,7 +90,7 @@ function ComplaintForm() {
       >
         <TextField
           id="subject"
-          label="Subject"
+          label="Complaints"
           type='text'
           onChange={(e) => setSubject(e.target.value)}
         />
