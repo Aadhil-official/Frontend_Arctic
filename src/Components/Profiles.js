@@ -11,23 +11,20 @@ import { success } from '../util/Toastify';
 
 export default function MenuAppBar() {
 
-  const [checked, setChecked] = React.useState(false);
-  const [message, setMessage] = React.useState('');
-
+  const [checked, setChecked] = React.useState(true);
+  
 
   const navigate = useNavigate();
 
-  const handleChange = async (event) => {
+    const handleChange = async (event) => {
     console.log("Switch toggled");
     setChecked(event.target.checked);
-    // Use the updated value of checked instead of the stale one
     if (!event.target.checked) {
       setTimeout(async () => {
         try {
-          await axios.post('/api/auth/signout', { checked: event.target.checked });
-          success(message);
-          setMessage("Signed out successfully!");
-          navigate('/'); // Assuming navigate is available in the scope
+          await axios.post('http://localhost:8080/api/auth/signout', { checked: event.target.checked });
+          success("Signed out successfully!");
+          navigate('/');
         } catch (error) {
           console.error('Sign out error:', error);
         }
