@@ -46,7 +46,7 @@ body{
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #2c4a7c;
-  width: 20%; /* Adjust width */
+  width: 20%; 
   margin: 0 auto; /* Center horizontally */
 }
 
