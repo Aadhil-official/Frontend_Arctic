@@ -1,0 +1,30 @@
+/* SerAgInputContainer.css */
+.seraginput input[type='text'] {
+      width: 90%; /* Set width to 90% of the parent container */
+      max-width: 80rem; /* Set maximum width to 90rem */
+      height: 4rem; /* Using rem for height */
+      padding: 0.5rem 2rem 0.5rem 7rem; /* Using rem for padding */
+      margin-bottom: 0rem; /* Using rem for margin */
+      background-color: rgba(128, 128, 128, 0.148);
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-size: 1rem;
+      border-radius: 0.5rem; /* Using rem for border-radius */
+      border-color: #aaaaaa00;     
+    }
+    
+    .icon {
+      position: absolute;
+      left: 3rem; /* Using rem for left position */
+      top: 50%; /* Center vertically */
+      transform: translateY(-50%);
+      color: #aaa;
+      width: 5rem; /* Using rem for width */
+      display: flex;
+      justify-content: flex-start;
+      font-size: 1.6em; /* Using rem for font-size */
+    }
+    
+    .input-container {
+      position: relative;
+      margin-bottom: 1rem; /* Using rem for margin */
+    }
