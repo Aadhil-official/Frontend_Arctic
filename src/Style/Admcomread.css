@@ -1,0 +1,15 @@
+.contant {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #6C94F8;
+    border: 2px solid #000;
+    box-shadow: 24px;
+    padding: 20px;
+  }
+
+  .text{
+    color:rgb(102, 148, 235);
+      font-style: italic;
+    }
