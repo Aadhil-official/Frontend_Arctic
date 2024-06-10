@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import '../Style/ResponsiveAppBar.css';
+import '../Style/Component/ResponsiveAppBar.css';
 
 export default function ButtonAppBar() {
 
@@ -36,8 +36,8 @@ export default function ButtonAppBar() {
 theme.typography.h5 = {
   fontSize: '0.8rem',
   [theme.breakpoints.up('md')]: {
-    fontSize: '1.6rem',
-    margin:'0 0.5rem'
+    fontSize: '1rem',
+    // margin:'0 0.5rem'
   }
 };
 
@@ -46,11 +46,11 @@ theme.typography.h5 = {
       <nav>
         <img className='logo'
           src="https://th.bing.com/th/id/R.3bb0cebcd343edf4aa56cf49b5ffc01e?rik=gn4849riOnBpng&pid=ImgRaw&r=0"
-          height="80px"
+          height="45px"
           alt='logo'
         ></img>
 
-        <MenuIcon fontSize="large" sx={{ position: 'absolute', marginTop: '3%' }} className='menu' onClick={handleMenuClick} />
+        <MenuIcon fontSize="large" sx={{ position: 'absolute' }} className='menu' onClick={handleMenuClick} />
         <ul className={menuOpen ? "open" : ""}>
         <ThemeProvider theme={theme}>
           <li>

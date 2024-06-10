@@ -72,7 +72,7 @@ export default function FormSignup() {
       <Box
         component="form"
         sx={{
-          '& .MuiTextField-root': { m: 1,width:'80%' },
+          '& .MuiTextField-root': { m: 1, width: '80%' },
           textAlign: 'center',
           mt: 3
         }}

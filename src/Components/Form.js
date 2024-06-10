@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success} from '../util/Toastify';
+import { error, success } from '../util/Toastify';
 
 
 export default function FormPropsTextFields() {
@@ -20,7 +20,7 @@ export default function FormPropsTextFields() {
   });
 
 
-  const handleSubmit =  () => {
+  const handleSubmit = () => {
 
     const data = {
       username: username,
@@ -31,31 +31,30 @@ export default function FormPropsTextFields() {
     if (result.success) {
       axios.post('http://localhost:8080/api/auth/signin', data)
         .then((response) => {
-          const tempdata =   response.data;
-          
+          const tempdata = response.data;
+
           // const token = tempdata.token;
-          
+
           // if (token) {
           //   localStorage.removeItem('jwtToken');
           //   // localStorage.setItem('jwtToken', token); // Store token in localStorage
           // } else {
           //   console.error('No token found in response');
           // }
-          
-          const role = tempdata.roles[0]; // This will be 'ADMIN'
-          
-          if(role ===  'ADMIN'){
-            // checkForNewComplaints();
-            navigate('/login/welcomeadmin');
-            success('Login successful!')
 
+          const role = tempdata.roles[0]; // This will be 'ADMIN'
+
+          if (role === 'ADMIN') {
+            // checkForNewComplaints();
+            navigate('/login/welcomeadmin', { state: { tempdata } });
+            success('Login successful!')
           } else {
-            navigate('/login/welcome');
+            navigate('/login/welcome', { state: { tempdata } });
             success('Login successful!')
           }
         })
         .catch(() => error("Invalid username or password!please try again"));
-        
+
     } else {
       const formattedError = result.error.format();
       if (formattedError.username?._errors) {
@@ -76,8 +75,7 @@ export default function FormPropsTextFields() {
 
 
   return (
-    <> 
-    <></>  
+    <>
       <Box
         component="form"
         sx={{
@@ -88,7 +86,7 @@ export default function FormPropsTextFields() {
         noValidate
         autoComplete='off'
       >
-      
+
         <TextField
           label="Name"
           type='text'
