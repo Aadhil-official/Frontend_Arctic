@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import { NormalHeaderBar } from '../Components/index';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import '../Style/Component/EmployeeList.css'
 import SearchIcon from '@mui/icons-material/Search';
@@ -15,11 +15,13 @@ const EmployeeListAd = () => {
   const [filterOption, setFilterOption] = useState('username');
   // const [displayfield, setDisplayfield] = useState('');
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     axios.post('http://localhost:8080/api/auth/findappusers')
       .then(response => {
-        setUsers(response.data);
         console.log(response.data);
+        setUsers(response.data);
       })
       .catch(error => {
         console.error('Error fetching users:', error);
@@ -38,12 +40,17 @@ const EmployeeListAd = () => {
   const filteredUsers = users.filter(user => {
     if (!searchQuery) return true;
     if (filterOption === 'roles.name') {
-      return user.roles.some(role => role.name.toLowerCase().includes(searchQuery.toLowerCase()));
+      return user.roles && user.roles.some(role => role.name.toLowerCase().includes(searchQuery.toLowerCase()));
     } else {
       const value = user[filterOption];
       return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
     }
   });
+
+  const handleEditUser = (userId) => {
+    console.log("User ID:", userId);
+    navigate(`/login/welcome/employeelistad/edit/${userId}`);
+  };
 
   const theme = responsiveFontSizes(createTheme());
 
@@ -113,7 +120,6 @@ const EmployeeListAd = () => {
                   <MenuItem value="roles.name">Role</MenuItem>
                   <MenuItem value="address">Address</MenuItem>
                   <MenuItem value="tel">Contact Number</MenuItem>
-                  {/* Add more options as needed */}
                 </Select>
               </FormControl>
             </Grid>
@@ -152,8 +158,10 @@ const EmployeeListAd = () => {
         </Grid>
         <Grid item xs={12}>
           {filteredUsers.map((user, index) => (
-            <Grid item xs={12} key={index}>
-              <Button variant='contained'
+            < Grid item xs={12} key={index} >
+              {/* {console.log("from start: " + user)} */}
+              <Button
+                variant='contained'
                 sx={{
                   backgroundColor: '#6C94F8',
                   color: 'white',
@@ -162,13 +170,16 @@ const EmployeeListAd = () => {
                   },
                   width: '80%',
                   marginBottom: '10px',
-                }}>
+                }}
+                onClick={() => handleEditUser(user.id)}
+              >
+
                 {`User: ${filterOption === 'roles.name' ? user.roles.map(role => role.name) : user[filterOption]}`} {/*.join(', ') Displaying the value based on the selected filter option */}
               </Button>
             </Grid>
           ))}
         </Grid>
-      </Grid>
+      </Grid >
     </>
   );
 };
