@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLocationDot, faSitemap, faCalendarDays, faFileSignature } from '@fortawesome/free-solid-svg-icons';
 import './SerAgTwoInputContainer.css';
 import axios from "axios";
-import SiViSingleButton from '../Components/SiteVisitComponents/SiViSingleButton';
+import SingleButton from '../Components/SingleButton';
 
 export default function SerAgTwoInputContainer() {
   const [customerName,setCustomerName]=useState("");
@@ -46,8 +46,7 @@ export default function SerAgTwoInputContainer() {
               <FontAwesomeIcon icon={faCalendarDays} className='icon' />
               </div>
               
-              {/* <button value="save"onClick={handleSave}>Save</button> */}
-              <SiViSingleButton value= 'Save'onClick={handleSave}></SiViSingleButton>
+              <SingleButton value= 'Save'onClick={handleSave}></SingleButton>
             
             </div>
 

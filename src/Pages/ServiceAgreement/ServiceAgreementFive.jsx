@@ -18,8 +18,7 @@ export default function ServiceAgreementFive() {
       <SerAgFilter/>
       <SerAgSearch/>
       <SerAgThreeInputContainer/>
-      <Link to ="/">
-      <SingleButton value= 'Add a new Service Agreement'/></Link>
+     
       <Footer/>
       
     </div>
