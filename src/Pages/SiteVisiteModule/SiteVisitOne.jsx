@@ -17,9 +17,7 @@ export default function SiteVisitOne() {
       <SiteVisitFilter/>
       <SiteVisitSearch/>
       <SiteVisitTwoInputContainer/>
-      <Link to="/SiteVisitTwo">
-      <SiViSingleButton value='Add a new Site Visit'/>
-      </Link>
+   
       <Footer/>
     </div>
   )

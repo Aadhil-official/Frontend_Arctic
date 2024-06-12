@@ -14,9 +14,7 @@ export default function SiteVisitTwo() {
       </Link>
       <HeaderOne value='Site Visit Details'></HeaderOne>
       <SiteVisitInputContainer/>
-      <Link to="/SiteVisitThree">
-      <SiViSingleButton value='Edit Details'/>
-      </Link>
+      
       <Footer/>
     </div>
   );

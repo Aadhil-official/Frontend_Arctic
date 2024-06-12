@@ -1,11 +1,10 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLocationDot, faClipboard } from '@fortawesome/free-solid-svg-icons';
-import './SiteVisitInputContainer.css'
-import { Link } from 'react-router-dom';
+import './SiteVisiFourtInputContainer.css'
 import SiViSingleButton from './SiViSingleButton';
 
-export default function SiteVisitInputContainer() {
+export default function SiteVisitFourInputContainer() {
   return (
     <div className='SiViInputC'>
       <div className="input-container">
@@ -21,12 +20,11 @@ export default function SiteVisitInputContainer() {
       <div className="input-container">
         <FontAwesomeIcon icon={faClipboard} className="icon" />
       <input type="text" placeholder="Job type" />
+
+
+
       </div>
-      
-      <Link to="/SiteVisitThree">
-      <SiViSingleButton value='Edit Details'/>
-      </Link>
-      </div>
-    
+      <SiViSingleButton value='Update'/>
+    </div>
   )
 }
