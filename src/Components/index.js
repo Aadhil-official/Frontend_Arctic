@@ -10,4 +10,6 @@ export { default as ResponsiveAppBar } from './ResponsiveAppBar';
 export { default as Tabs } from './Tabs';
 export { default as FormForgotPass } from './FormForgotPass';
 export { default as FormResetPass } from './FormResetPass';
-export { default as Nav } from './Nav';
+export { default as FormView } from './FormView';
+export { default as FormUpdate } from './FormUpdate';
+export { default as FooterIn } from './FooterIn';

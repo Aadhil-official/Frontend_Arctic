@@ -67,12 +67,21 @@ export default function FormSignup() {
 
   };
 
+  const handleReset = () => {
+    setUsername('');
+    setUsergroup('');
+    setTel('');
+    setRole('');
+    setEmail('');
+    setAddress('');
+  }
+
   return (
     <>
       <Box
         component="form"
         sx={{
-          '& .MuiTextField-root': { m: 1,width:'80%' },
+          '& .MuiTextField-root': { m: 1, width: '80%' },
           textAlign: 'center',
           mt: 3
         }}
@@ -82,6 +91,7 @@ export default function FormSignup() {
         <TextField
           label="Username"
           type='text'
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
 
@@ -90,12 +100,14 @@ export default function FormSignup() {
           type="text"
           multiline
           rows={4}
+          value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
 
         <TextField
           label="User group"
           type="text"
+          value={usergroup}
           onChange={(e) => setUsergroup(e.target.value)}
         />
 
@@ -103,18 +115,21 @@ export default function FormSignup() {
         <TextField
           label="Email"
           type='email'
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <TextField
           label="Contact No"
           type='text'
+          value={tel}
           onChange={(e) => setTel(e.target.value)}
         />
 
         <TextField
           select
           label="Designation"
+          value={role}
           onChange={(e) => setRole(e.target.value)}
           SelectProps={{ native: true }}
         >
@@ -122,9 +137,18 @@ export default function FormSignup() {
           <option value="admin">Admin</option>
           <option value="user">User</option>
         </TextField><br /><br />
-        <Button variant="contained" onClick={handleSubmit}>
+        <Button
+          variant="contained"
+          onClick={handleSubmit}
+          sx={{
+            marginRight: { xs: 4, sm: 4, md: 5 }
+          }}>
           Signup
-        </Button><br /><br />
+        </Button>
+        <Button variant="contained" onClick={handleReset}>
+          Reset
+        </Button>
+        <br /><br />
       </Box>
 
 

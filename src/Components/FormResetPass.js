@@ -80,6 +80,7 @@ function FormResetPass() {
           id="email"
           label="Email"
           type='email'
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         /><br />
 
@@ -87,6 +88,7 @@ function FormResetPass() {
           id="otp"
           label="OTP"
           type='text'
+          value={otp}
           onChange={(e) => setOtp(e.target.value)}
         /><br />
 
@@ -94,6 +96,7 @@ function FormResetPass() {
           id="newpass"
           label="New password"
           type='password'
+          value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
         /><br />
 
@@ -101,6 +104,7 @@ function FormResetPass() {
           id="conformpass"
           label="Conform password"
           type='password'
+          value={conformpass}
           onChange={(e) => setConformpass(e.target.value)}
         /><br /><br />
 

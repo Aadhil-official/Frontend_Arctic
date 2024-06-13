@@ -10,4 +10,6 @@ export { default as Admcomred } from './Admcomred';
 export { default as ResetPass } from './ResetPass';
 export { default as EmployeeListAd } from './EmployeeListAd';
 export { default as EmployeeList } from './EmployeeList';
+export { default as UserEdit } from './UserEdit';
+export { default as UserView } from './UserView';
 

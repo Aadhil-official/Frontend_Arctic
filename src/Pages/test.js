@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography, createTheme, responsiveFontSizes } from '@mui/material';
-import { NormalHeaderBar } from '../Components/index';
+// import { NormalHeaderBar } from '../Components/index';
 import { Link, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-// import { purple } from '@mui/material/colors';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import '../Style/Component/EmployeeList.css'
 import SearchIcon from '@mui/icons-material/Search';
-import '../Style/Component/EmployeeListAd.css'
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 
-const EmployeeList = () => {
-  const [users, setUsers] = useState([]);
+const JobDetails1 = () => {
+  const [jobs, setJobs] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterOption, setFilterOption] = useState('username');
+  const [filterOption, setFilterOption] = useState('item');
+  // const [displayfield, setDisplayfield] = useState('');
 
+  const navigate = useNavigate();
+
+ 
   useEffect(() => {
-    axios.post('http://localhost:8080/api/auth/findappusers')
+    axios.get('https:/localhost:8080/api/jobs')
       .then(response => {
-        setUsers(response.data);
-        console.log("The response of list hahahahah...........", response.data);
+        setJobs(response.data);
       })
       .catch(error => {
-        console.error('Error fetching users:', error);
+        console.error("There was an error fetching the jobs!", error);
       });
   }, []);
 
@@ -34,41 +36,41 @@ const EmployeeList = () => {
     setFilterOption(e.target.value);
   };
 
-  const navigate = useNavigate();
 
-  const filteredUsers = users.filter(user => {
+  const filteredUsers = jobs.filter(job => {
     if (!searchQuery) return true;
-    if (filterOption === 'roles.name') {
-      return user.roles.some(role => role.name.toLowerCase().includes(searchQuery.toLowerCase()));
-    } else {
+    
       const value = user[filterOption];
       return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
-    }
+    
   });
+
+  // navigate('/')
+  const handleEditUser = (jobId) => {
+        navigate(`/login/welcomeadmin/joblist_Ad/editJob/${jobId}`);
+  };
 
   const theme = responsiveFontSizes(createTheme());
 
-  const handleViewUser = (id) => {
-    navigate(`/login/welcome/employeelist/view/${id}`);
-  }
-
   return (
     <>
-      <NormalHeaderBar />
+      {/* <NormalHeaderBar /> */}
       <Grid container spacing={2}>
         <Grid item position='fixed'>
-          <Link to={"/login/welcome"}>
+          <Link to={"/login/welcomeadmin"}>
             <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
           </Link>
         </Grid>
       </Grid>
-      <Grid container textAlign='center' justifyContent='center'>
 
-        <Grid item xl={12} lg={12} md={12} xs={12} sm={12} className='text1'>
+      <Grid container textAlign='center' justifyContent='center'>
+        <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'} className='text'>
           <ThemeProvider theme={theme}>
-            <Typography variant='h3' sx={{ fontWeight: 'bold' }}>User Details</Typography>
+            <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Job Details</Typography>
           </ThemeProvider>
         </Grid>
+       
+
 
         <Grid item xs={12} style={{ margin: '20px' }}>
           <Grid container>
@@ -96,10 +98,14 @@ const EmployeeList = () => {
                     />
                   }
                 >
-                  <MenuItem value="username">User name</MenuItem>
-                  <MenuItem value="roles.name">Role</MenuItem>
-                  <MenuItem value="address">Address</MenuItem>
-                  <MenuItem value="tel">Contact Number</MenuItem>
+                  <MenuItem value="item">Item</MenuItem>
+                  <MenuItem value="location">Role</MenuItem>
+                  <MenuItem value="email">Address</MenuItem>
+                  <MenuItem value="itemIssue">Contact Number</MenuItem>
+ 		<MenuItem value="customerDetailscustomerDetails">Item</MenuItem>
+                  <MenuItem value="employeeDetailsemployeeDetails">Role</MenuItem>
+                  
+
                 </Select>
               </FormControl>
             </Grid>
@@ -115,14 +121,21 @@ const EmployeeList = () => {
                     <InputAdornment position='start'>
                       <SearchIcon />
                     </InputAdornment>
-                  )
+                  ),
+                  // value:(
+                  //   searchQuery
+                  // )
                 }}
+                // InputLabelProps={{
+                //   shrink: searchQuery.length > 0 || undefined,
+                // }}
                 // sx={{
                 //   '& .MuiOutlinedInput-root': {
                 //     borderRadius: '50px',
                 //   },
                 // }}
                 label="Search"
+                // value=""
                 value={searchQuery}
                 onChange={handleSearchChange}
               />
@@ -130,9 +143,11 @@ const EmployeeList = () => {
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          {filteredUsers.map((user, index) => (
-            <Grid item xs={12} key={index}>
-              <Button variant='contained'
+          {filteredUsers.map((job, index) => (
+            < Grid item xs={12} key={index} >
+              {/* {console.log("from start: " + item)} */}
+              <Button
+                variant='contained'
                 sx={{
                   backgroundColor: '#6C94F8',
                   color: 'white',
@@ -140,21 +155,19 @@ const EmployeeList = () => {
                     backgroundColor: '#547DD1', // Slightly darker shade for hover effect
                   },
                   width: '80%',
-                  // display: 'flex',
-                  // gap:'10px',
-                  justifyContent: 'flex-start',
                   marginBottom: '10px',
                 }}
-                onClick={() => handleViewUser(user.id)}
+                onClick={() => handleEditUser(job.id)}
               >
-                <span className='usertext'>{`User ${index+1} :`}</span>{` ${filterOption === 'roles.name' ? user.roles.map(role => role.name) : user[filterOption]}`} {/*.join(', ') Displaying the value based on the selected filter option */}
+                {/* {index} */}
+                {`Job: ${user[filterOption]}`} {/*.join(', ') Displaying the value based on the selected filter option */}
               </Button>
             </Grid>
           ))}
         </Grid>
-      </Grid>
+      </Grid >
     </>
   );
 };
 
-export default EmployeeList;
+export default JobDetails1;

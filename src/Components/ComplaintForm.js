@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { z } from 'zod';
 import { error, success } from '../util/Toastify';
@@ -12,12 +12,14 @@ function ComplaintForm() {
 
   const navigate = useNavigate();
 
-
   const [subject, setSubject] = useState('');
   const [object, setObject] = useState('');
   const [email, setEmail] = useState('');
   const [complaindate, setDate] = useState('');
-  const [admintype, setAdmintype] = useState('');
+  const [tempdata, setTempdata] = useState([]);
+  // const [admintype, setAdmintype] = useState('');
+
+  const location = useLocation();
 
   useEffect(() => {
     const getCurrentDate = () => {
@@ -28,37 +30,41 @@ function ComplaintForm() {
       return `${year}-${month}-${day}`;
     };
 
+    if (location.state && location.state.tempdata.email) {
+      setEmail(location.state.tempdata.email);
+      setTempdata(location.state.tempdata);
+    }
     // Set complaindate to the current date on component mount
     setDate(getCurrentDate());
-  }, []); // Empty dependency array to run this effect only once on mount
+  }, [location.state]); // Empty dependency array to run this effect only once on mount
 
 
   function HandleSubmit() {
 
-    const allowedTypes = ['employee', 'vehicle', 'unit', 'item', 'sitevisit', 'service', 'job', 'calander', 'custemer', 'usergroup'];
+    // const allowedTypes = ['employee', 'vehicle', 'unit', 'item', 'sitevisit', 'service', 'job', 'calander', 'custemer', 'usergroup'];
 
     const data = {
       subject: subject,
       object: object,
       email: email,
-      admintype: [admintype],
+      // admintype: [admintype],
       complaindate: complaindate
     }
 
     const validateForm = z.object({
       subject: z.string().min(1, { message: 'Enter the subject' }),
       object: z.string().min(1, { message: 'Enter the object' }),
-      email: z.string().email({ message: 'Invalid email address' }),
-      admintype: z.array(z.string()).refine((value) => allowedTypes.includes(value[0]), {
-        message: "Admin type is not define"
-      })
+      // email: z.string().email({ message: 'Invalid email address' }),
+      // admintype: z.array(z.string()).refine((value) => allowedTypes.includes(value[0]), {
+      //   message: "Admin type is not define"
+      // })
     });
 
     const result = validateForm.safeParse(data);
     if (result.success) {
       axios.post('http://localhost:8080/api/auth/complaints', data)
         .then(() => {
-          navigate('/login/welcome');
+          navigate('/login/welcome', { state: { tempdata } });
           success('Complain added successfully!')
         })
         .catch(() => error("Failed to add complain"));
@@ -68,11 +74,13 @@ function ComplaintForm() {
         error(String(formattedError.subject?._errors));
       } else if (formattedError.object?._errors) {
         error(String(formattedError.object?._errors))
-      } else if (formattedError.email?._errors) {
-        error(String(formattedError.email?._errors))
-      } else if (formattedError.admintype?._errors) {
-        error(String(formattedError.admintype?._errors));
-      }
+      } 
+      // else if (formattedError.email?._errors) {
+      //   error(String(formattedError.email?._errors))
+      // }
+      // else if (formattedError.admintype?._errors) {
+      //   error(String(formattedError.admintype?._errors));
+      // }
     }
   }
 
@@ -90,24 +98,26 @@ function ComplaintForm() {
       >
         <TextField
           id="subject"
-          label="Complaints"
+          label="Subject"
           type='text'
+          value={subject}
           onChange={(e) => setSubject(e.target.value)}
         />
 
-        <TextField
+        {/* <TextField
           label="Email"
           id="email"
           type='email'
           // value={email}
           onChange={(e) => setEmail(e.target.value)}
         // required
-        />
+        /> */}
 
         <TextField
           id='object'
-          label="Object"
+          label="Complaints"
           type='text'
+          value={object}
           // id="outlined-required"
           // value={roles}
           onChange={(e) => setObject(e.target.value)}
@@ -117,7 +127,7 @@ function ComplaintForm() {
         />
 
 
-        <TextField
+        {/* <TextField
           select
           label="Admin Type"
           onChange={(e) => setAdmintype(e.target.value)}
@@ -135,7 +145,7 @@ function ComplaintForm() {
           <option value="calander">Calander</option>
           <option value="custemer">Custemer</option>
           <option value="usergroup">Usergroup</option>
-        </TextField><br/>
+        </TextField><br /> */}
 
         {/* <TextField
           id='date'
@@ -145,8 +155,8 @@ function ComplaintForm() {
           onChange={(e) => setDate(e.target.value)}
         // required
         /><br /><br /> */}
-
-        <Button variant="contained" onClick={HandleSubmit}>Submit</Button><br /><br />
+<br /><br />
+        <Button variant="contained" onClick={HandleSubmit}>Submit</Button>
       </Box>
     </>
   )

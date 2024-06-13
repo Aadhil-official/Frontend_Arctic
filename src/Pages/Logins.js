@@ -19,16 +19,16 @@ export default function Logins() {
     <>
       <NormalHeaderBar />
 
-      <Grid container className="text">
-        <Grid item xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
+      <Grid container>
+        <Grid item className="text" xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
           <ThemeProvider theme={theme}>
-            <Typography variant='h3' sx={{ fontWeight: 'bold' }}>
+            <Typography variant='h3' sx={{ marginTop:'-15px',marginBottom:'-25px', fontWeight: 'bold' }}>
              Sign in
             </Typography>
           </ThemeProvider>
         </Grid>
-      </Grid>
-      <Grid container>
+      {/* </Grid>
+      <Grid container> */}
         <ThemeProvider theme={theme}>
           <Grid item xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
             <Typography variant='h6'>Sign in to your account</Typography>

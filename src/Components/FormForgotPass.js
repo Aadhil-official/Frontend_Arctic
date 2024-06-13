@@ -33,7 +33,7 @@ function FormForgotPass() {
                         success('OTP sended successfully!')
                     })
                     .catch(() => {
-                        error("Your internet connection is unstable!...")
+                        error("The email is not exist please enter valid email");
                     })
             } else {
                 const formattedError = result.error.format();
@@ -59,6 +59,7 @@ function FormForgotPass() {
                     id="email"
                     label="Email"
                     type='email'
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 /><br /><br />
 

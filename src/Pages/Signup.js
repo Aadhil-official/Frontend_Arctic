@@ -7,6 +7,8 @@ import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/s
 
 export default function Signup() {
 
+  // const location = useLocation()
+
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
 
@@ -19,9 +21,9 @@ export default function Signup() {
     <>
       <NormalHeaderBar />
       <Grid container spacing={2}>
-        <Grid item>
+        <Grid item position='fixed'>
           <Link to={"/login/welcomeadmin"}>
-            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6',position:'absolute',margin:'5px' }} alt='Back' />
+            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
           </Link>
         </Grid>
       </Grid>
@@ -36,7 +38,7 @@ export default function Signup() {
       <Grid container>
         <ThemeProvider theme={theme}>
           <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
-            <Typography variant='h6'>Enter account details</Typography>
+            <Typography variant='h6' sx={{marginTop:'-25px'}}>Enter account details</Typography>
           </Grid>
         </ThemeProvider>
       </Grid>
