@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #1d2634;
+  /* background-color: #1d2634; */
   color: #9e9ea4;
   font-family: 'Montserrat', sans-serif;
 }
@@ -48,6 +48,7 @@ body {
   justify-content: space-between;
   padding: 0 30px 0 30px;
   box-shadow: 0 6px 7px -3px rgba(0, 0, 0, 0.35);
+  background-color: #263043;
 }
 
 .menu-icon {
@@ -123,6 +124,7 @@ body {
 .main-title {
   display: flex;
   justify-content: space-between;
+  color: black;
 }
 
 .main-cards {
@@ -138,6 +140,8 @@ body {
   justify-content: space-around;
   padding: 8px 15px;
   border-radius: 5px;
+  /* border: #00d5ae; */
+  box-shadow: 5px 10px #f9f7f7;
 }
 
 .card:first-child {
@@ -245,41 +249,42 @@ body {
   justify-content: center;
   width: 350px;
   height: 500px;
+  color: black;
 }
 
 
 .img{
   transform: translate(242%, -175%);
-  color: #fff;
-  filter: grayscale(50%);
+  color: #060606;
+  /* filter: grayscale(50%); */
   font-size: 24px; 
   padding: 50px 10px;
   border-radius: 20px;
-  filter: brightness(0) invert(1);
+  /* filter: brightness(0) invert(1); */
   width: 40px;
   height: 40px;
 }
 
 .img1{
   transform: translate(200%, -170%);
-  color: #fff;
-  filter: grayscale(50%);
+  color: #060606;
+  /* filter: grayscale(50%); */
   font-size: 24px; 
   padding: 50px 10px;
   border-radius: 20px;
-  filter: brightness(0) invert(1);
+  /* filter: brightness(0) invert(1); */
   width: 50px;
   height: 50px;
 }
 
 .img2{
   transform: translate(270%, -182%);
-  color: #fff;
-  filter: grayscale(50%);
+  color: black;
+  /* filter: grayscale(50%); */
   font-size: 24px; 
   padding: 50px 10px;
   border-radius: 20px;
-  filter: brightness(0) invert(1);
+  filter: brightness(1) invert(1);
   width: 35px;
   height: 35px;
 }
@@ -289,6 +294,7 @@ body {
   justify-content: center;
   padding: 0px 0px 0px 70px;
   font-size: 15;
+  color: black;
 }
 
 .pieTopic1{
@@ -296,6 +302,7 @@ body {
   justify-content: center;
   padding: 0px 0px 0px 120px;
   font-size: 15;
+  color: black;
 }
 
 .pieTopic2{
@@ -303,6 +310,7 @@ body {
   justify-content: center;
   padding: 0px 0px 35px 100px;
   font-size: 15;
+  color: black;
 }
 
 .pieTopic3{
@@ -310,4 +318,5 @@ body {
   justify-content: center;
   padding: 0px 0px 35px 70px;
   font-size: 15;
+  color: black;
 }

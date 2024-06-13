@@ -5,6 +5,10 @@ import
  from 'react-icons/bs'
  import { FaCalendarAlt, FaCar} from "react-icons/fa";
  import { BiDetail } from "react-icons/bi";
+ import { FaBuilding } from "react-icons/fa6";
+ import { RiContractFill  } from "react-icons/ri";
+ import { HiMiniUserGroup } from "react-icons/hi2";
+
 
 function Sidebar({openSidebarToggle, OpenSidebar}) {
   return (
@@ -18,7 +22,7 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
         <ul className='sidebar-list'>
             <li className='sidebar-list-item'>
                 <a href="#">
-                    <BsGrid1X2Fill className='icon'/> Dashboard
+                    <BsGrid1X2Fill className='icon'/> Summary
                 </a>
             </li>
             <li className='sidebar-list-item'>
@@ -49,6 +53,11 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                 </a>
             </li>
 
+            <li className='sidebar-list-item'>
+                <a href="#">
+                    <HiMiniUserGroup className='icon'/> User Groups
+                </a>
+            </li>
 
             <li className='sidebar-list-item'>
                 <a href="#">
@@ -56,6 +65,18 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                 </a>
             </li>
             
+            <li className='sidebar-list-item'>
+                <a href="#">
+                    <RiContractFill   className='icon'/> Service Agreements
+                </a>
+            </li>
+
+            <li className='sidebar-list-item'>
+                <a href="#">
+                    <FaBuilding className='icon'/> Site Visits
+                </a>
+            </li>
+
             <li className='sidebar-list-item'>
                 <a href="#">
                     <FaCalendarAlt className='icon'/> Calender
