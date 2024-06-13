@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/s
 import Notify from '@mui/icons-material/MarkEmailUnread';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import axios from 'axios';
+import HomeIcon from '@mui/icons-material/Home';
 import { success } from '../util/Toastify';
 
 const ProfilesAdmin = ({ tempdata }) => {
@@ -101,7 +102,7 @@ const ProfilesAdmin = ({ tempdata }) => {
     // console.log("Switch toggled");
     setChecked(event.target.checked);
     if (!event.target.checked) {
-      setTimeout(async () => {
+      // setTimeout(async () => {
         try {
           await axios.post('http://localhost:8080/api/auth/signout', { checked: event.target.checked });
           success("Signed out!");
@@ -109,7 +110,7 @@ const ProfilesAdmin = ({ tempdata }) => {
         } catch (error) {
           console.error('Sign out error:', error);
         }
-      }, 500); // 500ms delay
+      // }, 500); // 500ms delay
     }
   };
 
@@ -127,7 +128,7 @@ const ProfilesAdmin = ({ tempdata }) => {
         <Grid container spacing={2} sx={{ position: 'absolute' }}>
           <Grid item lg={4.9} md={5} sm={4.5} xs={4}>
             <Link to={"/"}>
-              <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.5' }} alt='Back' />
+              <HomeIcon color='action' fontSize='large' sx={{ width: '40px', height: '40px', margin:'5px'}} alt='Back' />
             </Link>
           </Grid>
           {/* <ThemeProvider theme={theme}> */}
@@ -145,7 +146,7 @@ const ProfilesAdmin = ({ tempdata }) => {
             <Typography variant="h5" sx={{ marginTop: '12px' }}>logout</Typography>
           </Grid>
           <Grid item lg={0.5} md={0.5} sm={1} xs={0.5}>
-            <Switch
+            {/* <Switch
               checked={checked}
               onChange={handleChange}
               inputProps={{ 'aria-label': 'controlled' }}
@@ -170,7 +171,12 @@ const ProfilesAdmin = ({ tempdata }) => {
                   backgroundColor: '#E0E0E0', // Default track color for unchecked state
                 },
               }}
-            />
+            /> */}
+            {/* <Link to={'/signup'}> */}
+              <Button onClick={handleChange} sx={{ backgroundColor: '#6C94F8', marginRight: '20px' }} variant="contained" size='small'>
+                Log out
+              </Button>
+            {/* </Link> */}
           </Grid>
         </Grid>
         <Grid container justifyContent='center' textAlign='center' sx={{ marginTop: '13px' }}>

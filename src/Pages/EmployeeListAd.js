@@ -47,9 +47,10 @@ const EmployeeListAd = () => {
     }
   });
 
+  // navigate('/')
   const handleEditUser = (userId) => {
     console.log("User ID:", userId);
-    navigate(`/login/welcome/employeelistad/edit/${userId}`);
+    navigate(`/login/welcomeadmin/employeelistad/edit/${userId}`);
   };
 
   const theme = responsiveFontSizes(createTheme());
@@ -173,7 +174,7 @@ const EmployeeListAd = () => {
                 }}
                 onClick={() => handleEditUser(user.id)}
               >
-
+                {/* {index} */}
                 {`User: ${filterOption === 'roles.name' ? user.roles.map(role => role.name) : user[filterOption]}`} {/*.join(', ') Displaying the value based on the selected filter option */}
               </Button>
             </Grid>

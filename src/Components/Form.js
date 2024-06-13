@@ -90,12 +90,14 @@ export default function FormPropsTextFields() {
         <TextField
           label="Name"
           type='text'
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
 
         <TextField
           label="Password"
           type="password"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         /><br /><br />
         <Button variant="contained" onClick={handleSubmit}>

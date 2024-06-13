@@ -3,10 +3,11 @@ import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Switch from '@mui/material/Switch';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import ButtonComplain from './ButtonComplain';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import axios from 'axios';
+import HomeIcon from '@mui/icons-material/Home';
 import { success } from '../util/Toastify';
 
 export default function MenuAppBar() {
@@ -31,15 +32,15 @@ export default function MenuAppBar() {
     console.log("Switch toggled");
     setChecked(event.target.checked);
     if (!event.target.checked) {
-      setTimeout(async () => {
-        try {
-          await axios.post('http://localhost:8080/api/auth/signout', { checked: event.target.checked });
-          success("Signed out!");
-          navigate('/');
-        } catch (error) {
-          console.error('Sign out error:', error);
-        }
-      }, 500); // 500ms delay
+      // setTimeout(async () => {
+      try {
+        await axios.post('http://localhost:8080/api/auth/signout', { checked: event.target.checked });
+        success("Signed out!");
+        navigate('/');
+      } catch (error) {
+        console.error('Sign out error:', error);
+      }
+      // }, 500); // 500ms delay
     }
   };
 
@@ -62,18 +63,24 @@ export default function MenuAppBar() {
         <Grid container spacing={2} sx={{ position: 'absolute' }}>
           <Grid item lg={4.9} md={5} sm={4.5} xs={4}>
             <Link to={"/"}>
-              <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.5' }} alt='Back' />
+              <HomeIcon color='action' fontSize='large' sx={{ width: '40px', height: '40px', margin: '5px' }} alt='Back' />
             </Link>
           </Grid>
           {/* <ThemeProvider theme={theme}> */}
-          <Grid item lg={2} md={2} sm={1.6} xs={2.25}></Grid>
+          <Grid item lg={2} md={2} sm={1.9} xs={2.25}></Grid>
           {/* </ThemeProvider> */}
-          <Grid item lg={3.4} md={3.3} sm={3.5} xs={2.5}></Grid>
-          <Grid item lg={0.7} md={0.8} sm={1.2} xs={1.5} >
+          <Grid item lg={3.4} md={2.3} sm={1.5} xs={1}></Grid>
+          {/* <Grid item lg={0.7} md={0.8} sm={1.2} xs={1.5} >
             <Typography variant="h5" sx={{ marginTop: '12px', marginBottom: '20px' }}>logout</Typography>
+          </Grid> */}
+
+          <Grid item lg={1} md={1.2} sm={1.9} xs={1.5} >
+            <Link to={'/login/complaint'} state={{ tempdata }}>
+              <ButtonComplain />
+            </Link>
           </Grid>
-          <Grid item lg={0.5} md={0.5} sm={1} xs={0.5}>
-            <Switch
+          <Grid item lg={1.2} md={1.3} sm={2.2} xs={2}>
+            {/* <Switch
               checked={checked}
               onChange={handleChange}
               inputProps={{ 'aria-label': 'controlled' }}
@@ -98,10 +105,14 @@ export default function MenuAppBar() {
                   backgroundColor: '#E0E0E0', // Default track color for unchecked state
                 }
               }}
-            />
+            /> */}
+            <Button onClick={handleChange} sx={{ backgroundColor: '#6C94F8',marginTop:'15px'}} variant="contained" size='small'>
+              Log out
+            </Button>
           </Grid>
+
         </Grid>
-        <Grid container justifyContent='center' textAlign='center' sx={{ marginTop: '13px' }}>
+        <Grid container justifyContent='center' textAlign='center' sx={{ padding: '10px'}}>
           <ThemeProvider theme={theme}>
             <Grid item md={2.3} sm={3.4} xs={2.8}>
               <Typography variant="h4" sx={{ fontWeight: '500' }}>
@@ -115,14 +126,10 @@ export default function MenuAppBar() {
             </Grid> */}
           </ThemeProvider>
         </Grid>
-        <Grid container sx={{ marginTop: '12px' }}>
-          <Grid item lg={10.5} md={10.6} sm={10} xs={9.3}></Grid>
-          <Grid item lg={1.5} md={1} sm={1.5} xs={1.5} sx={{ marginBottom: '10px', marginTop: '-25px' }}>
-            <Link to={'/login/complaint'} state={{ tempdata }}>
-              <ButtonComplain />
-            </Link>
-          </Grid>
-        </Grid>
+        {/* <Grid container sx={{ marginTop: '12px' }}>
+          <Grid item lg={10.5} md={10.6} sm={10} xs={9.3}></Grid> */}
+
+        {/* </Grid> */}
       </AppBar>
 
     </>

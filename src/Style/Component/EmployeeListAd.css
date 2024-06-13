@@ -3,3 +3,13 @@
     color: rgb(102, 148, 235);
     font-style: italic;
 }
+
+.usertext {
+    margin-right: 10px;
+}
+
+@media(max-width: 600px) {
+    .usertext {
+        display: none;
+    }
+}

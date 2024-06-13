@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Footer, Profiles, Tabs } from '../Components/index';
+import { FooterIn, Profiles, Tabs } from '../Components/index';
 import '../Style/Welcome.css';
 import { Grid } from '@mui/material';
 // import ViewListPdf from './ViewListPdf';
 import { useLocation } from 'react-router-dom';
+// import { ThemeProvider } from 'styled-components';
 
 
 const Welcome = () => {
@@ -29,6 +30,8 @@ const Welcome = () => {
     { label: 'Job Allocation' },
   ];
 
+  // const theme = responsiveFontSizes(createTheme());
+
   return (
     <>
       <Grid container>
@@ -36,16 +39,31 @@ const Welcome = () => {
           {console.log(tempdata)}
           <Profiles state={{ tempdata }} />
         </Grid>
-        <Grid item xs={12}>
-          {/* <ViewListPdf/> */}
+      </Grid>
+      {/* <Grid container>
+        <Grid item xs={12} textAlign='center' justifyContent='center' className='text2'>
+          <ThemeProvider theme={theme}>
+            <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Dash board</Typography>
+          </ThemeProvider>
         </Grid>
+      </Grid>
+      <Grid container>
+        <ThemeProvider theme={theme}>
+          <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
+            <Typography variant='h6' sx={{ marginTop: '-25px' }}>Welocom!</Typography>
+          </Grid>
+        </ThemeProvider>
+      </Grid> */}
+
+      <Grid container>
+
         <Grid item xs={12}>
           <Tabs buttonData={buttonData} />
         </Grid>
         <Grid item xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mt: 3 }}>
-          <Footer />
+          <FooterIn />
         </Grid>
-      </Grid>
+      </Grid >
     </>
   );
 };

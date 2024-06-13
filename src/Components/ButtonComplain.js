@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 function ButtonComplain() {
   return (
     <div>
-      <Button sx={{ backgroundColor: '#6C94F8', marginTop: '25px', marginRight: '20px' }} variant="contained" size='small' >
+      <Button sx={{ backgroundColor: '#6C94F8', marginTop:'15px' }} variant="contained" size='small' >
         Complain
       </Button>
     </div>

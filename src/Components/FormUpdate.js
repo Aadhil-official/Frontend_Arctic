@@ -30,7 +30,7 @@ export default function FormUpdate({ user }) {
     // if (user) {
     //     console.log("user is there");
     // }
-
+    // navigate('/');
     const handleSubmit = () => {
 
         const allowedRoles = ['admin', 'user'];
@@ -66,13 +66,24 @@ export default function FormUpdate({ user }) {
         // console.log("thisklkdklwejdlkwed", updatedUser);
 
         const result = validateForm.safeParse(updatedUser);
-        if (!result.success) {
-            console.log("hiiiii", updatedUser);
-            axios.put(`http://localhost:8080/api/auth/updateUser`, updatedUser)
-                .then(() => {
-                    success("User updated successfully");
-                    navigate('/login/welcome/employeelistad');
-                }).catch(() => error("Undefined User!"))
+        if (result.error) {
+            if (
+                user.username !== updatedUser.username ||
+                user.email !== updatedUser.email ||
+                user.address !== updatedUser.address ||
+                user.usergroup !== updatedUser.usergroup ||
+                user.tel !== updatedUser.tel ||
+                user.roles[0].name.toLowerCase() !== updatedUser.roles[0].name.toLowerCase()
+            ) {
+                axios.put(`http://localhost:8080/api/auth/updateUser`, updatedUser)
+                    .then(() => {
+                        success("User updated successfully");
+                        navigate('/login/welcomeadmin/employeelistad');
+                    }).catch(() => error("Undefined User!"))
+            } else {
+                error("No changes detected!");
+                navigate('/login/welcomeadmin/employeelistad');
+            }
         } else {
             const formattedError = result.error.format();
             if (formattedError.username?._errors) {

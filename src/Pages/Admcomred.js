@@ -2,19 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { Box, Button, Divider, Grid, Modal, Typography, createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
 import '../Style/Admcomread.css';
+// import DeleteIcon from '@mui/icons-material/Delete';
 import { NormalHeaderBar } from '../Components/index'
+// import axios from 'axios';
+// import { error, success } from '../util/Toastify';
 
 function Admcomred() {
   const [openModalIndex, setOpenModalIndex] = useState(null);
   const [tempdata, setTempdata] = useState([]);
+  const [complaindata, setComplaindata] = useState([]);
   // const [complaindata, setComplaindata] = useState([]);
   const location = useLocation();
-const complaindata = location.state.complaintdata;
+  // const complaindata = location.state.complaintdata;
 
   useEffect(() => {
     if (location.state && location.state.tempdata) {
       setTempdata(location.state.tempdata);
       // console.log(complaindata)
+    } if (location.state && location.state.complaintdata) {
+      setComplaindata(location.state.complaintdata);
     }
   }, [location.state]);
 
@@ -27,17 +33,39 @@ const complaindata = location.state.complaintdata;
     setOpenModalIndex(null);
   };
 
+  // const handleDelete = (id) => {
+  //   axios.delete(`http://localhost:8080/api/auth/deletComplain?id=${id}`)
+  //     .then(() => {
+  //       success("Succesfully deleted")
+  //       setComplaindata(prevData => prevData.filter(complaint => complaint.complain.id !== id));
+  //       window.location.reload();
+  //     })
+  //     .catch(() => { error("Error") })
+  // }
+
+  // const handleDeleteAll = () => {
+  //   axios.delete(`http://localhost:8080/api/auth/deletComplains`)
+  //     .then(() => {
+  //       success("Succesfully deleted")
+  //     })
+  //     .catch(() => { error("Error") })
+  // }
 
   return (
     <>
       <NormalHeaderBar />
-      <Grid container spacing={2}>
-        <Grid item>
+      <Grid container spacing={2} sx={{ position: 'fixed', alignItems: 'center' }}>
+        <Grid item xs={6} sx={{ alignItems: 'center' }}>
           {/* {console.log(tempdata)} */}
-          <Link to={"/login/welcomeadmin"} state={{tempdata}}>
-            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', position: 'absolute', margin: '5px' }} alt='Back' />
+          <Link to={"/login/welcomeadmin"} state={{ tempdata }}>
+            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
           </Link>
         </Grid>
+        {/* <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Button variant='contained' onClick={handleDeleteAll} sx={{ marginRight: '5px' }}>
+            Clear all
+          </Button>
+        </Grid> */}
       </Grid>
       <Grid container className="text">
 
@@ -53,7 +81,7 @@ const complaindata = location.state.complaintdata;
 
       {complaindata.map((complaint, index) => (
         <Grid container key={index}>
-          {/* {console.log(complaindata)} */}
+          {console.log(complaint)}
           <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign={'center'}>
             {/* {setComplsize(count++)} */}
             {/* {setTempsize(complsize)} */}
@@ -64,11 +92,19 @@ const complaindata = location.state.complaintdata;
               onClick={() => handleOpenModal(index)} // Open modal for the current complaint
             >
               Subject: {complaint.complain.subject}, Date: {complaint.complain.complaindate}
+
+              {/* <DeleteIcon onClick={(e) => {
+                e.stopPropagation();
+                handleDelete(complaint.complain.id);
+              }} /> */}
             </Button>
           </Grid>
           <Modal
             open={openModalIndex === index} // Check if this modal should be open
             onClose={handleCloseModal}
+            BackdropProps={{
+              sx: { backdropFilter: 'blur(8px)' }, // Apply blur effect to the backdrop
+            }}
             aria-labelledby={`modal-modal-title-${index}`}
             aria-describedby={`modal-modal-description-${index}`}
           >

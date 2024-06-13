@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { NormalHeaderBar, FormUpdate, Footer } from '../Components/index';
-import { Link, useParams } from 'react-router-dom';
-import '../Style/Signup.css';
-import { Grid, Typography } from '@mui/material';
-import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
+import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { error } from '../util/Toastify';
 import axios from 'axios';
+import { Grid, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
+import { Footer, FormView, NormalHeaderBar } from '../Components/index';
 
-export default function UserEdit() {
+function UserView() {
     const { id } = useParams();
 
     const [user, setUser] = useState(null);
@@ -20,14 +19,15 @@ export default function UserEdit() {
                 setUser(response.data);
                 console.log("User details:", response.data);
                 setLoading(false);
-            } catch (error) {
-                // error('Error fetching user:' + error);
+            } catch (e) {
+                error('Error fetching user:' + e);
                 setLoading(true);
             }
         };
 
         fetchUser();
     }, [id]);
+
 
     let theme = createTheme();
     theme = responsiveFontSizes(theme);
@@ -37,11 +37,11 @@ export default function UserEdit() {
     }
 
     return (
-        <>
-            <NormalHeaderBar />
+        <div>
+            <NormalHeaderBar/>
             <Grid container spacing={2}>
                 <Grid item position='fixed'>
-                    <Link to={"/login/welcomeadmin/employeelistad"}>
+                    <Link to={"/login/welcome/employeelist"}>
                         <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
                     </Link>
                 </Grid>
@@ -49,7 +49,7 @@ export default function UserEdit() {
             <Grid container className="text">
                 <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
                     <ThemeProvider theme={theme}>
-                        <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Update The Existing User</Typography>
+                        <Typography variant='h3' sx={{ fontWeight: 'bold' }}>User Details</Typography>
                     </ThemeProvider>
                 </Grid>
             </Grid>
@@ -57,7 +57,7 @@ export default function UserEdit() {
             <Grid container>
                 <ThemeProvider theme={theme}>
                     <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
-                        <Typography variant='h6' sx={{ marginTop: '-20px' }}>Enter all the details</Typography>
+                        <Typography variant='h6' sx={{ marginTop: '-20px' }}>You can view user details</Typography>
                     </Grid>
                 </ThemeProvider>
             </Grid>
@@ -70,7 +70,7 @@ export default function UserEdit() {
                         <p>Loading...</p>
                     ) : user ? (
                         console.log("from userEdit page........" + user),
-                        <FormUpdate user={user} />
+                        <FormView user={user} />
                     ) : (
                         <p>User not found</p>
                     )}
@@ -81,8 +81,8 @@ export default function UserEdit() {
                 <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
                     <ThemeProvider theme={theme}>
                         <Typography variant='h5' fontWeight='bold'>
-                            To login?
-                            <Link to={'/login'} style={{ color: 'red' }}>
+                            To dashboard?
+                            <Link to={'/login/welcome'} style={{ color: 'red' }}>
                                 Click here
                             </Link>
                         </Typography>
@@ -90,6 +90,8 @@ export default function UserEdit() {
                 </Grid>
             </Grid><br />
             <Footer />
-        </>
-    );
+        </div>
+    )
 }
+
+export default UserView

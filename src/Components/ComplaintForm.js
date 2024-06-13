@@ -100,6 +100,7 @@ function ComplaintForm() {
           id="subject"
           label="Subject"
           type='text'
+          value={subject}
           onChange={(e) => setSubject(e.target.value)}
         />
 
@@ -116,6 +117,7 @@ function ComplaintForm() {
           id='object'
           label="Complaints"
           type='text'
+          value={object}
           // id="outlined-required"
           // value={roles}
           onChange={(e) => setObject(e.target.value)}

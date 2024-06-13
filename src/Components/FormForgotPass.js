@@ -59,6 +59,7 @@ function FormForgotPass() {
                     id="email"
                     label="Email"
                     type='email'
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 /><br /><br />
 
