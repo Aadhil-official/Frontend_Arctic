@@ -18,7 +18,7 @@ function Welcomeadmin() {
 
   const buttonData = [
     { label: 'Employee Details', link: '/login/welcomeadmin/employeelistad' },
-    { label: 'Item Details' },
+    { label: 'Item Details', link: '/login/welcomeadmin/itemListAd'},
     { label: 'Unit Details' },
     { label: 'Vehicle Details' },
     { label: 'Job Details' },

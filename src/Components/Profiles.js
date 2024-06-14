@@ -1,7 +1,7 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
-import Switch from '@mui/material/Switch';
+// import Switch from '@mui/material/Switch';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Grid } from '@mui/material';
 import ButtonComplain from './ButtonComplain';
@@ -12,7 +12,7 @@ import { success } from '../util/Toastify';
 
 export default function MenuAppBar() {
 
-  const [checked, setChecked] = React.useState(true);
+  // const [checked, setChecked] = React.useState(true);
   const [tempdata, setTempdata] = React.useState([]);
 
   const location = useLocation();
@@ -28,20 +28,20 @@ export default function MenuAppBar() {
 
   // const username = tempdata.username;
 
-  const handleChange = async (event) => {
-    console.log("Switch toggled");
-    setChecked(event.target.checked);
-    if (!event.target.checked) {
+  const handleChange = async () => {
+    // console.log("Switch toggled");
+    // setChecked(event.target.checked);
+    // if (!event.target.checked) {
       // setTimeout(async () => {
       try {
-        await axios.post('http://localhost:8080/api/auth/signout', { checked: event.target.checked });
+        await axios.post('http://localhost:8080/api/auth/signout', { checked: false });
         success("Signed out!");
         navigate('/');
       } catch (error) {
         console.error('Sign out error:', error);
       }
       // }, 500); // 500ms delay
-    }
+    // }
   };
 
 
@@ -63,7 +63,7 @@ export default function MenuAppBar() {
         <Grid container spacing={2} sx={{ position: 'absolute' }}>
           <Grid item lg={4.9} md={5} sm={4.5} xs={4}>
             <Link to={"/"}>
-              <HomeIcon color='action' fontSize='large' sx={{ width: '40px', height: '40px', margin: '5px' }} alt='Back' />
+              <HomeIcon color='action' fontSize='large' sx={{ width: '40px', height: '40px', margin: '5px',marginLeft:'20px' }} alt='Back' />
             </Link>
           </Grid>
           {/* <ThemeProvider theme={theme}> */}
@@ -74,12 +74,12 @@ export default function MenuAppBar() {
             <Typography variant="h5" sx={{ marginTop: '12px', marginBottom: '20px' }}>logout</Typography>
           </Grid> */}
 
-          <Grid item lg={1} md={1.2} sm={1.9} xs={1.5} >
+          <Grid item lg={1} md={1.2} sm={1.9} xs={2.2} >
             <Link to={'/login/complaint'} state={{ tempdata }}>
               <ButtonComplain />
             </Link>
           </Grid>
-          <Grid item lg={1.2} md={1.3} sm={2.2} xs={2}>
+          <Grid item lg={1.2} md={1.3} sm={2.2} xs={2.5}>
             {/* <Switch
               checked={checked}
               onChange={handleChange}
@@ -112,10 +112,10 @@ export default function MenuAppBar() {
           </Grid>
 
         </Grid>
-        <Grid container justifyContent='center' textAlign='center' sx={{ padding: '10px'}}>
+        <Grid container justifyContent='center' textAlign='center' sx={{ padding: '15px'}}>
           <ThemeProvider theme={theme}>
             <Grid item md={2.3} sm={3.4} xs={2.8}>
-              <Typography variant="h4" sx={{ fontWeight: '500' }}>
+              <Typography variant="h5" sx={{ fontWeight: '500' }}>
                 Welcome!
               </Typography>
             </Grid>

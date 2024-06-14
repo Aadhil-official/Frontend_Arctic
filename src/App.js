@@ -1,7 +1,8 @@
-import { EmployeeList, UserEdit, EmployeeListAd, Contacts, Logins, Welcome, ForPassword, Homes, Usercomplaint, Welcomeadmin, Signup, Admcomred, ResetPass, UserView } from './Pages/index';
+import { EmployeeList, UserEdit, EmployeeListAd, Contacts, Logins, Welcome, ForPassword, Homes, Usercomplaint, Welcomeadmin, Signup, Admcomred, ResetPass, UserView, ItemLis, ItemListAd, ItemView, ItemEdit } from './Pages/index';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+// import ItemLis from './Pages/Lists/User/ItemLis';
 
 
 function App() {
@@ -29,6 +30,10 @@ function App() {
         <Route path='/login/complaint' element={<Usercomplaint />} />
         <Route path='/login/complaintread' element={<Admcomred />} />
         <Route path='/login/forgetpassword/resetpass' element={<ResetPass />} />
+        <Route path='/login/welcome/itemList' element={<ItemLis />} />
+        <Route path='/login/welcomeadmin/itemListAd' element={<ItemListAd />} />
+        <Route path='/login/welcome/itemList/view/:id' element={<ItemView />} />
+        <Route path='/login/welcomeadmin/itemListAd/edit/:id' element={<ItemEdit/>} />
       </Routes>
     </>
   );

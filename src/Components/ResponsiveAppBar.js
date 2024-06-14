@@ -50,7 +50,7 @@ theme.typography.h5 = {
           alt='logo'
         ></img>
 
-        <MenuIcon fontSize="large" sx={{ position: 'absolute' }} className='menu' onClick={handleMenuClick} />
+        <MenuIcon fontSize="medium" sx={{ position: 'absolute' }} className='menu' onClick={handleMenuClick} />
         <ul className={menuOpen ? "open" : ""}>
         <ThemeProvider theme={theme}>
           <li>

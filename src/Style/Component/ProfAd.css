@@ -1,0 +1,32 @@
+.welcomead {
+    padding: 10px;
+    font-weight: 500;
+    /* position: absolute; */
+}
+
+/* @media(min-width:600px) {
+    .topbarpa {
+        display: none;
+    }
+} */
+
+@media(max-width:880px) {
+    .welcomead {
+        display: none;
+    }
+
+    .topbarpa {
+    padding: 5px;
+    }
+}
+
+
+/* @media(max-width:400px) {
+    .welcomead {
+        display: none;
+    }
+
+    .topbarpa {
+    padding: -px;
+    }
+} */

@@ -9,7 +9,7 @@ export default function NormalHeaderBar() {
   return (
     <>
       <AppBar position="sticky">
-        <Toolbar sx={{ background: 'rgb(102, 148, 235)' }}>
+        <Toolbar sx={{ background: 'rgb(25,118,210)' }}>
         <Link to={"/"}><HomeIcon color='action' fontSize='large' /></Link>
         </Toolbar>
       </AppBar>

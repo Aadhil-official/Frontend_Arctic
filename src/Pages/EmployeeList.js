@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography, createTheme, responsiveFontSizes } from '@mui/material';
-import { NormalHeaderBar } from '../Components/index';
+import { FooterIn, NormalHeaderBar } from '../Components/index';
 import { Link, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 // import { purple } from '@mui/material/colors';
@@ -152,7 +152,8 @@ const EmployeeList = () => {
             </Grid>
           ))}
         </Grid>
-      </Grid>
+      </Grid><br/><br/>
+      <FooterIn/>
     </>
   );
 };

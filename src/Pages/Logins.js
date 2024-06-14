@@ -1,5 +1,5 @@
 import React from 'react';
-import { NormalHeaderBar, Form, Footer } from '../Components/index';
+import { NormalHeaderBar, Form, FooterIn } from '../Components/index';
 import { Link } from 'react-router-dom';
 import '../Style/Login.css';
 import { Grid, Typography } from '@mui/material';
@@ -22,12 +22,12 @@ export default function Logins() {
       <Grid container>
         <Grid item className="text" xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
           <ThemeProvider theme={theme}>
-            <Typography variant='h3' sx={{ marginTop:'-15px',marginBottom:'-25px', fontWeight: 'bold' }}>
-             Sign in
+            <Typography variant='h3' sx={{ marginTop: '-15px', marginBottom: '-25px', fontWeight: 'bold' }}>
+              Sign in
             </Typography>
           </ThemeProvider>
         </Grid>
-      {/* </Grid>
+        {/* </Grid>
       <Grid container> */}
         <ThemeProvider theme={theme}>
           <Grid item xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
@@ -58,7 +58,7 @@ export default function Logins() {
           </ThemeProvider>
         </Grid>
       </Grid><br />
-      <Footer />
+      <FooterIn />
     </>
   );
 }

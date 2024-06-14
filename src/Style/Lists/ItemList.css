@@ -1,0 +1,15 @@
+.text2 {
+    padding: 30px;
+    color: rgb(102, 148, 235);
+    font-style: italic;
+}
+
+.usertext2 {
+    margin-right: 10px;
+}
+
+@media(max-width: 600px) {
+    .usertext2 {
+        display: none;
+    }
+}
