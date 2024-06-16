@@ -1,7 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLocationDot, faClipboard } from '@fortawesome/free-solid-svg-icons';
-import './SiteVisiThreetInputContainer.css'
+import './SiteVisitThreeInputContainer.css'
 import { Link } from 'react-router-dom';
 import SiViSingleButton from './SiViSingleButton';
 

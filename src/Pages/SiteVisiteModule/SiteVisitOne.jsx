@@ -4,10 +4,8 @@ import HeaderOne from '../../Components/HeaderOne'
 import SiteVisitFilter from '../../Components/SiteVisitComponents/SiteVisitFilter'
 import SiteVisitSearch from '../../Components/SiteVisitComponents/SiteVisitSearch'
 import SiteVisitTwoInputContainer from '../../Components/SiteVisitComponents/SiteVisitTwoInputContainer'
-import SingleButton from '../../Components/SingleButton'
-import SiViSingleButton from '../../Components/SiteVisitComponents/SiViSingleButton'
 import Footer from '../../Components/Footer'
-import { Link } from 'react-router-dom'
+
 
 export default function SiteVisitOne() {
   return (

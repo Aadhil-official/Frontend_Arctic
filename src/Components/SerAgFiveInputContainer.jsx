@@ -44,8 +44,20 @@ export default function SerAgFiveInputContainer() {
               <FontAwesomeIcon icon={faCalendarDays} className='icon' />
               </div>
               
+              <button value="save"  style={{
+                backgroundColor:"rgba(60, 108, 230, 0.647)",
+                color:"aliceblue",
+                border:"none",
+                textAlign:"center",
+                cursor:"pointer",
+                fontFamily:"'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+                borderRadius:"5px",
+                width:"400px",
+                height:"60px",
+                margin:"2em"
+              }}>Edit Details</button>
 
-              <Link to ='/ServiceAgreementThree'><SiViSingleButton value= 'Edit Details'/></Link> 
+              {/* <Link to ='/ServiceAgreementThree'><SiViSingleButton value= 'Edit Details'/></Link>  */}
             
             </div>
 

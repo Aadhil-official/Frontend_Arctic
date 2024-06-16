@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLocationDot, faSitemap, faCalendarDays, faFileSignature } from '@fortawesome/free-solid-svg-icons';
 import './SerAgTwoInputContainer.css';
 import axios from "axios";
-import SingleButton from '../Components/SingleButton';
+
 
 export default function SerAgTwoInputContainer() {
   const [customerName,setCustomerName]=useState("");
@@ -45,8 +45,20 @@ export default function SerAgTwoInputContainer() {
               <input type='text' placeholder='Period of the agreement'onChange={(e) => (setPeriodOfTheAgreement(e.target.value))}></input>
               <FontAwesomeIcon icon={faCalendarDays} className='icon' />
               </div>
+              <button value="save" onClick={handleSave} style={{
+                backgroundColor:"rgba(60, 108, 230, 0.647)",
+                color:"aliceblue",
+                border:"none",
+                textAlign:"center",
+                cursor:"pointer",
+                fontFamily:"'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+                borderRadius:"5px",
+                width:"400px",
+                height:"60px",
+                margin:"2em"
+              }}>Save</button>
               
-              <SingleButton value= 'Save'onClick={handleSave}></SingleButton>
+              
             
             </div>
 

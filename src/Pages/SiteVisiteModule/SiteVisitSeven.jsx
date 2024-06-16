@@ -8,7 +8,7 @@ import Time from '../../Components/SiteVisitComponents/Time'
 import Footer from '../../Components/Footer'
 import SiViSingleButton from '../../Components/SiteVisitComponents/SiViSingleButton'
 
-export default function  () {
+export default function SiteVisitSeven () {
   return (
     <div>
       <BackIcon/>

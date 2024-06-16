@@ -2,8 +2,7 @@ import React from 'react'
 import BackIcon from '../../Components/BackIcon'
 import HeaderOne from '../../Components/HeaderOne'
 import SiteVisitFourInputContainer from '../../Components/SiteVisitComponents/SiteVisitFourInputContainer'
-import SiViSingleButton from '../../Components/SiteVisitComponents/SiViSingleButton'
-import Footer from '../../Components/Footer'
+//import Footer from '../../Comp'
 
 export default function SiteVisitSix() {
   return (
@@ -12,7 +11,7 @@ export default function SiteVisitSix() {
       <HeaderOne value='Site Visit Details'/>
       <SiteVisitFourInputContainer/>
      
-      <Footer/>
+      {/* <Footer/> */}
       
     </div>
   )

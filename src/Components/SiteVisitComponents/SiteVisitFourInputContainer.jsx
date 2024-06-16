@@ -1,7 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLocationDot, faClipboard } from '@fortawesome/free-solid-svg-icons';
-import './SiteVisiFourtInputContainer.css'
+import './SiteVisitFourInputContainer';
 import SiViSingleButton from './SiViSingleButton';
 
 export default function SiteVisitFourInputContainer() {
