@@ -1,18 +1,16 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-// import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import { Box, Button, TextField, ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material';
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { TextField, ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material';
 
-function FormView({ user }) {
+function FormUnitView({ unit }) {
 
     const navigate = useNavigate();
 
-
     const theme = responsiveFontSizes(createTheme());
+
     return (
-        <>
+        <div>
+
             <Box
                 sx={{
                     '& .MuiTextField-root': { m: 1, width: '80%' },
@@ -24,38 +22,27 @@ function FormView({ user }) {
                 <ThemeProvider theme={theme}>
 
                     <TextField
-                        label="Username"
+                        label="Indoor Serial"
                         type='text'
-                        value={user.username}
+                        value={unit.indoorSerial}
                         InputProps={{
                             readOnly: true
                         }}
                     />
 
                     <TextField
-                        label="Address"
+                        label="Outdoor Serial"
                         type="text"
-                        multiline
-                        rows={4}
-                        value={user.address}
+                        value={unit.outdoorSerial}
                         InputProps={{
                             readOnly: true
                         }}
                     />
 
                     <TextField
-                        label="User group"
+                        label="Model Name"
                         type="text"
-                        value={user.usergroup}
-                        InputProps={{
-                            readOnly: true
-                        }}
-                    />
-
-                    <TextField
-                        label="User email"
-                        type="email"
-                        value={user.email}
+                        value={unit.modelName}
                         InputProps={{
                             readOnly: true
                         }}
@@ -63,31 +50,51 @@ function FormView({ user }) {
 
 
                     <TextField
-                        label="Contact number"
+                        label="Commissioned Date"
+                        type='date'
+                        value={unit.commissionedDate}
+                        InputProps={{
+                            readOnly: true
+                        }}
+                    />
+
+                    <TextField
+                        label="Owner"
                         type='text'
-                        value={user.tel}
+                        value={unit.owner}
                         InputProps={{
                             readOnly: true
                         }}
                     />
 
                     <TextField
-                        label="Contact No"
+                        label="Warranty Period"
                         type='text'
-                        value={user.roles[0].name.toLowerCase()}
+                        value={unit.warrantyPeriod}
                         InputProps={{
                             readOnly: true
                         }}
                     />
+
+                    <TextField
+                        label="Unit Price"
+                        type='text'
+                        value={unit.unitPrice}
+                        InputProps={{
+                            readOnly: true
+                        }}
+                    />
+
                     <br /><br />
-                </ThemeProvider>
 
-                <Button variant="contained" onClick={() => navigate('/login/welcome/employeelist')}>
+                </ThemeProvider>
+                <Button variant="contained" onClick={() => navigate('/login/welcome/unitList')}>
                     Back to List
                 </Button><br /><br />
             </Box>
-        </>
-    );
+
+        </div>
+    )
 }
 
-export default FormView;
+export default FormUnitView

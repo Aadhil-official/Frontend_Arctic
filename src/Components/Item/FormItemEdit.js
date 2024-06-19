@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../util/Toastify';
+import { error, success } from '../../util/Toastify';
 
 export default function FormItemEdit({ item }) {
 
@@ -55,41 +55,40 @@ export default function FormItemEdit({ item }) {
 
 
         // console.log("thisklkdklwejdlkwed"+email);
-        // console.log("thisklkdklwejdlkwed", updatedUser);
+        // console.log("thisklkdklwejdlkwed", updatedItem);
 
         const result = validateForm.safeParse(updatedItem);
-        if (result.error) {
-            if (
-                item.name !== updatedItem.name ||
-                item.indoorMod !== updatedItem.indoorMod ||
-                item.outdoorMod !== updatedItem.outdoorMod ||
-                item.manufacturer !== updatedItem.manufacturer ||
-                item.capacity !== updatedItem.capacity
-            ) {
-                axios.put(`http://localhost:8080/api/auth/updateItem`, updatedItem)
-                    .then(() => {
-                        success("Item updated successfully");
-                        navigate('/login/welcomeadmin/itemListAd');
-                    }).catch(() => error("Undefined Item!"))
-            } else {
-                error("No changes detected!");
-                navigate('/login/welcomeadmin/itemListAd');
-            }
-        } else {
-            const formattedError = result.error.format();
-            if (formattedError.name?._errors) {
-                error(String(formattedError.name?._errors));
-            } else if (formattedError.indoorMod?._errors) {
-                error(String(formattedError.indoorMod?._errors));
-            } else if (formattedError.outdoorMod?._errors) {
-                error(String(formattedError.outdoorMod?._errors));
-            } else if (formattedError.manufacturer?._errors) {
-                error(String(formattedError.manufacturer?._errors));
-            } else if (formattedError.capacity?._errors) {
-                error(String(formattedError.capacity?._errors));
-            }
+        // if (!result.success) {
+        console.log("thisklkdklwejdlkwed", updatedItem);
+        if (
+            item.name !== updatedItem.name ||
+            item.indoorMod !== updatedItem.indoorMod ||
+            item.outdoorMod !== updatedItem.outdoorMod ||
+            item.manufacturer !== updatedItem.manufacturer ||
+            item.capacity !== updatedItem.capacity
+        ) {
+            axios.put(`http://localhost:8080/api/auth/updateItem`, updatedItem)
+                .then(() => {
+                    success("Item updated successfully");
+                    navigate('/login/welcomeadmin/itemListAd');
+                })
+                .catch(() => {
+                    const formattedError = result.error.format();
+                    if (formattedError.name?._errors) {
+                        error(String(formattedError.name?._errors));
+                    } else if (formattedError.indoorMod?._errors) {
+                        error(String(formattedError.indoorMod?._errors));
+                    } else if (formattedError.outdoorMod?._errors) {
+                        error(String(formattedError.outdoorMod?._errors));
+                    } else if (formattedError.manufacturer?._errors) {
+                        error(String(formattedError.manufacturer?._errors));
+                    } else if (formattedError.capacity?._errors) {
+                        error(String(formattedError.capacity?._errors));
+                    } else {
+                        error("Undefined Item!")
+                    }
+                })
         }
-
     };
 
     return (
@@ -140,7 +139,7 @@ export default function FormItemEdit({ item }) {
                     value={capacity}
                     onChange={(e) => setCapacity(e.target.value)}
                 />
-                
+
                 <br /><br />
                 <Button variant="contained" onClick={handleSubmit}>
                     Update

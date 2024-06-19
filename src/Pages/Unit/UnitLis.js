@@ -1,29 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import axios from 'axios';
-import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography, createTheme, responsiveFontSizes } from '@mui/material';
-import { FooterIn, NormalHeaderBar } from '../Components/index';
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
-// import { purple } from '@mui/material/colors';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import { FooterIn, NormalHeaderBar } from '../../Components/index';
 import SearchIcon from '@mui/icons-material/Search';
-import '../Style/Lists/ItemList.css'
-import { error, success } from '../util/Toastify';
 
+function UnitLis() {
 
-const ItemListAd = () => {
-    const [items, setItems] = useState([]);
+    const [units, setUnits] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-    const [filterOption, setFilterOption] = useState('name');
+    const [filterOption, setFilterOption] = useState('modelName');
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/auth/getAllItem')
+        axios.get('http://localhost:8080/api/auth/getAllUnits')
             .then(response => {
-                setItems(response.data);
-                console.log("The response of list hahahahah...........", response.data);
+                setUnits(response.data);
             })
             .catch(error => {
-                console.error('Error fetching items:', error);
+                console.error('Error fetching units:', error);
             });
     }, []);
 
@@ -37,30 +32,26 @@ const ItemListAd = () => {
 
     const navigate = useNavigate();
 
-    const handleAddItem = () => {
-        navigate('')
-    }
-
-    const filteredItem = items.filter(item => {
+    const filteredUnit = units.filter(unit => {
         if (!searchQuery) return true;
 
-        const value = item[filterOption];
+        const value = unit[filterOption];
         return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
-
     });
 
     const theme = responsiveFontSizes(createTheme());
 
-    const handleViewUser = (id) => {
-        navigate(`/login/welcomeadmin/itemListAd/edit/${id}`);
+    const handleViewUnit = (id) => {
+        navigate(`/login/welcome/unitList/view/${id}`);
     }
 
     return (
-        <>
+        <div>
+
             <NormalHeaderBar />
             <Grid container spacing={2}>
                 <Grid item position='fixed'>
-                    <Link to={"/login/welcomeadmin"}>
+                    <Link to={"/login/welcome"}>
                         <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
                     </Link>
                 </Grid>
@@ -69,7 +60,7 @@ const ItemListAd = () => {
 
                 <Grid item xl={12} lg={12} md={12} xs={12} sm={12} className='text2'>
                     <ThemeProvider theme={theme}>
-                        <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Item Details</Typography>
+                        <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Unit Details</Typography>
                     </ThemeProvider>
                 </Grid>
 
@@ -99,7 +90,7 @@ const ItemListAd = () => {
                                         />
                                     }
                                 >
-                                    <MenuItem value="name">Item name</MenuItem>
+                                    <MenuItem value="modelName">Model name</MenuItem>
                                     <MenuItem value="indoorMod">Indoor Modal</MenuItem>
                                     <MenuItem value="outdoorMod">Outdoor Modal</MenuItem>
                                     <MenuItem value="manufacturer">Manufacturer</MenuItem>
@@ -134,7 +125,7 @@ const ItemListAd = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    {filteredItem.map((item, index) => (
+                    {filteredUnit.map((unit, index) => (
                         <Grid item xs={12} key={index}>
                             <Button variant='contained'
                                 sx={{
@@ -149,22 +140,19 @@ const ItemListAd = () => {
                                     justifyContent: 'flex-start',
                                     marginBottom: '10px',
                                 }}
-                                onClick={() => handleViewUser(item.id)}
+                                onClick={() => handleViewUnit(unit.id)}
                             >
-                                <span className='usertext2'>{`Item ${index + 1} :`}</span>{` ${item[filterOption]}`} {/*.join(', ') Displaying the value based on the selected filter option */}
+                                <span className='usertext2'>{`Unit ${index + 1} :`}</span>{` ${unit[filterOption]}`} {/*.join(', ') Displaying the value based on the selected filter option */}
                             </Button>
                         </Grid>
                     ))}
                 </Grid>
-                <Grid item xs={12} justifyContent='left' textAlign='left' position='fixed'>
-                    <Button onClick={handleAddItem}>
-                        Add Item
-                    </Button>
-                </Grid>
             </Grid><br /><br />
             <FooterIn />
-        </>
-    );
-};
 
-export default ItemListAd;
+
+        </div>
+    )
+}
+
+export default UnitLis

@@ -4,25 +4,28 @@ import { Link, useLocation } from 'react-router-dom';
 import '../Style/Admcomread.css';
 // import DeleteIcon from '@mui/icons-material/Delete';
 import { NormalHeaderBar } from '../Components/index'
-// import axios from 'axios';
-// import { error, success } from '../util/Toastify';
+import axios from 'axios';
+import { success } from '../util/Toastify';
 
 function Admcomred() {
+
+  const [complaindata, setComplaindata] = React.useState([]);
   const [openModalIndex, setOpenModalIndex] = useState(null);
-  const [tempdata, setTempdata] = useState([]);
-  const [complaindata, setComplaindata] = useState([]);
+  // const [tempdata, setTempdata] = useState([]);
+  // const [complaintdatasend, setComplaintdatasend] = useState([]);
   // const [complaindata, setComplaindata] = useState([]);
   const location = useLocation();
   // const complaindata = location.state.complaintdata;
 
   useEffect(() => {
-    if (location.state && location.state.tempdata) {
-      setTempdata(location.state.tempdata);
-      // console.log(complaindata)
-    } if (location.state && location.state.complaintdata) {
+    // if (location.state && location.state.tempdata) {
+    //   setTempdata(location.state.tempdata);
+    // }
+    if (location.state && location.state.complaintdata) {
       setComplaindata(location.state.complaintdata);
     }
   }, [location.state]);
+
 
   const handleOpenModal = (index) => {
     setOpenModalIndex(index);
@@ -51,21 +54,51 @@ function Admcomred() {
   //     .catch(() => { error("Error") })
   // }
 
+
+  const handleView1 = () => {
+    axios.post('http://localhost:8080/api/auth/getAllReviewedComplains')
+      .then(result => {
+        // console.log('Complaints fetched:', result.data);
+        setComplaindata(result.data);
+      })
+      .catch(error => {
+        console.error('Error fetching complaints:', error);
+      });
+  };
+
+  const handleDelete = (id) => {
+
+    console.log("got delete",id);
+    // axios.
+
+    // axios.post
+    // console.log(id);
+    axios.delete(`http://localhost:8080/api/auth/dltComplain?id=${id}`)
+      .then(response => {
+        success("Successfully reviewed"); // Assuming success is a function to show success message
+      })
+      .catch(error => {
+        console.error('Error fetching complaints:', error);
+      });
+  }
+
   return (
     <>
       <NormalHeaderBar />
       <Grid container spacing={2} sx={{ position: 'fixed', alignItems: 'center' }}>
         <Grid item xs={6} sx={{ alignItems: 'center' }}>
           {/* {console.log(tempdata)} */}
-          <Link to={"/login/welcomeadmin"} state={{ tempdata }}>
+          <Link to={"/login/welcomeadmin"}>{/* state={{ tempdata }}*/}
             <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
           </Link>
         </Grid>
-        {/* <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button variant='contained' onClick={handleDeleteAll} sx={{ marginRight: '5px' }}>
-            Clear all
-          </Button>
-        </Grid> */}
+        <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Link to={'/login/complaintread/reviewedcomplain'} state={{ complaindata }}>{/*, tempdata */}
+            <Button variant='contained' onClick={handleView1} sx={{ marginRight: '5px' }}>
+              Reviewed Complaints
+            </Button>
+          </Link>
+        </Grid>
       </Grid>
       <Grid container className="text">
 
@@ -81,7 +114,8 @@ function Admcomred() {
 
       {complaindata.map((complaint, index) => (
         <Grid container key={index}>
-          {console.log(complaint)}
+          {console.log("dataaa........", complaint)}
+          {/* {console.log(complaint)} */}
           <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign={'center'}>
             {/* {setComplsize(count++)} */}
             {/* {setTempsize(complsize)} */}
@@ -170,6 +204,22 @@ function Admcomred() {
                     </Typography>
                   </ThemeProvider>
                 </Grid>
+
+                <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign='right'>
+                  <Button
+                    // variant='contained'
+                    // color='black'
+                    onClick={() => handleDelete(complaint.complain.complainId)}
+                  >
+                    <ThemeProvider theme={responsiveFontSizes(createTheme())}>
+                      <Typography variant="h6" component="h2">
+                        {console.log(complaint.complain.complainId)}
+                        Review
+                      </Typography>
+                    </ThemeProvider>
+                  </Button>
+                </Grid>
+
 
               </Grid>
             </Box>
