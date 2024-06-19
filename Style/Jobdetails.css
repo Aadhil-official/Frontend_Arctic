@@ -6,6 +6,7 @@
     color: white;
     display: flex;
     align-items: center; 
+
    
   }
    /*footer text*/
@@ -27,7 +28,7 @@
     position: fixed;
     bottom: 0;
     left: 0;
-  
+    
     }
     
     /* title */
@@ -44,36 +45,30 @@
   
     
   
-/* tab */
-.tab{ float: center;
-  width: 80%;
-  padding: 10px;
-  box-sizing: border-box;
-  align-items: center;
-margin-bottom: 10px;
-  background:rgb(159, 200, 255);
-  list-style: none;
-  height: 80%; 
- margin-left: 130px;
-  color: black;
-  display: flex;
-  border-radius: 8px 8px 8px 8px;
 
-}
-/* tab content */
-.content{
-  margin-left: 20px;
-  text-align: center;
-  align-content: center;
-}
-/* button */
-.button {
-align-content: center;
-  float: center;
-  width: 20%;
+
+
+
+/* menus */
+.column1 {
+  float: left;
+  width: 10%;
   padding: 10px;
   box-sizing: border-box;
   text-align: center;
-cursor: pointer;
-margin-bottom: 10px;
+padding:10px;
+margin-left: 20px;
+margin-right: 1000px;
 }
+
+#button {
+  position:absolute;
+  margin-top: 2000%;
+  margin-left: 200px;
+  float:right;
+}
+
+
+
+
+

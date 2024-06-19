@@ -9,62 +9,51 @@ const YourComponent = () => {
       spacing={2}
       direction="column"
       alignItems="center"
-      justifyContent="center"
-      
-      >
+      justifyContent="center">
       
       
       <Button
         variant="contained"
-        style={{ width: '60%', marginTop: 80 ,height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}
-      >
+        style={{ width: '60%', marginTop: 80 ,height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}>
       </Button>
       <Button
         variant="contained"
-        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}
-      >
+        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}>
      
       </Button>
       <Button
         variant="contained"
-        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}
-      >
+        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}>
    
       </Button>
       <Button
         variant="contained"
-        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}
-      >
+        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}>
   
       </Button>
       <Button
         variant="contained"
-        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}
-      >
+        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}>
 
          </Button>
       <Button
         variant="contained"
-        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}
-      >
+        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}>
    
       </Button>
       <Button
         variant="contained"
-        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}
-      >
+        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}>
     
       </Button>
       <Button
         variant="contained"
-        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}
-      >
+        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}>
 
       </Button>
       <Button
         variant="contained"
-        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}
-      >
+        style={{ width: '60%', height: '40px', backgroundColor: 'rgb(108, 148, 248)' }}>
 
       </Button>
    

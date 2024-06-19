@@ -1,18 +1,15 @@
-import React from 'react';
-import Button from '@mui/material/Button';
+import * as React from 'react';
 import Stack from '@mui/material/Stack';
-import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
-const LoginButton = ({ to, buttonText }) => {
+export default function BasicButtons() {
   return (
-    <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
-      <Link to={to}>
-        <Button variant="contained">
-          {buttonText}
-        </Button>
-      </Link>
+    <Stack spacing={1} direction="row">
+     
+      <Button variant="contained">Add a New Job</Button>
+      <Button variant="contained">Allocate Job</Button> 
+      
+     
     </Stack>
   );
-};
-
-export default LoginButton;
+}
