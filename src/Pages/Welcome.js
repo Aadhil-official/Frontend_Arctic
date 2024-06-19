@@ -20,9 +20,9 @@ const Welcome = () => {
 
   const buttonData = [
     { label: 'Employee Details', link: '/login/welcome/employeelist' },
-    { label: 'Item Details' },
-    { label: 'Unit Details' },
-    { label: 'Vehicle Details' },
+    { label: 'Item Details', link: '/login/welcome/itemList' },
+    { label: 'Unit Details', link: '/login/welcome/unitList' },
+    { label: 'Vehicle Details', link: '/login/welcome/vehicleList' },
     { label: 'Job Details' },
     { label: 'Service Agreement' },
     { label: 'Calendar' },

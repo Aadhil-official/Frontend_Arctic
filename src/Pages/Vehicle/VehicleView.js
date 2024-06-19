@@ -1,31 +1,33 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { error } from '../util/Toastify';
-import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
+import { FooterIn, NormalHeaderBar } from '../../Components';
 import { Grid, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
-import { FooterIn, FormView, NormalHeaderBar } from '../Components/index';
+import { FormVehicleView } from '../../Components/Vehicle/index';
+import axios from 'axios';
+import { error } from '../../util/Toastify';
 
-function UserView() {
+function VehicleView() {
+
+
     const { id } = useParams();
 
-    const [user, setUser] = useState(null);
+    const [vehicle, setVehicle] = useState(null);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const fetchUser = async () => {
+        const fetchVehicle = async () => {
             try {
                 // console.log(id);
-                const response = await axios.post(`http://localhost:8080/api/auth/findappuser?id=${id}`);
-                setUser(response.data);
-                console.log("User details:", response.data);
+                const response = await axios.get(`http://localhost:8080/api/auth/getUnit?id=${id}`);
+                setVehicle(response.data);
                 setLoading(false);
             } catch (e) {
-                error('Error fetching user:' + e);
+                error('Error fetching item:' + e);
                 setLoading(true);
             }
         };
 
-        fetchUser();
+        fetchVehicle();
     }, [id]);
 
 
@@ -36,12 +38,15 @@ function UserView() {
         fontSize: '1.1rem'
     }
 
+
+
     return (
         <div>
+
             <NormalHeaderBar />
             <Grid container spacing={2}>
                 <Grid item position='fixed'>
-                    <Link to={"/login/welcome/employeelist"}>
+                    <Link to={"/login/welcome/vehicleList"}>
                         <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
                     </Link>
                 </Grid>
@@ -49,7 +54,7 @@ function UserView() {
             <Grid container className="text">
                 <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
                     <ThemeProvider theme={theme}>
-                        <Typography variant='h3' sx={{ fontWeight: 'bold' }}>User Details</Typography>
+                        <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Vehicle Details</Typography>
                     </ThemeProvider>
                 </Grid>
             </Grid>
@@ -57,7 +62,7 @@ function UserView() {
             <Grid container>
                 <ThemeProvider theme={theme}>
                     <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
-                        <Typography variant='h6' sx={{ marginTop: '-20px' }}>You can view user details</Typography>
+                        <Typography variant='h6' sx={{ marginTop: '-20px' }}>You can view vehicle details</Typography>
                     </Grid>
                 </ThemeProvider>
             </Grid>
@@ -68,11 +73,10 @@ function UserView() {
                 <Grid item xl={1.5} lg={2.7} md={6} xs={10.5} sm={8} className="box">
                     {loading ? (
                         <p>Loading...</p>
-                    ) : user ? (
-                        console.log("from userEdit page........" + user),
-                        <FormView user={user} />
+                    ) : vehicle ? (
+                        <FormVehicleView vehicle={vehicle} />
                     ) : (
-                        <p>User not found</p>
+                        <p>Vehicle not found</p>
                     )}
                 </Grid>
                 <Grid item xl={2} lg={3} md={3} xs={0.5} sm={2}></Grid>
@@ -90,8 +94,10 @@ function UserView() {
                 </Grid>
             </Grid><br />
             <FooterIn />
+
+
         </div>
     )
 }
 
-export default UserView
+export default VehicleView

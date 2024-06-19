@@ -13,14 +13,15 @@ function Welcomeadmin() {
   useEffect(() => {
     if (location.state && location.state.tempdata) {
       setTempdata(location.state.tempdata);
+      // {console.log(tempdata)}
     }
   }, [location.state]);
 
   const buttonData = [
     { label: 'Employee Details', link: '/login/welcomeadmin/employeelistad' },
-    { label: 'Item Details' },
-    { label: 'Unit Details' },
-    { label: 'Vehicle Details' },
+    { label: 'Item Details', link: '/login/welcomeadmin/itemListAd' },
+    { label: 'Unit Details', link: '/login/welcomeadmin/unitListAd' },
+    { label: 'Vehicle Details', link: '/login/welcomeadmin/vehicleListAd' },
     { label: 'Job Details' },
     { label: 'Service Agreement' },
     { label: 'Calendar' },
@@ -31,7 +32,7 @@ function Welcomeadmin() {
   return (
     <>
       <Grid container>
-        {console.log(tempdata)}
+
         <Grid items xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mb: 3 }}>
           <ProfilesAdmin tempdata={tempdata} />
         </Grid>

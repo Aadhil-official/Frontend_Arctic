@@ -1,18 +1,19 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
-import Switch from '@mui/material/Switch';
+// import Switch from '@mui/material/Switch';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Grid } from '@mui/material';
+import { Button, Grid, Toolbar } from '@mui/material';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import Notify from '@mui/icons-material/MarkEmailUnread';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import axios from 'axios';
 import HomeIcon from '@mui/icons-material/Home';
 import { success } from '../util/Toastify';
+import '../Style/Component/ProfAd.css'
 
 const ProfilesAdmin = ({ tempdata }) => {
-  const [checked, setChecked] = React.useState(true);
+  // const [checked, setChecked] = React.useState(true);
   // const [complaindata, setComplaindata] = React.useState([]);
   const [iconColor, setIconColor] = React.useState('#6C94F8');
   // const [tempdata1, setTempdata1] = React.useState([]);
@@ -98,20 +99,20 @@ const ProfilesAdmin = ({ tempdata }) => {
       });
   };
 
-  const handleChange = async (event) => {
+  const handleChange = async () => {
     // console.log("Switch toggled");
-    setChecked(event.target.checked);
-    if (!event.target.checked) {
-      // setTimeout(async () => {
-        try {
-          await axios.post('http://localhost:8080/api/auth/signout', { checked: event.target.checked });
-          success("Signed out!");
-          navigate('/');
-        } catch (error) {
-          console.error('Sign out error:', error);
-        }
-      // }, 500); // 500ms delay
+    // setChecked(event.target.checked);
+    // if (!event.target.checked) {
+    // setTimeout(async () => {
+    try {
+      await axios.post('http://localhost:8080/api/auth/signout', { checked: false });
+      success("Signed out!");
+      navigate('/');
+    } catch (error) {
+      console.error('Sign out error:', error);
     }
+    // }, 500); // 500ms delay
+    // }
   };
 
   const handleNotificationClick = () => {
@@ -124,28 +125,53 @@ const ProfilesAdmin = ({ tempdata }) => {
   return (
     <div>
       <AppBar position="static">
+        <Toolbar className='topbarpa' >
+
+          <Grid container justifyContent='center' textAlign='center'>
+            <ThemeProvider theme={theme}>
+              <Grid item md={2.3} sm={3.4} xs={2.8}>
+                <Typography className='welcomead' variant="h5">
+                  Welcome!
+                </Typography>
+              </Grid>
+              {/* <Grid item md={2.3} xs={2.8} sm={3.4}> */}
+              {/* <Typography variant="h4" sx={{ fontWeight: '450', textTransform: 'uppercase' }}> */}
+              {/* ADMIN */}
+              {/* {username.current} */}
+              {/* {tempdata?.username} */}
+              {/* </Typography> */}
+              {/* </Grid> */}
+            </ThemeProvider>
+          </Grid>
+        </Toolbar>
+
         {/* {console.log(tempdata)} */}
         <Grid container spacing={2} sx={{ position: 'absolute' }}>
           <Grid item lg={4.9} md={5} sm={4.5} xs={4}>
             <Link to={"/"}>
-              <HomeIcon color='action' fontSize='large' sx={{ width: '40px', height: '40px', margin:'5px'}} alt='Back' />
+              <HomeIcon color='action' fontSize='large' sx={{ width: '40px', height: '40px', margin: '5px',marginLeft:'20px' }} alt='Back' />
             </Link>
           </Grid>
           {/* <ThemeProvider theme={theme}> */}
-          <Grid item lg={2} md={2} sm={1.6} xs={2.25}></Grid>
+          <Grid item lg={2} md={2} sm={1.6} xs={0.4}></Grid>
           {/* </ThemeProvider> */}
-          <Grid item lg={2.9} md={2.8} sm={2.6} xs={2}></Grid>
+          <Grid item lg={1.9} md={1.5} sm={0.7} xs={0.9}></Grid>
 
-          <Grid item lg={0.5} md={0.5} sm={0.8} xs={0.8} sx={{ marginTop: '15px' }}>
+          <Grid item lg={0.5} md={0.5} sm={0.8} xs={1} sx={{ marginTop: '15px' }}>
             <Link to={'/login/complaintread'} state={{ complaintdata: complaintdata, tempdata }} onClick={handleNotificationClick}>
               <Notify fontSize='medium' sx={{ color: '#244FD9', position: 'absolute', marginTop: '2px' }} />
               <NotificationsIcon fontSize='small' sx={{ color: iconColor, marginBottom: '10px', marginLeft: '10px', position: 'absolute' }} />
             </Link>
           </Grid>
-          <Grid item lg={0.8} md={0.8} sm={1.2} xs={1.5}>
-            <Typography variant="h5" sx={{ marginTop: '12px' }}>logout</Typography>
+          <Grid item lg={1} md={1.61} sm={2.4} xs={3.15}>
+            <Link to={'/signup'}>
+              <Button sx={{ backgroundColor: '#6C94F8', marginTop: '15px' }} variant="contained" size='small'>
+                Create User
+              </Button>
+            </Link>
+            {/* <Typography variant="h5" sx={{ marginTop: '12px' }}>logout</Typography> */}
           </Grid>
-          <Grid item lg={0.5} md={0.5} sm={1} xs={0.5}>
+          <Grid item lg={1.2} md={1.3} sm={1.78} xs={2.5}>
             {/* <Switch
               checked={checked}
               onChange={handleChange}
@@ -173,37 +199,17 @@ const ProfilesAdmin = ({ tempdata }) => {
               }}
             /> */}
             {/* <Link to={'/signup'}> */}
-              <Button onClick={handleChange} sx={{ backgroundColor: '#6C94F8', marginRight: '20px' }} variant="contained" size='small'>
-                Log out
-              </Button>
+            <Button onClick={handleChange} sx={{ backgroundColor: '#6C94F8', marginTop: '15px' }} variant="contained" size='small'>
+              Log out
+            </Button>
             {/* </Link> */}
           </Grid>
         </Grid>
-        <Grid container justifyContent='center' textAlign='center' sx={{ marginTop: '13px' }}>
-          <ThemeProvider theme={theme}>
-            <Grid item md={2.3} sm={3.4} xs={2.8}>
-              <Typography variant="h4" sx={{ fontWeight: '500' }}>
-                Welcome!
-              </Typography>
-            </Grid>
-            {/* <Grid item md={2.3} xs={2.8} sm={3.4}> */}
-            {/* <Typography variant="h4" sx={{ fontWeight: '450', textTransform: 'uppercase' }}> */}
-            {/* ADMIN */}
-            {/* {username.current} */}
-            {/* {tempdata?.username} */}
-            {/* </Typography> */}
-            {/* </Grid> */}
-          </ThemeProvider>
-        </Grid>
-        <Grid container sx={{ marginTop: '12px' }}>
+        {/* <Grid container sx={{ marginTop: '12px' }}>
           <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign={'right'} sx={{ marginBottom: '10px', marginRight: '20px' }}>
-            <Link to={'/signup'}>
-              <Button sx={{ backgroundColor: '#6C94F8', marginRight: '20px' }} variant="contained" size='small'>
-                Sign Up
-              </Button>
-            </Link>
+
           </Grid>
-        </Grid>
+        </Grid> */}
       </AppBar>
     </div >
   );

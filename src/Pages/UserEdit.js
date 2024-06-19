@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NormalHeaderBar, FormUpdate, Footer } from '../Components/index';
+import { NormalHeaderBar, FormUpdate, FooterIn } from '../Components/index';
 import { Link, useParams } from 'react-router-dom';
 import '../Style/Signup.css';
 import { Grid, Typography } from '@mui/material';
@@ -81,15 +81,15 @@ export default function UserEdit() {
                 <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
                     <ThemeProvider theme={theme}>
                         <Typography variant='h5' fontWeight='bold'>
-                            To login?
-                            <Link to={'/login'} style={{ color: 'red' }}>
+                            To dashboard?
+                            <Link to={'/login/welcomeadmin'} style={{ color: 'red' }}>
                                 Click here
                             </Link>
                         </Typography>
                     </ThemeProvider>
                 </Grid>
             </Grid><br />
-            <Footer />
+            <FooterIn />
         </>
     );
 }
