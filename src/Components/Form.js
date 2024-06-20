@@ -6,10 +6,12 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { error, success } from '../util/Toastify';
+import { useUser } from '../Context/UserContext';
 
 
 export default function FormPropsTextFields() {
 
+  const { setTempdata } = useUser();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -32,7 +34,7 @@ export default function FormPropsTextFields() {
       axios.post('http://localhost:8080/api/auth/signin', data)
         .then((response) => {
           const tempdata = response.data;
-
+          setTempdata(tempdata);
           // const token = tempdata.token;
 
           // if (token) {
@@ -46,10 +48,10 @@ export default function FormPropsTextFields() {
 
           if (role === 'ADMIN') {
             // checkForNewComplaints();
-            navigate('/login/welcomeadmin', { state: { tempdata } });
+            navigate('/login/welcomeadmin');
             success('Login successful!')
           } else {
-            navigate('/login/welcome', { state: { tempdata } });
+            navigate('/login/welcome');
             success('Login successful!')
           }
         })
@@ -101,7 +103,7 @@ export default function FormPropsTextFields() {
           onChange={(e) => setPassword(e.target.value)}
         /><br /><br />
         <Button variant="contained" onClick={handleSubmit}>
-          Signin
+          Sign in
         </Button><br /><br />
       </Box>
     </>

@@ -6,6 +6,8 @@ import { Toaster } from 'react-hot-toast';
 import ReviewedComplain from './Pages/ReviewedComplain';
 import { AddUnit, UnitEdit, UnitLis, UnitListAd, UnitView } from './Pages/Unit/Index';
 import { AddVehicle, VehicleEdit, VehicleLis, VehicleListAd, VehicleView } from './Pages/Vehicle/Index';
+import { AddCustomer, CustomerEdit, CustomerLis, CustomerListAd, CustomerView } from './Pages/Customer/index';
+import { AddUserGroup, UserGroupEdit, UserGroupLis, UserGroupListAd, UserGroupView } from './Pages/User Group/index';
 // import ItemLis from './Pages/Lists/User/ItemLis';
 
 
@@ -50,6 +52,16 @@ function App() {
         <Route path='/login/welcomeadmin/vehicleListAd/addvehicle' element={<AddVehicle />} />
         <Route path='/login/welcome/vehicleList/view/:id' element={<VehicleView />} />
         <Route path='/login/welcomeadmin/vehicleListAd/edit/:id' element={<VehicleEdit />} />
+        <Route path='/login/welcome/customerList' element={<CustomerLis />} />
+        <Route path='/login/welcomeadmin/customerListAd' element={<CustomerListAd />} />
+        <Route path='/login/welcomeadmin/customerListAd/addcustomer' element={<AddCustomer />} />
+        <Route path='/login/welcome/customerList/view/:id' element={<CustomerView />} />
+        <Route path='/login/welcomeadmin/customerListAd/edit/:id' element={<CustomerEdit />} />
+        <Route path='/login/welcome/userGroupList' element={<UserGroupLis />} />
+        <Route path='/login/welcomeadmin/userGroupListAd' element={<UserGroupListAd />} />
+        <Route path='/login/welcomeadmin/userGroupListAd/adduserGroup' element={<AddUserGroup />} />
+        <Route path='/login/welcome/userGroupList/view/:id' element={<UserGroupView />} />
+        <Route path='/login/welcomeadmin/userGroupListAd/edit/:id' element={<UserGroupEdit />} />
       </Routes>
     </>
   );

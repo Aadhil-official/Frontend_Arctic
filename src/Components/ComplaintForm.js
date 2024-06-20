@@ -7,16 +7,18 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { z } from 'zod';
 import { error, success } from '../util/Toastify';
+import { useUser } from '../Context/UserContext';
 
 function ComplaintForm() {
 
   const navigate = useNavigate();
 
+  const { tempdata } = useUser();
   const [subject, setSubject] = useState('');
   const [object, setObject] = useState('');
-  const [email, setEmail] = useState('');
+  const [email] = useState(tempdata.email);
   const [complaindate, setDate] = useState('');
-  const [tempdata, setTempdata] = useState([]);
+  // const [tempdata, setTempdata] = useState([]);
   // const [admintype, setAdmintype] = useState('');
 
   const location = useLocation();
@@ -30,10 +32,10 @@ function ComplaintForm() {
       return `${year}-${month}-${day}`;
     };
 
-    if (location.state && location.state.tempdata.email) {
-      setEmail(location.state.tempdata.email);
-      setTempdata(location.state.tempdata);
-    }
+    // if (location.state && location.state.tempdata.email) {
+    //   setEmail(location.state.tempdata.email);
+    //   setTempdata(location.state.tempdata);
+    // }
     // Set complaindate to the current date on component mount
     setDate(getCurrentDate());
   }, [location.state]); // Empty dependency array to run this effect only once on mount
@@ -64,7 +66,7 @@ function ComplaintForm() {
     if (result.success) {
       axios.post('http://localhost:8080/api/auth/complaints', data)
         .then(() => {
-          navigate('/login/welcome', { state: { tempdata } });
+          navigate('/login/welcome');
           success('Complain added successfully!')
         })
         .catch(() => error("Failed to add complain"));
@@ -74,7 +76,7 @@ function ComplaintForm() {
         error(String(formattedError.subject?._errors));
       } else if (formattedError.object?._errors) {
         error(String(formattedError.object?._errors))
-      } 
+      }
       // else if (formattedError.email?._errors) {
       //   error(String(formattedError.email?._errors))
       // }
@@ -103,7 +105,7 @@ function ComplaintForm() {
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
         />
-
+        {/* {console.log("tested..........",tempdata)} */}
         {/* <TextField
           label="Email"
           id="email"
@@ -155,7 +157,7 @@ function ComplaintForm() {
           onChange={(e) => setDate(e.target.value)}
         // required
         /><br /><br /> */}
-<br /><br />
+        <br /><br />
         <Button variant="contained" onClick={HandleSubmit}>Submit</Button>
       </Box>
     </>
