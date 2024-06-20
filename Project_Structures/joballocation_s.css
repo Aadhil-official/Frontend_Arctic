@@ -1,0 +1,22 @@
+project-directory/
+  backend/
+    src/
+      main/
+        java/
+          com/
+            example/
+             project_backend/
+                ProjectBackendApplication.java
+               JobAllocationController.java
+        resources/
+          application.properties
+  frontend/
+    src/
+      JobAllocation.js
+      Joballocation.css
+      index.js
+      index.css
+    public/
+      index.html
+  pom.xml
+  

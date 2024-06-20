@@ -1,0 +1,74 @@
+.tab-labels {
+    background:rgb(102, 148, 235);
+    list-style: none;
+    height: 80px; 
+    width:100%;
+    color: white;
+    display: flex;
+    align-items: center; 
+
+   
+  }
+   /*footer text*/
+   .footer-text{
+    color: white;
+    position: absolute;
+  margin-left: 40%;
+  margin-bottom: 30px;
+  }
+  
+  .footer {
+    background: linear-gradient(to bottom, rgba(58, 69, 219, 0.758), rgb(20, 20, 133));
+    list-style: none;
+    height: 80px; 
+    width:100%;
+    color: white;
+    display: flex;
+    align-items: center; 
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    
+    }
+    
+    /* title */
+    .title{
+      font-size: 50px;
+      text-align: center;
+      color:rgb(102, 148, 235);
+      font-weight: bold;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+  
+    
+  
+
+
+
+
+/* menus */
+.column1 {
+  float: left;
+  width: 10%;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+padding:10px;
+margin-left: 20px;
+margin-right: 1000px;
+}
+
+#button {
+  position:absolute;
+  margin-top: 2000%;
+  margin-left: 200px;
+  float:right;
+}
+
+
+
+
+
