@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import { FooterIn, NormalHeaderBar } from '../../Components/index';
-import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SearchIcon from '@mui/icons-material/Search';
 import '../../Style/Lists/ItemList.css'
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
+import { FooterIn, NormalHeaderBar } from '../../Components/index';
 
-function VehicleListAd() {
+function UserGroupListAd() {
 
-
-    const [vehicles, setVehicles] = useState([]);
+    const [userGroups, setUserGroups] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-    const [filterOption, setFilterOption] = useState('noOfPassengers');
+    const [filterOption, setFilterOption] = useState('groupName');
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/auth/getAllVehicles')
+        axios.get('http://localhost:8080/api/auth/getAllUserGroups')
             .then(response => {
-                setVehicles(response.data);
+                setUserGroups(response.data);
             })
             .catch(error => {
                 console.error('Error fetching units:', error);
@@ -34,24 +33,25 @@ function VehicleListAd() {
 
     const navigate = useNavigate();
 
-    const handleAddVehicle = () => {
-        navigate('/login/welcomeadmin/unitListAd/addVehicle');
+    const handleAddUserGroup = () => {
+        navigate('/login/welcomeadmin/userGroupListAd/addUserGroup');
     }
 
-    const filteredVehicle = vehicles.filter(vehicle => {
+    const filteredUserGroup = userGroups.filter(userGroup => {
         if (!searchQuery) return true;
 
-        const value = vehicle[filterOption];
+        const value = userGroup[filterOption];
         return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
 
     });
 
     const theme = responsiveFontSizes(createTheme());
 
-    const handleViewVehicle = (id) => {
+    const handleViewUserGroup = (id) => {
         console.log(id)
-        navigate(`/login/welcomeadmin/vehicleListAd/edit/${id}`);
+        navigate(`/login/welcomeadmin/userGroupListAd/edit/${id}`);
     }
+
 
 
     return (
@@ -65,8 +65,8 @@ function VehicleListAd() {
                             marginTop: '10px',
                             marginRight: '2px'
                         }}
-                        variant='contained' onClick={handleAddVehicle}>
-                        Add Vehicle
+                        variant='contained' onClick={handleAddUserGroup}>
+                        Add User Group
                     </Button>
                 </Grid>
             </Grid>
@@ -83,7 +83,7 @@ function VehicleListAd() {
 
                 <Grid item xl={12} lg={12} md={12} xs={12} sm={12} className='text2'>
                     <ThemeProvider theme={theme}>
-                        <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Vehicle Details</Typography>
+                        <Typography variant='h3' sx={{ fontWeight: 'bold' }}>User Group Details</Typography>
                     </ThemeProvider>
                 </Grid>
 
@@ -113,16 +113,16 @@ function VehicleListAd() {
                                         />
                                     }
                                 >
-                                    <MenuItem value="noOfPassengers">Number Of Passengers</MenuItem>
-                                    <MenuItem value="indoorMod">Indoor Modal</MenuItem>
-                                    <MenuItem value="outdoorMod">Outdoor Modal</MenuItem>
-                                    <MenuItem value="manufacturer">Manufacturer</MenuItem>
-                                    <MenuItem value="capacity">Capacity</MenuItem>
+                                    <MenuItem value="groupName">Group Name</MenuItem>
+                                    <MenuItem value="groupDescription">Group Description</MenuItem>
+                                    <MenuItem value="relevantPrivileges">Relevant Privileges</MenuItem>
+                                    <MenuItem value="allocatedJobs">Allocated Jobs</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
                         <Grid item xs={2} sm={2} md={4} lg={9} xl={10}></Grid>
                         <Grid item xs={5} sm={5} md={4} lg={1.5} xl={1}>
+
                             <TextField
                                 variant="outlined"
                                 InputProps={{
@@ -148,7 +148,7 @@ function VehicleListAd() {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    {filteredVehicle.map((vehicle, index) => (
+                    {filteredUserGroup.map((userGroup, index) => (
                         <Grid item xs={12} key={index}>
                             <Button variant='contained'
                                 sx={{
@@ -163,9 +163,9 @@ function VehicleListAd() {
                                     justifyContent: 'flex-start',
                                     marginBottom: '10px',
                                 }}
-                                onClick={() => handleViewVehicle(vehicle.id)}
+                                onClick={() => handleViewUserGroup(userGroup.id)}
                             >
-                                <span className='usertext2'>{`Vehicle ${index + 1} :`}</span>{` ${vehicle[filterOption]}`} {/*.join(', ') Displaying the value based on the selected filter option */}
+                                <span className='usertext2'>{`User Group ${index + 1} :`}</span>{` ${userGroup[filterOption]}`} {/*.join(', ') Displaying the value based on the selected filter option */}
                             </Button>
                         </Grid>
                     ))}
@@ -178,4 +178,4 @@ function VehicleListAd() {
     )
 }
 
-export default VehicleListAd
+export default UserGroupListAd

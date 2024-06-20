@@ -2,28 +2,30 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 // import Switch from '@mui/material/Switch';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';//, useLocation
 import { Button, Grid } from '@mui/material';
 import ButtonComplain from './ButtonComplain';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import axios from 'axios';
 import HomeIcon from '@mui/icons-material/Home';
 import { success } from '../util/Toastify';
+import { useUser } from '../Context/UserContext';
 
 export default function MenuAppBar() {
 
+  const { tempdata } = useUser();
   // const [checked, setChecked] = React.useState(true);
-  const [tempdata, setTempdata] = React.useState([]);
+  // const [tempdata, setTempdata] = React.useState([]);
 
-  const location = useLocation();
+  // const location = useLocation();
 
-  React.useEffect(() => {
-    if (location.state && location.state.tempdata) {
-      setTempdata(location.state.tempdata);
-    }
-  }, [location.state]);
+  // React.useEffect(() => {
+  //   if (location.state && location.state.tempdata) {
+  //     setTempdata(location.state.tempdata);
+  //   }
+  // }, [location.state]);
 
-  console.log(tempdata)
+  // console.log("testing ,,kclksslc.....",tempdata)
   const navigate = useNavigate();
 
   // const username = tempdata.username;
@@ -32,15 +34,15 @@ export default function MenuAppBar() {
     // console.log("Switch toggled");
     // setChecked(event.target.checked);
     // if (!event.target.checked) {
-      // setTimeout(async () => {
-      try {
-        await axios.post('http://localhost:8080/api/auth/signout', { checked: false });
-        success("Signed out!");
-        navigate('/');
-      } catch (error) {
-        console.error('Sign out error:', error);
-      }
-      // }, 500); // 500ms delay
+    // setTimeout(async () => {
+    try {
+      await axios.post('http://localhost:8080/api/auth/signout', { checked: false });
+      success("Signed out!");
+      navigate('/');
+    } catch (error) {
+      console.error('Sign out error:', error);
+    }
+    // }, 500); // 500ms delay
     // }
   };
 
@@ -63,7 +65,7 @@ export default function MenuAppBar() {
         <Grid container spacing={2} sx={{ position: 'absolute' }}>
           <Grid item lg={4.9} md={5} sm={4.5} xs={4}>
             <Link to={"/"}>
-              <HomeIcon color='action' fontSize='large' sx={{ width: '40px', height: '40px', margin: '5px',marginLeft:'20px' }} alt='Back' />
+              <HomeIcon color='action' fontSize='large' sx={{ width: '40px', height: '40px', margin: '5px', marginLeft: '20px' }} alt='Back' />
             </Link>
           </Grid>
           {/* <ThemeProvider theme={theme}> */}
@@ -75,7 +77,8 @@ export default function MenuAppBar() {
           </Grid> */}
 
           <Grid item lg={1} md={1.2} sm={1.9} xs={2.2} >
-            <Link to={'/login/complaint'} state={{ tempdata }}>
+            <Link to={'/login/complaint'}>
+              {/* state={{ tempdata }} */}
               <ButtonComplain />
             </Link>
           </Grid>
@@ -106,17 +109,17 @@ export default function MenuAppBar() {
                 }
               }}
             /> */}
-            <Button onClick={handleChange} sx={{ backgroundColor: '#6C94F8',marginTop:'15px'}} variant="contained" size='small'>
+            <Button onClick={handleChange} sx={{ backgroundColor: '#6C94F8', marginTop: '15px' }} variant="contained" size='small'>
               Log out
             </Button>
           </Grid>
 
         </Grid>
-        <Grid container justifyContent='center' textAlign='center' sx={{ padding: '15px'}}>
+        <Grid container justifyContent='center' textAlign='center' sx={{ padding: '15px' }}>
           <ThemeProvider theme={theme}>
             <Grid item md={2.3} sm={3.4} xs={2.8}>
               <Typography variant="h5" sx={{ fontWeight: '500' }}>
-                Welcome!
+                HI, {tempdata.username.toUpperCase()}!
               </Typography>
             </Grid>
             {/* <Grid item md={2.3} xs={2.8} sm={3.4}>

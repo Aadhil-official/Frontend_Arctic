@@ -1,26 +1,26 @@
+import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { FooterIn, NormalHeaderBar } from '../../Components/index';
-import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SearchIcon from '@mui/icons-material/Search';
 import '../../Style/Lists/ItemList.css'
-import axios from 'axios';
 
-function VehicleListAd() {
+function CustomerListAd() {
 
-
-    const [vehicles, setVehicles] = useState([]);
+    const [customers, setCustomers] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-    const [filterOption, setFilterOption] = useState('noOfPassengers');
+    const [filterOption, setFilterOption] = useState('customerName');
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/auth/getAllVehicles')
+        axios.get('http://localhost:8080/api/auth/getAllCustomers')
             .then(response => {
-                setVehicles(response.data);
+                setCustomers(response.data);
+                console.log("customers........", response.data);
             })
             .catch(error => {
-                console.error('Error fetching units:', error);
+                console.error('Error fetching items:', error);
             });
     }, []);
 
@@ -34,23 +34,22 @@ function VehicleListAd() {
 
     const navigate = useNavigate();
 
-    const handleAddVehicle = () => {
-        navigate('/login/welcomeadmin/unitListAd/addVehicle');
+    const handleAddCustomer = () => {
+        navigate('/login/welcomeadmin/customerListAd/addCustomer');
     }
 
-    const filteredVehicle = vehicles.filter(vehicle => {
+    const filteredCustomer = customers.filter(customer => {
         if (!searchQuery) return true;
 
-        const value = vehicle[filterOption];
+        const value = customer[filterOption];
         return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
 
     });
 
     const theme = responsiveFontSizes(createTheme());
 
-    const handleViewVehicle = (id) => {
-        console.log(id)
-        navigate(`/login/welcomeadmin/vehicleListAd/edit/${id}`);
+    const handleViewCustomer = (id) => {
+        navigate(`/login/welcomeadmin/CustomerListAd/edit/${id}`);
     }
 
 
@@ -65,8 +64,8 @@ function VehicleListAd() {
                             marginTop: '10px',
                             marginRight: '2px'
                         }}
-                        variant='contained' onClick={handleAddVehicle}>
-                        Add Vehicle
+                        variant='contained' onClick={handleAddCustomer}>
+                        Add Customer
                     </Button>
                 </Grid>
             </Grid>
@@ -83,7 +82,7 @@ function VehicleListAd() {
 
                 <Grid item xl={12} lg={12} md={12} xs={12} sm={12} className='text2'>
                     <ThemeProvider theme={theme}>
-                        <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Vehicle Details</Typography>
+                        <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Customers Details</Typography>
                     </ThemeProvider>
                 </Grid>
 
@@ -113,11 +112,11 @@ function VehicleListAd() {
                                         />
                                     }
                                 >
-                                    <MenuItem value="noOfPassengers">Number Of Passengers</MenuItem>
-                                    <MenuItem value="indoorMod">Indoor Modal</MenuItem>
-                                    <MenuItem value="outdoorMod">Outdoor Modal</MenuItem>
-                                    <MenuItem value="manufacturer">Manufacturer</MenuItem>
-                                    <MenuItem value="capacity">Capacity</MenuItem>
+                                    <MenuItem value="customerName">Customer Name</MenuItem>
+                                    <MenuItem value="address">Address</MenuItem>
+                                    <MenuItem value="contactNumber">Contact Number</MenuItem>
+                                    <MenuItem value="email">Email</MenuItem>
+                                    <MenuItem value="location">Work from</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>
@@ -148,7 +147,7 @@ function VehicleListAd() {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    {filteredVehicle.map((vehicle, index) => (
+                    {filteredCustomer.map((customer, index) => (
                         <Grid item xs={12} key={index}>
                             <Button variant='contained'
                                 sx={{
@@ -163,9 +162,9 @@ function VehicleListAd() {
                                     justifyContent: 'flex-start',
                                     marginBottom: '10px',
                                 }}
-                                onClick={() => handleViewVehicle(vehicle.id)}
+                                onClick={() => handleViewCustomer(customer.id)}
                             >
-                                <span className='usertext2'>{`Vehicle ${index + 1} :`}</span>{` ${vehicle[filterOption]}`} {/*.join(', ') Displaying the value based on the selected filter option */}
+                                <span className='usertext2'>{`Customer ${index + 1} :`}</span>{` ${customer[filterOption]}`} {/*.join(', ') Displaying the value based on the selected filter option */}
                             </Button>
                         </Grid>
                     ))}
@@ -178,4 +177,4 @@ function VehicleListAd() {
     )
 }
 
-export default VehicleListAd
+export default CustomerListAd

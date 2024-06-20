@@ -1,32 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FooterIn, Profiles, Tabs } from '../Components/index';
 import '../Style/Welcome.css';
 import { Grid } from '@mui/material';
 // import ViewListPdf from './ViewListPdf';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 // import { ThemeProvider } from 'styled-components';
 
 
 const Welcome = () => {
 
-  const [tempdata, setTempdata] = useState([]);
-  const location = useLocation();
+  // const [tempdata, setTempdata] = useState([]);
+  // const location = useLocation();
 
-  useEffect(() => {
-    if (location.state && location.state.tempdata) {
-      setTempdata(location.state.tempdata);
-    }
-  }, [location.state]);
+  // useEffect(() => {
+  //   if (location.state && location.state.tempdata) {
+  //     setTempdata(location.state.tempdata);
+  //   }
+  // }, [location.state]);
 
   const buttonData = [
     { label: 'Employee Details', link: '/login/welcome/employeelist' },
     { label: 'Item Details', link: '/login/welcome/itemList' },
     { label: 'Unit Details', link: '/login/welcome/unitList' },
     { label: 'Vehicle Details', link: '/login/welcome/vehicleList' },
+    { label: 'Customer Details', link: '/login/welcome/customerList' },
+    { label: 'User Group Details', link: '/login/welcome/userGroupList' },
     { label: 'Job Details' },
-    { label: 'Service Agreement' },
+    { label: 'Service Agreement Details' },
     { label: 'Calendar' },
-    { label: 'Schedule a Site Visit' },
+    { label: 'Site Visit Details' },
     { label: 'Job Allocation' },
   ];
 
@@ -36,8 +38,8 @@ const Welcome = () => {
     <>
       <Grid container>
         <Grid item xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mb: 3 }}>
-          {console.log(tempdata)}
-          <Profiles state={{ tempdata }} />
+          {/* {console.log("Shitkdlks..........",tempdata)} */}
+          <Profiles />
         </Grid>
       </Grid>
       {/* <Grid container>

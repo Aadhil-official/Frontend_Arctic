@@ -11,13 +11,15 @@ import axios from 'axios';
 import HomeIcon from '@mui/icons-material/Home';
 import { success } from '../util/Toastify';
 import '../Style/Component/ProfAd.css'
+import { useUser } from '../Context/UserContext';
 
-const ProfilesAdmin = ({ tempdata }) => {
+const ProfilesAdmin = () => {
+  const { tempdata } = useUser();
   // const [checked, setChecked] = React.useState(true);
   // const [complaindata, setComplaindata] = React.useState([]);
   const [iconColor, setIconColor] = React.useState('#6C94F8');
   // const [tempdata1, setTempdata1] = React.useState([]);
-  const [complaintdata, setComplaintdata] = React.useState([]);
+  // const [complaintdata, setComplaintdata] = React.useState([]);
   // const [message, setMessage] = React.useState('');
   // const [username] = React.useState(tempdata?.username);
   // const username=React.useRef(tempdata?.username);
@@ -28,6 +30,7 @@ const ProfilesAdmin = ({ tempdata }) => {
   // const complaintdata = location.state.complaintdata;
   const navigate = useNavigate();
 
+  // console.log("this is huiiiiii.....", tempdata.username)
   // const location = useLocation;
 
   // let i=1;
@@ -49,7 +52,7 @@ const ProfilesAdmin = ({ tempdata }) => {
     // if (newComplaints === 'true') {
     //   setIconColor('error');
     // }
-    handleView();
+    // handleView();
 
     const eventSource = new EventSource('http://localhost:8080/api/auth/newupdates');
 
@@ -71,10 +74,10 @@ const ProfilesAdmin = ({ tempdata }) => {
     //   handleView(); // Fetch new complaints
     // };
 
-    eventSource.addEventListener('latest update', (event) => {
+    eventSource.addEventListener('latest update', () => {
       // console.log('Event data:', event.data);
       setIconColor('red');
-      handleView();
+      // handleView();
     })
 
     eventSource.onerror = (error) => {
@@ -82,22 +85,26 @@ const ProfilesAdmin = ({ tempdata }) => {
       eventSource.close();
     };
 
+    // setTimeout(() => {
+    //   eventSource = new EventSource('http://localhost:8080/api/auth/newupdates');
+    // }, 1000); 
+
     return () => {
       eventSource.close();
     };
 
   }, []);
 
-  const handleView = () => {
-    axios.post('http://localhost:8080/api/auth/findcomplaint')
-      .then(result => {
-        // console.log('Complaints fetched:', result.data);
-        setComplaintdata(result.data);
-      })
-      .catch(error => {
-        console.error('Error fetching complaints:', error);
-      });
-  };
+  // const handleView = () => {
+  //   axios.post('http://localhost:8080/api/auth/findcomplaint')
+  //     .then(result => {
+  //       // console.log('Complaints fetched:', result.data);
+  //       setComplaintdata(result.data);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching complaints:', error);
+  //     });
+  // };
 
   const handleChange = async () => {
     // console.log("Switch toggled");
@@ -131,7 +138,8 @@ const ProfilesAdmin = ({ tempdata }) => {
             <ThemeProvider theme={theme}>
               <Grid item md={2.3} sm={3.4} xs={2.8}>
                 <Typography className='welcomead' variant="h5">
-                  Welcome!
+                  HI, {tempdata.username.toUpperCase()}!
+                  {/* Welcome! */}
                 </Typography>
               </Grid>
               {/* <Grid item md={2.3} xs={2.8} sm={3.4}> */}
@@ -149,7 +157,7 @@ const ProfilesAdmin = ({ tempdata }) => {
         <Grid container spacing={2} sx={{ position: 'absolute' }}>
           <Grid item lg={4.9} md={5} sm={4.5} xs={4}>
             <Link to={"/"}>
-              <HomeIcon color='action' fontSize='large' sx={{ width: '40px', height: '40px', margin: '5px',marginLeft:'20px' }} alt='Back' />
+              <HomeIcon color='action' fontSize='large' sx={{ width: '40px', height: '40px', margin: '5px', marginLeft: '20px' }} alt='Back' />
             </Link>
           </Grid>
           {/* <ThemeProvider theme={theme}> */}
@@ -158,7 +166,8 @@ const ProfilesAdmin = ({ tempdata }) => {
           <Grid item lg={1.9} md={1.5} sm={0.7} xs={0.9}></Grid>
 
           <Grid item lg={0.5} md={0.5} sm={0.8} xs={1} sx={{ marginTop: '15px' }}>
-            <Link to={'/login/complaintread'} state={{ complaintdata: complaintdata, tempdata }} onClick={handleNotificationClick}>
+            {/* state={{ complaintdata: complaintdata, tempdata }} */}
+            <Link to={'/login/complaintread'} onClick={handleNotificationClick}>
               <Notify fontSize='medium' sx={{ color: '#244FD9', position: 'absolute', marginTop: '2px' }} />
               <NotificationsIcon fontSize='small' sx={{ color: iconColor, marginBottom: '10px', marginLeft: '10px', position: 'absolute' }} />
             </Link>
