@@ -21,7 +21,7 @@ function FormAddVehicle() {
         const validateForm = z.object({
             vehicleType: z.string().min(1, { message: "Enter vehicle type" }),
             vehicleNumber: z.string().min(1, { message: "Enter vehicle number" }),
-            noOfPassengers: z.number().min(1, { message: "Enter number of passengers" })
+            noOfPassengers: z.string().min(1, { message: "Enter number of passengers" })
         });
 
         const userData = {

@@ -111,13 +111,13 @@ function Admcomred() {
       <Grid container spacing={2} sx={{ position: 'fixed', alignItems: 'center' }}>
         <Grid item xs={6} sx={{ alignItems: 'center' }}>
           {console.log("just checking....",tempdata)}
-          <Link to={"/login/welcomeadmin"} state={{ tempdata }}>{/* state={{ tempdata }}*/}
+          <Link to={"/login/welcomeadmin"} >{/* state={{ tempdata }}*/}
             <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
           </Link>
         </Grid>
         <Grid item xs={6} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Link to={'/login/complaintread/reviewedcomplain'} >{/*, tempdata,state={{ complaintdatasend, complaindata }} */}
-            <Button variant='contained' sx={{ marginRight: '5px' }}>
+            <Button variant='contained' sx={{ margin: '5px' }}>
               Reviewed Complaints
             </Button>
           </Link>
@@ -193,7 +193,7 @@ function Admcomred() {
 
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                   <ThemeProvider theme={responsiveFontSizes(createTheme())}>
-                    <Typography sx={{ mt: 2 }}>
+                    <Typography variant='body1' sx={{ mt: 2 }}>
                       {complaint.complain.object}
                     </Typography>
                   </ThemeProvider>

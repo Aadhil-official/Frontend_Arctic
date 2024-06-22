@@ -112,10 +112,12 @@ function UnitListAd() {
                                     }
                                 >
                                     <MenuItem value="modelName">Model name</MenuItem>
-                                    <MenuItem value="indoorMod">Indoor Modal</MenuItem>
-                                    <MenuItem value="outdoorMod">Outdoor Modal</MenuItem>
-                                    <MenuItem value="manufacturer">Manufacturer</MenuItem>
-                                    <MenuItem value="capacity">Capacity</MenuItem>
+                                    <MenuItem value="indoorSerial">Indoor Serial</MenuItem>
+                                    <MenuItem value="outdoorSerial">Outdoor Serial</MenuItem>
+                                    <MenuItem value="commissionedDate">Commissioned Date</MenuItem>
+                                    <MenuItem value="owner">Owner</MenuItem>
+                                    <MenuItem value="warrantyPeriod">Warranty Period</MenuItem>
+                                    <MenuItem value="unitPrice">Unit Price</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>

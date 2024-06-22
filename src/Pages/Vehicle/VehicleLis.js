@@ -13,7 +13,7 @@ function VehicleLis() {
     const [filterOption, setFilterOption] = useState('noOfPassengers');
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/auth/getAllVehicle')
+        axios.get('http://localhost:8080/api/auth/getAllVehicles')
             .then(response => {
                 setVehicle(response.data);
             })
@@ -92,10 +92,8 @@ function VehicleLis() {
                                     }
                                 >
                                     <MenuItem value="noOfPassengers">Number Of Passengers</MenuItem>
-                                    <MenuItem value="indoorMod">Indoor Modal</MenuItem>
-                                    <MenuItem value="outdoorMod">Outdoor Modal</MenuItem>
-                                    <MenuItem value="manufacturer">Manufacturer</MenuItem>
-                                    <MenuItem value="capacity">Capacity</MenuItem>
+                                    <MenuItem value="vehicleType">Vehicle Type</MenuItem>
+                                    <MenuItem value="vehicleNumber">Vehicle Number</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>

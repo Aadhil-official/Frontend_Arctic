@@ -34,8 +34,8 @@ function FormUserGroupView({ userGroup }) {
                     <TextField
                         label="Group Description"
                         type="text"
-                        multilined
-                        raws={4}
+                        multiline
+                        rows={4}
                         value={userGroup.groupDescription}
                         InputProps={{
                             readOnly: true
@@ -54,7 +54,7 @@ function FormUserGroupView({ userGroup }) {
 
                     <TextField
                         label="Allocated Jobs"
-                        type='date'
+                        type='text'
                         value={userGroup.allocatedJobs}
                         InputProps={{
                             readOnly: true

@@ -24,7 +24,7 @@ function ResetPass() {
         <Grid container className="text">
           <Grid item xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
             <ThemeProvider theme={theme}>
-              <Typography variant='h3' sx={{ fontWeight: 'bold' }}>
+              <Typography variant='h3' sx={{ fontWeight: 'bold',marginTop:'-30px',marginBottom:'-20px' }}>
                 Forgot Password
               </Typography>
             </ThemeProvider>

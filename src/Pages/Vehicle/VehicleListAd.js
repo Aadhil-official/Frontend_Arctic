@@ -35,7 +35,7 @@ function VehicleListAd() {
     const navigate = useNavigate();
 
     const handleAddVehicle = () => {
-        navigate('/login/welcomeadmin/unitListAd/addVehicle');
+        navigate('/login/welcomeadmin/vehicleListAd/addVehicle');
     }
 
     const filteredVehicle = vehicles.filter(vehicle => {
@@ -114,10 +114,8 @@ function VehicleListAd() {
                                     }
                                 >
                                     <MenuItem value="noOfPassengers">Number Of Passengers</MenuItem>
-                                    <MenuItem value="indoorMod">Indoor Modal</MenuItem>
-                                    <MenuItem value="outdoorMod">Outdoor Modal</MenuItem>
-                                    <MenuItem value="manufacturer">Manufacturer</MenuItem>
-                                    <MenuItem value="capacity">Capacity</MenuItem>
+                                    <MenuItem value="vehicleType">Vehicle Type</MenuItem>
+                                    <MenuItem value="vehicleNumber">Vehicle Number</MenuItem>
                                 </Select>
                             </FormControl>
                         </Grid>

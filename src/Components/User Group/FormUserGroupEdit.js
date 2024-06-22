@@ -9,11 +9,11 @@ function FormUserGroupEdit({ userGroup }) {
 
 
     const [id] = useState(userGroup ? userGroup.id : '');
-    const [groupName, setGroupName] = useState(userGroup ? userGroup.indoorSerial : '');
+    const [groupName, setGroupName] = useState(userGroup ? userGroup.groupName : '');
     // const [password, setPassword] = useState('');
-    const [groupDescription, setGroupDescription] = useState(userGroup ? userGroup.outdoorSerial : '');
-    const [relevantPrivileges, setRelevantPrivileges] = useState(userGroup ? userGroup.modelName : ''); // State to hold the selected role
-    const [allocatedJobs, setAllocatedJobs] = useState(userGroup ? userGroup.commissionedDate : '');
+    const [groupDescription, setGroupDescription] = useState(userGroup ? userGroup.groupDescription : '');
+    const [relevantPrivileges, setRelevantPrivileges] = useState(userGroup ? userGroup.relevantPrivileges : ''); // State to hold the selected role
+    const [allocatedJobs, setAllocatedJobs] = useState(userGroup ? userGroup.allocatedJobs : '');
 
     const navigate = useNavigate();
 
@@ -21,11 +21,10 @@ function FormUserGroupEdit({ userGroup }) {
 
 
         const validateForm = z.object({
-            groupName: z.string().min(1, { message: "Enter indoor serial" }),
-            groupDescription: z.string().min(1, { message: "Enter outdoor serial" }),
-            relevantPrivileges: z.string().min(1, { message: "Enter model name" }),
-            // password: z.string().min(8, 'Password must be at least 8 characters long'),
-            allocatedJobs: z.string().min(1, { message: "Enter commissioned date" })
+            groupName: z.string().min(1, { message: "Enter group name" }),
+            groupDescription: z.string().min(1, { message: "Enter group description" }),
+            relevantPrivileges: z.string().min(1, { message: "Enter relevant privileges" }),
+            allocatedJobs: z.string().min(1, { message: "Enter allocated jobs date" })
         });
 
         // console.log("id of role is..........." + role.toUpperCase());
@@ -96,8 +95,8 @@ function FormUserGroupEdit({ userGroup }) {
                 <TextField
                     label="Group Description"
                     type="text"
-                    multilined
-                    raws={4}
+                    multiline
+                    rows={4}
                     value={groupDescription}
                     onChange={(e) => setGroupDescription(e.target.value)}
                 />

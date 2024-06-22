@@ -26,10 +26,6 @@ export default function FormItemEdit({ item }) {
     // console.log("usergroup:", usergroup);
     // console.log("tel:", tel);
 
-    // if (user) {
-    //     console.log("user is there");
-    // }
-    // navigate('/');
     const handleSubmit = () => {
 
 
@@ -37,12 +33,10 @@ export default function FormItemEdit({ item }) {
             name: z.string().min(1, { message: "Enter your item" }),
             indoorMod: z.string().min(1, { message: "Enter your indoor modal" }),
             outdoorMod: z.string().min(1, { message: "Enter your outdoor modal" }),
-            // password: z.string().min(8, 'Password must be at least 8 characters long'),
             manufacturer: z.string().min(1, { message: "Enter manufacturer" }),
             capacity: z.string().min(1, { message: "Enter capacity" }),
         });
 
-        // console.log("id of role is..........." + role.toUpperCase());
 
         const updatedItem = {
             id: id,
@@ -53,9 +47,6 @@ export default function FormItemEdit({ item }) {
             capacity: capacity,
         };
 
-
-        // console.log("thisklkdklwejdlkwed"+email);
-        // console.log("thisklkdklwejdlkwed", updatedItem);
 
         const result = validateForm.safeParse(updatedItem);
         // if (!result.success) {

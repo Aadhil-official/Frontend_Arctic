@@ -18,7 +18,7 @@ function VehicleView() {
         const fetchVehicle = async () => {
             try {
                 // console.log(id);
-                const response = await axios.get(`http://localhost:8080/api/auth/getUnit?id=${id}`);
+                const response = await axios.get(`http://localhost:8080/api/auth/getVehicle?id=${id}`);
                 setVehicle(response.data);
                 setLoading(false);
             } catch (e) {
