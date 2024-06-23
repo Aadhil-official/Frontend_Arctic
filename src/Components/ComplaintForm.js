@@ -7,17 +7,17 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { z } from 'zod';
 import { error, success } from '../util/Toastify';
+import { useUser } from '../Context/UserContext';
 
 function ComplaintForm() {
 
   const navigate = useNavigate();
 
-
+  const { tempdata } = useUser();
   const [subject, setSubject] = useState('');
   const [object, setObject] = useState('');
-  const [email, setEmail] = useState('');
+  const [email] = useState(tempdata.email);
   const [complaindate, setDate] = useState('');
-  const [admintype, setAdmintype] = useState('');
 
   useEffect(() => {
     const getCurrentDate = () => {
@@ -28,30 +28,22 @@ function ComplaintForm() {
       return `${year}-${month}-${day}`;
     };
 
-    // Set complaindate to the current date on component mount
     setDate(getCurrentDate());
   }, []); // Empty dependency array to run this effect only once on mount
 
 
   function HandleSubmit() {
 
-    const allowedTypes = ['employee', 'vehicle', 'unit', 'item', 'sitevisit', 'service', 'job', 'calander', 'custemer', 'usergroup'];
-
     const data = {
       subject: subject,
       object: object,
       email: email,
-      admintype: [admintype],
       complaindate: complaindate
     }
 
     const validateForm = z.object({
       subject: z.string().min(1, { message: 'Enter the subject' }),
-      object: z.string().min(1, { message: 'Enter the object' }),
-      email: z.string().email({ message: 'Invalid email address' }),
-      admintype: z.array(z.string()).refine((value) => allowedTypes.includes(value[0]), {
-        message: "Admin type is not define"
-      })
+      object: z.string().min(1, { message: 'Enter the object' })
     });
 
     const result = validateForm.safeParse(data);
@@ -61,17 +53,13 @@ function ComplaintForm() {
           navigate('/login/welcome');
           success('Complain added successfully!')
         })
-        .catch(() => error("Failed to add complain"));
+        .catch(() => error("Please add object within 150 words"));
     } else {
       const formattedError = result.error.format();
       if (formattedError.subject?._errors) {
         error(String(formattedError.subject?._errors));
       } else if (formattedError.object?._errors) {
         error(String(formattedError.object?._errors))
-      } else if (formattedError.email?._errors) {
-        error(String(formattedError.email?._errors))
-      } else if (formattedError.admintype?._errors) {
-        error(String(formattedError.admintype?._errors));
       }
     }
   }
@@ -90,24 +78,26 @@ function ComplaintForm() {
       >
         <TextField
           id="subject"
-          label="Complaints"
+          label="Subject"
           type='text'
+          value={subject}
           onChange={(e) => setSubject(e.target.value)}
         />
-
-        <TextField
+        {/* {console.log("tested..........",tempdata)} */}
+        {/* <TextField
           label="Email"
           id="email"
           type='email'
           // value={email}
           onChange={(e) => setEmail(e.target.value)}
         // required
-        />
+        /> */}
 
         <TextField
           id='object'
-          label="Object"
+          label="Complaints"
           type='text'
+          value={object}
           // id="outlined-required"
           // value={roles}
           onChange={(e) => setObject(e.target.value)}
@@ -117,7 +107,7 @@ function ComplaintForm() {
         />
 
 
-        <TextField
+        {/* <TextField
           select
           label="Admin Type"
           onChange={(e) => setAdmintype(e.target.value)}
@@ -135,7 +125,7 @@ function ComplaintForm() {
           <option value="calander">Calander</option>
           <option value="custemer">Custemer</option>
           <option value="usergroup">Usergroup</option>
-        </TextField><br/>
+        </TextField><br /> */}
 
         {/* <TextField
           id='date'
@@ -145,8 +135,8 @@ function ComplaintForm() {
           onChange={(e) => setDate(e.target.value)}
         // required
         /><br /><br /> */}
-
-        <Button variant="contained" onClick={HandleSubmit}>Submit</Button><br /><br />
+        <br /><br />
+        <Button variant="contained" onClick={HandleSubmit}>Submit</Button>
       </Box>
     </>
   )

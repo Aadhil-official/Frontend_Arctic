@@ -5,11 +5,13 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success} from '../util/Toastify';
+import { error, success } from '../util/Toastify';
+import { useUser } from '../Context/UserContext';
 
 
 export default function FormPropsTextFields() {
 
+  const { setTempdata } = useUser();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,7 +22,7 @@ export default function FormPropsTextFields() {
   });
 
 
-  const handleSubmit =  () => {
+  const handleSubmit = () => {
 
     const data = {
       username: username,
@@ -31,31 +33,30 @@ export default function FormPropsTextFields() {
     if (result.success) {
       axios.post('http://localhost:8080/api/auth/signin', data)
         .then((response) => {
-          const tempdata =   response.data;
-          
+          const tempdata = response.data;
+          setTempdata(tempdata);
           // const token = tempdata.token;
-          
+
           // if (token) {
           //   localStorage.removeItem('jwtToken');
           //   // localStorage.setItem('jwtToken', token); // Store token in localStorage
           // } else {
           //   console.error('No token found in response');
           // }
-          
+
           const role = tempdata.roles[0]; // This will be 'ADMIN'
-          
-          if(role ===  'ADMIN'){
+
+          if (role === 'ADMIN') {
             // checkForNewComplaints();
             navigate('/login/welcomeadmin');
             success('Login successful!')
-
           } else {
             navigate('/login/welcome');
             success('Login successful!')
           }
         })
         .catch(() => error("Invalid username or password!please try again"));
-        
+
     } else {
       const formattedError = result.error.format();
       if (formattedError.username?._errors) {
@@ -76,8 +77,7 @@ export default function FormPropsTextFields() {
 
 
   return (
-    <> 
-    <></>  
+    <>
       <Box
         component="form"
         sx={{
@@ -88,20 +88,22 @@ export default function FormPropsTextFields() {
         noValidate
         autoComplete='off'
       >
-      
+
         <TextField
           label="Name"
           type='text'
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
 
         <TextField
           label="Password"
           type="password"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         /><br /><br />
         <Button variant="contained" onClick={handleSubmit}>
-          Signin
+          Sign in
         </Button><br /><br />
       </Box>
     </>
