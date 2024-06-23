@@ -1,17 +1,14 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-//import ServiceAgreementThree from '../Pages/ServiceAgreement/ServiceAgreementThree';
+
+
 
 export default function WithoutButton({ agreement }) {
     const navigate = useNavigate();
 
-//     const handleEdit = () => {
-//         navigate(`http://localhost:3000/ServiceAgreementThree/${agreement.id}`);
-//     };
+
 
     return (
         <>
@@ -85,21 +82,8 @@ export default function WithoutButton({ agreement }) {
                         readOnly: true,
                     }}
                 />
-                 <TextField
-                    label="Telephone Number"
-                    type='text'
-                    value={agreement.telephone || ''}
-                    InputProps={{
-                        readOnly: true,
-                    }}
-                />
+                 
 
-                <br /><br />
-                {/* <Link to={"/ServiceAgreementThree/:{id}"}>
-                <Button variant="contained" onClick={handleEdit}>
-                    Edit Details
-                </Button>
-                </Link> */}
                 <br/><br/>
             </Box>
         </>

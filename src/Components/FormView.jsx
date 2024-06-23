@@ -16,7 +16,7 @@ export default function FormView({ agreement }) {
     const [periodOfTheAgreement, setPeriodOfTheAgreement] = useState(agreement.periodOfTheAgreement || '');
     const [startDate, setStartDate] = useState(agreement.startDate || '');
     const [endDate, setEndDate] = useState(agreement.endDate || '');
-    const [telephone, setTelephone] = useState(agreement.telephone || '');
+    
 
     const data = {
         id: agreement.id,
@@ -27,7 +27,7 @@ export default function FormView({ agreement }) {
         periodOfTheAgreement,
         startDate,
         endDate,
-        telephone
+        
     };
 
     const handleEdit = () => {
@@ -104,12 +104,7 @@ export default function FormView({ agreement }) {
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                 />
-                <TextField
-                    label="Telephone Number"
-                    type='text'
-                    value={telephone}
-                    onChange={(e) => setTelephone(e.target.value)}
-                />
+                
 
                 <br /><br />
                 <Button variant="outlined" onClick={handleGoBack} >
