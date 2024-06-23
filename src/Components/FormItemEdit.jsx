@@ -3,31 +3,52 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 export default function FormItemEdit() {
-    const { id } = useParams();
-    const [agreement, setAgreement] = useState(null);
+    // Handle the case when agreement is undefined
+    
+
+//    const initialAgreement = agreement || {};
+
+    const [agreement,setAgreement]=useState([]);
+    
+    const [customerName, setCustomerName] = useState(agreement.customerName || '');
+    const [location, setLocation] = useState(agreement.location || '');
+    const [item, setItem] = useState(agreement.item || '');
+    const [agreementType, setAgreementType] = useState(agreement.agreementType || '');
+    const [periodOfTheAgreement, setPeriodOfTheAgreement] = useState(agreement.periodOfTheAgreement || '');
+    const [startDate, setStartDate] = useState(agreement.startDate || '');
+    const [endDate, setEndDate] = useState(agreement.endDate || '');
+    const [telephone, setTelephone] = useState(agreement.telephone || '');
+    const locationone  = useLocation();
+
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchAgreementService = async () => {
-            try {
-                const response = await axios.get(`http://localhost:8080/api/v1/agreementService/getAgreementServiceTwo?id=${id}`);
-                console.log("Fetched Agreement:",response.data);
-                setAgreement(response.data);
-                setLoading(false);
-            } catch (e) {
-                console.error('Error fetching item:', e);
-                setLoading(false);
-            }
-        };
-        fetchAgreementService();
-    }, [id]);
+   
+    useEffect ( () =>{
+        // if (locationone.state && locationone.state.agreement) {
+
+            setAgreement(locationone.state.agreement);
+            console.log("Hasara" + agreement);
+        // }
+    },[locationone.state]);
+    
+    const data ={
+        id:agreement.id,
+        customerName,
+        location,
+        item,
+        agreementType,
+        periodOfTheAgreement,
+        startDate,
+        endDate,
+        telephone
+    }
 
     const handleSubmit = () => {
-        axios.put(`http://localhost:8080/api/v1/agreementService/updateAgreementService`, agreement)
+        axios.put(`http://localhost:8080/api/v1/agreementService/updateAgreementService`, data)
             .then(() => {
                 console.log("Service agreement updated successfully");
                 navigate('/');
@@ -38,10 +59,6 @@ export default function FormItemEdit() {
 
     if (loading) {
         return <p>Loading...</p>;
-    }
-
-    if (!agreement) {
-        return <p>Agreement not found</p>;
     }
 
     return (
@@ -58,66 +75,60 @@ export default function FormItemEdit() {
             <TextField
                 label="Customer Name"
                 type='text'
-                value={agreement.customerName}
-                onChange={(e) => setAgreement({ ...agreement, customerName: e.target.value })}
+                value={customerName}
+                onChange={(e) => setCustomerName(e.target.value)}
             />
 
             <TextField
                 label="Location"
                 type="text"
-                value={agreement.location}
-                onChange={(e) => setAgreement({ ...agreement, location: e.target.value })}
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
             />
 
             <TextField
                 label="Item"
                 type="text"
-                value={agreement.item}
-                onChange={(e) => setAgreement({ ...agreement, item: e.target.value })}
+                value={item}
+                onChange={(e) => setItem(e.target.value)}
             />
 
             <TextField
                 label="Agreement Type"
                 type='text'
-                value={agreement.agreementType}
-                onChange={(e) => setAgreement({ ...agreement, agreementType: e.target.value })}
+                value={agreementType}
+                onChange={(e) => setAgreementType(e.target.value)}
             />
 
             <TextField
                 label="Period of the Agreement"
                 type='text'
-                value={agreement.periodOfTheAgreement}
-                onChange={(e) => setAgreement({ ...agreement, periodOfTheAgreement: e.target.value })}
+                value={periodOfTheAgreement}
+                onChange={(e) => setPeriodOfTheAgreement(e.target.value)}
             />
             <TextField
-                    label="Start Date"
-                    type='text'
-                    value={agreement.startDate || ''}
-                    InputProps={{
-                        readOnly: true,
-                    }}
-                />
-                 <TextField
-                    label="End Date"
-                    type='text'
-                    value={agreement.endDate || ''}
-                    InputProps={{
-                        readOnly: true,
-                    }}
-                />
-                 <TextField
-                    label="Telephone Number"
-                    type='text'
-                    value={agreement.telephone || ''}
-                    InputProps={{
-                        readOnly: true,
-                    }}
-                />
+                label="Start Date"
+                type='text'
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+            />
+            <TextField
+                label="End Date"
+                type='text'
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+            />
+            <TextField
+                label="Telephone Number"
+                type='text'
+                value={telephone}
+                onChange={(e) => setTelephone(e.target.value)}
+            />
             
             <br /><br />
             <Button variant="contained" onClick={handleSubmit}>
                 Save
             </Button><br /><br />
         </Box>
-    );
+    )
 }

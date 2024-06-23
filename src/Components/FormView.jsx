@@ -1,16 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-//import ServiceAgreementThree from '../Pages/ServiceAgreement/ServiceAgreementThree';
+import axios from 'axios';
+import { success } from '../util/Toastify';
 
 export default function FormView({ agreement }) {
     const navigate = useNavigate();
 
+    const [customerName, setCustomerName] = useState(agreement.customerName || '');
+    const [location, setLocation] = useState(agreement.location || '');
+    const [item, setItem] = useState(agreement.item || '');
+    const [agreementType, setAgreementType] = useState(agreement.agreementType || '');
+    const [periodOfTheAgreement, setPeriodOfTheAgreement] = useState(agreement.periodOfTheAgreement || '');
+    const [startDate, setStartDate] = useState(agreement.startDate || '');
+    const [endDate, setEndDate] = useState(agreement.endDate || '');
+    const [telephone, setTelephone] = useState(agreement.telephone || '');
+
+    const data = {
+        id: agreement.id,
+        customerName,
+        location,
+        item,
+        agreementType,
+        periodOfTheAgreement,
+        startDate,
+        endDate,
+        telephone
+    };
+
     const handleEdit = () => {
-        navigate(`http://localhost:3000/ServiceAgreementThree/${agreement.id}`);
+        axios.put("http://localhost:8080/api/v1/agreementService/updateAgreementService", data)
+            .then((res) => {
+                console.log(res.data);
+                navigate('/ServiceAgreementSix');
+                success("Successfully Updated..!");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    const handleGoBack = () => {
+        navigate(-1); // This will take the user to the previous page
     };
 
     return (
@@ -28,79 +61,65 @@ export default function FormView({ agreement }) {
                 <TextField
                     label="Customer Name"
                     type='text'
-                    value={agreement.customerName || ''}
-                    InputProps={{
-                        readOnly: true,
-                    }}
+                    value={customerName}
+                    onChange={(e) => setCustomerName(e.target.value)}
                 />
 
                 <TextField
                     label="Location"
                     type="text"
-                    value={agreement.location || ''}
-                    InputProps={{
-                        readOnly: true,
-                    }}
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
                 />
 
                 <TextField
                     label="Item"
                     type="text"
-                    value={agreement.item || ''}
-                    InputProps={{
-                        readOnly: true,
-                    }}
+                    value={item}
+                    onChange={(e) => setItem(e.target.value)}
                 />
 
                 <TextField
                     label="Agreement Type"
                     type='text'
-                    value={agreement.agreementType || ''}
-                    InputProps={{
-                        readOnly: true,
-                    }}
+                    value={agreementType}
+                    onChange={(e) => setAgreementType(e.target.value)}
                 />
 
                 <TextField
                     label="Period of the Agreement"
                     type='text'
-                    value={agreement.periodOfTheAgreement || ''}
-                    InputProps={{
-                        readOnly: true,
-                    }}
+                    value={periodOfTheAgreement}
+                    onChange={(e) => setPeriodOfTheAgreement(e.target.value)}
                 />
-                 <TextField
+                <TextField
                     label="Start Date"
                     type='text'
-                    value={agreement.startDate || ''}
-                    InputProps={{
-                        readOnly: true,
-                    }}
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
                 />
-                 <TextField
+                <TextField
                     label="End Date"
                     type='text'
-                    value={agreement.endDate || ''}
-                    InputProps={{
-                        readOnly: true,
-                    }}
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
                 />
-                 <TextField
+                <TextField
                     label="Telephone Number"
                     type='text'
-                    value={agreement.telephone || ''}
-                    InputProps={{
-                        readOnly: true,
-                    }}
+                    value={telephone}
+                    onChange={(e) => setTelephone(e.target.value)}
                 />
 
                 <br /><br />
-                <Link to={"/ServiceAgreementThree/:{id}"}>
-                <Button variant="contained" onClick={handleEdit}>
-                    Edit Details
+                <Button variant="outlined" onClick={handleGoBack} >
+                    Go Back
                 </Button>
-                </Link>
-                <br/><br/>
+                <Button variant="contained" onClick={handleEdit} sx={{ ml: 2 }}>
+                    Update
+                </Button>
+                
+                <br /><br />
             </Box>
         </>
     );

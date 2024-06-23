@@ -12,19 +12,19 @@ import SiteVisitThree from './Pages/SiteVisiteModule/SiteVisitThree';
 import SiteVisitFour from './Pages/SiteVisiteModule/SiteVisitFour';
 import SiteVisitFive from './Pages/SiteVisiteModule/SiteVisitFive';
 import SiteVisitSix from './Pages/SiteVisiteModule/SiteVisitSix';
-
-
+import { Toaster } from 'react-hot-toast';
 
 
 
 function App() {
   return (
-    <div className="App">    
+    <div className="App">
+   <Toaster/>
      <BrowserRouter> 
      <Routes>
      <Route exact path="/" element={<ServiceAgreementOne/>}></Route>
      <Route path="/ServiceAgreementTwo/:id" element={<ServiceAgreementTwo/>}></Route>
-     <Route path ="/ServiceAgreementThree/:id" element={<ServiceAgreementThree/>}></Route>
+     <Route path ="/ServiceAgreementThree" element={<ServiceAgreementThree/>}></Route>
      <Route path ="/ServiceAgreementFour/:id" element={<ServiceAgreementFour/>}></Route>
      <Route path ="/ServiceAgreementFive" element={<ServiceAgreementFive/>}></Route>
      <Route path ="/ServiceAgreementSix" element={<ServiceAgreementSix/>}></Route>
@@ -34,6 +34,7 @@ function App() {
      <Route path ="/SiteVisitFour"element={<SiteVisitFour/>}></Route>
      <Route path ="/SiteVisitFive"element={<SiteVisitFive/>}></Route>
      <Route path ="/SiteVisitSix"element={<SiteVisitSix/>}></Route>
+     
      
      </Routes>
      </BrowserRouter> 

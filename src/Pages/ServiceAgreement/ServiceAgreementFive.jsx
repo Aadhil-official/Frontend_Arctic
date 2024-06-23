@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import Footer from '../../Components/Footer';
+
 
 const ServiceAgreementFive = () => {
   const [serviceAgreements, setServiceAgreements] = useState([]);
@@ -75,8 +77,10 @@ const ServiceAgreementFive = () => {
         </Grid>
 
         <Grid item xs={12} style={{ margin: '20px' }}>
-          <Grid container>
-            <Grid item xs={5} sm={5} md={4} lg={1.5} xl={1}>
+          {/* <Grid container>
+            <Grid item xs={5} sm={5} md={4} lg={1.5} xl={1}> */}
+            <Grid container spacing={2} alignItems="center" justifyContent="space-between">
+            <Grid item xs={12} sm={5} md={4} lg={2} xl={2}>
               <FormControl variant="outlined" sx={{
                 minWidth: 225,
                 '&.MuiSelect-select': {
@@ -109,8 +113,8 @@ const ServiceAgreementFive = () => {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={2} sm={2} md={4} lg={9} xl={10}></Grid>
-            <Grid item xs={5} sm={5} md={4} lg={1.5} xl={1}>
+            <Grid item xs={12} sm={12} md={4} lg={8} xl={2} textAlign="center">
+            {/* <Grid item xs={5} sm={5} md={4} lg={1.5} xl={1}> */}
               <TextField
                 variant="outlined"
                 InputProps={{
@@ -153,6 +157,7 @@ const ServiceAgreementFive = () => {
           ))}
         </Grid>
       </Grid>
+      <Footer/>
     </>
   );
 };

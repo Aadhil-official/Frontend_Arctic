@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-//import { error } from '../util/Toastify';
 import axios from 'axios';
 import { Grid, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 //import { FooterIn, FormItemEdit, NormalHeaderBar } from '../Components/index';
@@ -8,30 +7,30 @@ import FormItemEdit from '../../Components/FormItemEdit';
 //import FormView from '../../Components/FormView';
 
 
-function ServiceAgreementThree() {
-    const { id } = useParams();
+function ServiceAgreementThree({agreement}) {
+    // const { id } = useParams();
 
-    const [agreement, setAgreement] = useState(null);
-    const [loading, setLoading] = useState(false);
+    // const [agreement, setAgreement] = useState(null);
+    //const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        const fetchAgreementService = async () => {
-            try {
-                // console.log(id);
-                const response = await axios.get(`http://localhost:8080/api/v1/agreementService/getAgreementServiceTwo?id=${id}`);
-                setAgreement(response.data);
-                console.log("Agreement Details:", response.data);
-                setLoading(false);
-            } catch (e) {
-                //error('Error fetching item:' + e);
-                setLoading(true);
-                //setLoading(false);
-                //console.error('Error fetching item:', e);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchAgreementService = async () => {
+    //         try {
+    //             // console.log(id);
+    //             const response = await axios.get(`http://localhost:8080/api/v1/agreementService/getAgreementServiceTwo?id=${id}`);
+    //             setAgreement(response.data);
+    //             console.log("Agreement Details:", response.data);
+    //             setLoading(false);
+    //         } catch (e) {
+    //             //error('Error fetching item:' + e);
+    //             setLoading(true);
+    //             //setLoading(false);
+    //             //console.error('Error fetching item:', e);
+    //         }
+    //     };
 
-        fetchAgreementService();
-    }, [id]);
+    //     fetchAgreementService();
+    // }, [id]);
 
 
     let theme = createTheme();
@@ -78,15 +77,15 @@ function ServiceAgreementThree() {
             <Grid container>
                 <Grid item xl={5.25} lg={4.65} md={3} xs={1} sm={2}></Grid>
                 <Grid item xl={1.5} lg={2.7} md={6} xs={10.5} sm={8} className="box">
-                    {loading ? (
+                    {/* {loading ? (
                         <p>Loading...</p>
                     ) : agreement ? (
-                        console.log("from itemEdit page........" + agreement),
-                        <FormItemEdit agreement={agreement} />
-                        //<FormView agreement={agreement} />
+                        console.log("from itemEdit page........" + agreement), */}
+                        <FormItemEdit state={{agreement}} />
+                        {/* //<FormView agreement={agreement} />
                     ) : (
                         <p>agreement not found</p>
-                    )}
+                    )} */}
                 </Grid>
                 <Grid item xl={2} lg={3} md={3} xs={0.5} sm={2}></Grid>
             </Grid><br />

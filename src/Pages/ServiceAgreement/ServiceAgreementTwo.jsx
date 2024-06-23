@@ -6,6 +6,7 @@ import { Grid, ThemeProvider, Typography, createTheme, responsiveFontSizes } fro
 //import { FooterIn, FormItemEdit, NormalHeaderBar } from '../Components/index';
 //import FormItemEdit from '../../Components/FormItemEdit';
 import FormView from '../../Components/FormView';
+import Footer from '../../Components/Footer';
 
 
 function ServiceAgreementTwo() {
@@ -106,6 +107,8 @@ function ServiceAgreementTwo() {
                 </Grid> */}
             </Grid><br />
             {/* <FooterIn /> */}
+            <Footer></Footer>
+
         </div>
     )
 }

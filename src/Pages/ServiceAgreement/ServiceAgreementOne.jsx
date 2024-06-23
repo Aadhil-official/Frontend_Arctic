@@ -7,6 +7,8 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Footer from '../../Components/Footer';
+
 
 const ServiceAgreementOne = () => {
   // State variables to store form data
@@ -14,7 +16,7 @@ const ServiceAgreementOne = () => {
   const [location, setLocation] = useState("");
   const [item, setItem] = useState("");
   const [agreementType, setAgreementType] = useState("");
-  const [period, setPeriod] = useState("");
+  const [periodOfTheAgreement, setPeriodOfTheAgreement] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [telephone, setTelephone] = useState("");
@@ -28,8 +30,8 @@ const ServiceAgreementOne = () => {
   ];
 
   // Array of periods
-  const periods = [
-    { value: "One year", label: "One Years" },
+  const periodOfTheAgreements = [
+    { value: "One year", label: "One Year" },
     { value: "Two years", label: "Two Years" },
     { value: "Three years", label: "Three Years" },
   ];
@@ -39,7 +41,7 @@ const ServiceAgreementOne = () => {
     event.preventDefault();
 
     // Check if all fields are filled
-    if (!customerName || !location || !item || !agreementType || !period || !startDate || !endDate || !telephone) {
+    if (!customerName || !location || !item || !agreementType || !periodOfTheAgreement || !startDate || !endDate || !telephone) {
       alert("Please fill in all the fields.");
       return;
     }
@@ -57,7 +59,7 @@ const ServiceAgreementOne = () => {
       location,
       item,
       agreementType,
-      period,
+      periodOfTheAgreement,
       startDate,
       endDate,
       telephone,
@@ -76,7 +78,7 @@ const ServiceAgreementOne = () => {
       setLocation("");
       setItem("");
       setAgreementType("");
-      setPeriod("");
+      setPeriodOfTheAgreement("");
       setStartDate("");
       setEndDate("");
       setTelephone("");
@@ -92,7 +94,7 @@ const ServiceAgreementOne = () => {
     setLocation("");
     setItem("");
     setAgreementType("");
-    setPeriod("");
+    setPeriodOfTheAgreement("");
     setStartDate("");
     setEndDate("");
     setTelephone("");
@@ -109,8 +111,8 @@ const ServiceAgreementOne = () => {
   return (
     <Grid container spacing={1}>
       <Link to={"/ServiceAgreementSix"}>
-                        <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '1rem' }} alt='Back' />
-                    </Link>
+        <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '1rem' }} alt='Back' />
+      </Link>
       {showForm && (
         <>
           <Grid item xs={12}>
@@ -121,7 +123,7 @@ const ServiceAgreementOne = () => {
                 fontFamily: "Franklin Gothic Medium",
                 textAlign: "center",
                 fontSize: "70px",
-                marginTop: '5rem'
+                marginTop: '-2rem'
               }}
             >
               Service Agreement
@@ -180,21 +182,22 @@ const ServiceAgreementOne = () => {
                 ))}
               </TextField>
             </Grid>
-            <Grid item xs={12} style={{ paddingBottom: "1rem" }}>
+
+             <Grid item xs={12} style={{ paddingBottom: "1rem" }}>
               <TextField
                 select
                 label="Period of the Agreement"
-                value={period}
-                onChange={(event) => setPeriod(event.target.value)}
+                value={periodOfTheAgreement}
+                onChange={(event) => setPeriodOfTheAgreement(event.target.value)}
                 SelectProps={{ native: true }}
                 fullWidth
-              >
-                <option value=""></option>
-                {periods.map((option) => (
+              ><option value=""></option>
+               {periodOfTheAgreements.map((option) => (
                   <option key={option.value} value={option.value}>{option.label}</option>
                 ))}
               </TextField>
             </Grid>
+
             <Grid item xs={12} style={{ paddingBottom: "1rem" }}>
               <TextField
                 type="date"
@@ -249,6 +252,7 @@ const ServiceAgreementOne = () => {
           </Grid>
         </>
       )}
+      <Footer/>
     </Grid>
   );
 };

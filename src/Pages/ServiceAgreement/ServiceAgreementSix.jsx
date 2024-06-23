@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import Footer from '../../Components/Footer';
 
 const ServiceAgreementSix = () => {
   const [serviceAgreements, setServiceAgreements] = useState([]);
@@ -53,9 +54,9 @@ const ServiceAgreementSix = () => {
     <>
       <Grid container spacing={-2}>
         <Grid item position='fixed'>
-          <Link to={"/login/welcomeadmin"}>
+          {/* <Link to={"/login/welcomeadmin"}>
             <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
-          </Link>
+          </Link> */}
         </Grid>
       </Grid>
 
@@ -72,14 +73,14 @@ const ServiceAgreementSix = () => {
           </ThemeProvider>
         </Grid>
         <Grid container justifyContent="center"sx={{paddingTop:'0rem'}}>
-        <Grid item>
-          <h3>View Existing Service Agreements & Add new Service Agreement</h3>
+          <Grid item>
+            <h3>View Existing Service Agreements & Add new Service Agreement</h3>
           </Grid>
-          </Grid>
+        </Grid>
 
         <Grid item xs={12} style={{ margin: '20px' }}>
-          <Grid container>
-            <Grid item xs={5} sm={5} md={4} lg={1.5} xl={2}>
+          <Grid container spacing={2} alignItems="center" justifyContent="space-between">
+            <Grid item xs={12} sm={5} md={4} lg={2} xl={2}>
               <FormControl variant="outlined" sx={{
                 minWidth: 225,
                 '&.MuiSelect-select': {
@@ -102,7 +103,6 @@ const ServiceAgreementSix = () => {
                       sx={{ borderRadius: '50px' }}
                     />
                   }
-                  
                 >
                   <MenuItem value="customerName">Customer Name</MenuItem>
                   <MenuItem value="location">Location</MenuItem>
@@ -112,8 +112,36 @@ const ServiceAgreementSix = () => {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={2} sm={2} md={4} lg={8} xl={8}></Grid>
-            <Grid item xs={5} sm={5} md={4} lg={1.5} xl={2}>
+
+            <Grid item xs={12} sm={12} md={4} lg={8} xl={8} textAlign="center">
+              <Button 
+                variant="outlined" 
+                sx={{ 
+                  marginBottom: '3rem', 
+                  marginRight: '1rem',
+                  backgroundColor: 'rgb(26, 99, 209)',
+                  color: 'white',
+                  '&:hover': {
+                    backgroundColor: 'rgb(21, 80, 178)',
+                  },
+                }}
+              >
+                <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  Add new Service Agreement
+                </Link>
+              </Button>
+              <Button 
+                variant="outlined" 
+                sx={{ 
+                  marginBottom: '3rem',
+                }}
+                onClick={() => navigate(-1)}
+              >
+                Go Back
+              </Button>
+            </Grid>
+
+            <Grid item xs={12} sm={5} md={4} lg={2} xl={2}>
               <TextField
                 variant="outlined"
                 InputProps={{
@@ -135,27 +163,7 @@ const ServiceAgreementSix = () => {
           </Grid>
         </Grid>
 
-        <Grid container justifyContent="center"sx={{paddingTop:'3rem'}}>
-        <Grid item>
-          <Link to="/">
-          <button style={{ 
-            backgroundColor: 'rgb(26, 99, 209)',
-            color: 'white',
-            width: '20rem',
-            height:'3rem',
-            marginBottom: '3rem',
-            border:'none',
-            borderRadius:'10px',
-            cursor:'pointer',
-          }} 
-          >
-            Add new Service Agreement
-          </button>
-          </Link>
-        </Grid>
-      </Grid>
-
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           {filteredServiceAgreements.map((agreement,index) => (
             <Grid item xs={12} key={index}>
               <Button 
@@ -168,14 +176,13 @@ const ServiceAgreementSix = () => {
                 width: '80%',
                 marginBottom: '10px',}}
               onClick={() => handleEditAgreement(agreement.id)}>
-              {/* {agreement.customerName} */}
              {filterOption === 'customerName'? agreement.customerName: agreement[filterOption]}
               </Button>
             </Grid>
           ))}
         </Grid>
       </Grid>
-      
+      <Footer></Footer>
     </>
   );
 };
