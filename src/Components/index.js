@@ -13,6 +13,3 @@ export { default as FormResetPass } from './FormResetPass';
 export { default as FormView } from './FormView';
 export { default as FormUpdate } from './FormUpdate';
 export { default as FooterIn } from './FooterIn';
-// export { default as FormItemView } from './Item/FormItemView';
-// export { default as FormItemEdit } from './Item/FormItemEdit';
-// export { default as FormAddItem } from './Item/FormAddItem';

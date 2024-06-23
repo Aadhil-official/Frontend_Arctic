@@ -32,12 +32,12 @@ function FormCustomerEdit({ customer }) {
 
 
         const validateForm = z.object({
-            customerName: z.string().min(1, { message: "Enter your item" }),
-            address: z.string().min(1, { message: "Enter your indoor modal" }),
-            contactNumber: z.string().min(1, { message: "Enter your outdoor modal" }),
+            customerName: z.string().min(1, { message: "Enter customer name" }),
+            address: z.string().min(1, { message: "Enter address" }),
+            contactNumber: z.string().min(1, { message: "Enter contact number" }),
             // password: z.string().min(8, 'Password must be at least 8 characters long'),
-            email: z.string().min(1, { message: "Enter manufacturer" }),
-            location: z.string().min(1, { message: "Enter capacity" }),
+            email: z.string().email().min(1, { message: "Enter email" }),
+            location: z.string().min(1, { message: "Enter location" }),
         });
 
         // console.log("id of role is..........." + role.toUpperCase());
@@ -110,6 +110,8 @@ function FormCustomerEdit({ customer }) {
                 <TextField
                     label="Address"
                     type="text"
+                    multiline
+                    rows={4}
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                 />
@@ -132,6 +134,8 @@ function FormCustomerEdit({ customer }) {
                 <TextField
                     label="Work from"
                     type='text'
+                    multiline
+                    rows={4}
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                 />

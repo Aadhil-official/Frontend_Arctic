@@ -59,8 +59,8 @@ export default function AddItem() {
           <ThemeProvider theme={theme}>
             <Typography variant='h5' fontWeight='bold'>
 
-              To login?
-              <Link to={'/login'} style={{ color: 'red' }}>
+              To dashboard?
+              <Link to={'/login/welcomeadmin'} style={{ color: 'red' }}>
                 Click here
               </Link>
             </Typography>

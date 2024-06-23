@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NormalHeaderBar, ComplaintForm, Footer } from '../Components/index';
+import { NormalHeaderBar, ComplaintForm, FooterIn } from '../Components/index';
 import { Link, useLocation } from 'react-router-dom';
 import '../Style/Login.css';
 import { Grid, Typography } from '@mui/material';
@@ -68,7 +68,7 @@ function Usercomplaint() {
           </ThemeProvider>
         </Grid>
       </Grid><br />
-      <Footer />
+      <FooterIn />
 
     </>
   )

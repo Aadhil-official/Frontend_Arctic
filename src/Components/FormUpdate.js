@@ -79,7 +79,7 @@ export default function FormUpdate({ user }) {
                     .then(() => {
                         success("User updated successfully");
                         navigate('/login/welcomeadmin/employeelistad');
-                    }).catch(() => error("Undefined User!"))
+                    }).catch(() => error("Username or email already exist!"))
             } else {
                 error("No changes detected!");
                 navigate('/login/welcomeadmin/employeelistad');

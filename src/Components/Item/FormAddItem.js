@@ -27,6 +27,7 @@ export default function FormAddItem() {
             // password: z.string().min(8, 'Password must be at least 8 characters long'),
             manufacturer: z.string().min(1, { message: "Enter manufacture" }),
             capacity: z.string().min(1, { message: "Enter capacity" })
+                .max(30, { message: "Enter correct capacity with format" })
         });
 
         const userData = {
@@ -99,7 +100,7 @@ export default function FormAddItem() {
 
                 <TextField
                     label="Outdoor modal"
-                    type="text" 
+                    type="text"
                     value={outdoorMod}
                     onChange={(e) => setOutdoorMod(e.target.value)}
                 />
@@ -108,14 +109,14 @@ export default function FormAddItem() {
                 <TextField
                     label="Manufacturer"
                     type='email'
-                    value={manufacturer} 
+                    value={manufacturer}
                     onChange={(e) => setManufacturer(e.target.value)}
                 />
 
                 <TextField
                     label="Capacity"
                     type='text'
-                    value={capacity} 
+                    value={capacity}
                     onChange={(e) => setCapacity(e.target.value)}
                 />
 

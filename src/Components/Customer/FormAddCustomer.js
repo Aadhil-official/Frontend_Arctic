@@ -20,11 +20,11 @@ function FormAddCustomer() {
 
 
         const validateForm = z.object({
-            customerName: z.string().min(1, { message: "Enter item name" }),
-            address: z.string().min(1, { message: "Enter indoor model" }),
-            contactNumber: z.string().min(1, { message: "Enter outdoor model" }),
+            customerName: z.string().min(1, { message: "Enter customer name" }),
+            address: z.string().min(1, { message: "Enter address" }),
+            contactNumber: z.string().min(1, { message: "Enter contact number" }),
             // password: z.string().min(8, 'Password must be at least 8 characters long'),
-            email: z.string().min(1, { message: "Enter manufacture" }),
+            email: z.string().email().min(1, { message: "Enter email" }),
             location: z.string().min(1, { message: "Enter capacity" })
         });
 
@@ -44,7 +44,7 @@ function FormAddCustomer() {
                     navigate('/login/welcomeadmin/customerListAd');
                     success('Customer added successfully!')
                 })
-                .catch(() => error("Customer already exist!"))
+                .catch(() => error("Contact number already exist!"))
         } else {
             const formattedError = result.error.format();
             if (formattedError.customerName?._errors) {
@@ -94,6 +94,8 @@ function FormAddCustomer() {
                 <TextField
                     label="Address"
                     type="text"
+                    multiline
+                    rows={4}
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                 />
@@ -116,6 +118,8 @@ function FormAddCustomer() {
                 <TextField
                     label="Work from"
                     type='text'
+                    multiline
+                    rows={4}
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                 />

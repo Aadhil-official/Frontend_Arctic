@@ -34,6 +34,8 @@ function FormCustomerView({ customer }) {
                     <TextField
                         label="Address"
                         type="text"
+                        multiline
+                        rows={4}
                         value={customer.address}
                         InputProps={{
                             readOnly: true
@@ -62,6 +64,8 @@ function FormCustomerView({ customer }) {
                     <TextField
                         label="Work from"
                         type='text'
+                        multiline
+                        rows={4}
                         value={customer.location}
                         InputProps={{
                             readOnly: true

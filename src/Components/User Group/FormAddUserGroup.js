@@ -12,7 +12,7 @@ function FormAddUserGroup() {
     // const [password, setPassword] = useState('');
     const [groupDescription, setGroupDescription] = useState('');
     const [relevantPrivileges, setRelevantPrivileges] = useState(''); // State to hold the selected role
-    const [allocatedJobs, setAllocatedJobs] = useState(' ');
+    const [allocatedJobs, setAllocatedJobs] = useState('');
 
     const navigate = useNavigate();
 
@@ -20,11 +20,10 @@ function FormAddUserGroup() {
 
 
         const validateForm = z.object({
-            groupName: z.string().min(1, { message: "Enter indoor serial" }),
-            groupDescription: z.string().min(1, { message: "Enter outdoor serial" }),
-            relevantPrivileges: z.string().min(1, { message: "Enter model name" }),
-            // password: z.string().min(8, 'Password must be at least 8 characters long'),
-            allocatedJobs: z.string().min(1, { message: "Enter commissioned date" })
+            groupName: z.string().min(1, { message: "Enter group name" }),
+            groupDescription: z.string().min(1, { message: "Enter group description" }),
+            relevantPrivileges: z.string().min(1, { message: "Enter relevant privileges" }),
+            allocatedJobs: z.string().min(1, { message: "Enter allocated jobs date" })
         });
 
         const groupData = {
@@ -78,7 +77,7 @@ function FormAddUserGroup() {
                 noValidate
                 autoComplete="off"
             >
-                
+
                 <TextField
                     label="Group Name"
                     type='text'
@@ -89,6 +88,8 @@ function FormAddUserGroup() {
                 <TextField
                     label="Group Description"
                     type="text"
+                    multiline
+                    rows={4}
                     value={groupDescription}
                     onChange={(e) => setGroupDescription(e.target.value)}
                 />
