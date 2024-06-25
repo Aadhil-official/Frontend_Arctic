@@ -1,6 +1,6 @@
 import React from 'react'
 import '../Style/Welcome.css';
-import { Tabs, ProfilesAdmin, FooterIn } from '../Components/index';
+import { ProfilesAdmin, FooterIn, TabsAd } from '../Components/index';
 import { Grid } from '@mui/material';
 // import ViewListPdf from './ViewListPdf';
 // import { useLocation } from 'react-router-dom';
@@ -41,7 +41,7 @@ function Welcomeadmin() {
         </Grid>
         {/* <ViewListPdf /> */}
         <Grid item xs={12}>
-          <Tabs buttonData={buttonData} />
+          <TabsAd buttonData={buttonData} />
         </Grid>
         <Grid item xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mt: 3 }}>
           <FooterIn />

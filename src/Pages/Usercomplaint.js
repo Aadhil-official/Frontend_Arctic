@@ -1,21 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { NormalHeaderBar, ComplaintForm, FooterIn } from '../Components/index';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../Style/Login.css';
 import { Grid, Typography } from '@mui/material';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 
 
 function Usercomplaint() {
-
-  const [tempdata, setTempdata] = useState([]);
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.state && location.state.tempdata) {
-      setTempdata(location.state.tempdata);
-    }
-  }, [location.state]);
 
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
@@ -52,7 +43,7 @@ function Usercomplaint() {
       <Grid container>
         <Grid item xl={5.25} lg={4.65} md={4} xs={1} sm={3}></Grid>
         <Grid item xl={1.5} lg={2.7} md={4} xs={10.5} sm={6} className="box">
-          <ComplaintForm state={{ tempdata }} />
+          <ComplaintForm />
         </Grid>
         <Grid item xl={2} lg={3} md={4} xs={0.5} sm={3}></Grid>
       </Grid><br />
