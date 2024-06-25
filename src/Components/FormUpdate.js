@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -27,6 +27,13 @@ export default function FormUpdate({ user }) {
     // console.log("usergroup:", usergroup);
     // console.log("tel:", tel);
 
+
+    useEffect(() => {
+        if (role === 'admin') {
+            setUsergroup('AdminGroup');
+        } 
+    }, [role]);
+
     // if (user) {
     //     console.log("user is there");
     // }
@@ -34,6 +41,8 @@ export default function FormUpdate({ user }) {
     const handleSubmit = () => {
 
         const allowedRoles = ['admin', 'user'];
+
+
 
         const validateForm = z.object({
             username: z.string().min(1, { message: "Enter your name" }),
@@ -131,11 +140,13 @@ export default function FormUpdate({ user }) {
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                 />
-
                 <TextField
                     label="User group"
                     type="text"
                     value={usergroup}
+                    InputProps={{
+                        readOnly: role === 'admin'
+                    }}
                     onChange={(e) => setUsergroup(e.target.value)}
                 />
 

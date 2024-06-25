@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -15,7 +15,18 @@ export default function FormSignup() {
   const [address, setAddress] = useState('');
   const [usergroup, setUsergroup] = useState('');
   const [tel, setTel] = useState('');
+  const [usergroups, setUsergroups] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/auth/getAllUserGroups")
+      .then((response) => {
+        setUsergroups(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user groups:", error);
+      });
+  }, []);
 
   const handleSubmit = () => {
 
@@ -46,10 +57,10 @@ export default function FormSignup() {
     if (result.success) {
       axios.post('http://localhost:8080/api/auth/signup', userData)
         .then(() => {
-          navigate('/');
+          navigate('/login/welcomeadmin');
           success('User created successfully!')
         })
-        .catch(() => error("Username or email already exist!"))
+        .catch(() => error("Username or email already exist or userGroup is not created!"))
     } else {
       const formattedError = result.error.format();
       if (formattedError.username?._errors) {
@@ -88,6 +99,8 @@ export default function FormSignup() {
         noValidate
         autoComplete="off"
       >
+
+        {/* {console.log("asfcfcghas.....dat....."+usergroups)} */}
         <TextField
           label="Username"
           type='text'
@@ -105,11 +118,20 @@ export default function FormSignup() {
         />
 
         <TextField
+          select
           label="User group"
-          type="text"
           value={usergroup}
+          InputProps={{
+            readOnly: role === 'admin'
+          }}
           onChange={(e) => setUsergroup(e.target.value)}
-        />
+          SelectProps={{ native: true }}
+        >
+          <option value=""></option>
+          {usergroups.filter(group => group.groupName !== "AdminGroup").map((group, index) => (
+            <option key={index} value={group.groupName}>{group.groupName}</option>
+          ))}
+        </TextField>
 
 
         <TextField

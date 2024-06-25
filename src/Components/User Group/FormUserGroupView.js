@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 function FormUserGroupView({ userGroup }) {
 
-
     const navigate = useNavigate();
 
     const theme = responsiveFontSizes(createTheme());
@@ -41,15 +40,7 @@ function FormUserGroupView({ userGroup }) {
                             readOnly: true
                         }}
                     />
-
-                    <TextField
-                        label="Relevant Privileges"
-                        type="text"
-                        value={userGroup.relevantPrivileges}
-                        InputProps={{
-                            readOnly: true
-                        }}
-                    />
+                    
 
 
                     <TextField

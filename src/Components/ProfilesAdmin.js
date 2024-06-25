@@ -30,7 +30,7 @@ const ProfilesAdmin = () => {
   // const complaintdata = location.state.complaintdata;
   const navigate = useNavigate();
 
-  // console.log("this is huiiiiii.....", tempdata.username)
+  // console.log("this is huiiiiii.....", tempdata);
   // const location = useLocation;
 
   // let i=1;
