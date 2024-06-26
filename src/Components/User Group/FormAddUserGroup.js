@@ -36,7 +36,7 @@ function FormAddUserGroup() {
 
         const result = validateForm.safeParse(groupData);
         if (result.success) {
-            console.log("cggcgfcg....",groupName);
+            console.log("cggcgfcg....", groupName);
             if (groupName === "AdminGroup") {
                 error("You can't create AdminGroup!");
             } else {
@@ -117,6 +117,16 @@ function FormAddUserGroup() {
                     <Grid item xs={2.7}></Grid>
                     <Grid item xs={6}>
                         <FormGroup>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={relevantPrivileges.includes('createUser')}
+                                        onChange={handleCheckboxChange}
+                                        value="createUser"
+                                    />
+                                }
+                                label="Create User"
+                            />
                             <FormControlLabel
                                 control={
                                     <Checkbox

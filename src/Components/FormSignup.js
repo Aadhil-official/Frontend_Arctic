@@ -19,6 +19,9 @@ export default function FormSignup() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (usergroup === 'AdminGroup') {
+      setRole('admin');
+    }
     axios.get("http://localhost:8080/api/auth/getAllUserGroups")
       .then((response) => {
         setUsergroups(response.data);
@@ -26,7 +29,7 @@ export default function FormSignup() {
       .catch((error) => {
         console.error("Error fetching user groups:", error);
       });
-  }, []);
+  }, [usergroup]);
 
   const handleSubmit = () => {
 
@@ -60,7 +63,7 @@ export default function FormSignup() {
           navigate('/login/welcomeadmin');
           success('User created successfully!')
         })
-        .catch(() => error("Username or email already exist or userGroup is not created!"))
+        .catch(() => error("Username or email already exist!"))
     } else {
       const formattedError = result.error.format();
       if (formattedError.username?._errors) {
@@ -117,22 +120,6 @@ export default function FormSignup() {
           onChange={(e) => setAddress(e.target.value)}
         />
 
-        <TextField
-          select
-          label="User group"
-          value={usergroup}
-          InputProps={{
-            readOnly: role === 'admin'
-          }}
-          onChange={(e) => setUsergroup(e.target.value)}
-          SelectProps={{ native: true }}
-        >
-          <option value=""></option>
-          {usergroups.filter(group => group.groupName !== "AdminGroup").map((group, index) => (
-            <option key={index} value={group.groupName}>{group.groupName}</option>
-          ))}
-        </TextField>
-
 
         <TextField
           label="Email"
@@ -152,13 +139,31 @@ export default function FormSignup() {
           select
           label="Designation"
           value={role}
+          InputProps={{
+            readOnly: usergroup === 'AdminGroup'
+          }}
           onChange={(e) => setRole(e.target.value)}
           SelectProps={{ native: true }}
         >
           <option value=""></option>
           <option value="admin">Admin</option>
           <option value="user">User</option>
-        </TextField><br /><br />
+        </TextField>
+
+        <TextField
+          select
+          label="User group"
+          value={usergroup}
+          onChange={(e) => setUsergroup(e.target.value)}
+          SelectProps={{ native: true }}
+        >
+          <option value=""></option>
+          {usergroups.map((group, index) => (
+            <option key={index} value={group.groupName}>{group.groupName}</option>
+          ))}
+        </TextField>
+
+        <br /><br />
         <Button
           variant="contained"
           onClick={handleSubmit}
