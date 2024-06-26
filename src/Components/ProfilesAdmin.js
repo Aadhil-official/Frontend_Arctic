@@ -177,7 +177,7 @@ const ProfilesAdmin = () => {
             </Link>
           </Grid>
           {relevantPrivileges.includes("createUser") && (
-            <Grid item lg={1} md={1.61} sm={2.4} xs={3.15}>
+            <Grid item lg={1.4} md={1.61} sm={2.4} xs={3.15}>
               <Link to={'/signup'}>
                 <Button
                   sx={{ backgroundColor: '#6C94F8', marginTop: '15px' }}
