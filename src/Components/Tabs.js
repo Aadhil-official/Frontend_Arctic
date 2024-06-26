@@ -8,8 +8,6 @@ const Tabs = ({ buttonData }) => {
   const { tempdataGroup } = useUser();
   const relevantPrivileges = tempdataGroup?.relevantPrivileges || [];
 
-
-  // Define a mapping between privileges and button labels
   const privilegeToButtonLabel = {
     accessEmployee: 'Employee Details',
     accessItem: 'Item Details',
@@ -24,10 +22,12 @@ const Tabs = ({ buttonData }) => {
     accessJobAllocation: 'Job Allocation',
   };
 
+  // Define a mapping between privileges and button labels
   // Filter the buttons based on the user's privileges
   const filteredButtonData = buttonData.filter(button =>
     relevantPrivileges.some(privilege => privilegeToButtonLabel[privilege] === button.label)
   );
+
 
   return (
     <Grid

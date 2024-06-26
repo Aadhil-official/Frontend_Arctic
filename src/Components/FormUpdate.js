@@ -29,10 +29,10 @@ export default function FormUpdate({ user }) {
 
 
     useEffect(() => {
-        if (role === 'admin') {
-            setUsergroup('AdminGroup');
-        } 
-    }, [role]);
+        if (usergroup === 'AdminGroup') {
+            setRole('admin');
+        }
+    }, [usergroup]);
 
     // if (user) {
     //     console.log("user is there");
@@ -144,9 +144,6 @@ export default function FormUpdate({ user }) {
                     label="User group"
                     type="text"
                     value={usergroup}
-                    InputProps={{
-                        readOnly: role === 'admin'
-                    }}
                     onChange={(e) => setUsergroup(e.target.value)}
                 />
 
@@ -170,6 +167,9 @@ export default function FormUpdate({ user }) {
                     label="Designation"
                     onChange={(e) => setRole(e.target.value)}
                     value={role}
+                    InputProps={{
+                        readOnly: usergroup === 'AdminGroup'
+                    }}
                     // onChange={(e) => setRole(e.target.value.JSON.stringify(e))}
                     SelectProps={{ native: true }}
                 >

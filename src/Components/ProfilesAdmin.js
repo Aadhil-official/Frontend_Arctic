@@ -14,7 +14,9 @@ import '../Style/Component/ProfAd.css'
 import { useUser } from '../Context/UserContext';
 
 const ProfilesAdmin = () => {
-  const { tempdata } = useUser();
+  const { tempdata, tempdataGroup } = useUser();
+
+  const relevantPrivileges = tempdataGroup?.relevantPrivileges || [];
   // const [checked, setChecked] = React.useState(true);
   // const [complaindata, setComplaindata] = React.useState([]);
   const [iconColor, setIconColor] = React.useState('#6C94F8');
@@ -164,7 +166,9 @@ const ProfilesAdmin = () => {
           <Grid item lg={2} md={2} sm={1.6} xs={0.4}></Grid>
           {/* </ThemeProvider> */}
           <Grid item lg={1.9} md={1.5} sm={0.7} xs={0.9}></Grid>
-
+          {!relevantPrivileges.includes("createUser") && (
+            <Grid item lg={1} md={1.61} sm={2.4} xs={3.15}></Grid>
+          )}
           <Grid item lg={0.5} md={0.5} sm={0.8} xs={1} sx={{ marginTop: '15px' }}>
             {/* state={{ complaintdata: complaintdata, tempdata }} */}
             <Link to={'/login/complaintread'} onClick={handleNotificationClick}>
@@ -172,14 +176,18 @@ const ProfilesAdmin = () => {
               <NotificationsIcon fontSize='small' sx={{ color: iconColor, marginBottom: '10px', marginLeft: '10px', position: 'absolute' }} />
             </Link>
           </Grid>
-          <Grid item lg={1} md={1.61} sm={2.4} xs={3.15}>
-            <Link to={'/signup'}>
-              <Button sx={{ backgroundColor: '#6C94F8', marginTop: '15px' }} variant="contained" size='small'>
-                Create User
-              </Button>
-            </Link>
-            {/* <Typography variant="h5" sx={{ marginTop: '12px' }}>logout</Typography> */}
-          </Grid>
+          {relevantPrivileges.includes("createUser") && (
+            <Grid item lg={1} md={1.61} sm={2.4} xs={3.15}>
+              <Link to={'/signup'}>
+                <Button
+                  sx={{ backgroundColor: '#6C94F8', marginTop: '15px' }}
+                  variant="contained" size='small'>
+                  Create User
+                </Button>
+              </Link>
+              {/* <Typography variant="h5" sx={{ marginTop: '12px' }}>logout</Typography> */}
+            </Grid>
+          )}
           <Grid item lg={1.2} md={1.3} sm={1.78} xs={2.5}>
             {/* <Switch
               checked={checked}

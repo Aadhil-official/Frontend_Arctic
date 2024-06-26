@@ -9,6 +9,7 @@ import { Grid } from '@mui/material';
 
 const Welcome = () => {
 
+  
   // const [tempdata, setTempdata] = useState([]);
   // const location = useLocation();
 
@@ -17,6 +18,9 @@ const Welcome = () => {
   //     setTempdata(location.state.tempdata);
   //   }
   // }, [location.state]);
+
+  
+
 
   const buttonData = [
     { label: 'Employee Details', link: '/login/welcome/employeelist' },

@@ -138,6 +138,16 @@ function FormUserGroupEdit({ userGroup }) {
                                 <FormControlLabel
                                     control={
                                         <Checkbox
+                                            checked={relevantPrivileges.includes('createUser')}
+                                            onChange={handleCheckboxChange}
+                                            value="createUser"
+                                        />
+                                    }
+                                    label="Create User"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
                                             checked={relevantPrivileges.includes('accessEmployee')}
                                             onChange={handleCheckboxChange}
                                             value="accessEmployee"
