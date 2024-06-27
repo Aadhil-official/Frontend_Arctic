@@ -14,7 +14,6 @@ import SiteVisitFour from './Pages/SiteVisiteModule/SiteVisitFour';
 import SiteVisitFive from './Pages/SiteVisiteModule/SiteVisitFive';
 import SiteVisitSix from './Pages/SiteVisiteModule/SiteVisitSix';
 import { Toaster } from 'react-hot-toast';
-import AddCustomer from './Pages/CustomerMaster/AddCustomer';
 import SiteVisitDashboard from './Pages/SiteVisiteModule/SiteVisitDashboard';
 import GatePass from './Pages/SiteVisiteModule/GatePass';
 import SiteVisitDetails from './Pages/SiteVisiteModule/SiteVisitDetails';
@@ -86,7 +85,6 @@ function App() {
      <Route path ="/SiteVisitFour"element={<SiteVisitFour/>}></Route>
      <Route path ="/SiteVisitFive"element={<SiteVisitFive/>}></Route>
      <Route path ="/SiteVisitSix"element={<SiteVisitSix/>}></Route>
-     <Route path="/AddCustomer" element={<AddCustomer/>}></Route>
      <Route path ="/SiteVisitDashboard" element ={<SiteVisitDashboard/>}></Route>
      <Route path ="/GatePass" element={<GatePass/>}></Route>
      <Route path="/SiteVisitDetails/:id" element={<SiteVisitDetails/>}></Route>
