@@ -25,10 +25,10 @@ function Welcomeadmin() {
     { label: 'Customer Details', link: '/login/welcomeadmin/customerListAd' },
     { label: 'User Group Details', link: '/login/welcomeadmin/userGroupListAd' },
     { label: 'Job Details' },
-    { label: 'Service Agreement' },
     { label: 'Calendar' },
-    { label: 'Schedule a Site Visit' },
     { label: 'Job Allocation' },
+    { label: 'Service Agreement Details' },
+    { label: 'Site Visit Details' },
   ];
 
   return (
