@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Grid, Typography, Box, Pagination, InputAdornment, TextField } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import Footer from '../../Components/Footer';
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { FooterIn, NormalHeaderBar } from '../../Components';
 
 const SiteVisitFour = () => {
   const [siteVisits, setSiteVisits] = useState([]);
   const [filteredVisits, setFilteredVisits] = useState([]);
   const [startedVisits, setStartedVisits] = useState([]);
   const [endedVisits, setEndedVisits] = useState([]);
-  const [canceledVisits, setCanceledVisits] = useState([]);
+  const [canceledVisits] = useState([]);
   const [completedVisits, setCompletedVisits] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -101,7 +101,7 @@ const SiteVisitFour = () => {
     //     console.log(response.data);
     //     alert('Site Visit canceled successfully');
     //     setCanceledVisits([...canceledVisits, visitId]);
-        navigate(`/FeedbackForm/${visitId}`, { state: { visitDetails } }); // Navigate to FeedbackForm with visitDetails
+    navigate(`/FeedbackForm/${visitId}`, { state: { visitDetails } }); // Navigate to FeedbackForm with visitDetails
     //   } else {
     //     alert('Now You canceled this site visit.');
     //   }
@@ -142,6 +142,7 @@ const SiteVisitFour = () => {
 
   return (
     <>
+      <NormalHeaderBar />
       <Grid container textAlign='center' justifyContent='center'>
         <Grid item xs={12} style={{ textAlign: "left", margin: "1rem" }}>
           <Link to={"/SiteVisitDashboard"}>
@@ -188,13 +189,13 @@ const SiteVisitFour = () => {
                   },
                 }}
               >
-                <Link to="/SiteVisitOne" 
-                style={{
-                  textDecoration: 'none',
-                  color: 'inherit',
-                  fontFamily: 'Franklin Gothic',
-                  fontSize: '18px',
-              }}>
+                <Link to="/SiteVisitOne"
+                  style={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    fontFamily: 'Franklin Gothic',
+                    fontSize: '18px',
+                  }}>
                   Schedule a new Site Visit
                 </Link>
               </Button>
@@ -286,7 +287,7 @@ const SiteVisitFour = () => {
           />
         </Grid>
       </Grid>
-      <Footer />
+      <FooterIn />
     </>
   );
 };

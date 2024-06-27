@@ -4,14 +4,14 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { saveAs } from "file-saver";
+// import { saveAs } from "file-saver";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Footer from "../../Components/Footer";
 import Time from "../../Components/SiteVisitComponents/Time"; // Adjust the path as needed
 import GatePass from "./GatePass"; // Adjust the path as needed
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { FooterIn, NormalHeaderBar } from "../../Components";
 
 
 
@@ -24,7 +24,7 @@ const SiteVisitOne = () => {
   const [groupName, setGroupName] = useState("");
   const [scheduleDate, setScheduleDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
-  const [showForm, setShowForm] = useState(true);
+  const [ setShowForm] = useState(true);//showForm,
   const [isScheduled, setIsScheduled] = useState(false); // Track if scheduled
 
   useEffect(() => {
@@ -144,6 +144,8 @@ const SiteVisitOne = () => {
   };
 
   return (
+    <>
+    <NormalHeaderBar/>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2} justifyContent="center">
@@ -302,8 +304,9 @@ const SiteVisitOne = () => {
         </Grid>
       )}
 
-      <Footer />
     </LocalizationProvider>
+    <FooterIn />
+    </>
   );
 };
 

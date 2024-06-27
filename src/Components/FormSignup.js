@@ -5,11 +5,11 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../util/Toastify';
+import { dismiss, error, loading, success } from '../util/Toastify';
 
 export default function FormSignup() {
+
   const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState(''); // State to hold the selected role
   const [address, setAddress] = useState('');
@@ -33,13 +33,15 @@ export default function FormSignup() {
 
   const handleSubmit = () => {
 
+    const loadingToastId = loading("Submitting...");
+    console.log("value of toast id:......." + loadingToastId);
     const allowedRoles = ['admin', 'user'];
 
     const validateForm = z.object({
       username: z.string().min(1, { message: "Enter your name" }),
       address: z.string().min(1, { message: "Enter your address" }),
-      tel: z.string().min(1, { message: "Enter your contact number" }),
-      // password: z.string().min(8, 'Password must be at least 8 characters long'),
+      tel: z.string().min(10, { message: "Enter your valid contact number" }).max(12, { message: "Enter your valid contact number" }),
+      usergroup: z.string().min(1, 'Enter the user group'),
       email: z.string().email('Invalid email address'),
       roles: z.array(z.string()).nonempty('Please select a role!').refine((role) => allowedRoles.includes(role[0]), {
         message: 'Role is not defined.'
@@ -48,7 +50,6 @@ export default function FormSignup() {
 
     const userData = {
       username: username,
-      // password: password,
       email: email,
       address: address,
       usergroup: usergroup,
@@ -60,11 +61,16 @@ export default function FormSignup() {
     if (result.success) {
       axios.post('http://localhost:8080/api/auth/signup', userData)
         .then(() => {
+          dismiss(loadingToastId);
           navigate('/login/welcomeadmin');
           success('User created successfully!')
         })
-        .catch(() => error("Username or email already exist!"))
+        .catch(() => {
+          dismiss(loadingToastId);
+          error("Username or email already exist!")
+        })
     } else {
+      dismiss(loadingToastId);
       const formattedError = result.error.format();
       if (formattedError.username?._errors) {
         error(String(formattedError.username?._errors));

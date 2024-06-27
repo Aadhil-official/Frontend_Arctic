@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Grid, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import FormView from '../../Components/FormView';
-import Footer from '../../Components/Footer';
+import { FooterIn, NormalHeaderBar } from '../../Components';
 
 function ServiceAgreementTwo() {
     // Extract the `id` parameter from the URL using the `useParams` hook
@@ -42,7 +42,7 @@ function ServiceAgreementTwo() {
 
     return (
         <div>
-            {/* Back button that navigates to the home page */}
+            <NormalHeaderBar />
             <Grid container spacing={2}>
                 <Grid item position='fixed'>
                     <Link to={"/"}>
@@ -73,7 +73,7 @@ function ServiceAgreementTwo() {
             {/* Subtitle */}
             <Grid container justifyContent="center" sx={{ paddingTop: '0rem' }}>
                 <Grid item>
-                    <h3 style={{  fontSize: '18px', color:'#547DD1' ,fontFamily:'Franklin Gothic',}}>View Service Agreement Details</h3>
+                    <h3 style={{ fontSize: '18px', color: '#547DD1', fontFamily: 'Franklin Gothic', }}>View Service Agreement Details</h3>
                 </Grid>
             </Grid>
 
@@ -106,7 +106,7 @@ function ServiceAgreementTwo() {
             <br />
 
             {/* Footer */}
-            <Footer />
+            <FooterIn />
         </div>
     );
 }

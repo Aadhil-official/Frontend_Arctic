@@ -5,21 +5,22 @@ import HeaderSix from '../../Components/HeaderSix'
 import Calender from '../../Components/SiteVisitComponents/Calender'
 import SiteVisitHorizontal from '../../Components/SiteVisitComponents/SiteVisitHorizontal'
 import Time from '../../Components/SiteVisitComponents/Time'
-import Footer from '../../Components/Footer'
 import SiViSingleButton from '../../Components/SiteVisitComponents/SiViSingleButton'
+import { FooterIn, NormalHeaderBar } from '../../Components'
 
-export default function SiteVisitSeven () {
+export default function SiteVisitSeven() {
   return (
     <div>
-      <BackIcon/>
-      <HeaderOne value='Scheduling Site Visit'/>
-      <HeaderSix value='Scheduling Your Site Visit Here!'/>
-      <SiteVisitHorizontal/>
-      <Calender/>
-      <Time/>
-      <SiViSingleButton value='Update'/>
-      <Footer/>
-      
+      <NormalHeaderBar />
+      <BackIcon />
+      <HeaderOne value='Scheduling Site Visit' />
+      <HeaderSix value='Scheduling Your Site Visit Here!' />
+      <SiteVisitHorizontal />
+      <Calender />
+      <Time />
+      <SiViSingleButton value='Update' />
+      <FooterIn />
+
     </div>
   )
 }

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';//, useLocation
 import axios from 'axios';
 import { Button, Grid, Typography, Box, ThemeProvider, createTheme, responsiveFontSizes, TextField } from '@mui/material';
-import Footer from '../../Components/Footer';
+import { FooterIn, NormalHeaderBar } from '../../Components';
 
 function FeedbackForm() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
   const [feedback, setFeedback] = useState('');
   const [visitDetails, setVisitDetails] = useState(null);
@@ -59,6 +59,7 @@ function FeedbackForm() {
 
   return (
     <>
+      <NormalHeaderBar />
       <Grid container justifyContent="center">
         <Grid item xs={12} textAlign="center">
           <Link to={"/SiteVisitFour"}>
@@ -70,14 +71,16 @@ function FeedbackForm() {
       <Grid container className='text'>
         <Grid item xs={12} textAlign="center">
           <ThemeProvider theme={theme}>
-            <Typography variant="h" 
-            sx={{ fontWeight: 'bold',
-         
-             color: 'rgb(26, 99, 209)',
-            fontFamily: "Franklin Gothic Medium",
-            textAlign: "center", 
-            fontSize: "60px" ,
-            marginTop:"1rem"}}>
+            <Typography variant="h"
+              sx={{
+                fontWeight: 'bold',
+
+                color: 'rgb(26, 99, 209)',
+                fontFamily: "Franklin Gothic Medium",
+                textAlign: "center",
+                fontSize: "60px",
+                marginTop: "1rem"
+              }}>
               Feedback Form
             </Typography>
           </ThemeProvider>
@@ -85,20 +88,20 @@ function FeedbackForm() {
       </Grid>
 
       <Grid container justifyContent="center" sx={{ paddingTop: '1rem' }}>
-            <Grid item>
-              <Typography variant='h' sx={{
-                fontWeight: 'bold',
-                marginBottom: '2rem',
-                marginTop:'2rem',
-                fontSize: '18px',
-                color:'#547DD1',
-                fontFamily:'Franklin Gothic',
-                 
-              }}>
-                Add your Feedback here 
-              </Typography>
-            </Grid>
-          </Grid>
+        <Grid item>
+          <Typography variant='h' sx={{
+            fontWeight: 'bold',
+            marginBottom: '2rem',
+            marginTop: '2rem',
+            fontSize: '18px',
+            color: '#547DD1',
+            fontFamily: 'Franklin Gothic',
+
+          }}>
+            Add your Feedback here
+          </Typography>
+        </Grid>
+      </Grid>
 
       {loading ? (
         <Grid container justifyContent="center">
@@ -133,7 +136,7 @@ function FeedbackForm() {
                   readOnly: true,
                 }}
               />
-              
+
               <TextField
                 fullWidth
                 id="vehicleNumber"
@@ -211,30 +214,30 @@ function FeedbackForm() {
                 sx={{ marginBottom: '1rem' }}
               />
               <Grid container justifyContent="center" spacing={2}>
-              <Grid item>
-              <Button 
-              variant="outlined" 
-              style={{ width: "7rem" ,height:"2.3rem"}}
-              onClick={() => navigate(-1)}>
-                Go Back
-              </Button>
-              </Grid>
                 <Grid item>
-                  <Button 
-                  variant="contained" 
-                  onClick={handleFeedbackSubmit}
-                  style={{ width: "6rem" }}
+                  <Button
+                    variant="outlined"
+                    style={{ width: "7rem", height: "2.3rem" }}
+                    onClick={() => navigate(-1)}>
+                    Go Back
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    onClick={handleFeedbackSubmit}
+                    style={{ width: "6rem" }}
                   >
                     Submit
                   </Button>
                 </Grid>
-                   <Grid item>
-                  <Button 
-                 variant="contained"
-                 color="secondary"
-                 onClick={handleCancel}
-                 style={{ width: "6rem" }}
-                  
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleCancel}
+                    style={{ width: "6rem" }}
+
                   >
                     Cancel
                   </Button>
@@ -251,7 +254,7 @@ function FeedbackForm() {
         </Grid>
       )}
 
-      <Footer />
+      <FooterIn />
     </>
   );
 }

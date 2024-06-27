@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Grid, Typography, Box, ThemeProvider, createTheme, responsiveFontSizes, TextField, Paper } from '@mui/material';
-import Footer from '../../Components/Footer';
+import { Button, Grid, Typography, ThemeProvider, createTheme, responsiveFontSizes, TextField, Paper } from '@mui/material';
+import { FooterIn, NormalHeaderBar } from '../../Components';
 
 function SiteVisitThree() {
   const { id } = useParams();
@@ -36,6 +36,7 @@ function SiteVisitThree() {
 
   return (
     <>
+      <NormalHeaderBar />
       <Grid container className='back-icon'>
         <Grid item xs={12} textAlign="left">
           <Link to={"/SiteVisitFour"}>
@@ -48,7 +49,7 @@ function SiteVisitThree() {
         <Grid item xs={12} textAlign="center">
           <ThemeProvider theme={theme}>
             <Typography variant="h" sx={{ fontWeight: 'bold', marginTop: '5rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic Medium", textAlign: "center", fontSize: "60px" }}>
-             View Site Visit Details
+              View Site Visit Details
             </Typography>
           </ThemeProvider>
         </Grid>
@@ -167,7 +168,7 @@ function SiteVisitThree() {
         </Grid>
       )}
 
-      <Footer />
+      <FooterIn />
     </>
   );
 }

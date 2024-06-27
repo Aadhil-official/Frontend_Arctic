@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Paper } from "@mui/material";
-import Footer from "../../Components/Footer";
+import { FooterIn, NormalHeaderBar } from '../../Components';
 
 const SiteVisitDashboardEmployee = () => {
     const [hoveredButton, setHoveredButton] = useState(null);
@@ -70,6 +70,7 @@ const SiteVisitDashboardEmployee = () => {
 
     return (
         <>
+            <NormalHeaderBar />
             <Paper
                 elevation={3}
                 style={{
@@ -158,7 +159,7 @@ const SiteVisitDashboardEmployee = () => {
                     </div>
                 </div>
             </Paper>
-            <Footer/>
+            <FooterIn />
         </>
     );
 }

@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Footer from '../../Components/Footer';
+import { FooterIn, NormalHeaderBar } from '../../Components';
 
 const ServiceAgreementFive = () => {
   const [serviceAgreements, setServiceAgreements] = useState([]);
@@ -63,6 +63,7 @@ const ServiceAgreementFive = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <NormalHeaderBar />
       <Box sx={{ maxWidth: '1500px', margin: '0 auto', padding: '2px' }}>
         <Grid container spacing={5}>
           <Grid item xs={12}>
@@ -153,9 +154,10 @@ const ServiceAgreementFive = () => {
             )}
           </Grid>
         </Grid>
-        <Footer />
       </Box>
+      <FooterIn />
     </ThemeProvider>
+
   );
 };
 

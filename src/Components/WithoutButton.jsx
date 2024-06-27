@@ -1,12 +1,12 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 
 
 export default function WithoutButton({ agreement }) {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
 
 

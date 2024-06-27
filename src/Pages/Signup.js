@@ -1,5 +1,5 @@
 import React from 'react';
-import { NormalHeaderBar, FormSignup, Footer } from '../Components/index';
+import { NormalHeaderBar, FormSignup, FooterIn } from '../Components/index';
 import { Link } from 'react-router-dom';
 import '../Style/Signup.css';
 import { Grid, Typography } from '@mui/material';
@@ -38,7 +38,7 @@ export default function Signup() {
       <Grid container>
         <ThemeProvider theme={theme}>
           <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
-            <Typography variant='h6' sx={{marginTop:'-25px'}}>Enter account details</Typography>
+            <Typography variant='h6' sx={{ marginTop: '-25px' }}>Enter account details</Typography>
           </Grid>
         </ThemeProvider>
       </Grid>
@@ -66,7 +66,7 @@ export default function Signup() {
           </ThemeProvider>
         </Grid>
       </Grid><br />
-      <Footer />
+      <FooterIn />
     </>
   );
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Grid, Typography, Box, ThemeProvider, createTheme, responsiveFontSizes, TextField } from '@mui/material';
-import Footer from '../../Components/Footer';
+import { FooterIn, NormalHeaderBar } from '../../Components';
 
 function SiteVisitDetails() {
   const { id } = useParams();
@@ -62,6 +62,7 @@ function SiteVisitDetails() {
 
   return (
     <>
+      <NormalHeaderBar />
       <Grid container className='back-icon'>
         <Grid item xs={12} textAlign="left">
           <Link to={"/SiteVisitFour"}>
@@ -132,7 +133,7 @@ function SiteVisitDetails() {
                   readOnly: true,
                 }}
               />
-              
+
               <TextField
                 fullWidth
                 id="vehicleNumber"
@@ -228,7 +229,7 @@ function SiteVisitDetails() {
         </Grid>
       )}
 
-      <Footer />
+      <FooterIn />
     </>
   );
 }
