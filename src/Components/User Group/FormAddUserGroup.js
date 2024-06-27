@@ -117,76 +117,126 @@ function FormAddUserGroup() {
                     <Grid item xs={2.7}></Grid>
                     <Grid item xs={6}>
                         <FormGroup>
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={relevantPrivileges.includes('createUser')}
-                                        onChange={handleCheckboxChange}
-                                        value="createUser"
-                                    />
-                                }
-                                label="Create User"
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={relevantPrivileges.includes('accessEmployee')}
-                                        onChange={handleCheckboxChange}
-                                        value="accessEmployee"
-                                    />
-                                }
-                                label="Access Employee"
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={relevantPrivileges.includes('accessItem')}
-                                        onChange={handleCheckboxChange}
-                                        value="accessItem"
-                                    />
-                                }
-                                label="Access Item"
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={relevantPrivileges.includes('accessUnit')}
-                                        onChange={handleCheckboxChange}
-                                        value="accessUnit"
-                                    />
-                                }
-                                label="Access Unit"
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={relevantPrivileges.includes('accessVehicle')}
-                                        onChange={handleCheckboxChange}
-                                        value="accessVehicle"
-                                    />
-                                }
-                                label="Access Vehicle"
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={relevantPrivileges.includes('accessGroup')}
-                                        onChange={handleCheckboxChange}
-                                        value="accessGroup"
-                                    />
-                                }
-                                label="Access Group"
-                            />
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={relevantPrivileges.includes('accessGroup')}
-                                        onChange={handleCheckboxChange}
-                                        value="accessGroup"
-                                    />
-                                }
-                                label="Access Group"
-                            />
+                        <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={relevantPrivileges.includes('createUser')}
+                                            onChange={handleCheckboxChange}
+                                            value="createUser"
+                                        />
+                                    }
+                                    label="Create User"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={relevantPrivileges.includes('accessEmployee')}
+                                            onChange={handleCheckboxChange}
+                                            value="accessEmployee"
+                                        />
+                                    }
+                                    label="Access Employee"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={relevantPrivileges.includes('accessItem')}
+                                            onChange={handleCheckboxChange}
+                                            value="accessItem"
+                                        />
+                                    }
+                                    label="Access Item"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={relevantPrivileges.includes('accessUnit')}
+                                            onChange={handleCheckboxChange}
+                                            value="accessUnit"
+                                        />
+                                    }
+                                    label="Access Unit"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={relevantPrivileges.includes('accessVehicle')}
+                                            onChange={handleCheckboxChange}
+                                            value="accessVehicle"
+                                        />
+                                    }
+                                    label="Access Vehicle"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={relevantPrivileges.includes('accessGroup')}
+                                            onChange={handleCheckboxChange}
+                                            value="accessGroup"
+                                        />
+                                    }
+                                    label="Access Group"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={relevantPrivileges.includes('accessJobAllocation')}
+                                            onChange={handleCheckboxChange}
+                                            value="accessJobAllocation"
+                                        />
+                                    }
+                                    label="Access Job Allocation"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={relevantPrivileges.includes('accessSiteVisit')}
+                                            onChange={handleCheckboxChange}
+                                            value="accessSiteVisit"
+                                        />
+                                    }
+                                    label="Access Site Visit"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={relevantPrivileges.includes('accessCalendar')}
+                                            onChange={handleCheckboxChange}
+                                            value="accessCalendar"
+                                        />
+                                    }
+                                    label="Access Calendar"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={relevantPrivileges.includes('accessServiceAgreement')}
+                                            onChange={handleCheckboxChange}
+                                            value="accessServiceAgreement"
+                                        />
+                                    }
+                                    label="Access Service Agreement"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={relevantPrivileges.includes('accessJob')}
+                                            onChange={handleCheckboxChange}
+                                            value="accessJob"
+                                        />
+                                    }
+                                    label="Access Job"
+                                />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={relevantPrivileges.includes('accessCustomer')}
+                                            onChange={handleCheckboxChange}
+                                            value="accessCustomer"
+                                        />
+                                    }
+                                    label="Access Customer"
+                                />
                         </FormGroup>
                     </Grid>
                 </Grid>
