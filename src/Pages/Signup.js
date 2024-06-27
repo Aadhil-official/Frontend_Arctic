@@ -44,14 +44,14 @@ export default function Signup() {
       </Grid>
 
       <br />
-      <Grid container>
-        <Grid item xl={5.25} lg={4.65} md={3} xs={1} sm={2}></Grid>
+      <Grid container justifyContent='center' textAlign='center'>
+        {/* <Grid item xl={5.25} lg={4.65} md={3} xs={1} sm={2}></Grid> */}
         <Grid item xl={1.5} lg={2.7} md={6} xs={10.5} sm={8} className="box">
 
           <FormSignup />
 
         </Grid>
-        <Grid item xl={2} lg={3} md={3} xs={0.5} sm={2}></Grid>
+        {/* <Grid item xl={2} lg={3} md={3} xs={0.5} sm={2}></Grid> */}
       </Grid><br />
       <Grid container>
         <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
