@@ -33,8 +33,8 @@ const Welcome = () => {
     { label: 'Calendar' },
     { label: 'Job Allocation' },
     { label: 'Job Allocation' },
-    { label: 'Service Agreement Details' },
-    { label: 'Site Visit Details' },
+    { label: 'Service Agreement Details', link: '/ServiceAgreementFive' },
+    { label: 'Site Visit Details', link: '/SiteVisitFour' },
   ];
 
   // const theme = responsiveFontSizes(createTheme());

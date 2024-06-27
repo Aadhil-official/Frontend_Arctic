@@ -74,17 +74,17 @@ function App() {
         <Route path='/login/welcomeadmin/userGroupListAd/edit/:id' element={<UserGroupEdit />} />
 
 
-     <Route path="/login/welcomeadmin/ServiceAgreementOne" element={<ServiceAgreementOne/>}></Route>
-     <Route path="/login/welcomeadmin/ServiceAgreementTwo/:id" element={<ServiceAgreementTwo/>}></Route>
-     <Route path ="/login/welcome/ServiceAgreementFour/:id" element={<ServiceAgreementFour/>}></Route>
-     <Route path ="/login/welcome/ServiceAgreementFive" element={<ServiceAgreementFive/>}></Route>
-     <Route path ="/login/welcomeadmin/ServiceAgreementSix" element={<ServiceAgreementSix/>}></Route>
-     <Route path ="/login/welcomeadmin/SiteVisitOne" element={<SiteVisitOne/>}></Route>
-     <Route path ="/login/welcomeadmin/SiteVisitTwo" element={<SiteVisitTwo/>}></Route>
+     <Route path="/ServiceAgreementOne" element={<ServiceAgreementOne/>}></Route>
+     <Route path="/ServiceAgreementTwo/:id" element={<ServiceAgreementTwo/>}></Route>
+     <Route path ="/ServiceAgreementFour/:id" element={<ServiceAgreementFour/>}></Route>
+     <Route path ="/ServiceAgreementFive" element={<ServiceAgreementFive/>}></Route>
+     <Route path ="/ServiceAgreementSix" element={<ServiceAgreementSix/>}></Route>
+     <Route path ="/SiteVisitOne" element={<SiteVisitOne/>}></Route>
+     <Route path ="/SiteVisitTwo" element={<SiteVisitTwo/>}></Route>
      <Route path ="/SiteVisitThree/:id"element={ <SiteVisitThree/>}></Route>
-     <Route path ="/login/welcome/SiteVisitFour"element={<SiteVisitFour/>}></Route>
-     <Route path ="/login/welcome/SiteVisitFive"element={<SiteVisitFive/>}></Route>
-     <Route path ="/login/welcomeadmin/SiteVisitSix"element={<SiteVisitSix/>}></Route>
+     <Route path ="/SiteVisitFour"element={<SiteVisitFour/>}></Route>
+     <Route path ="/SiteVisitFive"element={<SiteVisitFive/>}></Route>
+     <Route path ="/SiteVisitSix"element={<SiteVisitSix/>}></Route>
      <Route path ="/SiteVisitDashboard" element ={<SiteVisitDashboard/>}></Route>
      <Route path ="/GatePass" element={<GatePass/>}></Route>
      <Route path="/SiteVisitDetails/:id" element={<SiteVisitDetails/>}></Route>
