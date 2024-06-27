@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../util/Toastify';
+import { dismiss, error, loading, success } from '../util/Toastify';
 
 export default function FormSignup() {
   const [username, setUsername] = useState('');
@@ -32,6 +32,8 @@ export default function FormSignup() {
   }, [usergroup]);
 
   const handleSubmit = () => {
+
+    const loadingId = loading("");
 
     const allowedRoles = ['admin', 'user'];
 
@@ -60,10 +62,14 @@ export default function FormSignup() {
     if (result.success) {
       axios.post('http://localhost:8080/api/auth/signup', userData)
         .then(() => {
+          dismiss(loadingId);
           navigate('/login/welcomeadmin');
           success('User created successfully!')
         })
-        .catch(() => error("Username or email already exist!"))
+        .catch(() => {
+          dismiss(loadingId);
+          error("Username or email already exist!")
+        })
     } else {
       const formattedError = result.error.format();
       if (formattedError.username?._errors) {

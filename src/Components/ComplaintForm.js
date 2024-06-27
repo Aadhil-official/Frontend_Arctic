@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { z } from 'zod';
-import { error, success } from '../util/Toastify';
+import { dismiss, error, loading, success } from '../util/Toastify';
 import { useUser } from '../Context/UserContext';
 
 function ComplaintForm() {
@@ -34,6 +34,8 @@ function ComplaintForm() {
 
   function HandleSubmit() {
 
+    const loadingId = loading("Sending...");
+
     const data = {
       subject: subject,
       object: object,
@@ -50,11 +52,16 @@ function ComplaintForm() {
     if (result.success) {
       axios.post('http://localhost:8080/api/auth/complaints', data)
         .then(() => {
+          dismiss(loadingId);
           navigate('/login/welcome');
-          success('Complain added successfully!')
+          success('Complain added successfully!');
         })
-        .catch(() => error("Please add object within 150 words"));
+        .catch(() => {
+          dismiss(loadingId);
+          error("Please add object within 150 words");
+        });
     } else {
+      dismiss(loadingId);
       const formattedError = result.error.format();
       if (formattedError.subject?._errors) {
         error(String(formattedError.subject?._errors));
