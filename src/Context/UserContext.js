@@ -21,7 +21,7 @@ export const UserProvider = ({ children }) => {
     }
     
     if (tempdataGroup) {
-      sessionStorage.setItem('tempdataGroup', JSON.stringify(tempdata));
+      sessionStorage.setItem('tempdataGroup', JSON.stringify(tempdataGroup));
     } else {
       sessionStorage.removeItem('tempdataGroup');
     }
