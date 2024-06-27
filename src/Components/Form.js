@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../util/Toastify';
+import { dismiss, error, loading, success } from '../util/Toastify';
 import { useUser } from '../Context/UserContext';
 
 
@@ -24,6 +24,8 @@ export default function FormPropsTextFields() {
 
   const handleSubmit = () => {
 
+    const loadingId = loading("loading......");
+
     const data = {
       username: username,
       password: password
@@ -33,6 +35,7 @@ export default function FormPropsTextFields() {
     if (result.success) {
       axios.post('http://localhost:8080/api/auth/signin', data)
         .then((response) => {
+          dismiss(loadingId);
           const tempdata = response.data;
           setTempdata(tempdata.userInfo);
           setTempdataGroup(tempdata.userGroup);
@@ -56,9 +59,13 @@ export default function FormPropsTextFields() {
             success('Login successful!')
           }
         })
-        .catch(() => error("Invalid username or password!"));
+        .catch(() => {
+          dismiss(loadingId);
+          error("Invalid username or password!")
+        });
 
     } else {
+      dismiss(loadingId);
       const formattedError = result.error.format();
       if (formattedError.username?._errors) {
         error(String(formattedError.username?._errors));

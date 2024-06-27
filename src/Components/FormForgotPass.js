@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { z } from 'zod';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { error, success } from '../util/Toastify';
+import { dismiss, error, loading, success } from '../util/Toastify';
 
 
 function FormForgotPass() {
@@ -19,6 +19,8 @@ function FormForgotPass() {
 
     const handleSubmit = () => {
 
+        const loadingId = loading("Sending OTP.....");
+
         const data = {
             email: email
         };
@@ -26,16 +28,18 @@ function FormForgotPass() {
 
             const result = validateForm.safeParse(data);
             if (result.success) {
-                // loading('Sending OTP...')
                 axios.post('http://localhost:8080/api/auth/send-otp', data)
                     .then(() => {
+                        dismiss(loadingId);
                         navigate('/login/forgetpassword/resetpass');
                         success('OTP sended successfully!')
                     })
                     .catch(() => {
+                        dismiss(loadingId);
                         error("The email is not exist please enter valid email");
                     })
             } else {
+                dismiss(loadingId);
                 const formattedError = result.error.format();
                 if (formattedError.email?._errors) {
                     error(String(formattedError.email?._errors));
