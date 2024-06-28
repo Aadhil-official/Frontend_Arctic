@@ -33,7 +33,7 @@ export default function FormSignup() {
 
   const handleSubmit = () => {
 
-    const loadingId = loading("");
+    const loadingId = loading("Creating new user...");
 
     const allowedRoles = ['admin', 'user'];
 
