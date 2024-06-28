@@ -1,28 +1,38 @@
 import { EmployeeList, UserEdit, EmployeeListAd, Contacts, Logins, Welcome, ForPassword, Homes, Usercomplaint, Welcomeadmin, Signup, Admcomred, ResetPass, UserView } from './Pages/index';
 import { ItemLis, ItemListAd, ItemView, ItemEdit, AddItem } from './Pages/Item/index';
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import {BrowserRouter, Routes,Route} from 'react-router-dom';
+import ServiceAgreementOne from './Pages/ServiceAgreement/ServiceAgreementOne';
+import ServiceAgreementTwo from './Pages/ServiceAgreement/ServiceAgreementTwo';
+import ServiceAgreementFour from './Pages/ServiceAgreement/ServiceAgreementFour';
+import ServiceAgreementFive from './Pages/ServiceAgreement/ServiceAgreementFive';
+import ServiceAgreementSix from './Pages/ServiceAgreement/ServiceAgreementSix';
+import SiteVisitOne from './Pages/SiteVisiteModule/SiteVisitOne';
+import SiteVisitTwo from './Pages/SiteVisiteModule/SiteVisitTwo';
+import SiteVisitThree from './Pages/SiteVisiteModule/SiteVisitThree';
+import SiteVisitFour from './Pages/SiteVisiteModule/SiteVisitFour';
+import SiteVisitFive from './Pages/SiteVisiteModule/SiteVisitFive';
+import SiteVisitSix from './Pages/SiteVisiteModule/SiteVisitSix';
 import { Toaster } from 'react-hot-toast';
+import SiteVisitDashboard from './Pages/SiteVisiteModule/SiteVisitDashboard';
+import GatePass from './Pages/SiteVisiteModule/GatePass';
+import SiteVisitDetails from './Pages/SiteVisiteModule/SiteVisitDetails';
+import CompletedSiteVisits from './Pages/SiteVisiteModule/CompletedSiteVisits';
+import FeedbackForm from './Pages/SiteVisiteModule/FeedBackForm';
+import SiteVisitDashboardEmployee from './Pages/SiteVisiteModule/SiteVisitDashboardEmployee';
 import ReviewedComplain from './Pages/ReviewedComplain';
 import { AddUnit, UnitEdit, UnitLis, UnitListAd, UnitView } from './Pages/Unit/Index';
 import { AddVehicle, VehicleEdit, VehicleLis, VehicleListAd, VehicleView } from './Pages/Vehicle/Index';
 import { AddCustomer, CustomerEdit, CustomerLis, CustomerListAd, CustomerView } from './Pages/Customer/index';
 import { AddUserGroup, UserGroupEdit, UserGroupLis, UserGroupListAd, UserGroupView } from './Pages/User Group/index';
-// import ItemLis from './Pages/Lists/User/ItemLis';
-
 
 function App() {
   return (
-    <>
-      <Toaster
-      // toastOptions={{
-      //   style: {
-
-      //   },}}
-      />
-
-      <Routes>
-        <Route path="/" element={<Homes />} />
+    <div className="App">
+   <Toaster/>
+     <BrowserRouter> 
+     <Routes>
+     <Route path="/" element={<Homes />} />
         <Route path='/contact' element={<Contacts />} />
         <Route path='/login' element={<Logins />} />
         <Route path='/signup' element={<Signup />} />
@@ -62,9 +72,34 @@ function App() {
         <Route path='/login/welcomeadmin/userGroupListAd/adduserGroup' element={<AddUserGroup />} />
         <Route path='/login/welcome/userGroupList/view/:id' element={<UserGroupView />} />
         <Route path='/login/welcomeadmin/userGroupListAd/edit/:id' element={<UserGroupEdit />} />
-      </Routes>
-    </>
+
+
+     <Route path="/login/welcomeadmin/ServiceAgreementOne" element={<ServiceAgreementOne/>}></Route>
+     <Route path="/login/welcomeadmin/ServiceAgreementTwo/:id" element={<ServiceAgreementTwo/>}></Route>
+     <Route path ="/login/welcome/ServiceAgreementFour/:id" element={<ServiceAgreementFour/>}></Route>
+     <Route path ="/login/welcome/ServiceAgreementFive" element={<ServiceAgreementFive/>}></Route>
+     <Route path ="/login/welcomeadmin/ServiceAgreementSix" element={<ServiceAgreementSix/>}></Route>
+     <Route path ="/login/welcomeadmin/SiteVisitOne" element={<SiteVisitOne/>}></Route>
+     <Route path ="/login/welcomeadmin/SiteVisitTwo" element={<SiteVisitTwo/>}></Route>
+     <Route path ="/SiteVisitThree/:id"element={ <SiteVisitThree/>}></Route>
+     <Route path ="/login/welcome/SiteVisitFour"element={<SiteVisitFour/>}></Route>
+     <Route path ="/login/welcome/SiteVisitFive"element={<SiteVisitFive/>}></Route>
+     <Route path ="/login/welcomeadmin/SiteVisitSix"element={<SiteVisitSix/>}></Route>
+     <Route path ="/SiteVisitDashboard" element ={<SiteVisitDashboard/>}></Route>
+     <Route path ="/GatePass" element={<GatePass/>}></Route>
+     <Route path="/SiteVisitDetails/:id" element={<SiteVisitDetails/>}></Route>
+     <Route path="/CompletedSiteVisits" elemant={<CompletedSiteVisits/>}></Route>
+     <Route path="/FeedBackForm/:id" element={<FeedbackForm/>}></Route>
+     <Route path="/SIteVisitDashboardEmployee" element={<SiteVisitDashboardEmployee/>}></Route>
+    
+     
+     </Routes>
+     </BrowserRouter> 
+
+    </div>
+
   );
+
 }
 
 export default App;

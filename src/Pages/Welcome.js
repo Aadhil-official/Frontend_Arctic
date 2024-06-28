@@ -9,7 +9,7 @@ import { Grid } from '@mui/material';
 
 const Welcome = () => {
 
-  
+
   // const [tempdata, setTempdata] = useState([]);
   // const location = useLocation();
 
@@ -19,7 +19,7 @@ const Welcome = () => {
   //   }
   // }, [location.state]);
 
-  
+
 
 
   const buttonData = [
