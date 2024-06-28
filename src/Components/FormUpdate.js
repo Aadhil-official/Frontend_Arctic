@@ -32,6 +32,13 @@ export default function FormUpdate({ user }) {
         if (usergroup === 'AdminGroup') {
             setRole('admin');
         }
+        axios.get("http://localhost:8080/api/auth/getAllUserGroups")
+            .then((response) => {
+                setUsergroup(response.data);
+            })
+            .catch((error) => {
+                console.error("Error fetching user groups:", error);
+            });
     }, [usergroup]);
 
     // if (user) {
@@ -145,12 +152,19 @@ export default function FormUpdate({ user }) {
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                 />
+
                 <TextField
+                    select
                     label="User group"
-                    type="text"
                     value={usergroup}
                     onChange={(e) => setUsergroup(e.target.value)}
-                />
+                    SelectProps={{ native: true }}
+                >
+                    <option value=""></option>
+                    {usergroup.map((group, index) => (
+                        <option key={index} value={group.groupName}>{group.groupName}</option>
+                    ))}
+                </TextField>
 
 
                 <TextField

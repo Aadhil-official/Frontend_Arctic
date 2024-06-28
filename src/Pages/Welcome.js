@@ -30,10 +30,10 @@ const Welcome = () => {
     { label: 'Customer Details', link: '/login/welcome/customerList' },
     { label: 'User Group Details', link: '/login/welcome/userGroupList' },
     { label: 'Job Details' },
-    { label: 'Service Agreement Details' },
-    { label: 'Calendar' },
-    { label: 'Site Visit Details' },
     { label: 'Job Allocation' },
+    { label: 'Calendar' },
+    { label: 'Service Agreement Details' },
+    { label: 'Site Visit Details' },
   ];
 
   // const theme = responsiveFontSizes(createTheme());

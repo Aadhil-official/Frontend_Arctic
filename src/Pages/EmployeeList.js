@@ -71,7 +71,7 @@ const EmployeeList = () => {
         </Grid>
 
         <Grid item xs={12} style={{ margin: '20px' }}>
-          <Grid container>
+          <Grid container justifyContent='center' textAlign='center'>
             <Grid item xs={5} sm={5} md={4} lg={1.5} xl={1}>
               <FormControl variant="outlined" sx={{
                 minWidth: 225,
@@ -103,8 +103,8 @@ const EmployeeList = () => {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={2} sm={2} md={4} lg={9} xl={10}></Grid>
-            <Grid item xs={5} sm={5} md={4} lg={1.5} xl={1}>
+            <Grid item xs={2} sm={2} md={4} lg={7} xl={10}></Grid>
+            <Grid item xs={5} sm={5} md={4} lg={3} xl={1}>
               <TextField
                 variant="outlined"
                 InputProps={{

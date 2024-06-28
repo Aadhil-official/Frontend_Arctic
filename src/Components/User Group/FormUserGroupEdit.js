@@ -32,7 +32,7 @@ function FormUserGroupEdit({ userGroup }) {
         const validateForm = z.object({
             groupName: z.string().min(1, { message: "Enter group name" }),
             groupDescription: z.string().min(1, { message: "Enter group description" }),
-            relevantPrivileges: z.string().min(1, { message: "Enter relevant privileges" }),
+            relevantPrivileges: z.array(z.string()).min(1, { message: 'Select relevant privileges' }),
             allocatedJobs: z.string().min(1, { message: "Enter allocated jobs date" })
         });
 
@@ -144,6 +144,17 @@ function FormUserGroupEdit({ userGroup }) {
                                         />
                                     }
                                     label="Create User"
+                                />
+                                
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={relevantPrivileges.includes('complain')}
+                                            onChange={handleCheckboxChange}
+                                            value="complain"
+                                        />
+                                    }
+                                    label="Complain"
                                 />
                                 <FormControlLabel
                                     control={

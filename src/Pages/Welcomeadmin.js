@@ -25,10 +25,10 @@ function Welcomeadmin() {
     { label: 'Customer Details', link: '/login/welcomeadmin/customerListAd' },
     { label: 'User Group Details', link: '/login/welcomeadmin/userGroupListAd' },
     { label: 'Job Details' },
-    { label: 'Service Agreement' },
-    { label: 'Calendar' },
-    { label: 'Schedule a Site Visit' },
     { label: 'Job Allocation' },
+    { label: 'Calendar' },
+    { label: 'Service Agreement Details' },
+    { label: 'Site Visit Details' },
   ];
 
   return (
@@ -41,9 +41,9 @@ function Welcomeadmin() {
         <Grid item xs={12}>
           <Tabs buttonData={buttonData} />
         </Grid>
-        <Grid item xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mt: 3 }}>
+        {/* <Grid item xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mt: 3 }}> */}
           <FooterIn />
-        </Grid>
+        {/* </Grid> */}
       </Grid>
     </>
   )
