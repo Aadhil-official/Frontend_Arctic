@@ -110,7 +110,6 @@ function Admcomred() {
       <NormalHeaderBar />
       <Grid container spacing={2} sx={{ position: 'fixed', alignItems: 'center' }}>
         <Grid item xs={6} sx={{ alignItems: 'center' }}>
-          {console.log("just checking....",tempdata)}
           <Link to={"/login/welcomeadmin"} >{/* state={{ tempdata }}*/}
             <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
           </Link>

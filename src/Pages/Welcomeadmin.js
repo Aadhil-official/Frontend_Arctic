@@ -27,7 +27,7 @@ function Welcomeadmin() {
     { label: 'Job Details' },
     { label: 'Calendar' },
     { label: 'Job Allocation' },
-    { label: 'Service Agreement Details', link: '/ServiceAgreementOne' },
+    { label: 'Service Agreement Details', link: '/ServiceAgreementSix' },
     { label: 'Site Visit Details', link: '/SiteVisitDashboard' },
   ];
 

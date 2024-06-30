@@ -69,6 +69,15 @@ const ServiceAgreementSix = () => {
   return (
     <ThemeProvider theme={theme}>
       <NormalHeaderBar />
+
+      <Grid container spacing={2}>
+        <Grid item position='fixed'>
+          <Link to={"/login/welcomeadmin"}>
+            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
+          </Link>
+        </Grid>
+      </Grid>
+
       <Box sx={{ maxWidth: '1200px', margin: '0 auto', padding: '20px', marginBottom: '60px' }}>
         <Grid container textAlign='center' justifyContent='center'>
           <Grid item xs={12}>
@@ -138,7 +147,7 @@ const ServiceAgreementSix = () => {
                   },
                 }}
               >
-                <Link to="/" style={{
+                <Link to="/ServiceAgreementOne" style={{
                   textDecoration: 'none',
                   color: 'inherit',
                   fontFamily: 'Franklin Gothic',
