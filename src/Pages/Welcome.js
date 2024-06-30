@@ -32,7 +32,7 @@ const Welcome = () => {
     { label: 'Job Details' },
     { label: 'Job Allocation' },
     { label: 'Calendar' },
-    { label: 'Service Agreement Details', link: '/ServiceAgreementFive' },
+    { label: 'Service Agreement Details', link: '/ServiceAgreementSix' },
     { label: 'Site Visit Details', link: '/SiteVisitFour' },
   ];
 
