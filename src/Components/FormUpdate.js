@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../util/Toastify';
+import { dismiss, error, loading, success } from '../util/Toastify';
 
 export default function FormUpdate({ user }) {
 
@@ -32,6 +32,13 @@ export default function FormUpdate({ user }) {
         if (usergroup === 'AdminGroup') {
             setRole('admin');
         }
+        axios.get("http://localhost:8080/api/auth/getAllUserGroups")
+            .then((response) => {
+                setUsergroup(response.data);
+            })
+            .catch((error) => {
+                console.error("Error fetching user groups:", error);
+            });
     }, [usergroup]);
 
     // if (user) {
@@ -39,6 +46,8 @@ export default function FormUpdate({ user }) {
     // }
     // navigate('/');
     const handleSubmit = () => {
+
+        const loadingId = loading("Updating details.....");
 
         const allowedRoles = ['admin', 'user'];
 
@@ -86,14 +95,17 @@ export default function FormUpdate({ user }) {
             ) {
                 axios.put(`http://localhost:8080/api/auth/updateUser`, updatedUser)
                     .then(() => {
+                        dismiss(loadingId);
                         success("User updated successfully");
                         navigate('/login/welcomeadmin/employeelistad');
                     }).catch(() => error("Username or email already exist!"))
             } else {
+                dismiss(loadingId);
                 error("No changes detected!");
                 navigate('/login/welcomeadmin/employeelistad');
             }
         } else {
+            dismiss(loadingId);
             const formattedError = result.error.format();
             if (formattedError.username?._errors) {
                 error(String(formattedError.username?._errors));
@@ -140,12 +152,19 @@ export default function FormUpdate({ user }) {
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                 />
+
                 <TextField
+                    select
                     label="User group"
-                    type="text"
                     value={usergroup}
                     onChange={(e) => setUsergroup(e.target.value)}
-                />
+                    SelectProps={{ native: true }}
+                >
+                    <option value=""></option>
+                    {usergroup.map((group, index) => (
+                        <option key={index} value={group.groupName}>{group.groupName}</option>
+                    ))}
+                </TextField>
 
 
                 <TextField

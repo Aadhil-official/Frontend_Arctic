@@ -30,9 +30,8 @@ const Welcome = () => {
     { label: 'Customer Details', link: '/login/welcome/customerList' },
     { label: 'User Group Details', link: '/login/welcome/userGroupList' },
     { label: 'Job Details' },
+    { label: 'Job Allocation' },
     { label: 'Calendar' },
-    { label: 'Job Allocation' },
-    { label: 'Job Allocation' },
     { label: 'Service Agreement Details', link: '/ServiceAgreementFive' },
     { label: 'Site Visit Details', link: '/SiteVisitFour' },
   ];

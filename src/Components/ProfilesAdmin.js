@@ -169,13 +169,16 @@ const ProfilesAdmin = () => {
           {!relevantPrivileges.includes("createUser") && (
             <Grid item lg={1} md={1.61} sm={2.4} xs={3.15}></Grid>
           )}
+
           <Grid item lg={0.5} md={0.5} sm={0.8} xs={1} sx={{ marginTop: '15px' }}>
-            {/* state={{ complaintdata: complaintdata, tempdata }} */}
+          {relevantPrivileges.includes("complain") && (
             <Link to={'/login/complaintread'} onClick={handleNotificationClick}>
               <Notify fontSize='medium' sx={{ color: '#244FD9', position: 'absolute', marginTop: '2px' }} />
               <NotificationsIcon fontSize='small' sx={{ color: iconColor, marginBottom: '10px', marginLeft: '10px', position: 'absolute' }} />
             </Link>
+          )}
           </Grid>
+
           {relevantPrivileges.includes("createUser") && (
             <Grid item lg={1.4} md={1.61} sm={2.4} xs={3.15}>
               <Link to={'/signup'}>
@@ -188,6 +191,7 @@ const ProfilesAdmin = () => {
               {/* <Typography variant="h5" sx={{ marginTop: '12px' }}>logout</Typography> */}
             </Grid>
           )}
+
           <Grid item lg={1.2} md={1.3} sm={1.78} xs={2.5}>
             {/* <Switch
               checked={checked}

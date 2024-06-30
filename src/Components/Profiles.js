@@ -13,8 +13,10 @@ import { useUser } from '../Context/UserContext';
 
 export default function MenuAppBar() {
 
-  const { tempdata } = useUser();
-  // const [checked, setChecked] = React.useState(true);
+  
+  const { tempdata, tempdataGroup } = useUser();
+
+  const relevantPrivileges = tempdataGroup?.relevantPrivileges || [];  // const [checked, setChecked] = React.useState(true);
   // const [tempdata, setTempdata] = React.useState([]);
 
   // const location = useLocation();
@@ -77,10 +79,12 @@ export default function MenuAppBar() {
           </Grid> */}
 
           <Grid item lg={1} md={1.2} sm={1.9} xs={2.2} >
+          {relevantPrivileges.includes("complain") && (
             <Link to={'/login/complaint'}>
               {/* state={{ tempdata }} */}
               <ButtonComplain />
             </Link>
+          )}
           </Grid>
           <Grid item lg={1.2} md={1.3} sm={2.2} xs={2.5}>
             {/* <Switch

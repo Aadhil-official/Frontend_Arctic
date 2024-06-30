@@ -33,8 +33,8 @@ export default function FormSignup() {
 
   const handleSubmit = () => {
 
-    const loadingToastId = loading("Submitting...");
-    console.log("value of toast id:......." + loadingToastId);
+    const loadingId = loading("Creating new user...");
+
     const allowedRoles = ['admin', 'user'];
 
     const validateForm = z.object({
@@ -61,12 +61,12 @@ export default function FormSignup() {
     if (result.success) {
       axios.post('http://localhost:8080/api/auth/signup', userData)
         .then(() => {
-          dismiss(loadingToastId);
+          dismiss(loadingId);
           navigate('/login/welcomeadmin');
           success('User created successfully!')
         })
         .catch(() => {
-          dismiss(loadingToastId);
+          dismiss(loadingId);
           error("Username or email already exist!")
         })
     } else {
