@@ -55,7 +55,7 @@ export default function FormPropsTextFields() {
             navigate('/login/welcomeadmin');
             success('Login successful!')
           } else {
-            navigate('/login/welcome');
+            navigate('/login/welcome',state=role);
             success('Login successful!')
           }
         })
