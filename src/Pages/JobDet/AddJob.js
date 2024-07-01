@@ -2,9 +2,9 @@ import { Grid, ThemeProvider, Typography, createTheme, responsiveFontSizes } fro
 import React from 'react'
 import { FooterIn, NormalHeaderBar } from '../../Components/index';
 import { Link } from 'react-router-dom';
-import { FormAddUnit } from '../../Components/Unit/index';
+import { FormAddJob } from '../../Components/JobDet';
 
-function AddUnit() {
+function AddJob() {
 
     let theme = createTheme();
     theme = responsiveFontSizes(theme);
@@ -19,7 +19,7 @@ function AddUnit() {
             <NormalHeaderBar />
             <Grid container spacing={2}>
                 <Grid item position='fixed'>
-                    <Link to={"/login/welcomeadmin/vehicleListAd"}>
+                    <Link to={"/login/welcomeadmin/jobListAd"}>
                         <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
                     </Link>
                 </Grid>
@@ -27,7 +27,7 @@ function AddUnit() {
             <Grid container className="text">
                 <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
                     <ThemeProvider theme={theme}>
-                        <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Add New Vehicle</Typography>
+                        <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Add New Job</Typography>
                     </ThemeProvider>
                 </Grid>
             </Grid>
@@ -35,7 +35,7 @@ function AddUnit() {
             <Grid container>
                 <ThemeProvider theme={theme}>
                     <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
-                        <Typography variant='h6' sx={{ marginTop: '-25px' }}>Enter vehicle details</Typography>
+                        <Typography variant='h6' sx={{ marginTop: '-25px' }}>Enter job details</Typography>
                     </Grid>
                 </ThemeProvider>
             </Grid>
@@ -45,7 +45,7 @@ function AddUnit() {
                 <Grid item xl={5.25} lg={4.65} md={3} xs={1} sm={2}></Grid>
                 <Grid item xl={3} lg={4} md={6} xs={10.5} sm={8} className="box">
 
-                    <FormAddUnit />
+                    <FormAddJob />
 
                 </Grid>
                 <Grid item xl={2} lg={3} md={3} xs={0.5} sm={2}></Grid>
@@ -69,4 +69,4 @@ function AddUnit() {
     )
 }
 
-export default AddUnit
+export default AddJob

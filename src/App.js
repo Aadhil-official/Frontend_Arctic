@@ -8,6 +8,7 @@ import { AddUnit, UnitEdit, UnitLis, UnitListAd, UnitView } from './Pages/Unit/I
 import { AddVehicle, VehicleEdit, VehicleLis, VehicleListAd, VehicleView } from './Pages/Vehicle/Index';
 import { AddCustomer, CustomerEdit, CustomerLis, CustomerListAd, CustomerView } from './Pages/Customer/index';
 import { AddUserGroup, UserGroupEdit, UserGroupLis, UserGroupListAd, UserGroupView } from './Pages/User Group/index';
+import { AddJob, JobEdit, JobLis, JobListAd, JobView } from './Pages/JobDet';
 // import ItemLis from './Pages/Lists/User/ItemLis';
 
 
@@ -62,6 +63,11 @@ function App() {
         <Route path='/login/welcomeadmin/userGroupListAd/adduserGroup' element={<AddUserGroup />} />
         <Route path='/login/welcome/userGroupList/view/:id' element={<UserGroupView />} />
         <Route path='/login/welcomeadmin/userGroupListAd/edit/:id' element={<UserGroupEdit />} />
+        <Route path='/login/welcome/jobList' element={<JobLis />} />
+        <Route path='/login/welcomeadmin/jobListAd' element={<JobListAd />} />
+        <Route path='/login/welcomeadmin/jobListAd/addjob' element={<AddJob />} />
+        <Route path='/login/welcome/jobList/view/:id' element={<JobView />} />
+        <Route path='/login/welcomeadmin/jobListAd/edit/:id' element={<JobEdit />} />
       </Routes>
     </>
   );
