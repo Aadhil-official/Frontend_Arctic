@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { success } from '../util/Toastify';
 
-export default function FormView({ agreement }) {
+export default function FormViewOne({ agreement }) {
     const navigate = useNavigate();
 
     const [customerName, setCustomerName] = useState(agreement.customerName || '');

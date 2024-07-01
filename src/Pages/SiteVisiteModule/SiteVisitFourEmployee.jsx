@@ -6,7 +6,7 @@ import Footer from '../../Components/Footer';
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-const SiteVisitFour = () => {
+const SiteVisitFourEmployee = () => {
   const [siteVisits, setSiteVisits] = useState([]);
   const [filteredVisits, setFilteredVisits] = useState([]);
   const [startedVisits, setStartedVisits] = useState([]);
@@ -142,14 +142,15 @@ const SiteVisitFour = () => {
 
   return (
     <>
-      <Grid container textAlign='center' justifyContent='center'>
-        <Grid item xs={12} style={{ textAlign: "left", margin: "1rem" }}>
-          <Link to={"/SiteVisitDashboard"}>
-            <ArrowBackIcon style={{ fontSize: "40px", opacity: "0.6" }} />
+     <Grid container className='back-icon'>
+        <Grid item xs={12} textAlign="left">
+          <Link to={"/SiteVisitFourEmployee"}>
+            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px', position: 'absolute', left: '10px', top: '10px' }} alt='Back' />
           </Link>
         </Grid>
+      </Grid>
         <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'} className='text'>
-          <Typography variant='h3' sx={{ marginTop: '-3rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic Medium", textAlign: "center", fontSize: "60px" }}>
+          <Typography variant='h3' sx={{ marginTop: '-3rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic Medium", textAlign: "center", fontSize: "60px" ,marginTop:"1rem"}}>
             Scheduled Site Visits
           </Typography>
         </Grid>
@@ -285,11 +286,11 @@ const SiteVisitFour = () => {
             color="primary"
           />
         </Grid>
-      </Grid>
+      {/* </Grid> */}
       <Footer />
     </>
   );
 };
 
-export default SiteVisitFour;
+export default SiteVisitFourEmployee;
 
