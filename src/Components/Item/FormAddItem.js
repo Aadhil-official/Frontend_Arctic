@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../../util/Toastify';
+import { dismiss, error, loading, success } from '../../util/Toastify';
 
 export default function FormAddItem() {
     const [name, setName] = useState('');
@@ -19,6 +19,7 @@ export default function FormAddItem() {
 
     const handleSubmit = () => {
 
+        const loadingId = loading("Adding new item...");
 
         const validateForm = z.object({
             name: z.string().min(1, { message: "Enter item name" }),
@@ -43,10 +44,14 @@ export default function FormAddItem() {
         if (result.success) {
             axios.post('http://localhost:8080/api/auth/addItem', userData)
                 .then(() => {
+                    dismiss(loadingId);
                     navigate('/login/welcomeadmin/itemListAd');
                     success('Item added successfully!')
                 })
-                .catch(() => error("Item already exist!"))
+                .catch(() => {
+                    dismiss(loadingId);
+                    error("Item already exist!")
+                })
         } else {
             const formattedError = result.error.format();
             if (formattedError.name?._errors) {

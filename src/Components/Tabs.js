@@ -19,7 +19,7 @@ const Tabs = ({ buttonData }) => {
     accessServiceAgreement: 'Service Agreement Details',
     accessCalendar: 'Calendar',
     accessSiteVisit: 'Site Visit Details',
-    accessJobAllocation: 'Job Allocation',
+    // accessJobAllocation: 'Job Allocation',
   };
 
   // Define a mapping between privileges and button labels
