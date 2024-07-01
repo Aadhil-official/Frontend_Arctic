@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Grid, Typography, Box, ThemeProvider, createTheme, responsiveFontSizes, TextField, Paper } from '@mui/material';
+import { Button, Grid, Typography,  ThemeProvider, createTheme, responsiveFontSizes, TextField, Paper } from '@mui/material';
 import Footer from '../../Components/Footer';
+import SiteVisitFourEmployee from './SiteVisitFourEmployee';
 
 function SiteVisitThree() {
   const { id } = useParams();
@@ -34,11 +35,15 @@ function SiteVisitThree() {
     fontSize: '1.1rem'
   };
 
+  const handleGatePass = () => {
+    navigate(`/GatePassDetailsEmployee/${id}`);
+  };
+
   return (
     <>
       <Grid container className='back-icon'>
         <Grid item xs={12} textAlign="left">
-          <Link to={"/SiteVisitFour"}>
+          <Link to={"/SiteVisitFourEmployee"}>
             <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px', position: 'absolute', left: '10px', top: '10px' }} alt='Back' />
           </Link>
         </Grid>
@@ -153,9 +158,22 @@ function SiteVisitThree() {
                 }}
               />
               {/* Add more fields as needed */}
-              <Button variant="outlined" onClick={() => navigate(-1)}>
+              <Button 
+              variant="outlined" 
+              style={{marginTop:"1rem"}}
+              onClick={() => navigate("/SiteVisitFourEmployee")}>
                 Go Back
               </Button>
+              <Grid item>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleGatePass}
+                    style={{marginTop:"1rem"}}
+                  >
+                    Gate Pass
+                  </Button>
+                </Grid>
             </Paper>
           </Grid>
         </Grid>

@@ -4,16 +4,10 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { saveAs } from "file-saver";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Footer from "../../Components/Footer";
-import Time from "../../Components/SiteVisitComponents/Time"; // Adjust the path as needed
-import GatePass from "./GatePass"; // Adjust the path as needed
+import Time from "../../Components/SiteVisitComponents/Time";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-
-
 
 const SiteVisitOne = () => {
   const [todayDate, setTodayDate] = useState("");
@@ -21,11 +15,13 @@ const SiteVisitOne = () => {
   const [location, setLocation] = useState("");
   const [jobType, setJobType] = useState("");
   const [email, setEmail] = useState("");
-  const [groupName, setGroupName] = useState("");
+  const [customerName, setCustomerName] = useState("");
   const [scheduleDate, setScheduleDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
-  const [showForm, setShowForm] = useState(true);
-  const [isScheduled, setIsScheduled] = useState(false); // Track if scheduled
+  const [numberOfEmployees, setNumberOfEmployees] = useState(0);
+  const [isScheduled, setIsScheduled] = useState(false);
+  const [id, setId] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCurrentDate = () => {
@@ -38,7 +34,6 @@ const SiteVisitOne = () => {
     setTodayDate(getCurrentDate());
   }, []);
 
-  const navigate = useNavigate();
   const jobTypes = [
     { value: "inspectiononly", label: "Inspection only" },
     { value: "serviceOnly", label: "Service Only" },
@@ -57,7 +52,6 @@ const SiteVisitOne = () => {
       return;
     }
 
-    // Validate email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       alert("Please enter a valid email address.");
@@ -69,9 +63,10 @@ const SiteVisitOne = () => {
       location,
       jobType,
       email,
-      groupName,
+      customerName,
       scheduleDate: scheduleDate.format("YYYY-MM-DD"),
       selectedTime: selectedTime.format("HH:mm"),
+      numberOfEmployees,
     };
 
     console.log("newSiteVisit:", newSiteVisit);
@@ -82,25 +77,28 @@ const SiteVisitOne = () => {
           "http://localhost:8080/api/v1/siteVisit/addSiteVisit",
           newSiteVisit
         );
-        console.log("New Site Visit created:", response.data);
+        
+        const visitId = response.data.visitId; // Get site visit ID from response
+        setId(visitId); // Store site visit ID
+        console.log("New Site Visit created:", visitId);
         alert("Site Visit scheduled successfully!");
-        setIsScheduled(true); // Set scheduling flag
+        setIsScheduled(true);
+
+        // Reset form fields after successful submission
+        setVehicleNumber("");
+        setLocation("");
+        setJobType("");
+        setEmail("");
+        setCustomerName("");
+        setScheduleDate(null);
+        setSelectedTime(null);
+        setNumberOfEmployees(0);
+
+        // Navigate after setting the ID
+        navigate(`/GatePass/${visitId}`,{state:{numberOfEmployees}});
       } else {
         alert("Schedule date should be greater than or equal to today's date");
       }
-
-      // Reset form fields
-      setVehicleNumber("");
-      setLocation("");
-      setJobType("");
-      setEmail("");
-      setGroupName("");
-      setScheduleDate(null);
-      setSelectedTime(null);
-      setShowForm(true);
-
-      // Navigate to success page or another route
-      navigate("/SiteVisitFive"); // Replace with actual route
     } catch (error) {
       console.error("Error scheduling Site Visit:", error);
       alert("Failed to schedule Site Visit. Please try again later.");
@@ -108,39 +106,14 @@ const SiteVisitOne = () => {
   };
 
   const handleCancel = () => {
-    // Reset form fields
     setVehicleNumber("");
     setLocation("");
     setJobType("");
     setEmail("");
-    setGroupName("");
+    setCustomerName("");
     setScheduleDate(null);
     setSelectedTime(null);
-    setShowForm(true);
-  };
-
-  const generateGatePass = async () => {
-    try {
-      const passContainer = document.getElementById("gatePassContainer");
-
-      // Use html2canvas to capture the gate pass container
-      const canvas = await html2canvas(passContainer, { scale: 2 });
-
-      // Convert canvas to jpeg image
-      const imageData = canvas.toDataURL("image/jpeg");
-
-      // Initialize jsPDF
-      const pdf = new jsPDF("p", "mm", "a4");
-
-      // Add image to PDF
-      pdf.addImage(imageData, "JPEG", 0, 0, 210, 297); // A4 size: 210mm x 297mm
-
-      // Save PDF
-      pdf.save("gate_pass.pdf");
-    } catch (error) {
-      console.error("Error generating gate pass:", error);
-      alert("Failed to generate gate pass. Please try again later.");
-    }
+    setNumberOfEmployees(0);
   };
 
   return (
@@ -149,7 +122,7 @@ const SiteVisitOne = () => {
         <Grid container spacing={2} justifyContent="center">
           <Grid item xs={12} style={{ textAlign: "left", margin: "1rem" }}>
             <Link to={"/SiteVisitDashboard"}>
-              <ArrowBackIcon style={{ fontSize: "40px", opacity: "0.6" ,paddingRight:"24rem"}} />
+              <ArrowBackIcon style={{ fontSize: "40px", opacity: "0.6", paddingRight: "24rem" }} />
             </Link>
           </Grid>
           <Grid item xs={12}>
@@ -171,12 +144,10 @@ const SiteVisitOne = () => {
             style={{
               textAlign: "center",
               marginBottom: "2rem",
-              marginTop:"1rem",
-              fontSize: '18px', 
-              color:'#547DD1',
-              fontFamily:"Franklin Gothic Medium"
-
-
+              marginTop: "1rem",
+              fontSize: '18px',
+              color: '#547DD1',
+              fontFamily: "Franklin Gothic Medium"
             }}
           >
             Schedule Site Visit Here
@@ -210,9 +181,9 @@ const SiteVisitOne = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
                   <TextField
-                    label="Enter Group Name"
-                    value={groupName}
-                    onChange={(event) => setGroupName(event.target.value)}
+                    label="Enter Customer Name"
+                    value={customerName}
+                    onChange={(event) => setCustomerName(event.target.value)}
                     fullWidth
                   />
                 </Grid>
@@ -255,6 +226,15 @@ const SiteVisitOne = () => {
                     onTimeChange={setSelectedTime}
                   />
                 </Grid>
+                <Grid item xs={12} sm={6} md={6}>
+                  <TextField
+                    label="Selected no of Employees"
+                    type="number"
+                    value={numberOfEmployees}
+                    onChange={(event) => setNumberOfEmployees(event.target.value)}
+                    fullWidth
+                  />
+                </Grid>
               </Grid>
             </Paper>
           </Grid>
@@ -263,7 +243,7 @@ const SiteVisitOne = () => {
               variant="contained"
               type="submit"
               onClick={handleSubmit}
-              style={{ width: "20rem", marginRight: "1rem" }}
+              style={{ width: "20rem", marginRight: "1rem",marginBottom:"1rem" }}
             >
               Save
             </Button>
@@ -271,7 +251,7 @@ const SiteVisitOne = () => {
               variant="contained"
               color="secondary"
               onClick={handleCancel}
-              style={{ width: "20rem" }}
+              style={{ width: "20rem" ,marginBottom:"1rem"}}
             >
               Cancel
             </Button>
@@ -282,18 +262,14 @@ const SiteVisitOne = () => {
       {isScheduled && (
         <Grid container justifyContent="center">
           <Grid item xs={12} style={{ marginBottom: "2rem" }}>
-            <GatePass
-              id="              gatePassContainer"
-              groupName={groupName}
-              vehicleNumber={vehicleNumber}
-              customerName={email} // Assuming email is used as customer name
-            />
+            {/* Optional: Display confirmation message or additional content */}
           </Grid>
           <Grid item xs={12} style={{ textAlign: "center" }}>
             <Button
               variant="contained"
               color="primary"
-              onClick={generateGatePass}
+              component={Link}
+              to={`/GatePass/${id}/${numberOfEmployees}`}
               style={{ width: "20rem" }}
             >
               Generate Gate Pass
@@ -308,4 +284,3 @@ const SiteVisitOne = () => {
 };
 
 export default SiteVisitOne;
-

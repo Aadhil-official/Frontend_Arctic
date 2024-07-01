@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { Paper } from "@mui/material";
+import { Paper,Grid } from "@mui/material";
 import Footer from "../../Components/Footer";
 
 const SiteVisitDashboard = () => {
@@ -79,8 +79,8 @@ const SiteVisitDashboard = () => {
                     backgroundColor: "transparent", // Transparent background
                 }}
             >
-                <div style={sectionStyle}>
-                    <Link
+                 <div style={sectionStyle}>
+                    {/* <Link
                         to={-1}
                         style={{
                             background: 'none',
@@ -96,7 +96,16 @@ const SiteVisitDashboard = () => {
                         onMouseLeave={handleIconMouseLeave}
                     >
                         <FontAwesomeIcon icon={faArrowLeft} size="2x" style={iconStyle} />
-                    </Link>
+                    </Link>  */}
+        <Grid container className='back-icon'>
+        <Grid item xs={12} textAlign="left">
+          <Link to={"/SiteVisitFourEmployee"}>
+            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px', position: 'absolute', left: '10px', top: '10px' }} alt='Back' />
+          </Link>
+        </Grid>
+      </Grid>
+
+
                     <h1 style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '5rem', color: '#0056b3', marginTop: '20px' }}>
                         Site Visit - Admin </h1>
                 </div>
@@ -123,14 +132,14 @@ const SiteVisitDashboard = () => {
                         >
                             Scheduling Site Visit
                         </Link>
-                        <Link
+                        {/* <Link
                             to="/SiteVisitFour"
                             style={hoveredButton === "Start Site Visit" ? hoveredButtonStyle : buttonStyle}
                             onMouseEnter={() => handleMouseEnter("Start Site Visit")}
                             onMouseLeave={handleMouseLeave}
                         >
                             Start/End/Feedback of Site Visit
-                        </Link>
+                        </Link> */}
                         <Link
                             to="/SiteVisitSix"
                             style={hoveredButton === "End Site Visit" ? hoveredButtonStyle : buttonStyle}
@@ -147,17 +156,19 @@ const SiteVisitDashboard = () => {
                         >
                             Update Site Visit
                         </Link> */}
-                        <Link
+                        {/* <Link
                             to="/gate-pass"
                             style={hoveredButton === "Gate Pass" ? hoveredButtonStyle : buttonStyle}
                             onMouseEnter={() => handleMouseEnter("Gate Pass")}
                             onMouseLeave={handleMouseLeave}
                         >
                             Gate Pass
-                        </Link>
+                        </Link> */}
                     </div>
                 </div>
             </Paper>
+            <br></br>
+            <br></br>
             <Footer/>
         </>
     );

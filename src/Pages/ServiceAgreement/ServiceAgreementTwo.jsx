@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Grid, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
-import FormView from '../../Components/FormView';
+import FormViewOne from '../../Components/FormViewOne';
 import Footer from '../../Components/Footer';
 
 function ServiceAgreementTwo() {
@@ -88,14 +88,14 @@ function ServiceAgreementTwo() {
                     ) : agreement ? (
                         console.log("from itemEdit page........" + agreement),
                         // Display the agreement details using the FormView component
-                        <div style={{
+                        <div className='SerAgTwo' style={{
                             boxShadow: '0px 1.2px 3px 4px rgba(0, 0, 0, 0.1)', // Add shadow box
                             borderRadius: '10px',
                             padding: '20px',
                             marginBottom: '20px',
                             backgroundColor: 'white'
                         }}>
-                            <FormView agreement={agreement} />
+                            <FormViewOne agreement={agreement} />
                         </div>
                     ) : (
                         <p>Agreement not found</p>
