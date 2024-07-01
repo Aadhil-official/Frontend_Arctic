@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../../util/Toastify';
+import { dismiss, error, loading, success } from '../../util/Toastify';
 import { Box, Button, TextField } from '@mui/material';
 
 function FormAddCustomer() {
@@ -17,7 +17,7 @@ function FormAddCustomer() {
     const navigate = useNavigate();
 
     const handleSubmit = () => {
-
+        const loadingId = loading("Creating new customer...");
 
         const validateForm = z.object({
             customerName: z.string().min(1, { message: "Enter customer name" }),
@@ -41,11 +41,16 @@ function FormAddCustomer() {
         if (result.success) {
             axios.post('http://localhost:8080/api/auth/addCustomer', customerData)
                 .then(() => {
+                    dismiss(loadingId);
                     navigate('/login/welcomeadmin/customerListAd');
                     success('Customer added successfully!')
                 })
-                .catch(() => error("Contact number already exist!"))
+                .catch(() => {
+                    dismiss(loadingId);
+                    error("Contact number already exist!")
+                })
         } else {
+            dismiss(loadingId);
             const formattedError = result.error.format();
             if (formattedError.customerName?._errors) {
                 error(String(formattedError.customerName?._errors));
