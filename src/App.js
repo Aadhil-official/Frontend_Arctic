@@ -1,26 +1,26 @@
-import {
-  EmployeeList,
-  UserEdit,
-  EmployeeListAd,
-  Contacts,
-  Logins,
-  Welcome,
-  ForPassword,
-  Homes,
-  Usercomplaint,
-  Welcomeadmin,
-  Signup,
-  Admcomred,
-  ResetPass,
-  UserView,
-} from "./Pages/index";
-import {
-  ItemLis,
-  ItemListAd,
-  ItemView,
-  ItemEdit,
-  AddItem,
-} from "./Pages/Item/index";
+// import {
+//   EmployeeList,
+//   UserEdit,
+//   EmployeeListAd,
+//   Contacts,
+//   Logins,
+//   Welcome,
+//   ForPassword,
+//   Homes,
+//   Usercomplaint,
+//   Welcomeadmin,
+//   Signup,
+//   Admcomred,
+//   ResetPass,
+//   UserView,
+// } from "./Pages/index";
+// import {
+//   ItemLis,
+//   ItemListAd,
+//   ItemView,
+//   ItemEdit,
+//   AddItem,
+// } from "./Pages/Item/index";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ServiceAgreementOne from "./Pages/ServiceAgreement/ServiceAgreementOne";
@@ -39,35 +39,35 @@ import SiteVisitDashboard from "./Pages/SiteVisiteModule/SiteVisitDashboard";
 import GatePass from "./Pages/SiteVisiteModule/GatePass";
 import SiteVisitDetails from "./Pages/SiteVisiteModule/SiteVisitDetails";
 import FeedbackForm from "./Pages/SiteVisiteModule/FeedBackForm";
-import ReviewedComplain from "./Pages/ReviewedComplain";
-import {
-  AddUnit,
-  UnitEdit,
-  UnitLis,
-  UnitListAd,
-  UnitView,
-} from "./Pages/Unit/Index";
-import {
-  AddVehicle,
-  VehicleEdit,
-  VehicleLis,
-  VehicleListAd,
-  VehicleView,
-} from "./Pages/Vehicle/Index";
-import {
-  AddCustomer,
-  CustomerEdit,
-  CustomerLis,
-  CustomerListAd,
-  CustomerView,
-} from "./Pages/Customer/index";
-import {
-  AddUserGroup,
-  UserGroupEdit,
-  UserGroupLis,
-  UserGroupListAd,
-  UserGroupView,
-} from "./Pages/User Group/index";
+// import ReviewedComplain from "./Pages/ReviewedComplain";
+// import {
+//   AddUnit,
+//   UnitEdit,
+//   UnitLis,
+//   UnitListAd,
+//   UnitView,
+// } from "./Pages/Unit/Index";
+// import {
+//   AddVehicle,
+//   VehicleEdit,
+//   VehicleLis,
+//   VehicleListAd,
+//   VehicleView,
+// } from "./Pages/Vehicle/Index";
+// import {
+//   AddCustomer,
+//   CustomerEdit,
+//   CustomerLis,
+//   CustomerListAd,
+//   CustomerView,
+// } from "./Pages/Customer/index";
+// import {
+//   AddUserGroup,
+//   UserGroupEdit,
+//   UserGroupLis,
+//   UserGroupListAd,
+//   UserGroupView,
+// } from "./Pages/User Group/index";
 import GatePassDetails from "./Pages/SiteVisiteModule/GatePassDetails";
 import GatePassDetailsEmployee from "./Pages/SiteVisiteModule/GatePassDetailsEmployee";
 import GatePassList from "./Pages/SiteVisiteModule/GatePassList";

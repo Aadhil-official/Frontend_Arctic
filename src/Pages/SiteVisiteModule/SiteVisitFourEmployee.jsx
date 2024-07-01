@@ -4,14 +4,14 @@ import { Button, Grid, Typography, Box, Pagination, InputAdornment, TextField } 
 import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../../Components/Footer';
 import SearchIcon from '@mui/icons-material/Search';
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+// import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const SiteVisitFourEmployee = () => {
   const [siteVisits, setSiteVisits] = useState([]);
   const [filteredVisits, setFilteredVisits] = useState([]);
   const [startedVisits, setStartedVisits] = useState([]);
   const [endedVisits, setEndedVisits] = useState([]);
-  const [canceledVisits, setCanceledVisits] = useState([]);
+  const [canceledVisits] = useState([]);
   const [completedVisits, setCompletedVisits] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -150,7 +150,7 @@ const SiteVisitFourEmployee = () => {
         </Grid>
       </Grid>
         <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'} className='text'>
-          <Typography variant='h3' sx={{ marginTop: '-3rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic Medium", textAlign: "center", fontSize: "60px" ,marginTop:"1rem"}}>
+          <Typography variant='h3' sx={{ marginTop: '-3rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic Medium", textAlign: "center", fontSize: "60px" }}>{/*,marginTop:"1rem"*/}
             Scheduled Site Visits
           </Typography>
         </Grid>

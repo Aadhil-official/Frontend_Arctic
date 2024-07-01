@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PrintMsgIcon from '../../Components/SiteVisitComponents/PrintMsgIcon';
 import Footer from '../../Components/Footer';
@@ -11,7 +11,7 @@ export default function SiteVisitFive() {
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative' }}>
       <Box sx={{ position: 'absolute', top: '1rem', left: '1rem' }}>
         <Link to="/SiteVisitDashboard">
-          <ArrowBackIcon sx={{ fontSize: 30, color: 'rgba(0, 0, 0, 0.54)' ,margin:'1rem', opacity: "0.6" }} />
+          <ArrowBackIcon sx={{ fontSize: 30, color: 'rgba(0, 0, 0, 0.54)', margin: '1rem', opacity: "0.6" }} />
         </Link>
       </Box>
       <Box sx={{ flexGrow: 1, p: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
