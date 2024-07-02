@@ -70,7 +70,7 @@ export default function FormSignup() {
           error("Username or email already exist!")
         })
     } else {
-      dismiss(loadingToastId);
+      dismiss(loadingId);
       const formattedError = result.error.format();
       if (formattedError.username?._errors) {
         error(String(formattedError.username?._errors));

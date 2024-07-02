@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
