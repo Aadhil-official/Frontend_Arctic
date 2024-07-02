@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../../util/Toastify';
+import { dismiss, error, loading, success } from '../../util/Toastify';
 import { Box, Button, TextField } from '@mui/material';
 
 function FormUnitEdit({ unit }) {
@@ -21,6 +21,7 @@ function FormUnitEdit({ unit }) {
 
     const handleSubmit = () => {
 
+        const loadingId = loading("Updating unit...");
 
         const validateForm = z.object({
             indoorSerial: z.string().min(1, { message: "Enter indoor serial" }),
@@ -62,10 +63,12 @@ function FormUnitEdit({ unit }) {
         ) {
             axios.put(`http://localhost:8080/api/auth/updateUnit`, updatedUnit)
                 .then(() => {
+                    dismiss(loadingId);
                     success("Unit updated successfully");
                     navigate('/login/welcomeadmin/unitListAd');
                 })
                 .catch(() => {
+                    dismiss(loadingId);
                     const formattedError = result.error.format();
                     if (formattedError.indoorSerial?._errors) {
                         error(String(formattedError.indoorSerial?._errors));

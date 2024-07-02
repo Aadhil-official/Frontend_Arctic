@@ -25,7 +25,7 @@ function Welcomeadmin() {
     { label: 'Customer Details', link: '/login/welcomeadmin/customerListAd' },
     { label: 'User Group Details', link: '/login/welcomeadmin/userGroupListAd' },
     { label: 'Job Details' },
-    { label: 'Job Allocation' },
+    // { label: 'Job Allocation' },
     { label: 'Calendar' },
     { label: 'Service Agreement Details', link: '/ServiceAgreementSix' },
     { label: 'Site Visit Details', link: '/SiteVisitDashboard' }

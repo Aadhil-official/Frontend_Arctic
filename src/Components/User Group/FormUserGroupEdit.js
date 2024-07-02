@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../../util/Toastify';
+import { dismiss, error, loading, success } from '../../util/Toastify';
 import { Box, Button, Checkbox, FormControlLabel, FormGroup, Grid, TextField, Typography } from '@mui/material';
 
 function FormUserGroupEdit({ userGroup }) {
@@ -28,6 +28,7 @@ function FormUserGroupEdit({ userGroup }) {
 
     const handleSubmit = () => {
 
+        const loadingId = loading("Updating user group...");
 
         const validateForm = z.object({
             groupName: z.string().min(1, { message: "Enter group name" }),
@@ -66,10 +67,12 @@ function FormUserGroupEdit({ userGroup }) {
         ) {
             axios.put(`http://localhost:8080/api/auth/updateUserGroup`, updatedGroupData)
                 .then(() => {
+                    dismiss(loadingId);
                     success("User group updated successfully");
                     navigate('/login/welcomeadmin/userGroupListAd');
                 })
                 .catch(() => {
+                    dismiss(loadingId);
                     const formattedError = result.error.format();
                     if (formattedError.groupName?._errors) {
                         error(String(formattedError.groupName?._errors));

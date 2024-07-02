@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../../util/Toastify';
+import { dismiss, error, loading, success } from '../../util/Toastify';
 
 export default function FormItemEdit({ item }) {
 
@@ -28,6 +28,7 @@ export default function FormItemEdit({ item }) {
 
     const handleSubmit = () => {
 
+        const loadingId = loading("Updating item...");
 
         const validateForm = z.object({
             name: z.string().min(1, { message: "Enter your item" }),
@@ -60,10 +61,12 @@ export default function FormItemEdit({ item }) {
         ) {
             axios.put(`http://localhost:8080/api/auth/updateItem`, updatedItem)
                 .then(() => {
+                    dismiss(loadingId);
                     success("Item updated successfully");
                     navigate('/login/welcomeadmin/itemListAd');
                 })
                 .catch(() => {
+                    dismiss(loadingId);
                     const formattedError = result.error.format();
                     if (formattedError.name?._errors) {
                         error(String(formattedError.name?._errors));
