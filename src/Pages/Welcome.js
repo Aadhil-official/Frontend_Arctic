@@ -9,7 +9,7 @@ import { Grid } from '@mui/material';
 
 const Welcome = () => {
 
-  
+
   // const [tempdata, setTempdata] = useState([]);
   // const location = useLocation();
 
@@ -19,7 +19,7 @@ const Welcome = () => {
   //   }
   // }, [location.state]);
 
-  
+
 
 
   const buttonData = [
@@ -32,8 +32,8 @@ const Welcome = () => {
     { label: 'Job Details' },
     // { label: 'Job Allocation' },
     { label: 'Calendar' },
-    { label: 'Service Agreement Details' },
-    { label: 'Site Visit Details' },
+    { label: 'Service Agreement Details', link: '/ServiceAgreementSix' },
+    { label: 'Site Visit Details', link: '/SiteVisitFour' },
   ];
 
   // const theme = responsiveFontSizes(createTheme());

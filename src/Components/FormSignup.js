@@ -8,8 +8,10 @@ import { z } from 'zod';
 import { dismiss, error, loading, success } from '../util/Toastify';
 
 export default function FormSignup() {
+
+  const [loadingToastId, setLoadingToastId] = useState(null);
+
   const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState(''); // State to hold the selected role
   const [address, setAddress] = useState('');
@@ -40,8 +42,8 @@ export default function FormSignup() {
     const validateForm = z.object({
       username: z.string().min(1, { message: "Enter your name" }),
       address: z.string().min(1, { message: "Enter your address" }),
-      tel: z.string().min(1, { message: "Enter your contact number" }),
-      // password: z.string().min(8, 'Password must be at least 8 characters long'),
+      tel: z.string().min(10, { message: "Enter your valid contact number" }).max(12, { message: "Enter your valid contact number" }),
+      usergroup: z.string().min(1, 'Enter the user group'),
       email: z.string().email('Invalid email address'),
       roles: z.array(z.string()).nonempty('Please select a role!').refine((role) => allowedRoles.includes(role[0]), {
         message: 'Role is not defined.'
@@ -50,7 +52,6 @@ export default function FormSignup() {
 
     const userData = {
       username: username,
-      // password: password,
       email: email,
       address: address,
       usergroup: usergroup,
@@ -71,6 +72,7 @@ export default function FormSignup() {
           error("Username or email already exist!")
         })
     } else {
+      dismiss(loadingId);
       const formattedError = result.error.format();
       if (formattedError.username?._errors) {
         error(String(formattedError.username?._errors));
