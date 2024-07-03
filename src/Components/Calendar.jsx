@@ -4,20 +4,18 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import rrulePlugin from '@fullcalendar/rrule';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import 'tippy.js/dist/tippy.css'; // Import tippy.js styles
-import './Calendar.css';
 import axios from 'axios';
 import tippy from 'tippy.js';
+import { RRule } from 'rrule';
+import 'tippy.js/dist/tippy.css';
+import './Calendar.css';
 
-
-
-
-export default function Calendar() {
+export default function Calendar({ selectedDate }) {
     const calendarRef = useRef(null);
     const [events, setEvents] = useState([]);
-    const [selectedDate, setSelectedDate] = useState(new Date());
     const [eventDetails, setEventDetails] = useState('');
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [startTime, setStartTime] = useState(new Date());
@@ -25,14 +23,17 @@ export default function Calendar() {
     const [isAllDay, setIsAllDay] = useState(false);
     const [showEventModal, setShowEventModal] = useState(false);
     const [currentEvent, setCurrentEvent] = useState(null);
-    const [mode, setMode] = useState('create'); // 'create' or 'update'
+    const [mode, setMode] = useState('create');
+    const [recurrenceFrequency, setRecurrenceFrequency] = useState('none');
+
 
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/events');
-                const externalEvents=await fetchExternalEvents();
-                setEvents([...response.data,...externalEvents]);
+                const internalEvents = await axios.get('http://localhost:8080/events');
+                const externalEvents = await fetchExternalEvents();
+                const agreementEvents = await fetchAgreementEvents();
+                setEvents([...internalEvents.data, ...externalEvents, ...agreementEvents]);
             } catch (error) {
                 console.error('Error fetching events:', error);
             }
@@ -41,11 +42,22 @@ export default function Calendar() {
         fetchEvents();
     }, []);
 
+    useEffect(() => {
+        if (calendarRef.current) {
+            const calendarApi = calendarRef.current.getApi();
+            calendarApi.gotoDate(selectedDate);
+        }
+    }, [selectedDate]);
+
     const fetchExternalEvents = async () => {
         try {
-            const response = await axios.get('#'); 
-            return response.data.map(event => ({
-                ...event,
+            const response = await axios.get('http://localhost:8080/job');
+            return response.data.map(externalEvent => ({
+                id: `external-${externalEvent.id}`,
+                title: `${externalEvent.companyName}`,
+                start: externalEvent.date,
+                allDay: false,
+                description: `<br>Company: ${externalEvent.companyName} <br> Issue: ${externalEvent.issue}`,
                 source: 'external',
             }));
         } catch (error) {
@@ -54,16 +66,62 @@ export default function Calendar() {
         }
     };
 
+    const fetchAgreementEvents = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/aggrements');
+            return response.data.map(agreementEvent => {
+                const rrule = generateAgreementRrule(agreementEvent.type, agreementEvent.date);
+                return {
+                    id: `agreement-${agreementEvent.id}`,
+                    title: agreementEvent.companyName,
+                    start: agreementEvent.date,
+                    allDay: true,
+                    description: agreementEvent.companyName,
+                    rrule: rrule,
+                    source: 'agreement',
+                };
+            });
+        } catch (error) {
+            console.error('Error fetching agreement events:', error);
+            return [];
+        }
+    };
+
+    const generateAgreementRrule = (type, date) => {
+        if (!date) {
+            console.error("Start date is undefined");
+            return null;
+        }
+
+        const frequencyMap = {
+            'monthly': RRule.MONTHLY,
+            'yearly': RRule.YEARLY,
+            'two_years': RRule.YEARLY,
+        };
+
+        const intervalMap = {
+            'monthly': 1,
+            'yearly': 1,
+            'two_years': 2,
+        };
+
+        return {
+            freq: frequencyMap[type],
+            interval: intervalMap[type],
+            dtstart: new Date(date),
+        };
+    };
 
     const handleDateClick = (info) => {
-        setSelectedDate(info.date);
         setShowDatePicker(true);
         setStartTime(new Date(info.date));
         setEndTime(new Date(info.date));
         setEventDetails('');
         setIsAllDay(false);
+        setRecurrenceFrequency('none');
         setMode('create');
         setShowEventModal(true);
+       
     };
 
     const handleEventClick = (info) => {
@@ -73,13 +131,14 @@ export default function Calendar() {
         setStartTime(new Date(event.start));
         setEndTime(event.end ? new Date(event.end) : new Date(event.start));
         setIsAllDay(event.allDay);
+        setRecurrenceFrequency(event.extendedProps.rrule?.freq || 'none');
         setMode('update');
         setShowEventModal(true);
+        
     };
 
     const handleButtonClick = () => {
         setShowDatePicker(true);
-        setSelectedDate(new Date());
         setStartTime(new Date());
         setEndTime(new Date());
         setEventDetails('');
@@ -87,52 +146,73 @@ export default function Calendar() {
         setCurrentEvent(null);
         setMode('create');
         setShowEventModal(true);
+       
     };
 
-    const handleSaveOrUpdateEvent = async () => {
+    const handleSaveOrUpdateEvent = async (e) => {
+        e.preventDefault();
+        if (!eventDetails.trim()) {
+            alert('Empty events cannot be saved');
+            return;
+        }
+
+        if (startTime >= endTime) {
+            alert('End time must be later than start time.');
+            return;
+        }
+
         if (mode === 'create') {
             await handleAddEvent();
         } else {
             await handleUpdateEvent();
         }
+        setShowEventModal(false);
     };
 
     const handleAddEvent = async () => {
         try {
-            const newEvent = {
-                id: events.length + 1,
+            let newEvent = {
                 title: eventDetails,
                 start: startTime.toISOString(),
                 end: endTime.toISOString(),
                 allDay: isAllDay,
                 description: eventDetails,
+                recurrenceFrequency: recurrenceFrequency,
+                rrule: recurrenceFrequency !== 'none' ? generateInternalEventRrule(recurrenceFrequency, startTime) : null,
             };
-
+    
             const response = await axios.post('http://localhost:8080/events', newEvent);
-            setEvents([...events, response.data]);
+            setEvents(prevEvents => [...prevEvents, response.data]); // Update events state correctly
             setShowDatePicker(false);
             setShowEventModal(false);
             setEventDetails('');
+            window.location.reload();
         } catch (error) {
             console.error('Error creating event:', error);
         }
     };
+    
+    
+    
 
     const handleUpdateEvent = async () => {
-        if (currentEvent.source === 'external') {
+        if (currentEvent.extendedProps.source === 'external' || currentEvent.extendedProps.source === 'agreement' ) {
             alert('External events cannot be updated.');
             return;
         }
 
         try {
-            const updatedEvent = {
-                ...currentEvent.extendedProps, // Use extendedProps to preserve other fields
+            let updatedEvent = {
+                ...currentEvent.extendedProps,
                 id: currentEvent.id,
                 title: eventDetails,
                 start: startTime.toISOString(),
                 end: endTime.toISOString(),
                 allDay: isAllDay,
                 description: eventDetails,
+                recurrenceFrequency: recurrenceFrequency,
+                rrule: recurrenceFrequency !== 'none' ? generateInternalEventRrule(recurrenceFrequency, startTime) : null,
+               
             };
 
             await axios.put(`http://localhost:8080/events/${currentEvent.id}`, updatedEvent);
@@ -145,8 +225,8 @@ export default function Calendar() {
     };
 
     const handleDeleteEvent = async () => {
-        if (currentEvent.source==='external'){
-            alert("External Events cannot be deleted");
+        if (currentEvent.extendedProps.source === 'external') {
+            alert('External events cannot be deleted.');
             return;
         }
 
@@ -182,31 +262,35 @@ export default function Calendar() {
         });
     };
 
+    const generateInternalEventRrule = (frequency, startDate) => {
+        return `FREQ=${frequency.toUpperCase()};DTSTART=${new Date(startDate).toISOString().replace(/-|:|\.\d+/g, '')}`;
+    };
+
     return (
-        <div className='allcal'>
-            <FullCalendar
-                ref={calendarRef}
-                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
-                initialView={'dayGridMonth'}
-                selectable={true}
-                editable={true}
-                dateClick={handleDateClick}
-                eventClick={handleEventClick}
-                events={events}
-                eventMouseEnter={handleMouseEnter}
-                eventColor='#00CCCC'
-                eventBackgroundColor='black'
-                displayEventTime={true}
-                displayEventEnd={true}
-                eventOrder='start'
-                headerToolbar={{
-                    start: 'today prev,next',
-                    center: 'title',
-                    end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
-                }}
-                height={'90vh'}
-               
-            />
+        <div className="allcal">
+            {calendarRef && (
+                <FullCalendar
+                    ref={calendarRef}
+                    plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin, rrulePlugin]}
+                    initialView={'dayGridMonth'}
+                    selectable={true}
+                    editable={true}
+                    dateClick={handleDateClick}
+                    eventClick={handleEventClick}
+                    events={events}
+                    eventMouseEnter={handleMouseEnter}
+                    displayEventTime={true}
+                    displayEventEnd={true}
+                    dayMaxEvents={true}
+                    eventOrder="start"
+                    headerToolbar={{
+                        start: 'today prev,next',
+                        center: 'title',
+                        end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+                    }}
+                    height={'90vh'}
+                />
+            )}
 
             <div className="button1" onClick={handleButtonClick}>
                 Create New Event
@@ -215,8 +299,8 @@ export default function Calendar() {
             {showEventModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">
-                        <h2>{mode === 'create' ? 'Create Event' : 'Update Event'}</h2>
-                        <div className='button2-container'>
+                        <h2 className='topic'>{mode === 'create' ? 'Create Event' : 'Update Event'}</h2>
+                        <div className="button2-container">
                             <label>Start Time: </label>
                             <DatePicker
                                 selected={startTime}
@@ -232,7 +316,7 @@ export default function Calendar() {
                             />
                         </div>
                         <br />
-                        <div className='button2-container'>
+                        <div className="button2-container">
                             <label>End Time: </label>
                             <DatePicker
                                 selected={endTime}
@@ -242,7 +326,7 @@ export default function Calendar() {
                                 dateFormat="Pp"
                             />
                         </div>
-                        <div className='button2-container'>
+                        <div className="button2-container">
                             <div className="eventdetails">
                                 <label>Event Details: </label>
                                 <input
@@ -250,7 +334,7 @@ export default function Calendar() {
                                     placeholder="Event details"
                                     value={eventDetails}
                                     onChange={(e) => setEventDetails(e.target.value)}
-                                    style={{ width: '300px', height: '50px' }}
+                                    style={{ width: '300px', height: '50px', borderRadius: '10px' }}
                                 />
                             </div>
                             <input
@@ -260,21 +344,32 @@ export default function Calendar() {
                                 onChange={handleAllDayChange}
                             />
                             <label htmlFor="allDayCheckbox">All Day</label>
+                            
+                            <div>
+                                <label>Repeat: </label>
+                                <select value={recurrenceFrequency} onChange={(e) => setRecurrenceFrequency(e.target.value)}>
+                                    <option value="none">None</option>
+                                    <option value="daily">Daily</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="monthly">Monthly</option>
+                                    <option value="yearly">Yearly</option>
+                                </select>
+                            </div>
+                            
+                            
                         </div>
                         <div className="button2-container">
                             <div className="button2" onClick={handleSaveOrUpdateEvent}>
                                 {mode === 'create' ? 'Save' : 'Update'}
                             </div>
-                            
                             {mode === 'update' && (
-                                    
-                                <div style={{ margin: '20px 120px' }} className="button2" onClick={handleDeleteEvent}>
+                                <div style={{ margin: '20px 135px' }} className="button2" onClick={handleDeleteEvent}>
                                     Delete
                                 </div>
                             )}
                         </div>
                         <div className="button2-container">
-                            <button className="button2" onClick={() => setShowEventModal(false)}>
+                            <button className="button3" onClick={() => setShowEventModal(false)}>
                                 Cancel
                             </button>
                         </div>

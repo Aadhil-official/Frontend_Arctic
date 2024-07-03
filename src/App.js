@@ -1,44 +1,76 @@
-//App.js
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Calendar from './Components/Calendar';
+import Footer from './Components/Footer.jsx';
+import Header from './Components/Header';
+import api from './API/axiosConfig.js';
+import dayjs from 'dayjs';
+import Reminder from './Components/Reminder.jsx';
+import Sidebar from './Components/Sidebar';
+import Home from './Components/Home';
+import './App.css';  // Import the CSS file 
 
-import Calendar from "./Components/Calendar";
-import Footer from "./Components/Footer";
-import Header from "./Components/Header";
-import api from "./API/axiosConfig.js"; //imprting axios config for API calls
-import { useState,useEffect} from "react";  //importing useEffect and useState hooks
 
 function App() {
-  // State to store the list of events
   const [events, setEvents] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(dayjs());
+  const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
 
-  // Fetching events data from the server when the component mounts
-  useEffect(() => {
-    const getEvents = async () => {
-
-    try{
-      // Sending GET request to fetch events data
-      const response = await api.get("/events");
-      console.log(response.data);
-
-      // Updating the events state with the fetched data
-      setEvents(response.data);
-    }
-    catch(error){
-      console.log(error);
-    }
-
+  const OpenSidebar = () => {
+    setOpenSidebarToggle(!openSidebarToggle);
   };
 
-    getEvents(); // Calling the getEvents function
-  }, [events]);  // Run whenever events state changes
+  const handleDatePickerChange = (date) => {
+    setSelectedDate(date);
+  };
+
+  useEffect(() => {
+    const getEvents = async () => {
+      try {
+        const response = await api.get('/events');
+        setEvents(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getEvents();
+  }, []);
+
+  const updateEvents = (newEvents) => {
+    setEvents(newEvents);
+  };
 
   return (
-    <div className="App">
-      
-      <Header></Header>
-      <Calendar events={events} setEvents={setEvents}></Calendar>
-      <Footer></Footer>
-      
-    </div>
+    <Router>
+      <div className="app-container">
+        <Header
+          selectedDate={selectedDate}
+          handleDatePickerChange={handleDatePickerChange}
+          OpenSidebar={OpenSidebar}
+        />
+        <div className="main-content">
+          <Sidebar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
+          <div className="content-area">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/calendar"
+                element={
+                  <Calendar
+                    selectedDate={selectedDate.toDate()}
+                    events={events}
+                    updateEvents={updateEvents}
+                  />
+                }
+              />
+              <Route path="/reminder" element={<Reminder />} />
+            </Routes>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
