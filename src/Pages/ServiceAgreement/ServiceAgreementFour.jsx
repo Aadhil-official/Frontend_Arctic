@@ -41,8 +41,14 @@ function ServiceAgreementFour() {
       <Grid container spacing={2}>
         <Grid item>
           <Link to={"/ServiceAgreementFive"}>
-            <Button startIcon={<ArrowBackIcon />} sx={{ color: 'rgba(0, 0, 0, 0.6)', fontSize: '20px' }}>
-            </Button>
+          <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" 
+            style={{ width: '40px', 
+            height: '40px', 
+            opacity: '0.6', 
+            margin: '15px', 
+            
+            left: '10px', 
+            top: '10px' }} alt='Back' />
           </Link>
         </Grid>
       </Grid>

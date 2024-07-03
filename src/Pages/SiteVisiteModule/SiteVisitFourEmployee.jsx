@@ -3,10 +3,10 @@ import axios from 'axios';
 import { Button, Grid, Typography, Box, Pagination, InputAdornment, TextField } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Footer from '../../Components/Footer';
 import { FooterIn, NormalHeaderBar } from '../../Components';
 
-const SiteVisitFour = () => {
+const SiteVisitFourEmployee = () => {
   const [siteVisits, setSiteVisits] = useState([]);
   const [filteredVisits, setFilteredVisits] = useState([]);
   const [startedVisits, setStartedVisits] = useState([]);
@@ -142,15 +142,17 @@ const SiteVisitFour = () => {
 
   return (
     <>
-      <NormalHeaderBar />
-      <Grid container textAlign='center' justifyContent='center'>
-        <Grid item xs={12} style={{ textAlign: "left", margin: "1rem" }}>
-          <Link to={"/SiteVisitDashboard"}>
-            <ArrowBackIcon style={{ fontSize: "40px", opacity: "0.6" }} />
+    <NormalHeaderBar/>
+     <Grid container className='back-icon'>
+        <Grid item xs={12} textAlign="left">
+          <Link to={"/SiteVisitFourEmployee"}>
+            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+             style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px',  left: '10px', top: '10px' }} alt='Back' />
           </Link>
         </Grid>
+      </Grid>
         <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'} className='text'>
-          <Typography variant='h3' sx={{ marginTop: '-3rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic Medium", textAlign: "center", fontSize: "60px" }}>
+          <Typography variant='h3' sx={{ marginTop: '-3rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic Medium", textAlign: "center", fontSize: "60px" }}>{/*,marginTop:"1rem"*/}
             Scheduled Site Visits
           </Typography>
         </Grid>
@@ -177,7 +179,7 @@ const SiteVisitFour = () => {
               />
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} textAlign="center">
-              <Button
+              {/* <Button
                 variant="outlined"
                 sx={{
                   marginBottom: '3rem',
@@ -198,7 +200,7 @@ const SiteVisitFour = () => {
                   }}>
                   Schedule a new Site Visit
                 </Link>
-              </Button>
+              </Button> */}
               <Button
                 variant="outlined"
                 sx={{
@@ -286,11 +288,11 @@ const SiteVisitFour = () => {
             color="primary"
           />
         </Grid>
-      </Grid>
+      {/* </Grid> */}
       <FooterIn />
     </>
   );
 };
 
-export default SiteVisitFour;
+export default SiteVisitFourEmployee;
 

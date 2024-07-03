@@ -16,12 +16,14 @@ function SiteVisitDetails() {
     const fetchVisitDetails = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:8080/api/v1/siteVisit/getSiteVisitTwo?id=${id}`);
+        const response = await axios.get(
+          `http://localhost:8080/api/v1/siteVisit/getSiteVisitTwo?id=${id}`
+        );
         setVisitDetails(response.data);
         setUpdatedVisitDetails(response.data); // Initialize updatedVisitDetails with fetched data
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching visit details:', error);
+        console.error("Error fetching visit details:", error);
         setLoading(false);
       }
     };
@@ -33,18 +35,28 @@ function SiteVisitDetails() {
   theme = responsiveFontSizes(theme);
 
   theme.typography.h5 = {
-    fontSize: '1.1rem'
+    fontSize: "1.1rem",
   };
 
   const handleUpdate = async () => {
     try {
-      const response = await axios.put(`http://localhost:8080/api/v1/siteVisit/updateSiteVisit`, updatedVisitDetails);
-      console.log('Visit details updated successfully:', response.data);
-      alert('Visit details updated successfully!');
+      const response = await axios.put(
+        `http://localhost:8080/api/v1/siteVisit/updateSiteVisit`,
+        updatedVisitDetails
+      );
+      console.log("Visit details updated successfully:", response.data);
+      alert("Visit details updated successfully!");
       setVisitDetails(updatedVisitDetails); // Update local state with new details
     } catch (error) {
-      console.error('Error updating visit details:', error.response ? error.response.data : error.message);
-      alert(`Failed to update visit details. ${error.response ? error.response.data : 'Please try again later.'}`);
+      console.error(
+        "Error updating visit details:",
+        error.response ? error.response.data : error.message
+      );
+      alert(
+        `Failed to update visit details. ${
+          error.response ? error.response.data : "Please try again later."
+        }`
+      );
     }
   };
 
@@ -54,10 +66,14 @@ function SiteVisitDetails() {
 
   const handleChange = (field, value) => {
     // Update the field in the updatedVisitDetails state
-    setUpdatedVisitDetails(prevState => ({
+    setUpdatedVisitDetails((prevState) => ({
       ...prevState,
-      [field]: value
+      [field]: value,
     }));
+  };
+
+  const handleGatePass = () => {
+    navigate(`/GatePassDetails/${id}`);
   };
 
   return (
@@ -65,26 +81,53 @@ function SiteVisitDetails() {
       <NormalHeaderBar />
       <Grid container className='back-icon'>
         <Grid item xs={12} textAlign="left">
-          <Link to={"/SiteVisitFour"}>
-            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px', position: 'absolute', left: '10px', top: '10px' }} alt='Back' />
+          <Link to={"/SiteVisitSix"}>
+          <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" 
+            style={{ width: '40px', 
+            height: '40px', 
+            opacity: '0.6', 
+            margin: '15px', 
+            
+            left: '10px', 
+            top: '10px' }} alt='Back' />
           </Link>
         </Grid>
       </Grid>
 
-      <Grid container className='text'>
+      <Grid container className="text">
         <Grid item xs={12} textAlign="center">
           <ThemeProvider theme={theme}>
-            <Typography variant="h3" sx={{ marginTop: '5rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic Medium", textAlign: "center", fontSize: "70px" }}>
+            <Typography
+              variant="h3"
+              sx={{
+                marginTop: "1rem",
+                color: "rgb(26, 99, 209)",
+                fontFamily: "Franklin Gothic Medium",
+                textAlign: "center",
+                fontSize: "70px",
+              }}
+            >
               Edit Site Visit Details
             </Typography>
           </ThemeProvider>
         </Grid>
       </Grid>
-      <Grid container className='text'>
+      <Grid container className="text">
         <Grid item xs={12} textAlign="center">
           <ThemeProvider theme={theme}>
-            <Typography variant="h6" sx={{ fontWeight: 'bold', marginTop: '1rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic", textAlign: "center", fontSize: "18px" }}>
-              You can edit Vehicle Number, Location, Group name, Schedule date & Time details only
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: "bold",
+                marginTop: "1rem",
+                color: "rgb(26, 99, 209)",
+                fontFamily: "Franklin Gothic",
+                textAlign: "center",
+                fontSize: "18px",
+              }}
+            >
+              You can edit Vehicle Number, Location, Group name, Schedule date &
+              Time details only
             </Typography>
           </ThemeProvider>
         </Grid>
@@ -98,8 +141,23 @@ function SiteVisitDetails() {
         </Grid>
       ) : visitDetails ? (
         <Grid container justifyContent="center">
-          <Grid item xs={12} sm={8} md={6} textAlign="center" style={{ marginTop: '2rem' }}>
-            <Box sx={{ p: 3, borderRadius: 2, backgroundColor: 'white', marginBottom: '2rem', boxShadow: 3 }}>
+          <Grid
+            item
+            xs={12}
+            sm={8}
+            md={6}
+            textAlign="center"
+            style={{ marginTop: "2rem" }}
+          >
+            <Box
+              sx={{
+                p: 3,
+                borderRadius: 2,
+                backgroundColor: "white",
+                marginBottom: "2rem",
+                boxShadow: 3,
+              }}
+            >
               <TextField
                 fullWidth
                 id="visitId"
@@ -144,7 +202,7 @@ function SiteVisitDetails() {
                 InputProps={{
                   readOnly: false,
                 }}
-                onChange={(e) => handleChange('vehicleNumber', e.target.value)}
+                onChange={(e) => handleChange("vehicleNumber", e.target.value)}
               />
               <TextField
                 fullWidth
@@ -156,9 +214,9 @@ function SiteVisitDetails() {
                 InputProps={{
                   readOnly: false,
                 }}
-                onChange={(e) => handleChange('location', e.target.value)}
+                onChange={(e) => handleChange("location", e.target.value)}
               />
-              <TextField
+              {/* <TextField
                 fullWidth
                 id="groupName"
                 label="Group Name"
@@ -168,8 +226,8 @@ function SiteVisitDetails() {
                 InputProps={{
                   readOnly: false,
                 }}
-                onChange={(e) => handleChange('groupName', e.target.value)}
-              />
+                onChange={(e) => handleChange("groupName", e.target.value)}
+              /> */}
               <TextField
                 fullWidth
                 id="scheduleDate"
@@ -180,7 +238,7 @@ function SiteVisitDetails() {
                 InputProps={{
                   readOnly: false,
                 }}
-                onChange={(e) => handleChange('scheduleDate', e.target.value)}
+                onChange={(e) => handleChange("scheduleDate", e.target.value)}
               />
               <TextField
                 fullWidth
@@ -192,13 +250,18 @@ function SiteVisitDetails() {
                 InputProps={{
                   readOnly: false,
                 }}
-                onChange={(e) => handleChange('selectedTime', e.target.value)}
+                onChange={(e) => handleChange("selectedTime", e.target.value)}
               />
               {/* Add more fields as needed */}
 
-              <Grid container justifyContent="center" spacing={2} sx={{ marginTop: '1rem' }}>
+              <Grid
+                container
+                justifyContent="center"
+                spacing={2}
+                sx={{ marginTop: "1rem" }}
+              >
                 <Grid item>
-                  <Button variant="outlined" onClick={() => navigate(-1)}>
+                  <Button variant="outlined" onClick={() => navigate("/SiteVisitSix")}>
                     Go Back
                   </Button>
                 </Grid>
@@ -215,6 +278,15 @@ function SiteVisitDetails() {
                     style={{ width: "6rem" }}
                   >
                     Cancel
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleGatePass}
+                  >
+                    Gate Pass
                   </Button>
                 </Grid>
               </Grid>

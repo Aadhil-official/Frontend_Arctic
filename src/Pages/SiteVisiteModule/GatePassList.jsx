@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography, createTheme, responsiveFontSizes, Box, IconButton } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,27 +6,36 @@ import { ThemeProvider } from 'styled-components';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { FooterIn, NormalHeaderBar } from '../../Components';
+import Footer from '../../Components/Footer';
 
-const ServiceAgreementFive = () => {
-  const [serviceAgreements, setServiceAgreements] = useState([]);
+const GatePassList = () => {
+  const [gatePasses, setGatePasses] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterOption, setFilterOption] = useState('customerName');
+  const [filterOption, setFilterOption] = useState('gatePassId');
   const [currentPage, setCurrentPage] = useState(1);
-  const [agreementsPerPage] = useState(5);
+  const [passesPerPage] = useState(5);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axios.get('http://localhost:8080/api/v1/agreementService/fetchAgreementService')
-      .then(response => {
-        console.log(response.data);
-        setServiceAgreements(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching service agreements:', error);
-      });
-  }, []);
+  //   useEffect(() => {
+  //     axios.get('http://localhost:8080/api/v1/siteVisit/fetchGatePass')
+  //       .then(response => {
+  //         console.log(response.data);
+  //         setGatePasses(response.data);
+  //       })
+  //       .catch(error => {
+  //         console.error('Error fetching gate passes:', error);
+  //       });
+  //   }, []);
+
+  axios.get('http://localhost:8080/api/v1/gatePass/fetchGatePass')
+    .then(response => {
+      console.log(response.data);
+      setGatePasses(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching gate passes:', error);
+    });
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -37,25 +46,21 @@ const ServiceAgreementFive = () => {
     setFilterOption(e.target.value);
   };
 
-  const handleEditAgreement = (id) => {
-    console.log("Agreement ID:", id);
-    navigate(`/ServiceAgreementFour/${id}`);
+  const handleEditGatePass = (id) => {
+    console.log("Gate Pass ID:", id);
+    navigate(`/editGatePass/${id}`);
   };
 
-  const indexOfLastAgreement = currentPage * agreementsPerPage;
-  const indexOfFirstAgreement = indexOfLastAgreement - agreementsPerPage;
+  const indexOfLastPass = currentPage * passesPerPage;
+  const indexOfFirstPass = indexOfLastPass - passesPerPage;
 
-  const filteredAgreements = serviceAgreements.filter(agreement => {
+  const filteredPasses = gatePasses.filter(pass => {
     if (!searchQuery) return true;
-    if (filterOption === 'agreementType') {
-      return agreement.agreementType.toLowerCase().includes(searchQuery.toLowerCase());
-    } else {
-      const value = agreement[filterOption];
-      return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
-    }
+    const value = pass[filterOption];
+    return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
   });
 
-  const currentAgreements = filteredAgreements.slice(indexOfFirstAgreement, indexOfLastAgreement);
+  const currentPasses = filteredPasses.slice(indexOfFirstPass, indexOfLastPass);
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
@@ -63,20 +68,14 @@ const ServiceAgreementFive = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <NormalHeaderBar />
       <Box sx={{ maxWidth: '1500px', margin: '0 auto', padding: '2px' }}>
         <Grid container spacing={5}>
           <Grid item xs={12}>
             <Box sx={{ textAlign: 'left' }}>
-              <Link to={"/"}>
-              <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" 
-            style={{ width: '40px', 
-            height: '40px', 
-            opacity: '0.6', 
-            margin: '15px', 
-            
-            left: '10px', 
-            top: '10px' }} alt='Back' />
+              <Link to={"/dashboard"}>
+                <IconButton>
+                  <ArrowBackIcon style={{ fontSize: 40, color: 'rgba(0, 0, 0, 0.6)' }} />
+                </IconButton>
               </Link>
             </Box>
           </Grid>
@@ -85,10 +84,10 @@ const ServiceAgreementFive = () => {
         <Grid container textAlign='center' justifyContent='center'>
           <Grid item xs={12} textAlign='center'>
             <Typography variant='h3' sx={{ fontWeight: 'bold', margin: '0rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic Medium", fontSize: "60px" }}>
-              Service Agreement
+              Gate Passes
             </Typography>
             <Typography variant='h6' sx={{ fontWeight: 'bold', margin: '1rem', color: '#547DD1', textAlign: "center", fontSize: "18px", fontFamily: 'Franklin Gothic' }}>
-              View Service Agreements
+              View and Manage Gate Passes
             </Typography>
           </Grid>
 
@@ -107,11 +106,9 @@ const ServiceAgreementFive = () => {
                     />
                   }
                 >
-                  <MenuItem value="customerName">Customer Name</MenuItem>
+                  <MenuItem value="gatePassId">Gate Pass ID</MenuItem>
+                  <MenuItem value="vehicleNumber">Vehicle Number</MenuItem>
                   <MenuItem value="location">Location</MenuItem>
-                  <MenuItem value="item">Item</MenuItem>
-                  <MenuItem value="agreementType">Agreement Type</MenuItem>
-                  <MenuItem value="period">Period of Agreement</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -131,7 +128,7 @@ const ServiceAgreementFive = () => {
           </Grid>
 
           <Grid item xs={12}>
-            {currentAgreements.map((agreement, index) => (
+            {currentPasses.map((pass, index) => (
               <Grid item xs={12} key={index} sx={{ boxShadow: '0px 2px 1px rgba(0, 0, 0, 0.1)', borderRadius: '10px', padding: '20px', marginBottom: '10px' }}>
                 <Button
                   variant="contained"
@@ -141,29 +138,28 @@ const ServiceAgreementFive = () => {
                     '&:hover': { backgroundColor: '#547DD1' },
                     width: '80%',
                   }}
-                  onClick={() => handleEditAgreement(agreement.id)}
+                  onClick={() => handleEditGatePass(pass.id)}
                 >
-                  {filterOption === 'customerName' ? agreement.customerName : agreement[filterOption]}
+                  Gate Pass ID: {pass.gatePassId} | Vehicle: {pass.vehicleNumber} | Location: {pass.location}
                 </Button>
               </Grid>
             ))}
           </Grid>
 
           <Grid container justifyContent="center" sx={{ marginTop: '20px' }}>
-            {filteredAgreements.length > agreementsPerPage && (
+            {filteredPasses.length > passesPerPage && (
               <Grid item>
-                {Array.from({ length: Math.ceil(filteredAgreements.length / agreementsPerPage) }, (_, index) => (
+                {Array.from({ length: Math.ceil(filteredPasses.length / passesPerPage) }, (_, index) => (
                   <Button key={index} onClick={() => paginate(index + 1)} sx={{ margin: '5px' }}>{index + 1}</Button>
                 ))}
               </Grid>
             )}
           </Grid>
         </Grid>
+        <Footer />
       </Box>
-      <FooterIn />
     </ThemeProvider>
-
   );
 };
 
-export default ServiceAgreementFive;
+export default GatePassList;

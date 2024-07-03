@@ -80,7 +80,14 @@ const SiteVisitSix = () => {
             <ThemeProvider theme={theme}>
                 <Grid item xs={12} style={{ textAlign: "left", margin: "1rem" }}>
                     <Link to={"/SiteVisitDashboard"}>
-                        <ArrowBackIcon style={{ fontSize: "40px", opacity: "0.6", paddingRight: "10px" }} />
+                    <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" 
+            style={{ width: '40px', 
+            height: '40px', 
+            opacity: '0.6', 
+            margin: '15px', 
+            
+            left: '10px', 
+            top: '10px' }} alt='Back' />
                     </Link>
                 </Grid>
                 <Box sx={{ maxWidth: '1200px', margin: '0 auto', padding: '20px', marginBottom: '60px' }}>

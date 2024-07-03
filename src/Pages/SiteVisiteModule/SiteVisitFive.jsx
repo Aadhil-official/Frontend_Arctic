@@ -12,8 +12,15 @@ export default function SiteVisitFive() {
       <NormalHeaderBar />
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative' }}>
         <Box sx={{ position: 'absolute', top: '1rem', left: '1rem' }}>
-          <Link to="/SiteVisitFour">
-            <ArrowBackIcon sx={{ fontSize: 30, color: 'rgba(0, 0, 0, 0.54)', margin: '1rem', opacity: "0.6" }} />
+          <Link to="/SiteVisitDashboard">
+          <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" 
+            style={{ width: '40px', 
+            height: '40px', 
+            opacity: '0.6', 
+            margin: '15px', 
+            
+            left: '10px', 
+            top: '10px' }} alt='Back' />
           </Link>
         </Box>
         <Box sx={{ flexGrow: 1, p: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

@@ -9,6 +9,8 @@ import { dismiss, error, loading, success } from '../util/Toastify';
 
 export default function FormSignup() {
 
+  const [loadingToastId, setLoadingToastId] = useState(null);
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState(''); // State to hold the selected role

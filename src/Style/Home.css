@@ -37,6 +37,7 @@
 
 
 
+/* /text on the wallpaper/ */
 .text-overlay {
   position: center;
   margin-top: 5%;
@@ -53,6 +54,7 @@
 }
 
 
+/* /find us on social media/ */
 .social {
   font-size: 18px;
   font-weight: medium;
@@ -76,6 +78,7 @@
 }
 
 
+/* /footer text/ */
 .footer-text {
   color: white;
   position: absolute;
