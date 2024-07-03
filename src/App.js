@@ -14,12 +14,7 @@ import { AddUserGroup, UserGroupEdit, UserGroupLis, UserGroupListAd, UserGroupVi
 function App() {
   return (
     <>
-      <Toaster
-      // toastOptions={{
-      //   style: {
-
-      //   },}}
-      />
+      <Toaster />
 
       <Routes>
         <Route path="/" element={<Homes />} />
