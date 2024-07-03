@@ -30,9 +30,7 @@ import { AddUserGroup, UserGroupEdit, UserGroupLis, UserGroupListAd, UserGroupVi
 
 function App() {
   return (
-
-      <Toaster />
-    <div className="App">
+    <>
       <Toaster />
       <BrowserRouter>
         <Routes>
@@ -122,7 +120,7 @@ function App() {
 
         </Routes>
       </BrowserRouter>
-    </div>
+    </>
   );
 }
 
