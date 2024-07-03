@@ -102,6 +102,8 @@ import GatePassList from "./Pages/SiteVisiteModule/GatePassList";
 
 function App() {
   return (
+
+      <Toaster />
     <div className="App">
       <Toaster />
       <BrowserRouter>
@@ -122,7 +124,6 @@ function App() {
             path="/ServiceAgreementFour/:id"
             element={<ServiceAgreementFour />}
           ></Route>
-
 
           {/* SITE VISIT */}
           {/* ADMIN */}
