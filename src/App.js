@@ -30,6 +30,8 @@ import { AddUserGroup, UserGroupEdit, UserGroupLis, UserGroupListAd, UserGroupVi
 
 function App() {
   return (
+
+      <Toaster />
     <div className="App">
       <Toaster />
       <BrowserRouter>
@@ -50,7 +52,6 @@ function App() {
             path="/ServiceAgreementFour/:id"
             element={<ServiceAgreementFour />}
           ></Route>
-
 
           {/* SITE VISIT */}
           {/* ADMIN */}
