@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../../util/Toastify';
+import { dismiss, error, loading, success } from '../../util/Toastify';
 
 function FormAddUnit() {
 
@@ -20,6 +20,7 @@ function FormAddUnit() {
 
     const handleSubmit = () => {
 
+        const loadingId = loading("Creating new unit...");
 
         const validateForm = z.object({
             indoorSerial: z.string().min(1, { message: "Enter indoor serial" }),
@@ -47,10 +48,14 @@ function FormAddUnit() {
         if (result.success) {
             axios.post('http://localhost:8080/api/auth/addUnit', userData)
                 .then(() => {
+                    dismiss(loadingId);
                     navigate('/login/welcomeadmin/unitListAd');
                     success('Unit added successfully!')
                 })
-                .catch(() => error("Unit already exist!"))
+                .catch(() => {
+                    dismiss(loadingId);
+                    error("Unit already exist!")
+                })
         } else {
             const formattedError = result.error.format();
             if (formattedError.indoorSerial?._errors) {
@@ -94,7 +99,7 @@ function FormAddUnit() {
                 noValidate
                 autoComplete="off"
             >
-                
+
                 <TextField
                     label="Indoor Serial"
                     type='text'

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../../util/Toastify';
+import { dismiss, error, loading, success } from '../../util/Toastify';
 import { Box, Button, TextField } from '@mui/material';
 
 function FormCustomerEdit({ customer }) {
@@ -30,6 +30,7 @@ function FormCustomerEdit({ customer }) {
     // navigate('/');
     const handleSubmit = () => {
 
+        const loadingId = loading("Updating customer...");
 
         const validateForm = z.object({
             customerName: z.string().min(1, { message: "Enter customer name" }),
@@ -63,10 +64,12 @@ function FormCustomerEdit({ customer }) {
         ) {
             axios.put(`http://localhost:8080/api/auth/updateCustomer`, updatedCustomer)
                 .then(() => {
+                    dismiss(loadingId);
                     success("Customer updated successfully");
                     navigate('/login/welcomeadmin/customerListAd');
                 })
                 .catch(() => {
+                    dismiss(loadingId);
                     const formattedError = result.error.format();
                     if (formattedError.customerName?._errors) {
                         error(String(formattedError.customerName?._errors));

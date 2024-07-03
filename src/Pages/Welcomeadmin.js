@@ -1,6 +1,6 @@
 import React from 'react'
 import '../Style/Welcome.css';
-import { Tabs, ProfilesAdmin, FooterIn } from '../Components/index';
+import { ProfilesAdmin, FooterIn, Tabs } from '../Components/index';
 import { Grid } from '@mui/material';
 // import ViewListPdf from './ViewListPdf';
 // import { useLocation } from 'react-router-dom';
@@ -25,10 +25,10 @@ function Welcomeadmin() {
     { label: 'Customer Details', link: '/login/welcomeadmin/customerListAd' },
     { label: 'User Group Details', link: '/login/welcomeadmin/userGroupListAd' },
     { label: 'Job Details' },
-    { label: 'Service Agreement' },
+    // { label: 'Job Allocation' },
     { label: 'Calendar' },
-    { label: 'Schedule a Site Visit' },
-    { label: 'Job Allocation' },
+    { label: 'Service Agreement Details', link: '/ServiceAgreementSix' },
+    { label: 'Site Visit Details', link: '/SiteVisitDashboard' }
   ];
 
   return (
@@ -36,16 +36,14 @@ function Welcomeadmin() {
       <Grid container>
 
         <Grid item xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mb: 3 }}>
-          {/* {console.log("testttttttttttttt....",tempdata)} */}
           <ProfilesAdmin />
         </Grid>
-        {/* <ViewListPdf /> */}
         <Grid item xs={12}>
           <Tabs buttonData={buttonData} />
         </Grid>
-        <Grid item xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mt: 3 }}>
+        {/* <Grid item xl={12} lg={12} md={12} sm={12} xs={12} sx={{ mt: 3 }}> */}
           <FooterIn />
-        </Grid>
+        {/* </Grid> */}
       </Grid>
     </>
   )

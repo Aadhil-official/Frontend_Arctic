@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Footer from '../../Components/Footer';
+import { FooterIn, NormalHeaderBar } from '../../Components';
 
 const ServiceAgreementFive = () => {
   const [serviceAgreements, setServiceAgreements] = useState([]);
@@ -63,14 +63,20 @@ const ServiceAgreementFive = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <NormalHeaderBar />
       <Box sx={{ maxWidth: '1500px', margin: '0 auto', padding: '2px' }}>
         <Grid container spacing={5}>
           <Grid item xs={12}>
             <Box sx={{ textAlign: 'left' }}>
-              <Link to={"/login/welcomeadmin"}>
-                <IconButton>
-                  <ArrowBackIcon style={{ fontSize: 40, color: 'rgba(0, 0, 0, 0.6)' }} />
-                </IconButton>
+              <Link to={"/"}>
+              <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" 
+            style={{ width: '40px', 
+            height: '40px', 
+            opacity: '0.6', 
+            margin: '15px', 
+            
+            left: '10px', 
+            top: '10px' }} alt='Back' />
               </Link>
             </Box>
           </Grid>
@@ -153,9 +159,10 @@ const ServiceAgreementFive = () => {
             )}
           </Grid>
         </Grid>
-        <Footer />
       </Box>
+      <FooterIn />
     </ThemeProvider>
+
   );
 };
 

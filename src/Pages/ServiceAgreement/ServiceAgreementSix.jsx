@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import Footer from '../../Components/Footer';
+import { FooterIn, NormalHeaderBar } from '../../Components';
 
 const ServiceAgreementSix = () => {
   const [serviceAgreements, setServiceAgreements] = useState([]);
@@ -68,6 +68,16 @@ const ServiceAgreementSix = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <NormalHeaderBar />
+
+      <Grid container spacing={2}>
+        <Grid item position='fixed'>
+          <Link to={"/login/welcomeadmin"}>
+            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
+          </Link>
+        </Grid>
+      </Grid>
+
       <Box sx={{ maxWidth: '1200px', margin: '0 auto', padding: '20px', marginBottom: '60px' }}>
         <Grid container textAlign='center' justifyContent='center'>
           <Grid item xs={12}>
@@ -87,9 +97,9 @@ const ServiceAgreementSix = () => {
                 fontWeight: 'bold',
                 marginBottom: '2rem',
                 fontSize: '15px',
-                color:'#547DD1',
-                fontFamily:'Franklin Gothic',
-                 
+                color: '#547DD1',
+                fontFamily: 'Franklin Gothic',
+
               }}>
                 View Existing Service Agreements & Add new Service Agreement
               </Typography>
@@ -137,11 +147,12 @@ const ServiceAgreementSix = () => {
                   },
                 }}
               >
-                <Link to="/" style={{ 
+                <Link to="/ServiceAgreementOne" style={{
                   textDecoration: 'none',
-                   color: 'inherit',
-                   fontFamily:'Franklin Gothic',
-                   fontSize: '18px',  }}>
+                  color: 'inherit',
+                  fontFamily: 'Franklin Gothic',
+                  fontSize: '18px',
+                }}>
                   Add new Service Agreement
                 </Link>
               </Button>
@@ -194,7 +205,7 @@ const ServiceAgreementSix = () => {
                     variant="contained"
                     sx={{
                       backgroundColor: '#6C94F8',
-              
+
                       color: 'white',
                       '&:hover': {
                         backgroundColor: '#547DD1',
@@ -220,7 +231,7 @@ const ServiceAgreementSix = () => {
           </Grid>
         </Grid>
       </Box>
-      <Footer />
+      <FooterIn />
     </ThemeProvider>
   );
 };

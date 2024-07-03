@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Grid, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
+
 import FormViewOne from '../../Components/FormViewOne';
-import Footer from '../../Components/Footer';
+
+import { FooterIn, NormalHeaderBar } from '../../Components';
+
 
 function ServiceAgreementTwo() {
     // Extract the `id` parameter from the URL using the `useParams` hook
@@ -42,10 +45,10 @@ function ServiceAgreementTwo() {
 
     return (
         <div>
-            {/* Back button that navigates to the home page */}
+            <NormalHeaderBar />
             <Grid container spacing={2}>
                 <Grid item position='fixed'>
-                    <Link to={"/"}>
+                    <Link to={"/ServiceAgreementSix"}>
                         <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
                     </Link>
                 </Grid>
@@ -73,7 +76,7 @@ function ServiceAgreementTwo() {
             {/* Subtitle */}
             <Grid container justifyContent="center" sx={{ paddingTop: '0rem' }}>
                 <Grid item>
-                    <h3 style={{  fontSize: '18px', color:'#547DD1' ,fontFamily:'Franklin Gothic',}}>View Service Agreement Details</h3>
+                    <h3 style={{ fontSize: '18px', color: '#547DD1', fontFamily: 'Franklin Gothic', }}>View Service Agreement Details</h3>
                 </Grid>
             </Grid>
 
@@ -89,11 +92,12 @@ function ServiceAgreementTwo() {
                         console.log("from itemEdit page........" + agreement),
                         // Display the agreement details using the FormView component
                         <div className='SerAgTwo' style={{
-                            boxShadow: '0px 1.2px 3px 4px rgba(0, 0, 0, 0.1)', // Add shadow box
+                            
                             borderRadius: '10px',
                             padding: '20px',
                             marginBottom: '20px',
                             backgroundColor: 'white'
+                    
                         }}>
                             <FormViewOne agreement={agreement} />
                         </div>
@@ -106,7 +110,7 @@ function ServiceAgreementTwo() {
             <br />
 
             {/* Footer */}
-            <Footer />
+            <FooterIn />
         </div>
     );
 }

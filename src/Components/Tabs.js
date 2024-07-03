@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
+import { useUser } from '../Context/UserContext';
 
 const Tabs = ({ buttonData }) => {
+  const { tempdataGroup } = useUser();
+  const relevantPrivileges = tempdataGroup?.relevantPrivileges || [];
+
+  const privilegeToButtonLabel = {
+    accessEmployee: 'Employee Details',
+    accessItem: 'Item Details',
+    accessUnit: 'Unit Details',
+    accessVehicle: 'Vehicle Details',
+    accessCustomer: 'Customer Details',
+    accessUserGroup: 'User Group Details',
+    accessJob: 'Job Details',
+    accessServiceAgreement: 'Service Agreement Details',
+    accessCalendar: 'Calendar',
+    accessSiteVisit: 'Site Visit Details',
+    // accessJobAllocation: 'Job Allocation',
+  };
+
+  const filteredButtonData = buttonData.filter(button =>
+    relevantPrivileges.some(privilege => privilegeToButtonLabel[privilege] === button.label)
+  );
+
+  console.log("Filtered Button Data in Tabs:", filteredButtonData);
+
   return (
     <Grid
       container
@@ -11,12 +35,8 @@ const Tabs = ({ buttonData }) => {
       alignItems="center"
       justifyContent="center"
     >
-      {buttonData.map((button, index) => (
-        <Grid item key={index} xl={9} lg={8} md={7} sm={6} xs={5}
-          variant="contained"
-          component={Link}
-          to={button.link}
-        >
+      {filteredButtonData.map((button, index) => (
+        <Grid item key={index} xl={9} lg={8} md={7} sm={6} xs={5}>
           <Button
             sx={{
               height: '40px',
@@ -28,6 +48,8 @@ const Tabs = ({ buttonData }) => {
                 backgroundColor: '#547DD1', // Slightly darker shade for hover effect
               }
             }}
+            component={Link}
+            to={button.link}
           >
             {button.label}
           </Button>

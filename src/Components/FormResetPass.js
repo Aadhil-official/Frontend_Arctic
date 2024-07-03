@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { z } from 'zod';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { error, success } from '../util/Toastify';
+import { dismiss, error, loading, success } from '../util/Toastify';
 
 
 function FormResetPass() {
@@ -32,6 +32,9 @@ function FormResetPass() {
 
   const handleSubmit = () => {
 
+    
+    const loadingId = loading("Updating password");
+    
     const data = {
       email: email,
       otp: otp,
@@ -43,11 +46,16 @@ function FormResetPass() {
     if (result.success) {
       axios.post('http://localhost:8080/api/auth/update-password', data)
         .then(() => {
+          dismiss(loadingId);
           navigate('/login');
           success('Changed the password successfully!')
         })
-        .catch(() => error("Enter your correct email and OTP!.."))
+        .catch(() => {
+          dismiss(loadingId);
+          error("Enter your correct email and OTP!..")
+        })
     } else {
+      dismiss(loadingId);
       const formattedError = result.error.format();
       if (formattedError.newPassword?._errors) {
         error(String(formattedError.newPassword?._errors));

@@ -14,6 +14,7 @@ import {
 import Footer from "../../Components/Footer";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { FooterIn, NormalHeaderBar } from '../../Components';
 
 function GatePassDetails() {
   const { id } = useParams();
@@ -79,6 +80,7 @@ function GatePassDetails() {
 
   return (
     <>
+    <NormalHeaderBar />
       <Grid container className="back-icon">
         <Grid item xs={12} textAlign="left">
           <Link to={`/SiteVisitDetails/${id}`}>
@@ -89,7 +91,7 @@ function GatePassDetails() {
                 height: "40px",
                 opacity: "0.6",
                 margin: "5px",
-                position: "absolute",
+                
                 left: "10px",
                 top: "10px",
               }}
@@ -296,7 +298,7 @@ value={`Vehicle Number: ${gatePassDetails && gatePassDetails.vehicleNumber}`}
         </Grid>
       )}
 
-      <Footer />
+      <FooterIn />
     </>
   );
 }

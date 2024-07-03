@@ -1,18 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import {
-  Button,
-  Grid,
-  Typography,
-  Box,
-  ThemeProvider,
-  createTheme,
-  responsiveFontSizes,
-  TextField,
-} from "@mui/material";
-import Footer from "../../Components/Footer";
-import SiteVisitSix from "./SiteVisitSix";
+import React, { useEffect, useState } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { Button, Grid, Typography, Box, ThemeProvider, createTheme, responsiveFontSizes, TextField } from '@mui/material';
+import { FooterIn, NormalHeaderBar } from '../../Components';
 
 function SiteVisitDetails() {
   const { id } = useParams();
@@ -88,22 +78,18 @@ function SiteVisitDetails() {
 
   return (
     <>
-      <Grid container className="back-icon">
+      <NormalHeaderBar />
+      <Grid container className='back-icon'>
         <Grid item xs={12} textAlign="left">
           <Link to={"/SiteVisitSix"}>
-            <img
-              src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
-              style={{
-                width: "40px",
-                height: "40px",
-                opacity: "0.6",
-                margin: "5px",
-                position: "absolute",
-                left: "10px",
-                top: "10px",
-              }}
-              alt="Back"
-            />
+          <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" 
+            style={{ width: '40px', 
+            height: '40px', 
+            opacity: '0.6', 
+            margin: '15px', 
+            
+            left: '10px', 
+            top: '10px' }} alt='Back' />
           </Link>
         </Grid>
       </Grid>
@@ -114,7 +100,7 @@ function SiteVisitDetails() {
             <Typography
               variant="h3"
               sx={{
-                marginTop: "5rem",
+                marginTop: "1rem",
                 color: "rgb(26, 99, 209)",
                 fontFamily: "Franklin Gothic Medium",
                 textAlign: "center",
@@ -275,7 +261,7 @@ function SiteVisitDetails() {
                 sx={{ marginTop: "1rem" }}
               >
                 <Grid item>
-                  <Button variant="outlined" onClick={() => navigate(SiteVisitSix)}>
+                  <Button variant="outlined" onClick={() => navigate("/SiteVisitSix")}>
                     Go Back
                   </Button>
                 </Grid>
@@ -315,7 +301,7 @@ function SiteVisitDetails() {
         </Grid>
       )}
 
-      <Footer />
+      <FooterIn />
     </>
   );
 }

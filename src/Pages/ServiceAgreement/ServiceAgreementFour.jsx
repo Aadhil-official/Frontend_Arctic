@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Button, Grid, ThemeProvider, Typography, createTheme, responsiveFontSizes, Box, CircularProgress } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import WithoutButton from '../../Components/WithoutButton';
-import Footer from '../../Components/Footer';
+import { FooterIn, NormalHeaderBar } from '../../Components';
 
 function ServiceAgreementFour() {
   const { id } = useParams();
@@ -37,11 +37,18 @@ function ServiceAgreementFour() {
 
   return (
     <div>
+      <NormalHeaderBar />
       <Grid container spacing={2}>
         <Grid item>
           <Link to={"/ServiceAgreementFive"}>
-            <Button startIcon={<ArrowBackIcon />} sx={{ color: 'rgba(0, 0, 0, 0.6)', fontSize: '20px' }}>
-            </Button>
+          <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" 
+            style={{ width: '40px', 
+            height: '40px', 
+            opacity: '0.6', 
+            margin: '15px', 
+            
+            left: '10px', 
+            top: '10px' }} alt='Back' />
           </Link>
         </Grid>
       </Grid>
@@ -50,7 +57,7 @@ function ServiceAgreementFour() {
         <Grid container className="text" justifyContent="center">
           <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
             <ThemeProvider theme={theme}>
-              <Typography variant='h' sx={{ fontWeight: 'bold', marginTop: '1rem', marginBottom: '1rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic Medium", fontSize:"60px"}}>
+              <Typography variant='h' sx={{ fontWeight: 'bold', marginTop: '1rem', marginBottom: '1rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic Medium", fontSize: "60px" }}>
                 Service Agreement
               </Typography>
             </ThemeProvider>
@@ -87,7 +94,7 @@ function ServiceAgreementFour() {
       </Box>
 
       <br />
-      <Footer />
+      <FooterIn />
     </div>
   );
 }

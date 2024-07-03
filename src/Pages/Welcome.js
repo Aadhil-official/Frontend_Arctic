@@ -9,6 +9,7 @@ import { Grid } from '@mui/material';
 
 const Welcome = () => {
 
+
   // const [tempdata, setTempdata] = useState([]);
   // const location = useLocation();
 
@@ -18,6 +19,9 @@ const Welcome = () => {
   //   }
   // }, [location.state]);
 
+
+
+
   const buttonData = [
     { label: 'Employee Details', link: '/login/welcome/employeelist' },
     { label: 'Item Details', link: '/login/welcome/itemList' },
@@ -26,10 +30,10 @@ const Welcome = () => {
     { label: 'Customer Details', link: '/login/welcome/customerList' },
     { label: 'User Group Details', link: '/login/welcome/userGroupList' },
     { label: 'Job Details' },
-    { label: 'Service Agreement Details' },
+    // { label: 'Job Allocation' },
     { label: 'Calendar' },
-    { label: 'Site Visit Details' },
-    { label: 'Job Allocation' },
+    { label: 'Service Agreement Details', link: '/ServiceAgreementSix' },
+    { label: 'Site Visit Details', link: '/SiteVisitFour' },
   ];
 
   // const theme = responsiveFontSizes(createTheme());

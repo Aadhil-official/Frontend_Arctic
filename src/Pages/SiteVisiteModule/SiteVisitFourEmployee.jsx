@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Grid, Typography, Box, Pagination, InputAdornment, TextField } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import Footer from '../../Components/Footer';
 import SearchIcon from '@mui/icons-material/Search';
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Footer from '../../Components/Footer';
+import { FooterIn, NormalHeaderBar } from '../../Components';
 
 const SiteVisitFourEmployee = () => {
   const [siteVisits, setSiteVisits] = useState([]);
   const [filteredVisits, setFilteredVisits] = useState([]);
   const [startedVisits, setStartedVisits] = useState([]);
   const [endedVisits, setEndedVisits] = useState([]);
-  const [canceledVisits, setCanceledVisits] = useState([]);
+  const [canceledVisits] = useState([]);
   const [completedVisits, setCompletedVisits] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -101,7 +101,7 @@ const SiteVisitFourEmployee = () => {
     //     console.log(response.data);
     //     alert('Site Visit canceled successfully');
     //     setCanceledVisits([...canceledVisits, visitId]);
-        navigate(`/FeedbackForm/${visitId}`, { state: { visitDetails } }); // Navigate to FeedbackForm with visitDetails
+    navigate(`/FeedbackForm/${visitId}`, { state: { visitDetails } }); // Navigate to FeedbackForm with visitDetails
     //   } else {
     //     alert('Now You canceled this site visit.');
     //   }
@@ -142,10 +142,12 @@ const SiteVisitFourEmployee = () => {
 
   return (
     <>
+    <NormalHeaderBar/>
      <Grid container className='back-icon'>
         <Grid item xs={12} textAlign="left">
           <Link to={"/SiteVisitFourEmployee"}>
-            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px', position: 'absolute', left: '10px', top: '10px' }} alt='Back' />
+            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+             style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px',  left: '10px', top: '10px' }} alt='Back' />
           </Link>
         </Grid>
       </Grid>
@@ -177,7 +179,7 @@ const SiteVisitFourEmployee = () => {
               />
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} textAlign="center">
-              <Button
+              {/* <Button
                 variant="outlined"
                 sx={{
                   marginBottom: '3rem',
@@ -189,16 +191,16 @@ const SiteVisitFourEmployee = () => {
                   },
                 }}
               >
-                <Link to="/SiteVisitOne" 
-                style={{
-                  textDecoration: 'none',
-                  color: 'inherit',
-                  fontFamily: 'Franklin Gothic',
-                  fontSize: '18px',
-              }}>
+                <Link to="/SiteVisitOne"
+                  style={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    fontFamily: 'Franklin Gothic',
+                    fontSize: '18px',
+                  }}>
                   Schedule a new Site Visit
                 </Link>
-              </Button>
+              </Button> */}
               <Button
                 variant="outlined"
                 sx={{
@@ -287,7 +289,7 @@ const SiteVisitFourEmployee = () => {
           />
         </Grid>
       {/* </Grid> */}
-      <Footer />
+      <FooterIn />
     </>
   );
 };

@@ -2,8 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../../util/Toastify';
-import { Box, Button, TextField } from '@mui/material';
+import { dismiss, error, loading, success } from '../../util/Toastify';
+import { Box, Button, Checkbox, FormControlLabel, FormGroup, Grid, TextField, Typography } from '@mui/material';
 
 function FormAddUserGroup() {
 
@@ -11,18 +11,19 @@ function FormAddUserGroup() {
     const [groupName, setGroupName] = useState('');
     // const [password, setPassword] = useState('');
     const [groupDescription, setGroupDescription] = useState('');
-    const [relevantPrivileges, setRelevantPrivileges] = useState(''); // State to hold the selected role
+    const [relevantPrivileges, setRelevantPrivileges] = useState([]); // State to hold the selected role
     const [allocatedJobs, setAllocatedJobs] = useState('');
 
     const navigate = useNavigate();
 
     const handleSubmit = () => {
 
+        const loadingId = loading("Creating new user group...");
 
         const validateForm = z.object({
             groupName: z.string().min(1, { message: "Enter group name" }),
             groupDescription: z.string().min(1, { message: "Enter group description" }),
-            relevantPrivileges: z.string().min(1, { message: "Enter relevant privileges" }),
+            relevantPrivileges: z.array(z.string()).min(1, { message: 'Select relevant privileges' }),
             allocatedJobs: z.string().min(1, { message: "Enter allocated jobs date" })
         });
 
@@ -36,12 +37,21 @@ function FormAddUserGroup() {
 
         const result = validateForm.safeParse(groupData);
         if (result.success) {
-            axios.post('http://localhost:8080/api/auth/addUserGroup', groupData)
-                .then(() => {
-                    navigate('/login/welcomeadmin/userGroupListAd');
-                    success('User group added successfully!')
-                })
-                .catch(() => error("User group already exist!"))
+
+            if (groupName === "AdminGroup") {
+                error("You can't create AdminGroup!");
+            } else {
+                axios.post('http://localhost:8080/api/auth/addUserGroup', groupData)
+                    .then(() => {
+                        dismiss(loadingId);
+                        navigate('/login/welcomeadmin/userGroupListAd');
+                        success('User group added successfully!')
+                    })
+                    .catch(() => {
+                        dismiss(loadingId);
+                        error("User group already exist!")
+                    })
+            }
         } else {
             const formattedError = result.error.format();
             if (formattedError.groupName?._errors) {
@@ -57,10 +67,17 @@ function FormAddUserGroup() {
 
     };
 
+    const handleCheckboxChange = (event) => {
+        const value = event.target.value;
+        setRelevantPrivileges((prev) =>
+            prev.includes(value) ? prev.filter((privilege) => privilege !== value) : [...prev, value]
+        );
+    };
+
     const handleReset = () => {
         setGroupName('');
         setGroupDescription('');
-        setRelevantPrivileges('');
+        setRelevantPrivileges([]);
         setAllocatedJobs('');
     }
 
@@ -94,13 +111,150 @@ function FormAddUserGroup() {
                     onChange={(e) => setGroupDescription(e.target.value)}
                 />
 
-                <TextField
-                    label="Relevant Privileges"
-                    type="text"
-                    value={relevantPrivileges}
-                    onChange={(e) => setRelevantPrivileges(e.target.value)}
-                />
-
+                <Grid container textAlign='center' justifyContent='center'>
+                    <Grid item xs={7} textAlign='left' sx={{ opacity: '0.5' }}>
+                        <Typography variant='body1'>
+                            <u>
+                                Relevant Privileges :
+                            </u>
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={2.7}></Grid>
+                    <Grid item xs={6}>
+                        <FormGroup>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={relevantPrivileges.includes('createUser')}
+                                        onChange={handleCheckboxChange}
+                                        value="createUser"
+                                    />
+                                }
+                                label="Create User"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={relevantPrivileges.includes('complain')}
+                                        onChange={handleCheckboxChange}
+                                        value="complain"
+                                    />
+                                }
+                                label="Complain"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={relevantPrivileges.includes('accessEmployee')}
+                                        onChange={handleCheckboxChange}
+                                        value="accessEmployee"
+                                    />
+                                }
+                                label="Access Employee"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={relevantPrivileges.includes('accessItem')}
+                                        onChange={handleCheckboxChange}
+                                        value="accessItem"
+                                    />
+                                }
+                                label="Access Item"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={relevantPrivileges.includes('accessUnit')}
+                                        onChange={handleCheckboxChange}
+                                        value="accessUnit"
+                                    />
+                                }
+                                label="Access Unit"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={relevantPrivileges.includes('accessVehicle')}
+                                        onChange={handleCheckboxChange}
+                                        value="accessVehicle"
+                                    />
+                                }
+                                label="Access Vehicle"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={relevantPrivileges.includes('accessGroup')}
+                                        onChange={handleCheckboxChange}
+                                        value="accessGroup"
+                                    />
+                                }
+                                label="Access Group"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={relevantPrivileges.includes('accessJobAllocation')}
+                                        onChange={handleCheckboxChange}
+                                        value="accessJobAllocation"
+                                    />
+                                }
+                                label="Access Job Allocation"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={relevantPrivileges.includes('accessSiteVisit')}
+                                        onChange={handleCheckboxChange}
+                                        value="accessSiteVisit"
+                                    />
+                                }
+                                label="Access Site Visit"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={relevantPrivileges.includes('accessCalendar')}
+                                        onChange={handleCheckboxChange}
+                                        value="accessCalendar"
+                                    />
+                                }
+                                label="Access Calendar"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={relevantPrivileges.includes('accessServiceAgreement')}
+                                        onChange={handleCheckboxChange}
+                                        value="accessServiceAgreement"
+                                    />
+                                }
+                                label="Access Service Agreement"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={relevantPrivileges.includes('accessJob')}
+                                        onChange={handleCheckboxChange}
+                                        value="accessJob"
+                                    />
+                                }
+                                label="Access Job"
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={relevantPrivileges.includes('accessCustomer')}
+                                        onChange={handleCheckboxChange}
+                                        value="accessCustomer"
+                                    />
+                                }
+                                label="Access Customer"
+                            />
+                        </FormGroup>
+                    </Grid>
+                </Grid>
 
                 <TextField
                     label="Allocated Jobs"

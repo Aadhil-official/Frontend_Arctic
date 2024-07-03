@@ -71,6 +71,34 @@ import {
 import GatePassDetails from "./Pages/SiteVisiteModule/GatePassDetails";
 import GatePassDetailsEmployee from "./Pages/SiteVisiteModule/GatePassDetailsEmployee";
 import GatePassList from "./Pages/SiteVisiteModule/GatePassList";
+// import { EmployeeList, UserEdit, EmployeeListAd, Contacts, Logins, Welcome, ForPassword, Homes, Usercomplaint, Welcomeadmin, Signup, Admcomred, ResetPass, UserView } from './Pages/index';
+// import { ItemLis, ItemListAd, ItemView, ItemEdit, AddItem } from './Pages/Item/index';
+// import './App.css';
+// import {BrowserRouter, Routes,Route} from 'react-router-dom';
+// import ServiceAgreementOne from './Pages/ServiceAgreement/ServiceAgreementOne';
+// import ServiceAgreementTwo from './Pages/ServiceAgreement/ServiceAgreementTwo';
+// import ServiceAgreementFour from './Pages/ServiceAgreement/ServiceAgreementFour';
+// import ServiceAgreementFive from './Pages/ServiceAgreement/ServiceAgreementFive';
+// import ServiceAgreementSix from './Pages/ServiceAgreement/ServiceAgreementSix';
+// import SiteVisitOne from './Pages/SiteVisiteModule/SiteVisitOne';
+// import SiteVisitTwo from './Pages/SiteVisiteModule/SiteVisitTwo';
+// import SiteVisitThree from './Pages/SiteVisiteModule/SiteVisitThree';
+// import SiteVisitFour from './Pages/SiteVisiteModule/SiteVisitFour';
+// import SiteVisitFive from './Pages/SiteVisiteModule/SiteVisitFive';
+// import SiteVisitSix from './Pages/SiteVisiteModule/SiteVisitSix';
+// import { Toaster } from 'react-hot-toast';
+// import SiteVisitDashboard from './Pages/SiteVisiteModule/SiteVisitDashboard';
+// import GatePass from './Pages/SiteVisiteModule/GatePass';
+// import SiteVisitDetails from './Pages/SiteVisiteModule/SiteVisitDetails';
+// import CompletedSiteVisits from './Pages/SiteVisiteModule/CompletedSiteVisits';
+// import FeedbackForm from './Pages/SiteVisiteModule/FeedBackForm';
+// import SiteVisitDashboardEmployee from './Pages/SiteVisiteModule/SiteVisitDashboardEmployee';
+// import ReviewedComplain from './Pages/ReviewedComplain';
+// import { AddUnit, UnitEdit, UnitLis, UnitListAd, UnitView } from './Pages/Unit/Index';
+// import { AddVehicle, VehicleEdit, VehicleLis, VehicleListAd, VehicleView } from './Pages/Vehicle/Index';
+// import { AddCustomer, CustomerEdit, CustomerLis, CustomerListAd, CustomerView } from './Pages/Customer/index';
+// import { AddUserGroup, UserGroupEdit, UserGroupLis, UserGroupListAd, UserGroupView } from './Pages/User Group/index';
+
 
 function App() {
   return (
@@ -225,6 +253,7 @@ function App() {
             path="/ServiceAgreementFour/:id"
             element={<ServiceAgreementFour />}
           ></Route>
+
 
           {/* SITE VISIT */}
           {/* ADMIN */}

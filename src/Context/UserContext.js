@@ -8,16 +8,27 @@ export const UserProvider = ({ children }) => {
     return storedData ? JSON.parse(storedData) : null;
   });
 
+  const [tempdataGroup, setTempdataGroup] = useState(() => {
+    const storedData = sessionStorage.getItem('tempdataGroup');
+    return storedData ? JSON.parse(storedData) : null;
+  });
+
   useEffect(() => {
     if (tempdata) {
       sessionStorage.setItem('tempdata', JSON.stringify(tempdata));
     } else {
       sessionStorage.removeItem('tempdata');
     }
-  }, [tempdata]);
+    
+    if (tempdataGroup) {
+      sessionStorage.setItem('tempdataGroup', JSON.stringify(tempdataGroup));
+    } else {
+      sessionStorage.removeItem('tempdataGroup');
+    }
+  }, [tempdataGroup,tempdata]);
 
   return (
-    <UserContext.Provider value={{ tempdata, setTempdata }}>
+    <UserContext.Provider value={{ tempdata, setTempdata,tempdataGroup,setTempdataGroup }}>
       {children}
     </UserContext.Provider>
   );

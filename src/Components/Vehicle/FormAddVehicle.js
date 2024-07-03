@@ -3,11 +3,11 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../../util/Toastify';
+import { dismiss, error, loading, success } from '../../util/Toastify';
 
 function FormAddVehicle() {
 
-    
+
     const [vehicleType, setVehicleType] = useState('');
     // const [password, setPassword] = useState('');
     const [vehicleNumber, setVehicleNumber] = useState();
@@ -17,6 +17,7 @@ function FormAddVehicle() {
 
     const handleSubmit = () => {
 
+        const loadingId = loading("Adding new vehicle...");
 
         const validateForm = z.object({
             vehicleType: z.string().min(1, { message: "Enter vehicle type" }),
@@ -34,10 +35,14 @@ function FormAddVehicle() {
         if (result.success) {
             axios.post('http://localhost:8080/api/auth/addVehicle', userData)
                 .then(() => {
+                    dismiss(loadingId);
                     navigate('/login/welcomeadmin/vehicleListAd');
                     success('Vehicle added successfully!')
                 })
-                .catch(() => error("Vehicle already exist!"))
+                .catch(() => {
+                    dismiss(loadingId);
+                    error("Vehicle already exist!")
+                })
         } else {
             const formattedError = result.error.format();
             if (formattedError.vehicleType?._errors) {

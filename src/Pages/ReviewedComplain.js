@@ -120,14 +120,14 @@ function ReviewedComplain() {
                                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign='left'>
                                     <ThemeProvider theme={responsiveFontSizes(createTheme())}>
                                         <Typography variant="h6" component="h2">
-                                            From: {complaindata.reviewedComplain.username}
+                                            From: {complaindata.appUser.username}
                                         </Typography>
                                     </ThemeProvider>
                                 </Grid>
                                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign='left'>
                                     <ThemeProvider theme={responsiveFontSizes(createTheme())}>
                                         <Typography variant="h6" component="h2">
-                                            User Group: {complaindata.reviewedComplain.usergroup}
+                                            User Group: {complaindata.appUser.usergroup}
                                         </Typography>
                                     </ThemeProvider>
                                 </Grid>

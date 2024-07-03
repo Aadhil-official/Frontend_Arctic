@@ -4,10 +4,17 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+//import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+//import Footer from "../../Components/Footer";
+//import Time from "../../Components/SiteVisitComponents/Time";
+// import { saveAs } from "file-saver";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Footer from "../../Components/Footer";
-import Time from "../../Components/SiteVisitComponents/Time";
+import Time from "../../Components/SiteVisitComponents/Time"; // Adjust the path as needed
+import GatePass from "./GatePass"; // Adjust the path as needed
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { FooterIn, NormalHeaderBar } from "../../Components";
 
 const SiteVisitOne = () => {
   const [todayDate, setTodayDate] = useState("");
@@ -117,12 +124,21 @@ const SiteVisitOne = () => {
   };
 
   return (
+    <>
+    <NormalHeaderBar/>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2} justifyContent="center">
           <Grid item xs={12} style={{ textAlign: "left", margin: "1rem" }}>
             <Link to={"/SiteVisitDashboard"}>
-              <ArrowBackIcon style={{ fontSize: "40px", opacity: "0.6", paddingRight: "24rem" }} />
+            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" 
+            style={{ width: '40px', 
+            height: '40px', 
+            opacity: '0.6', 
+            margin: '15px', 
+            
+            left: '10px', 
+            top: '10px' }} alt='Back' />
             </Link>
           </Grid>
           <Grid item xs={12}>
@@ -278,8 +294,9 @@ const SiteVisitOne = () => {
         </Grid>
       )}
 
-      <Footer />
-    </LocalizationProvider>
+    </LocalizationProvider><br/><br/>
+    <FooterIn />
+    </>
   );
 };
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../../util/Toastify';
+import { dismiss, error, loading, success } from '../../util/Toastify';
 
 function FormVehicleEdit({ vehicle }) {
 
@@ -17,6 +17,7 @@ function FormVehicleEdit({ vehicle }) {
 
     const handleSubmit = () => {
 
+        const loadingId = loading("Updating vehicle...");
 
         const validateForm = z.object({
             vehicleType: z.string().min(1, { message: "Enter vehicle type" }),
@@ -43,10 +44,12 @@ function FormVehicleEdit({ vehicle }) {
         ) {
             axios.put(`http://localhost:8080/api/auth/updateVehicle`, updatedVehicle)
                 .then(() => {
+                    dismiss(loadingId);
                     success("Vehicle updated successfully");
                     navigate('/login/welcomeadmin/vehicleListAd');
                 })
                 .catch(() => {
+                    dismiss(loadingId);
                     const formattedError = result.error.format();
                     if (formattedError.vehicleType?._errors) {
                         error(String(formattedError.vehicleType?._errors));

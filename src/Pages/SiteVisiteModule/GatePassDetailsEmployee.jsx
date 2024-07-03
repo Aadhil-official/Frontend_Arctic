@@ -14,6 +14,7 @@ import {
 import Footer from "../../Components/Footer";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { FooterIn, NormalHeaderBar } from '../../Components';
 
 function GatePassDetailsEmployee() {
   const { id } = useParams();
@@ -79,22 +80,18 @@ function GatePassDetailsEmployee() {
 
   return (
     <>
+    <NormalHeaderBar/>
       <Grid container className="back-icon">
         <Grid item xs={12} textAlign="left">
           <Link to={`/SiteVisitThree/${id}`}>
-            <img
-              src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
-              style={{
-                width: "40px",
-                height: "40px",
-                opacity: "0.6",
-                margin: "5px",
-                position: "absolute",
-                left: "10px",
-                top: "10px",
-              }}
-              alt="Back"
-            />
+          <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" 
+            style={{ width: '40px', 
+            height: '40px', 
+            opacity: '0.6', 
+            margin: '15px', 
+            
+            left: '10px', 
+            top: '10px' }} alt='Back' />
           </Link>
         </Grid>
       </Grid>
@@ -296,7 +293,7 @@ value={`Vehicle Number: ${gatePassDetails && gatePassDetails.vehicleNumber}`}
         </Grid>
       )}
 
-      <Footer />
+      <FooterIn />
     </>
   );
 }

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../util/Toastify';
+import { dismiss, error, loading, success } from '../util/Toastify';
 
 export default function FormUpdate({ user }) {
 
@@ -27,13 +27,31 @@ export default function FormUpdate({ user }) {
     // console.log("usergroup:", usergroup);
     // console.log("tel:", tel);
 
+
+    useEffect(() => {
+        if (usergroup === 'AdminGroup') {
+            setRole('admin');
+        }
+        axios.get("http://localhost:8080/api/auth/getAllUserGroups")
+            .then((response) => {
+                setUsergroup(response.data);
+            })
+            .catch((error) => {
+                console.error("Error fetching user groups:", error);
+            });
+    }, [usergroup]);
+
     // if (user) {
     //     console.log("user is there");
     // }
     // navigate('/');
     const handleSubmit = () => {
 
+        const loadingId = loading("Updating details.....");
+
         const allowedRoles = ['admin', 'user'];
+
+
 
         const validateForm = z.object({
             username: z.string().min(1, { message: "Enter your name" }),
@@ -77,14 +95,17 @@ export default function FormUpdate({ user }) {
             ) {
                 axios.put(`http://localhost:8080/api/auth/updateUser`, updatedUser)
                     .then(() => {
+                        dismiss(loadingId);
                         success("User updated successfully");
                         navigate('/login/welcomeadmin/employeelistad');
                     }).catch(() => error("Username or email already exist!"))
             } else {
+                dismiss(loadingId);
                 error("No changes detected!");
                 navigate('/login/welcomeadmin/employeelistad');
             }
         } else {
+            dismiss(loadingId);
             const formattedError = result.error.format();
             if (formattedError.username?._errors) {
                 error(String(formattedError.username?._errors));
@@ -133,11 +154,17 @@ export default function FormUpdate({ user }) {
                 />
 
                 <TextField
+                    select
                     label="User group"
-                    type="text"
                     value={usergroup}
                     onChange={(e) => setUsergroup(e.target.value)}
-                />
+                    SelectProps={{ native: true }}
+                >
+                    <option value=""></option>
+                    {usergroup.map((group, index) => (
+                        <option key={index} value={group.groupName}>{group.groupName}</option>
+                    ))}
+                </TextField>
 
 
                 <TextField
@@ -159,6 +186,9 @@ export default function FormUpdate({ user }) {
                     label="Designation"
                     onChange={(e) => setRole(e.target.value)}
                     value={role}
+                    InputProps={{
+                        readOnly: usergroup === 'AdminGroup'
+                    }}
                     // onChange={(e) => setRole(e.target.value.JSON.stringify(e))}
                     SelectProps={{ native: true }}
                 >

@@ -1,31 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-import { error, success } from '../util/Toastify';
+import { dismiss, error, loading, success } from '../util/Toastify';
 
 export default function FormSignup() {
+
+  const [loadingToastId, setLoadingToastId] = useState(null);
+
   const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState(''); // State to hold the selected role
   const [address, setAddress] = useState('');
   const [usergroup, setUsergroup] = useState('');
   const [tel, setTel] = useState('');
+  const [usergroups, setUsergroups] = useState([]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (usergroup === 'AdminGroup') {
+      setRole('admin');
+    }
+    axios.get("http://localhost:8080/api/auth/getAllUserGroups")
+      .then((response) => {
+        setUsergroups(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user groups:", error);
+      });
+  }, [usergroup]);
+
   const handleSubmit = () => {
+
+    const loadingId = loading("Creating new user...");
 
     const allowedRoles = ['admin', 'user'];
 
     const validateForm = z.object({
       username: z.string().min(1, { message: "Enter your name" }),
       address: z.string().min(1, { message: "Enter your address" }),
-      tel: z.string().min(1, { message: "Enter your contact number" }),
-      // password: z.string().min(8, 'Password must be at least 8 characters long'),
+      tel: z.string().min(10, { message: "Enter your valid contact number" }).max(12, { message: "Enter your valid contact number" }),
+      usergroup: z.string().min(1, 'Enter the user group'),
       email: z.string().email('Invalid email address'),
       roles: z.array(z.string()).nonempty('Please select a role!').refine((role) => allowedRoles.includes(role[0]), {
         message: 'Role is not defined.'
@@ -34,7 +52,6 @@ export default function FormSignup() {
 
     const userData = {
       username: username,
-      // password: password,
       email: email,
       address: address,
       usergroup: usergroup,
@@ -46,11 +63,16 @@ export default function FormSignup() {
     if (result.success) {
       axios.post('http://localhost:8080/api/auth/signup', userData)
         .then(() => {
-          navigate('/');
+          dismiss(loadingId);
+          navigate('/login/welcomeadmin');
           success('User created successfully!')
         })
-        .catch(() => error("Username or email already exist!"))
+        .catch(() => {
+          dismiss(loadingId);
+          error("Username or email already exist!")
+        })
     } else {
+      dismiss(loadingToastId);
       const formattedError = result.error.format();
       if (formattedError.username?._errors) {
         error(String(formattedError.username?._errors));
@@ -88,6 +110,8 @@ export default function FormSignup() {
         noValidate
         autoComplete="off"
       >
+
+        {/* {console.log("asfcfcghas.....dat....."+usergroups)} */}
         <TextField
           label="Username"
           type='text'
@@ -102,13 +126,6 @@ export default function FormSignup() {
           rows={4}
           value={address}
           onChange={(e) => setAddress(e.target.value)}
-        />
-
-        <TextField
-          label="User group"
-          type="text"
-          value={usergroup}
-          onChange={(e) => setUsergroup(e.target.value)}
         />
 
 
@@ -130,13 +147,31 @@ export default function FormSignup() {
           select
           label="Designation"
           value={role}
+          InputProps={{
+            readOnly: usergroup === 'AdminGroup'
+          }}
           onChange={(e) => setRole(e.target.value)}
           SelectProps={{ native: true }}
         >
           <option value=""></option>
           <option value="admin">Admin</option>
           <option value="user">User</option>
-        </TextField><br /><br />
+        </TextField>
+
+        <TextField
+          select
+          label="User group"
+          value={usergroup}
+          onChange={(e) => setUsergroup(e.target.value)}
+          SelectProps={{ native: true }}
+        >
+          <option value=""></option>
+          {usergroups.map((group, index) => (
+            <option key={index} value={group.groupName}>{group.groupName}</option>
+          ))}
+        </TextField>
+
+        <br /><br />
         <Button
           variant="contained"
           onClick={handleSubmit}
