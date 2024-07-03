@@ -14,7 +14,7 @@ export default function FormUpdate({ user }) {
     const [email, setEmail] = useState(user ? user.email : '');
     const [role, setRole] = useState(user && user.roles ? user.roles[0].name.toLowerCase() : [' ']); // Check if user and user.roles exist
     const [address, setAddress] = useState(user ? user.address : '');
-    const [usergroup, setUsergroup] = useState(user ? user.usergroup : '');
+    const [usergroup, setUsergroup] = useState([]);
     const [tel, setTel] = useState(user ? user.tel : '')
 
     const navigate = useNavigate();
@@ -160,8 +160,8 @@ export default function FormUpdate({ user }) {
                     onChange={(e) => setUsergroup(e.target.value)}
                     SelectProps={{ native: true }}
                 >
-                    <option value=""></option>
-                    {usergroup.map((group, index) => (
+                    <option value={user.usergroup}>{user.usergroup}</option>
+                    {usergroup.filter(group => group.groupName !== user.usergroup).map((group, index) => (
                         <option key={index} value={group.groupName}>{group.groupName}</option>
                     ))}
                 </TextField>
