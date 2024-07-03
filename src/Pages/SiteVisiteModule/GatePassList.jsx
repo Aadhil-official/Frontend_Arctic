@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography, createTheme, responsiveFontSizes, Box, IconButton } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
@@ -17,25 +17,25 @@ const GatePassList = () => {
 
   const navigate = useNavigate();
 
-//   useEffect(() => {
-//     axios.get('http://localhost:8080/api/v1/siteVisit/fetchGatePass')
-//       .then(response => {
-//         console.log(response.data);
-//         setGatePasses(response.data);
-//       })
-//       .catch(error => {
-//         console.error('Error fetching gate passes:', error);
-//       });
-//   }, []);
+  //   useEffect(() => {
+  //     axios.get('http://localhost:8080/api/v1/siteVisit/fetchGatePass')
+  //       .then(response => {
+  //         console.log(response.data);
+  //         setGatePasses(response.data);
+  //       })
+  //       .catch(error => {
+  //         console.error('Error fetching gate passes:', error);
+  //       });
+  //   }, []);
 
-axios.get('http://localhost:8080/api/v1/gatePass/fetchGatePass')
-  .then(response => {
-    console.log(response.data);
-    setGatePasses(response.data);
-  })
-  .catch(error => {
-    console.error('Error fetching gate passes:', error);
-  });
+  axios.get('http://localhost:8080/api/v1/gatePass/fetchGatePass')
+    .then(response => {
+      console.log(response.data);
+      setGatePasses(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching gate passes:', error);
+    });
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);

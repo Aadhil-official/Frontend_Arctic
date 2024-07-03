@@ -11,7 +11,7 @@ import { FooterIn, NormalHeaderBar } from '../../Components';
 
 const SiteVisitDashboard = () => {
     const [hoveredButton, setHoveredButton] = useState(null);
-    const [hoveredIcon, setHoveredIcon] = useState(false);
+    // const [hoveredIcon, setHoveredIcon] = useState(false);
 
     const handleMouseEnter = (buttonLabel) => {
         setHoveredButton(buttonLabel);
@@ -21,13 +21,13 @@ const SiteVisitDashboard = () => {
         setHoveredButton(null);
     };
 
-    const handleIconMouseEnter = () => {
-        setHoveredIcon(true);
-    };
+    // const handleIconMouseEnter = () => {
+    //     setHoveredIcon(true);
+    // };
 
-    const handleIconMouseLeave = () => {
-        setHoveredIcon(false);
-    };
+    // const handleIconMouseLeave = () => {
+    //     setHoveredIcon(false);
+    // };
 
     const buttonStyle = {
         width: '50%',
@@ -49,14 +49,14 @@ const SiteVisitDashboard = () => {
         backgroundColor: '#0056b3'
     };
 
-    const iconStyle = {
-        position: 'absolute',
-        top: '10px', // Adjust as needed for vertical alignment
-        left: '10px', // Adjust as needed for horizontal alignment
-        cursor: 'pointer',
-        color: hoveredIcon ? '#0056b3' : 'gray',
-        transition: 'color 0.3s'
-    };
+    // const iconStyle = {
+    //     position: 'absolute',
+    //     top: '10px', // Adjust as needed for vertical alignment
+    //     left: '10px', // Adjust as needed for horizontal alignment
+    //     cursor: 'pointer',
+    //     color: hoveredIcon ? '#0056b3' : 'gray',
+    //     transition: 'color 0.3s'
+    // };
 
     const sectionStyle = {
         display: 'flex',

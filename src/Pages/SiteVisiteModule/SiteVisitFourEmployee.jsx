@@ -152,7 +152,7 @@ const SiteVisitFourEmployee = () => {
         </Grid>
       </Grid>
         <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'} className='text'>
-          <Typography variant='h3' sx={{ marginTop: '-3rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic Medium", textAlign: "center", fontSize: "60px" ,marginTop:"1rem"}}>
+          <Typography variant='h3' sx={{ marginTop: '-3rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic Medium", textAlign: "center", fontSize: "60px" }}>{/*,marginTop:"1rem"*/}
             Scheduled Site Visits
           </Typography>
         </Grid>

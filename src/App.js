@@ -1,26 +1,26 @@
-import {
-  EmployeeList,
-  UserEdit,
-  EmployeeListAd,
-  Contacts,
-  Logins,
-  Welcome,
-  ForPassword,
-  Homes,
-  Usercomplaint,
-  Welcomeadmin,
-  Signup,
-  Admcomred,
-  ResetPass,
-  UserView,
-} from "./Pages/index";
-import {
-  ItemLis,
-  ItemListAd,
-  ItemView,
-  ItemEdit,
-  AddItem,
-} from "./Pages/Item/index";
+// import {
+//   EmployeeList,
+//   UserEdit,
+//   EmployeeListAd,
+//   Contacts,
+//   Logins,
+//   Welcome,
+//   ForPassword,
+//   Homes,
+//   Usercomplaint,
+//   Welcomeadmin,
+//   Signup,
+//   Admcomred,
+//   ResetPass,
+//   UserView,
+// } from "./Pages/index";
+// import {
+//   ItemLis,
+//   ItemListAd,
+//   ItemView,
+//   ItemEdit,
+//   AddItem,
+// } from "./Pages/Item/index";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ServiceAgreementOne from "./Pages/ServiceAgreement/ServiceAgreementOne";
@@ -39,35 +39,35 @@ import SiteVisitDashboard from "./Pages/SiteVisiteModule/SiteVisitDashboard";
 import GatePass from "./Pages/SiteVisiteModule/GatePass";
 import SiteVisitDetails from "./Pages/SiteVisiteModule/SiteVisitDetails";
 import FeedbackForm from "./Pages/SiteVisiteModule/FeedBackForm";
-import ReviewedComplain from "./Pages/ReviewedComplain";
-import {
-  AddUnit,
-  UnitEdit,
-  UnitLis,
-  UnitListAd,
-  UnitView,
-} from "./Pages/Unit/Index";
-import {
-  AddVehicle,
-  VehicleEdit,
-  VehicleLis,
-  VehicleListAd,
-  VehicleView,
-} from "./Pages/Vehicle/Index";
-import {
-  AddCustomer,
-  CustomerEdit,
-  CustomerLis,
-  CustomerListAd,
-  CustomerView,
-} from "./Pages/Customer/index";
-import {
-  AddUserGroup,
-  UserGroupEdit,
-  UserGroupLis,
-  UserGroupListAd,
-  UserGroupView,
-} from "./Pages/User Group/index";
+// import ReviewedComplain from "./Pages/ReviewedComplain";
+// import {
+//   AddUnit,
+//   UnitEdit,
+//   UnitLis,
+//   UnitListAd,
+//   UnitView,
+// } from "./Pages/Unit/Index";
+// import {
+//   AddVehicle,
+//   VehicleEdit,
+//   VehicleLis,
+//   VehicleListAd,
+//   VehicleView,
+// } from "./Pages/Vehicle/Index";
+// import {
+//   AddCustomer,
+//   CustomerEdit,
+//   CustomerLis,
+//   CustomerListAd,
+//   CustomerView,
+// } from "./Pages/Customer/index";
+// import {
+//   AddUserGroup,
+//   UserGroupEdit,
+//   UserGroupLis,
+//   UserGroupListAd,
+//   UserGroupView,
+// } from "./Pages/User Group/index";
 import GatePassDetails from "./Pages/SiteVisiteModule/GatePassDetails";
 import GatePassDetailsEmployee from "./Pages/SiteVisiteModule/GatePassDetailsEmployee";
 import GatePassList from "./Pages/SiteVisiteModule/GatePassList";
@@ -106,144 +106,13 @@ function App() {
       <Toaster />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Homes />} />
-          <Route path="/contact" element={<Contacts />} />
-          <Route path="/login" element={<Logins />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login/forgetpassword" element={<ForPassword />} />
-          <Route path="/login/welcome" element={<Welcome />} />
-          <Route
-            path="/login/welcome/employeelist"
-            element={<EmployeeList />}
-          />
-          <Route
-            path="/login/welcome/employeelist/view/:id"
-            element={<UserView />}
-          />
-          <Route
-            path="/login/welcomeadmin/employeelistad"
-            element={<EmployeeListAd />}
-          />
-          <Route
-            path="/login/welcomeadmin/employeelistad/edit/:id"
-            element={<UserEdit />}
-          />
-          <Route path="/login/welcomeadmin" element={<Welcomeadmin />} />
-          <Route path="/login/complaint" element={<Usercomplaint />} />
-          <Route path="/login/complaintread" element={<Admcomred />} />
-          <Route
-            path="/login/complaintread/reviewedcomplain"
-            element={<ReviewedComplain />}
-          />
-          <Route
-            path="/login/forgetpassword/resetpass"
-            element={<ResetPass />}
-          />
-          <Route path="/login/welcome/itemList" element={<ItemLis />} />
-          <Route
-            path="/login/welcomeadmin/itemListAd"
-            element={<ItemListAd />}
-          />
-          <Route
-            path="/login/welcomeadmin/itemListAd/addItem"
-            element={<AddItem />}
-          />
-          <Route
-            path="/login/welcome/itemList/view/:id"
-            element={<ItemView />}
-          />
-          <Route
-            path="/login/welcomeadmin/itemListAd/edit/:id"
-            element={<ItemEdit />}
-          />
-          <Route path="/login/welcome/unitList" element={<UnitLis />} />
-          <Route
-            path="/login/welcomeadmin/unitListAd"
-            element={<UnitListAd />}
-          />
-          <Route
-            path="/login/welcomeadmin/unitListAd/addUnit"
-            element={<AddUnit />}
-          />
-          <Route
-            path="/login/welcome/unitList/view/:id"
-            element={<UnitView />}
-          />
-          <Route
-            path="/login/welcomeadmin/unitListAd/edit/:id"
-            element={<UnitEdit />}
-          />
-          <Route path="/login/welcome/vehicleList" element={<VehicleLis />} />
-          <Route
-            path="/login/welcomeadmin/vehicleListAd"
-            element={<VehicleListAd />}
-          />
-          <Route
-            path="/login/welcomeadmin/vehicleListAd/addvehicle"
-            element={<AddVehicle />}
-          />
-          <Route
-            path="/login/welcome/vehicleList/view/:id"
-            element={<VehicleView />}
-          />
-          <Route
-            path="/login/welcomeadmin/vehicleListAd/edit/:id"
-            element={<VehicleEdit />}
-          />
-          <Route path="/login/welcome/customerList" element={<CustomerLis />} />
-          <Route
-            path="/login/welcomeadmin/customerListAd"
-            element={<CustomerListAd />}
-          />
-          <Route
-            path="/login/welcomeadmin/customerListAd/addcustomer"
-            element={<AddCustomer />}
-          />
-          <Route
-            path="/login/welcome/customerList/view/:id"
-            element={<CustomerView />}
-          />
-          <Route
-            path="/login/welcomeadmin/customerListAd/edit/:id"
-            element={<CustomerEdit />}
-          />
-          <Route
-            path="/login/welcome/userGroupList"
-            element={<UserGroupLis />}
-          />
-          <Route
-            path="/login/welcomeadmin/userGroupListAd"
-            element={<UserGroupListAd />}
-          />
-          <Route
-            path="/login/welcomeadmin/userGroupListAd/adduserGroup"
-            element={<AddUserGroup />}
-          />
-          <Route
-            path="/login/welcome/userGroupList/view/:id"
-            element={<UserGroupView />}
-          />
-          <Route
-            path="/login/welcomeadmin/userGroupListAd/edit/:id"
-            element={<UserGroupEdit />}
-          />
-
           {/* <Hasaras' Part> */}
           {/* SERVICE AGREEMENT */}
           {/* for ADMIN */}
-          <Route
-            path="/ServiceAgreementSix"
-            element={<ServiceAgreementSix />}
-          ></Route>
-          <Route
-            path="/ServiceAgreementTwo/:id"
-            element={<ServiceAgreementTwo />}
-          ></Route>
+          <Route path="/ServiceAgreementSix" element={<ServiceAgreementSix />}></Route>
+          <Route path="/ServiceAgreementTwo/:id" element={<ServiceAgreementTwo />}></Route>
           {/* Add new ServiceAgreement */}
-          <Route
-            path="/ServiceAgreementOne"
-            element={<ServiceAgreementOne />}
-          ></Route>
+          <Route path="/ServiceAgreementOne" element={<ServiceAgreementOne />}></Route>
           {/* for EMPLOYEE */}
           <Route
             path="/ServiceAgreementFive"
@@ -257,10 +126,7 @@ function App() {
 
           {/* SITE VISIT */}
           {/* ADMIN */}
-          <Route
-            path="/SiteVisitDashboard"
-            element={<SiteVisitDashboard />}
-          ></Route>
+          <Route path="/SiteVisitDashboard" element={<SiteVisitDashboard />}></Route>
           {/* SCHEDULE SITE VISIT */}
           <Route path="/SiteVisitOne" element={<SiteVisitOne />}></Route>
           {/* ADD GATE PASS EMPLOYEES */}
@@ -269,32 +135,15 @@ function App() {
           <Route path="/SiteVisitFive" element={<SiteVisitFive />}></Route>
           {/* UPDATE SITE VISIT */}
           <Route path="/SiteVisitSix" element={<SiteVisitSix />}></Route>
-          <Route
-            path="/SiteVisitDetails/:id"
-            element={<SiteVisitDetails />}
-          ></Route>
+          <Route path="/SiteVisitDetails/:id" element={<SiteVisitDetails />}></Route>
           {/* PRINT GATE PASS */}
-          <Route
-            path="/GatePassDetails/:id"
-            element={<GatePassDetails />}
-          ></Route>
+          <Route path="/GatePassDetails/:id" element={<GatePassDetails />}></Route>
           {/* EMPLOYEE */}
           {/* SCHEDULED SITE VISITS START/END/FEEDBACK FORM */}
-          <Route
-            path="/SiteVisitFourEmployee"
-            element={<SiteVisitFourEmployee />}
-          ></Route>
+          <Route path="/SiteVisitFourEmployee" element={<SiteVisitFourEmployee />}></Route>
           {/* DETAILS */}
-          <Route
-            path="/SiteVisitThree/:id"
-            element={<SiteVisitThree />}
-          ></Route>
-          {/* PRINT GATE PASS */}
-          <Route
-            path="/GatePassDetailsEmployee/:id"
-            element={<GatePassDetailsEmployee />}
-          ></Route>
-          {/* FEEDBACK FORM */}
+          <Route path="/SiteVisitThree/:id" element={<SiteVisitThree />}></Route>
+          <Route path="/GatePassDetailsEmployee/:id" element={<GatePassDetailsEmployee />}></Route>
           <Route path="/FeedBackForm/:id" element={<FeedbackForm />}></Route>
 
           <Route path="/SiteVisitTwo" element={<SiteVisitTwo />}></Route>
