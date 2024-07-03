@@ -8,11 +8,11 @@ import { Link, useNavigate } from "react-router-dom";
 //import Footer from "../../Components/Footer";
 //import Time from "../../Components/SiteVisitComponents/Time";
 // import { saveAs } from "file-saver";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+// import html2canvas from "html2canvas";
+// import jsPDF from "jspdf";
+// import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Time from "../../Components/SiteVisitComponents/Time"; // Adjust the path as needed
-import GatePass from "./GatePass"; // Adjust the path as needed
+// import GatePass from "./GatePass"; // Adjust the path as needed
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { FooterIn, NormalHeaderBar } from "../../Components";
 

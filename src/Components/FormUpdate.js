@@ -9,13 +9,14 @@ import { dismiss, error, loading, success } from '../util/Toastify';
 
 export default function FormUpdate({ user }) {
 
+    
     const [id] = useState(user ? user.id : '');
     const [username, setUsername] = useState(user ? user.username : ''); // Initialize with user.username if user exists
     const [email, setEmail] = useState(user ? user.email : '');
     const [role, setRole] = useState(user && user.roles ? user.roles[0].name.toLowerCase() : [' ']); // Check if user and user.roles exist
     const [address, setAddress] = useState(user ? user.address : '');
-    const [usergroup, setUsergroup] = useState(user ? user.usergroup : '');
-    const [tel, setTel] = useState(user ? user.tel : '')
+    const [usergroup, setUsergroup] = useState([]);
+    const [tel, setTel] = useState(user ? user.tel : '');
 
     const navigate = useNavigate();
 
@@ -41,8 +42,9 @@ export default function FormUpdate({ user }) {
             });
     }, [usergroup]);
 
+
     // if (user) {
-    //     console.log("user is there");
+        // console.log("user is there",test);
     // }
     // navigate('/');
     const handleSubmit = () => {
@@ -160,8 +162,8 @@ export default function FormUpdate({ user }) {
                     onChange={(e) => setUsergroup(e.target.value)}
                     SelectProps={{ native: true }}
                 >
-                    <option value=""></option>
-                    {usergroup.map((group, index) => (
+                    <option value={user.usergroup}>{user.usergroup}</option>
+                    {usergroup.filter(group => group.groupName !== user.usergroup).map((group, index) => (
                         <option key={index} value={group.groupName}>{group.groupName}</option>
                     ))}
                 </TextField>

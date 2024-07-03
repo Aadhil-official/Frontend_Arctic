@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Button, Grid, Typography, Box, Pagination, InputAdornment, TextField } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
-import Footer from '../../Components/Footer';
 import { FooterIn, NormalHeaderBar } from '../../Components';
 
 const SiteVisitFourEmployee = () => {

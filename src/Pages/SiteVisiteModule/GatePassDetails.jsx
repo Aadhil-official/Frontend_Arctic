@@ -11,7 +11,6 @@ import {
   createTheme,
   responsiveFontSizes,
 } from "@mui/material";
-import Footer from "../../Components/Footer";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { FooterIn, NormalHeaderBar } from '../../Components';
