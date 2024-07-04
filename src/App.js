@@ -123,6 +123,7 @@ function App() {
           <Route path="/base/*" element={<Base />} />
 
 
+
         </Routes>
       </BrowserRouter>
     </>

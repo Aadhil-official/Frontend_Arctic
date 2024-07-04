@@ -11,7 +11,7 @@ import Reminder from './Reminder';
 function Create() {
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(dayjs());
-  const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const getEvents = async () => {
@@ -34,27 +34,26 @@ function Create() {
     setSelectedDate(date);
   };
 
-  const openSidebar = () => {
-    setOpenSidebarToggle(!openSidebarToggle);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   return (
-      <div className="grid-container">
+      <div className="app">
           <Sidebar  
-            openSidebarToggle={openSidebarToggle} 
-            OpenSidebar={openSidebar} 
+           isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} 
           />
 
           <header className="header">
             <Header 
               selectedDate={selectedDate}
               handleDatePickerChange={handleDatePickerChange}
-              OpenSidebar={openSidebar}
+              toggleSidebar={toggleSidebar}
             />
           </header>
 
-          <main className="main-container">
-            <Routes>
+          <main className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
+          <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/calendar" element={<Calendar 
                           selectedDate={selectedDate.toDate()}
