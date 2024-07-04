@@ -1,6 +1,6 @@
 import { Box, Button, TextField } from '@mui/material'
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { dismiss, error, loading, success } from '../../util/Toastify';
@@ -15,8 +15,20 @@ function FormAddUnit() {
     const [owner, setOwner] = useState('');
     const [warrantyPeriod, setWarrantyPeriod] = useState('');
     const [unitPrice, setUnitPrice] = useState('');
+    const [todaydate, setTodaydate] = useState('');
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const getCurrentDate = () => {
+            const currentDate = new Date();
+            const year = currentDate.getFullYear();
+            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Month starts from 0
+            const day = currentDate.getDate().toString().padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        };
+        setTodaydate(getCurrentDate());
+    }, []);
 
     const handleSubmit = () => {
 
@@ -26,8 +38,7 @@ function FormAddUnit() {
             indoorSerial: z.string().min(1, { message: "Enter indoor serial" }),
             outdoorSerial: z.string().min(1, { message: "Enter outdoor serial" }),
             modelName: z.string().min(1, { message: "Enter model name" }),
-            // password: z.string().min(8, 'Password must be at least 8 characters long'),
-            commissionedDate: z.string().min(1, { message: "Enter commissioned date" }),
+            commissionedDate: z.string().date().min(1, { message: "Enter commissioned date" }),
             owner: z.string().min(1, { message: "Enter owner" }),
             warrantyPeriod: z.string().min(1, { message: "Enter warranty period" }),
             unitPrice: z.string().min(1, { message: "Enter unit price" })
@@ -35,7 +46,6 @@ function FormAddUnit() {
 
         const userData = {
             indoorSerial: indoorSerial,
-            // password: password,
             outdoorSerial: outdoorSerial,
             modelName: modelName,
             commissionedDate: commissionedDate,
@@ -46,16 +56,21 @@ function FormAddUnit() {
 
         const result = validateForm.safeParse(userData);
         if (result.success) {
-            axios.post('http://localhost:8080/api/auth/addUnit', userData)
-                .then(() => {
-                    dismiss(loadingId);
-                    navigate('/login/welcomeadmin/unitListAd');
-                    success('Unit added successfully!')
-                })
-                .catch(() => {
-                    dismiss(loadingId);
-                    error("Unit already exist!")
-                })
+            if (todaydate <= commissionedDate) {
+                axios.post('http://localhost:8080/api/auth/addUnit', userData)
+                    .then(() => {
+                        dismiss(loadingId);
+                        navigate('/login/welcomeadmin/unitListAd');
+                        success('Unit added successfully!')
+                    })
+                    .catch(() => {
+                        dismiss(loadingId);
+                        error("Unit already exist!")
+                    })
+            } else {
+                dismiss(loadingId);
+                error("Date must be presant or future...!");
+            }
         } else {
             const formattedError = result.error.format();
             if (formattedError.indoorSerial?._errors) {

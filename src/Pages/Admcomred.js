@@ -6,9 +6,13 @@ import '../Style/Admcomread.css';
 import { NormalHeaderBar } from '../Components/index'
 import axios from 'axios';
 import { success } from '../util/Toastify';
+import { useUser } from '../Context/UserContext';
+import Sidebar from '../Components/Calendar/Sidebar';
 
 function Admcomred() {
 
+  const { tempdata } = useUser();
+  // const [role,set]
   const [complaindata, setComplaindata] = React.useState([]);
   const [openModalIndex, setOpenModalIndex] = useState(null);
   // const [tempdata, setTempdata] = useState([]);
@@ -37,6 +41,9 @@ function Admcomred() {
     //   setComplaintdatasend(location.state.complaintdatasend);
     // }
   }, []);//location.state
+
+
+  const role = tempdata.userInfo.roles[0]; // This will be 'ADMIN'
 
   const handleView = () => {
     axios.post('http://localhost:8080/api/auth/findcomplaint')
@@ -108,6 +115,7 @@ function Admcomred() {
   return (
     <>
       <NormalHeaderBar />
+      {role === 'ADMIN' && <Sidebar />}
       <Grid container spacing={2} sx={{ position: 'fixed', alignItems: 'center' }}>
         <Grid item xs={6} sx={{ alignItems: 'center' }}>
           <Link to={"/login/welcomeadmin"} >{/* state={{ tempdata }}*/}

@@ -11,7 +11,7 @@ import { useUser } from '../Context/UserContext';
 
 export default function FormPropsTextFields() {
 
-  const { setTempdata,setTempdataGroup } = useUser();
+  const { setTempdata, tempdata, setTempdataGroup } = useUser();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -36,9 +36,9 @@ export default function FormPropsTextFields() {
       axios.post('http://localhost:8080/api/auth/signin', data)
         .then((response) => {
           dismiss(loadingId);
-          const tempdata = response.data;
-          setTempdata(tempdata.userInfo);
-          setTempdataGroup(tempdata.userGroup);
+          const tempdata1 = response.data;
+          setTempdata(tempdata1.userInfo);
+          setTempdataGroup(tempdata1.userGroup);
           // const token = tempdata.token;
 
           // if (token) {
@@ -48,9 +48,12 @@ export default function FormPropsTextFields() {
           //   console.error('No token found in response');
           // }
 
-          const role = tempdata.userInfo.roles[0]; // This will be 'ADMIN'
+          const role = tempdata1.userInfo.roles[0]; // This will be 'ADMIN'
 
-          if (role === 'ADMIN') {
+          if (role === 'ADMIN' && tempdata.usergroup === "AdminGroup") {
+            navigate('/base/*');
+            success('Login successful!')
+          } else if (role === 'ADMIN') {
             // checkForNewComplaints();
             navigate('/login/welcomeadmin');
             success('Login successful!')
@@ -58,6 +61,7 @@ export default function FormPropsTextFields() {
             navigate('/login/welcome');
             success('Login successful!')
           }
+
         })
         .catch(() => {
           dismiss(loadingId);

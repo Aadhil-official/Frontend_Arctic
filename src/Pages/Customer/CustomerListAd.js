@@ -6,9 +6,11 @@ import { FooterIn, NormalHeaderBar } from '../../Components/index';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SearchIcon from '@mui/icons-material/Search';
 import '../../Style/Lists/ItemList.css'
+import { useUser } from '../../Context/UserContext';
 
 function CustomerListAd() {
 
+    const {tempdata} = useUser();
     const [customers, setCustomers] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filterOption, setFilterOption] = useState('customerName');

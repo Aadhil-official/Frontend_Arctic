@@ -7,8 +7,10 @@ import { Route, Routes } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
 import Reminder from './Reminder';
+import { useUser } from '../../Context/UserContext';
 
 function Create() {
+  const {tempdata} = useUser();
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
@@ -40,10 +42,13 @@ function Create() {
 
   return (
       <div className="grid-container">
+          
+          {tempdata.usergroup === "AdminGroup" &&
           <Sidebar  
             openSidebarToggle={openSidebarToggle} 
             OpenSidebar={openSidebar} 
           />
+          }
 
           <header className="header">
             <Header 

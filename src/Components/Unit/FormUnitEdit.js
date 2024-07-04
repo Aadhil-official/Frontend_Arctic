@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { dismiss, error, loading, success } from '../../util/Toastify';
@@ -16,8 +16,21 @@ function FormUnitEdit({ unit }) {
     const [owner, setOwner] = useState(unit ? unit.owner : '');
     const [warrantyPeriod, setWarrantyPeriod] = useState(unit ? unit.warrantyPeriod : '');
     const [unitPrice, setUnitPrice] = useState(unit ? unit.unitPrice : '');
+    const [todaydate, setTodaydate] = useState('');
 
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+        const getCurrentDate = () => {
+            const currentDate = new Date();
+            const year = currentDate.getFullYear();
+            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Month starts from 0
+            const day = currentDate.getDate().toString().padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        };
+        setTodaydate(getCurrentDate());
+    }, []);
 
     const handleSubmit = () => {
 
@@ -61,31 +74,36 @@ function FormUnitEdit({ unit }) {
             unit.warrantyPeriod !== updatedUnit.warrantyPeriod ||
             unit.unitPrice !== updatedUnit.unitPrice
         ) {
-            axios.put(`http://localhost:8080/api/auth/updateUnit`, updatedUnit)
-                .then(() => {
-                    dismiss(loadingId);
-                    success("Unit updated successfully");
-                    navigate('/login/welcomeadmin/unitListAd');
-                })
-                .catch(() => {
-                    dismiss(loadingId);
-                    const formattedError = result.error.format();
-                    if (formattedError.indoorSerial?._errors) {
-                        error(String(formattedError.indoorSerial?._errors));
-                    } else if (formattedError.outdoorSerial?._errors) {
-                        error(String(formattedError.outdoorSerial?._errors));
-                    } else if (formattedError.modelName?._errors) {
-                        error(String(formattedError.modelName?._errors));
-                    } else if (formattedError.commissionedDate?._errors) {
-                        error(String(formattedError.commissionedDate?._errors));
-                    } else if (formattedError.owner?._errors) {
-                        error(String(formattedError.owner?._errors));
-                    } else if (formattedError.warrantyPeriod?._errors) {
-                        error(String(formattedError.warrantyPeriod?._errors));
-                    } else if (formattedError.unitPrice?._errors) {
-                        error(String(formattedError.unitPrice?._errors));
-                    }
-                })
+            if (todaydate <= commissionedDate || unit.commissionedDate === updatedUnit.commissionedDate) {
+                axios.put(`http://localhost:8080/api/auth/updateUnit`, updatedUnit)
+                    .then(() => {
+                        dismiss(loadingId);
+                        success("Unit updated successfully");
+                        navigate('/login/welcomeadmin/unitListAd');
+                    })
+                    .catch(() => {
+                        dismiss(loadingId);
+                        const formattedError = result.error.format();
+                        if (formattedError.indoorSerial?._errors) {
+                            error(String(formattedError.indoorSerial?._errors));
+                        } else if (formattedError.outdoorSerial?._errors) {
+                            error(String(formattedError.outdoorSerial?._errors));
+                        } else if (formattedError.modelName?._errors) {
+                            error(String(formattedError.modelName?._errors));
+                        } else if (formattedError.commissionedDate?._errors) {
+                            error(String(formattedError.commissionedDate?._errors));
+                        } else if (formattedError.owner?._errors) {
+                            error(String(formattedError.owner?._errors));
+                        } else if (formattedError.warrantyPeriod?._errors) {
+                            error(String(formattedError.warrantyPeriod?._errors));
+                        } else if (formattedError.unitPrice?._errors) {
+                            error(String(formattedError.unitPrice?._errors));
+                        }
+                    })
+            } else {
+                dismiss(loadingId);
+                error("Date must be presant or future...!");
+            }
         }
     };
 
