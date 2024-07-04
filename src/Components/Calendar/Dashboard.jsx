@@ -9,7 +9,7 @@ import { BiDetail } from "react-icons/bi";
 import { HiMiniUserGroup } from "react-icons/hi2";
 import { FaBuilding } from "react-icons/fa6";
 import { SiTestcafe } from "react-icons/si";
-import '../Style/Calendar/dashboard.css';
+import '../../Style/Calendar/dashboard.css';
 
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);

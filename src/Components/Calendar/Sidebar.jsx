@@ -20,7 +20,7 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
 
             <ul className='sidebar-list'>
                 <li className='sidebar-list-item'>
-                    <Link to="/">
+                    <Link to="/base/dashboard">
                         <BsGrid1X2Fill className='icon' /> Summary
                     </Link>
                 </li>
@@ -70,12 +70,12 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                     </a>
                 </li>
                 <li className='sidebar-list-item'>
-                    <Link to="/calendar">
+                    <Link to="/base/calendar">
                         <FaCalendarAlt className='icon' /> Calendar
                     </Link>
                 </li>
                 <li className='sidebar-list-item'>
-                    <Link to="/reminder">
+                    <Link to="/base/reminder">
                         <FaClock className='icon' /> Set Reminder
                     </Link>
                 </li>

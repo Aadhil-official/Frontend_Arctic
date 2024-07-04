@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Style/Calendar/Header.css';
+import '../../Style/Calendar/Header.css';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -22,7 +22,7 @@ export default function Header({ selectedDate, handleDatePickerChange, OpenSideb
                 <br />
 
                 {/* Conditionally render the search bar based on the current path */}
-                {location.pathname === '/calendar' && (
+                {location.pathname === '/base/calendar' && (
                     <div className="pick">
                         <div className="date-picker-container">
                             <label htmlFor="date-picker">Search:</label>

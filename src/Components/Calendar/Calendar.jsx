@@ -11,8 +11,7 @@ import axios from 'axios';
 import tippy from 'tippy.js';
 import { RRule } from 'rrule';
 import 'tippy.js/dist/tippy.css';
-import '../Style/Calendar/Calendar.css';
-import Header from './Header';
+import '../../Style/Calendar/Calendar.css';
 
 export default function Calendar({ selectedDate }) {
     const calendarRef = useRef(null);
@@ -269,7 +268,6 @@ export default function Calendar({ selectedDate }) {
 
     return (
         <div className="allcal">
-            <Header />
             {calendarRef && (
                 <FullCalendar
                     ref={calendarRef}

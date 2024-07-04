@@ -26,11 +26,11 @@ import { AddUnit, UnitEdit, UnitLis, UnitListAd, UnitView } from './Pages/Unit/I
 import { AddVehicle, VehicleEdit, VehicleLis, VehicleListAd, VehicleView } from './Pages/Vehicle/Index';
 import { AddCustomer, CustomerEdit, CustomerLis, CustomerListAd, CustomerView } from './Pages/Customer/index';
 import { AddUserGroup, UserGroupEdit, UserGroupLis, UserGroupListAd, UserGroupView } from './Pages/User Group/index';
-import Reminder from "./Calendar/Reminder";
-import Dashboard from "./Calendar/Dashboard";
-import Calendar from "./Calendar/Calendar";
-import Base from "./Calendar/Base";
-import Header from "./Calendar/Header";
+import Reminder from "./Components/Calendar/Reminder";
+import Dashboard from "./Components/Calendar/Dashboard";
+import Calendar from "./Components/Calendar/Calendar";
+import Base from "./Components/Calendar/Base";
+import Header from "./Components/Calendar/Header";
 
 function App() {
   return (
@@ -122,13 +122,9 @@ function App() {
           <Route path='/login/welcome/userGroupList/view/:id' element={<UserGroupView />} />
           <Route path='/login/welcomeadmin/userGroupListAd/edit/:id' element={<UserGroupEdit />} />
 
-          <Route path='/Reminder'  element={<Reminder />} />
-          <Route path='/Dashboard'  element={<Dashboard />} />
-          <Route path='/Calendar'  element={<Calendar />} />
-          <Route path='/Base'  element={<Base />} />
-          <Route path='/Header'  element={<Header />} />
 
-
+          {/* Calendar-related routes */}
+          <Route path="/base/*" element={<Base />} />
 
 
         </Routes>
