@@ -17,7 +17,7 @@ const SiteVisitSix = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/v1/siteVisit/getSiteVisit')
+        axios.get('http://localhost:8080/api/auth/siteVisit/getSiteVisit')
             .then(response => {
                 console.log(response.data);
                 setSiteVisits(response.data);

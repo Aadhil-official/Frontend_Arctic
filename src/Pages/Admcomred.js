@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Divider, Grid, Modal, Typography, createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
+import { Box, Button, Divider, Grid, Modal, Typography, createTheme, responsiveFontSizes, ThemeProvider, Pagination } from '@mui/material';
 import { Link } from 'react-router-dom';//, useLocation 
 import '../Style/Admcomread.css';
 // import DeleteIcon from '@mui/icons-material/Delete';
-import { NormalHeaderBar } from '../Components/index'
+import { FooterIn, NormalHeaderBar } from '../Components/index'
 import axios from 'axios';
 import { success } from '../util/Toastify';
 import { useUser } from '../Context/UserContext';
@@ -15,11 +15,9 @@ function Admcomred() {
   // const [role,set]
   const [complaindata, setComplaindata] = React.useState([]);
   const [openModalIndex, setOpenModalIndex] = useState(null);
-  // const [tempdata, setTempdata] = useState([]);
-  // const [complaintdatasend, setComplaintdatasend] = useState([]);
-  // const [complaindata, setComplaindata] = useState([]);
-  // const location = useLocation();
-  // const complaindata = location.state.complaintdata;
+  const [complainPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+
 
   useEffect(() => {
     axios.post('http://localhost:8080/api/auth/findcomplaint')
@@ -111,6 +109,15 @@ function Admcomred() {
       });
   }
 
+  const indexOfLastEmployee = currentPage * complainPerPage;
+  const indexOfFirstEmployee = indexOfLastEmployee - complainPerPage;
+  const currentComplaints = complaindata.slice(indexOfFirstEmployee, indexOfLastEmployee);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+
   return (
     <>
       <NormalHeaderBar />
@@ -151,7 +158,7 @@ function Admcomred() {
       </Grid><br />
 
       {
-        complaindata.map((complaint, index) => (
+        currentComplaints.map((complaint, index) => (
           <Grid container key={index}>
             {console.log("dataaa........", complaint)}
             {/* {console.log(complaint)} */}
@@ -217,7 +224,7 @@ function Admcomred() {
 
                 <Grid xl={12} lg={12} md={12} sm={12} xs={12}>
                   <Divider />
-                </Grid><br/>
+                </Grid><br />
 
                 <Grid container justifyContent='left' textAlign='left'>
                   <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
@@ -268,6 +275,16 @@ function Admcomred() {
           </Grid>
         ))
       }
+
+      <Pagination
+        position="fixed"
+        count={Math.ceil(complaindata.length / complainPerPage)}
+        page={currentPage}
+        onChange={handlePageChange}
+        variant="outlined"
+        color="primary"
+      />
+      <FooterIn />
     </>
   );
 }

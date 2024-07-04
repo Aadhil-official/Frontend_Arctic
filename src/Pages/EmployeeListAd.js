@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography, createTheme, responsiveFontSizes } from '@mui/material';
+import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Pagination, Select, TextField, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import { FooterIn, NormalHeaderBar } from '../Components/index';
 import { Link, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
@@ -11,12 +11,13 @@ import { useUser } from '../Context/UserContext';
 
 
 const EmployeeListAd = () => {
-  
-  const {tempdata} = useUser();
+
+  const { tempdata } = useUser();
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterOption, setFilterOption] = useState('username');
-  // const [displayfield, setDisplayfield] = useState('');
+  const [employeesPerPage] = useState(4);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate();
 
@@ -33,6 +34,8 @@ const EmployeeListAd = () => {
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
+    filteredUsers = e.target.value;
+    setCurrentPage(1);
   };
 
   const handleFilterChange = (e) => {
@@ -40,7 +43,7 @@ const EmployeeListAd = () => {
   };
 
 
-  const filteredUsers = users.filter(user => {
+  let filteredUsers = users.filter(user => {
     if (!searchQuery) return true;
     if (filterOption === 'roles.name') {
       return user.roles && user.roles.some(role => role.name.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -57,6 +60,15 @@ const EmployeeListAd = () => {
   };
 
   const theme = responsiveFontSizes(createTheme());
+
+  const indexOfLastEmployee = currentPage * employeesPerPage;
+  const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
+  const currentUsers = filteredUsers.slice(indexOfFirstEmployee, indexOfLastEmployee);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
 
   return (
     <>
@@ -166,7 +178,7 @@ const EmployeeListAd = () => {
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          {filteredUsers.map((user, index) => (
+          {currentUsers.map((user, index) => (
             < Grid item xs={12} key={index} >
               {/* {console.log("from start: " + user)} */}
               <Button
@@ -188,7 +200,15 @@ const EmployeeListAd = () => {
             </Grid>
           ))}
         </Grid>
-      </Grid ><br /><br />
+      </Grid ><br />
+      
+      <Pagination
+        count={Math.ceil(filteredUsers.length / employeesPerPage)}
+        page={currentPage}
+        onChange={handlePageChange}
+        variant="outlined"
+        color="primary"
+      />
       <FooterIn />
     </>
   );

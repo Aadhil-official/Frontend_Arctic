@@ -20,7 +20,7 @@ const ServiceAgreementSix = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/v1/agreementService/fetchAgreementService')
+    axios.get('http://localhost:8080/api/auth/agreementService/fetchAgreementService')
       .then(response => {
         console.log(response.data);
         setServiceAgreements(response.data);
@@ -107,7 +107,6 @@ const ServiceAgreementSix = () => {
                 fontSize: '15px',
                 color: '#547DD1',
                 fontFamily: 'Franklin Gothic',
-
               }}>
                 View Existing Service Agreements & Add new Service Agreement
               </Typography>

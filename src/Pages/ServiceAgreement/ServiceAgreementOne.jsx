@@ -67,7 +67,7 @@ const ServiceAgreementOne = () => {
     try {
       if (todayDate <= startDate && startDate <= endDate) {
         // Post the new service agreement to the API
-        const response = await axios.post("http://localhost:8080/api/v1/agreementService/addNewServiceAgreement", newServiceAgreement);
+        const response = await axios.post("http://localhost:8080/api/auth/agreementService/addNewServiceAgreement", newServiceAgreement);
         console.log("New Service Agreement created:", response.data);
         alert("Data saved successfully!");
       } else {
