@@ -14,7 +14,7 @@ const EmployeeList = () => {
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterOption, setFilterOption] = useState('username');
-  const [employeesPerPage] = useState(4);
+  const [employeesPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {

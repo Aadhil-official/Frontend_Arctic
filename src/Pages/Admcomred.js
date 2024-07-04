@@ -18,7 +18,6 @@ function Admcomred() {
   const [complainPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
 
-
   useEffect(() => {
     axios.post('http://localhost:8080/api/auth/findcomplaint')
       .then(result => {
