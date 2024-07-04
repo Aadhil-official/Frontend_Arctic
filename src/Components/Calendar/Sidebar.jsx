@@ -25,49 +25,49 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                     </Link>
                 </li>
                 <li className='sidebar-list-item'>
-                    <a href="#">
+                    <Link to="/">
                         <BsFillArchiveFill className='icon' /> Units
-                    </a>
+                    </Link>
                 </li>
                 <li className='sidebar-list-item'>
-                    <a href="#">
+                    <Link to="/">
                         <BsFillGrid3X3GapFill className='icon' /> Items
-                    </a>
+                    </Link>
                 </li>
                 <li className='sidebar-list-item'>
-                    <a href="#">
+                    <Link to="/">
                         <BsPeopleFill className='icon' /> Customers
-                    </a>
+                    </Link>
                 </li>
                 <li className='sidebar-list-item'>
-                    <a href="#">
+                    <Link to="/">
                         <BsPersonVcardFill className='icon' /> Employees
-                    </a>
+                    </Link>
                 </li>
                 <li className='sidebar-list-item'>
-                    <a href="#">
+                    <Link to="/">
                         <BiDetail className='icon' /> Job Details
-                    </a>
+                    </Link>
                 </li>
                 <li className='sidebar-list-item'>
-                    <a href="#">
+                    <Link to="/">
                         <HiMiniUserGroup className='icon' /> User Groups
-                    </a>
+                    </Link>
                 </li>
                 <li className='sidebar-list-item'>
-                    <a href="#">
+                    <Link to="/">
                         <FaCar className='icon' /> Vehicle
-                    </a>
+                    </Link>
                 </li>
                 <li className='sidebar-list-item'>
-                    <a href="#">
+                    <Link to="/">
                         <RiContractFill className='icon' /> Service Agreements
-                    </a>
+                    </Link>
                 </li>
                 <li className='sidebar-list-item'>
-                    <a href="#">
+                    <Link to="/">
                         <FaBuilding className='icon' /> Site Visits
-                    </a>
+                    </Link>
                 </li>
                 <li className='sidebar-list-item'>
                     <Link to="/base/calendar">

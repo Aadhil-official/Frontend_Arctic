@@ -1,216 +1,129 @@
-/* Calendar.css */
-
 /* Ensure FullCalendar container takes full width */
 .fc {
-    width: 1000px;
-    height: 90vh;
-    color: black !important;
-    text-align: center;
-    margin-top: 100px;
-  }
-  
-  body{
-      background-color:white;
-      color: black;
-    }
-    
-    .allcal {
-      display: flex;
-      flex-direction: column;
-      height: 120vh;
-      text-align: center;
-    }
-    
-    
-    .headerToolbar{
-      background-color: white;
-    }
-    
-    /* Adjust calendar height for smaller screens */
-    .fc-view {
-      height: 70vh;
-      
-    }
-    
-    /* Center the calendar title */
-    .fc-toolbar-title {
-      color: black; 
-      text-align: center;
-    }
-  
-    .fc-day.highlight {
-      background-color: #e61321;
-  }
-  
-  
-    
-    .topic{
-      color: white;
-    }
-    
-    /* Style the create new event button */
-    .button1 {
-      margin-bottom: 100px;
-      display: block; /* Display as block to take full width */
-      padding: 15px 5px;
-      font-size: 18px; /* Adjust font size */
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      outline: none;
-      color: white;
-      background-color: #00B4D8;
-      border: none;
-      border-radius: 15px;
-      box-shadow: 0 9px #2c4a7c;
-      width: 25%; 
-      margin: 0 auto; /* Center horizontally */
-      margin-left: 350px;
-      transition: background-color 0.3s ease;
-  
-    }
-    
-    .button1:hover {
-      background-color: #48CAE4;
-      box-shadow: 0 9px #48CAE4;
-    }
-    
-    .button1:active {
-      background-color: #00B4D8;
-      box-shadow: 0 5px #48CAE4;
-      transform: translateY(4px);
-    }
-    
-    /* Style the Save button */
-    .button2 {
-      margin-bottom: 20px;
-      margin-top: 20px;
-      display: block; /* Display as block to take full width */
-      padding: 10px 20px; /* Adjust padding */
-      font-size: 18px; /* Adjust font size */
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      outline: none;
-      color: black;
-      background-color: #00B4D8;
-      border: none;
-      border-radius: 15px;
-      box-shadow: 0 9px #2c4a7c;
-      width: 20%; /* Adjust width */
-      margin: 0 auto; /*Center horizontally*/
-      display: flex;
-      justify-content: space-evenly;
-      margin-right:150px;
-    }
-    
-    .button2:hover {
-      background-color: #48CAE4;
-      box-shadow: 0 9px #48CAE4;
-    }
-    
-    .button2:active {
-      background-color: #00B4D8;
-      box-shadow: 0 5px #48CAE4;
-      transform: translateY(4px);
-    }
-    
-    /* Style the event details input */
-    .eventdetails {
-      margin-bottom: 20px;
-      margin-top: 20px;
-      width: 80%; /* Adjust width */
-      margin: 0 auto; /* Center horizontally */
-    }
-    
-    
-    /* Center button containers */
-    .button2-container {
-      text-align: center;
-      margin-top: 20px;
-     
-    }
-    
-    .fc-toolbar .fc-button-primary {
-      background: #48CAE4;
-      color: white; 
-      border: #48CAE4
-    }
-    
-    
-    .fc-toolbar .fc-button-primary:active{
-      background: #48CAE4;
-    }
-    
-    .fc-toolbar {
-      background-color: white;
-    
-    }
-    
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); 
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1;
-      color: white;
-    }
-    
-    .modal-content {
-      background-color: black;
-      padding: 20px;
-      padding-top: 10px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-      z-index: 1;
-      color: white;
-      }
-   
-    
-    .fc-day-today {
-      background-color: #4296a7;
-    }
-    
-  
-    .button3 {
-      margin-bottom: 20px;
-      margin-top: 20px;
-      display: block; /* Display as block to take full width */
-      padding: 10px 0px; /* Adjust padding */
-      font-size: 18px; /* Adjust font size */
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      outline: none;
-      color: black;
-      background-color: #00B4D8;
-      border: none;
-      border-radius: 15px;
-      box-shadow: 0 9px #2c4a7c;
-      width: 30%; /* Adjust width */
-      margin: 0 auto; /*Center horizontally*/
-      display: flex;
-      justify-content: space-evenly;
-      margin-right:150px;
-    }
-    
-    .button3:hover {
-      background-color: #48CAE4;
-      box-shadow: 0 9px #48CAE4;
-    }
-    
-    .button3:active {
-      background-color: #00B4D8;
-      box-shadow: 0 5px #48CAE4;
-      transform: translateY(4px);
-    }
-  
-    .reminder{
-      color: white;
-      background-color: white;
-    }
+  width: 1000px;
+  height: 90vh;
+  color: black !important;
+  text-align: center;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body {
+  background-color: white;
+  color: black;
+}
+
+.allcal {
+  display: flex;
+  flex-direction: column;
+  height: 120vh;
+  text-align: center;
+  align-items: center; /* Center the children horizontally */
+}
+
+.headerToolbar {
+  background-color: white;
+}
+
+/* Adjust calendar height for smaller screens */
+.fc-view {
+  height: 70vh;
+}
+
+/* Center the calendar title */
+.fc-toolbar-title {
+  color: rgb(26, 99, 209);
+  text-align: center;
+}
+
+.topic {
+  color: white;
+}
+
+/* Simple button styles */
+.button1,
+.button2,
+.button3 {
+  width: 200px;
+  padding: 10px;
+  background-color: rgb(8, 99, 190);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button1,
+.button2,
+.button3:hover {
+  background-color: rgb(25, 118, 210);
+}
+
+
+
+.button2 {
+  margin-left: 95px;
+}
+
+.eventdetails {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  width: 80%; /* Adjust width */
+  margin: 0 auto; /* Center horizontally */
+}
+
+/* Center button containers */
+.button2-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.fc-toolbar .fc-button-primary {
+  background: rgb(26, 99, 209);
+  color: white;
+  border: #48CAE4;
+}
+
+.fc-toolbar .fc-button-primary:active {
+  background: #48CAE4;
+}
+
+.fc-toolbar {
+  background-color: white;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  color: white;
+}
+
+.modal-content {
+  background-color: black;
+  padding: 20px;
+  padding-top: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  color: white;
+}
+
+.fc-day-today {
+  background-color: #4296a7;
+}
+
+.reminder {
+  color: black;
+  background-color: white;
+}
