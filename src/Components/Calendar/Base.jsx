@@ -7,13 +7,11 @@ import { Route, Routes } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
 import Reminder from './Reminder';
-import { useUser } from '../../Context/UserContext';
 
 function Create() {
-  const {tempdata} = useUser();
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(dayjs());
-  const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const getEvents = async () => {
@@ -36,30 +34,27 @@ function Create() {
     setSelectedDate(date);
   };
 
-  const openSidebar = () => {
-    setOpenSidebarToggle(!openSidebarToggle);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   return (
-      <div className="grid-container">
-          
-          {tempdata.usergroup === "AdminGroup" &&
+      <div className="app">
+      
           <Sidebar  
-            openSidebarToggle={openSidebarToggle} 
-            OpenSidebar={openSidebar} 
+           isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} 
           />
-          }
-
+        
           <header className="header">
             <Header 
               selectedDate={selectedDate}
               handleDatePickerChange={handleDatePickerChange}
-              OpenSidebar={openSidebar}
+              toggleSidebar={toggleSidebar}
             />
           </header>
 
-          <main className="main-container">
-            <Routes>
+          <main className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
+          <Routes>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/calendar" element={<Calendar 
                           selectedDate={selectedDate.toDate()}
