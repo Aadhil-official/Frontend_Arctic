@@ -40,11 +40,10 @@ function Create() {
 
   return (
       <div className="app">
-        {tempdata.usergroup === "AdminGroup" &&
           <Sidebar  
            isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} 
           />
-        }
+        
           <header className="header">
             <Header 
               selectedDate={selectedDate}
