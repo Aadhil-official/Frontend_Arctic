@@ -10,7 +10,7 @@ import { useUser } from '../../Context/UserContext';
 
 function CustomerListAd() {
 
-    const {tempdata} = useUser();
+    const { tempdata } = useUser();
     const [customers, setCustomers] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filterOption, setFilterOption] = useState('customerName');
@@ -71,14 +71,18 @@ function CustomerListAd() {
                     </Button>
                 </Grid>
             </Grid>
-            <Grid container spacing={2}>
+
+            <Grid container>
                 <Grid item position='fixed'>
-                    <Link to={"/login/welcomeadmin"}>
-                        <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
+                    <Link to={tempdata.usergroup === "AdminGroup" ? "/base/*" : "/login/welcomeadmin"}>
+                        <img
+                            src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+                            style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }}
+                            alt='Back'
+                        />
                     </Link>
                 </Grid>
             </Grid>
-
 
             <Grid container textAlign='center' justifyContent='center'>
 

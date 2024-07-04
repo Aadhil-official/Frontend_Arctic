@@ -7,9 +7,12 @@ import { ThemeProvider } from 'styled-components';
 import '../Style/Component/EmployeeList.css'
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import { useUser } from '../Context/UserContext';
 
 
 const EmployeeListAd = () => {
+  
+  const {tempdata} = useUser();
   const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterOption, setFilterOption] = useState('username');
@@ -58,10 +61,15 @@ const EmployeeListAd = () => {
   return (
     <>
       <NormalHeaderBar />
-      <Grid container spacing={2}>
+
+      <Grid container>
         <Grid item position='fixed'>
-          <Link to={"/login/welcomeadmin"}>
-            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
+          <Link to={tempdata.usergroup === "AdminGroup" ? "/base/*" : "/login/welcomeadmin"}>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+              style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }}
+              alt='Back'
+            />
           </Link>
         </Grid>
       </Grid>
@@ -180,8 +188,8 @@ const EmployeeListAd = () => {
             </Grid>
           ))}
         </Grid>
-      </Grid ><br/><br/>
-      <FooterIn/>
+      </Grid ><br /><br />
+      <FooterIn />
     </>
   );
 };

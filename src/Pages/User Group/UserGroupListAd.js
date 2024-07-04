@@ -6,9 +6,12 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import { FooterIn, NormalHeaderBar } from '../../Components/index';
+import { useUser } from '../../Context/UserContext';
 
 function UserGroupListAd() {
 
+    
+    const {tempdata} = useUser();
     const [userGroups, setUserGroups] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filterOption, setFilterOption] = useState('groupName');
@@ -70,10 +73,15 @@ function UserGroupListAd() {
                     </Button>
                 </Grid>
             </Grid>
-            <Grid container spacing={2}>
+            
+            <Grid container>
                 <Grid item position='fixed'>
-                    <Link to={"/login/welcomeadmin"}>
-                        <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
+                    <Link to={tempdata.usergroup === "AdminGroup" ? "/base/*" : "/login/welcomeadmin"}>
+                        <img
+                            src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+                            style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }}
+                            alt='Back'
+                        />
                     </Link>
                 </Grid>
             </Grid>

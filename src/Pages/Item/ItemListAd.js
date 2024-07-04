@@ -8,10 +8,14 @@ import { ThemeProvider } from 'styled-components';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SearchIcon from '@mui/icons-material/Search';
 import '../../Style/Lists/ItemList.css'
+import { useUser } from '../../Context/UserContext';
 // import { error, success } from '../util/Toastify';
 
 
 const ItemListAd = () => {
+
+    const {tempdata} = useUser();
+
     const [items, setItems] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filterOption, setFilterOption] = useState('name');
@@ -70,10 +74,15 @@ const ItemListAd = () => {
                     </Button>
                 </Grid>
             </Grid>
-            <Grid container spacing={2}>
+            
+            <Grid container>
                 <Grid item position='fixed'>
-                    <Link to={"/login/welcomeadmin"}>
-                        <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
+                    <Link to={tempdata.usergroup === "AdminGroup" ? "/base/*" : "/login/welcomeadmin"}>
+                        <img
+                            src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+                            style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }}
+                            alt='Back'
+                        />
                     </Link>
                 </Grid>
             </Grid>
