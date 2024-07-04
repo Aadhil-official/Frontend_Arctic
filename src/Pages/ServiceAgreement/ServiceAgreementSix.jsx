@@ -6,8 +6,11 @@ import { ThemeProvider } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { FooterIn, NormalHeaderBar } from '../../Components';
+import { useUser } from '../../Context/UserContext';
 
 const ServiceAgreementSix = () => {
+
+  const {tempdata} = useUser();
   const [serviceAgreements, setServiceAgreements] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterOption, setFilterOption] = useState('customerName');
@@ -70,13 +73,18 @@ const ServiceAgreementSix = () => {
     <ThemeProvider theme={theme}>
       <NormalHeaderBar />
 
-      <Grid container spacing={2}>
+      <Grid container>
         <Grid item position='fixed'>
-          <Link to={"/login/welcomeadmin"}>
-            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
+          <Link to={tempdata.usergroup === "AdminGroup" ? "/base/dashboard" : "/login/welcomeadmin"}>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+              style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }}
+              alt='Back'
+            />
           </Link>
         </Grid>
       </Grid>
+
 
       <Box sx={{ maxWidth: '1200px', margin: '0 auto', padding: '20px', marginBottom: '60px' }}>
         <Grid container textAlign='center' justifyContent='center'>

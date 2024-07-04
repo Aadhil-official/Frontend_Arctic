@@ -5,8 +5,6 @@ import '../Style/Admcomread.css';
 import { NormalHeaderBar } from '../Components/index';
 import axios from 'axios';
 import { error } from '../util/Toastify';
-// import axios from 'axios';
-// import { error } from '../util/Toastify';
 
 function ReviewedComplain() {
 
@@ -57,10 +55,10 @@ function ReviewedComplain() {
                     </Button>
                 </Grid>
             </Grid>
-            <Grid container className="text">
+            <Grid container>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign="center">
                     <ThemeProvider theme={responsiveFontSizes(createTheme())}>
-                        <Typography variant="h2" sx={{ fontWeight: 'bold' }}>
+                        <Typography variant="h2" className="text" sx={{ fontWeight: 'bold' }}>
                             Reviewed Complaints
                         </Typography>
                     </ThemeProvider>
@@ -99,7 +97,7 @@ function ReviewedComplain() {
                                 </Grid>
                                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                                     <ThemeProvider theme={responsiveFontSizes(createTheme())}>
-                                        <Typography variant="h6" component="h2">
+                                        <Typography variant="h6">
                                             {complaindata.reviewedComplain.subject}
                                         </Typography>
                                     </ThemeProvider>
@@ -119,21 +117,21 @@ function ReviewedComplain() {
                                 </Grid>
                                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign='left'>
                                     <ThemeProvider theme={responsiveFontSizes(createTheme())}>
-                                        <Typography variant="h6" component="h2">
+                                        <Typography variant="h6">
                                             From: {complaindata.appUser.username}
                                         </Typography>
                                     </ThemeProvider>
                                 </Grid>
                                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign='left'>
                                     <ThemeProvider theme={responsiveFontSizes(createTheme())}>
-                                        <Typography variant="h6" component="h2">
+                                        <Typography variant="h6">
                                             User Group: {complaindata.appUser.usergroup}
                                         </Typography>
                                     </ThemeProvider>
                                 </Grid>
                                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign='left'>
                                     <ThemeProvider theme={responsiveFontSizes(createTheme())}>
-                                        <Typography variant="h6" component="h2">
+                                        <Typography variant="h6">
                                             Email: {complaindata.reviewedComplain.email}
                                         </Typography>
                                     </ThemeProvider>

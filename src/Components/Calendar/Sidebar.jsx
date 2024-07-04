@@ -6,6 +6,7 @@ import { FaBuilding, FaClock } from 'react-icons/fa6';
 import { RiContractFill } from 'react-icons/ri';
 import { HiMiniUserGroup } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
+import '../../Style/Component/Sidebar.css'
 
 
 function Sidebar({ openSidebarToggle, OpenSidebar }) {
@@ -19,71 +20,84 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
             </div>
 
             <ul className='sidebar-list'>
-                <li className='sidebar-list-item'>
-                    <Link to="/signup">
+
+                <Link to="/signup" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <BsPersonVcardFill className='icon' /> Create user
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/base/dashboard">
+                    </li>
+                </Link>
+
+                <Link to="/base/dashboard" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <BsGrid1X2Fill className='icon' /> Summary
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/login/welcomeadmin/unitListAd">
+                    </li>
+                </Link>
+
+                <Link to="/login/welcomeadmin/unitListAd" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <BsFillArchiveFill className='icon' /> Units
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/login/welcomeadmin/itemListAd">
+                    </li>
+                </Link>
+
+                <Link to="/login/welcomeadmin/itemListAd" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <BsFillGrid3X3GapFill className='icon' /> Items
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/login/welcomeadmin/customerListAd">
+                    </li>
+                </Link>
+
+                <Link to="/login/welcomeadmin/customerListAd" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <BsPeopleFill className='icon' /> Customers
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/login/welcomeadmin/employeelistad">
+                    </li>
+                </Link>
+
+                <Link to="/login/welcomeadmin/employeelistad" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <BsPersonVcardFill className='icon' /> Employees
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/">
+                    </li>
+                </Link>
+
+                <Link to="/" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <BiDetail className='icon' /> Job Details
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/login/welcomeadmin/userGroupListAd">
+                    </li>
+                </Link>
+
+                <Link to="/login/welcomeadmin/userGroupListAd" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <HiMiniUserGroup className='icon' /> User Groups
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/login/welcomeadmin/vehicleListAd">
+                    </li>
+                </Link>
+
+                <Link to="/login/welcomeadmin/vehicleListAd" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <FaCar className='icon' /> Vehicle
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/ServiceAgreementSix">
+                    </li>
+                </Link>
+
+                <Link to="/ServiceAgreementSix" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <RiContractFill className='icon' /> Service Agreements
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/SiteVisitDashboard">
+                    </li>
+                </Link>
+
+                <Link to="/SiteVisitDashboard" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <FaBuilding className='icon' /> Site Visits
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/base/calendar">
+                    </li>
+                </Link>
+
+                <Link to="/base/calendar" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <FaCalendarAlt className='icon' /> Calendar
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/base/reminder">
+                    </li>
+                </Link>
+
+                <Link to="/base/reminder" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <FaClock className='icon' /> Set Reminder
-                    </Link>
-                </li>
+                    </li>
+                </Link>
             </ul>
         </aside>
     );

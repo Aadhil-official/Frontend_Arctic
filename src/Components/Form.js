@@ -51,7 +51,7 @@ export default function FormPropsTextFields() {
           const role = tempdata1.userInfo.roles[0]; // This will be 'ADMIN'
 
           if (role === 'ADMIN' && tempdata.usergroup === "AdminGroup") {
-            navigate('/base/*');
+            navigate('/base/dashboard');
             success('Login successful!')
           } else if (role === 'ADMIN') {
             // checkForNewComplaints();
