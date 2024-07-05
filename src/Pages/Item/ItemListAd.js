@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography, createTheme, responsiveFontSizes } from '@mui/material';
+import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Pagination, Select, TextField, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import { FooterIn, NormalHeaderBar } from '../../Components/index';
 import { Link, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
@@ -8,13 +8,19 @@ import { ThemeProvider } from 'styled-components';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SearchIcon from '@mui/icons-material/Search';
 import '../../Style/Lists/ItemList.css'
+import { useUser } from '../../Context/UserContext';
 // import { error, success } from '../util/Toastify';
 
 
 const ItemListAd = () => {
+
+    const { tempdata } = useUser();
+
     const [items, setItems] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filterOption, setFilterOption] = useState('name');
+    const [itemsPerPage] = useState(5);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/auth/getAllItem')
@@ -29,6 +35,8 @@ const ItemListAd = () => {
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
+        filteredItem = e.target.value;
+        setCurrentPage(1);
     };
 
     const handleFilterChange = (e) => {
@@ -41,9 +49,8 @@ const ItemListAd = () => {
         navigate('/login/welcomeadmin/itemListAd/addItem');
     }
 
-    const filteredItem = items.filter(item => {
+    let filteredItem = items.filter(item => {
         if (!searchQuery) return true;
-
         const value = item[filterOption];
         return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
 
@@ -55,25 +62,39 @@ const ItemListAd = () => {
         navigate(`/login/welcomeadmin/itemListAd/edit/${id}`);
     }
 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredItem.slice(indexOfFirstItem, indexOfLastItem);
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+    };
+
+
     return (
         <>
             <NormalHeaderBar />
-            <Grid container position= 'fixed' justifyContent='right' textAlign='right'>
+            <Grid container position='fixed' justifyContent='right' textAlign='right'>
                 <Grid item xs={12}>
                     <Button
                         sx={{
                             marginTop: '10px',
-                            marginRight:'2px'
+                            marginRight: '2px'
                         }}
                         variant='contained' onClick={handleAddItem}>
                         Add Item
                     </Button>
                 </Grid>
             </Grid>
-            <Grid container spacing={2}>
+
+            <Grid container>
                 <Grid item position='fixed'>
-                    <Link to={"/login/welcomeadmin"}>
-                        <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
+                    <Link to={tempdata.usergroup === "AdminGroup" ? "/base/dashboard" : "/login/welcomeadmin"}>
+                        <img
+                            src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+                            style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }}
+                            alt='Back'
+                        />
                     </Link>
                 </Grid>
             </Grid>
@@ -148,7 +169,7 @@ const ItemListAd = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    {filteredItem.map((item, index) => (
+                    {currentItems.map((item, index) => (
                         <Grid item xs={12} key={index}>
                             <Button variant='contained'
                                 sx={{
@@ -170,7 +191,16 @@ const ItemListAd = () => {
                         </Grid>
                     ))}
                 </Grid>
-            </Grid><br /><br />
+            </Grid><br />
+
+            <Pagination
+                count={Math.ceil(filteredItem.length / itemsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                variant="outlined"
+                color="primary"
+            />
+
             <FooterIn />
         </>
     );

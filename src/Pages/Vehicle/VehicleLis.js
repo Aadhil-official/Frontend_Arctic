@@ -1,4 +1,4 @@
-import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
+import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Pagination, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
@@ -11,6 +11,8 @@ function VehicleLis() {
     const [vehicles, setVehicle] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filterOption, setFilterOption] = useState('noOfPassengers');
+    const [vehiclesPerPage] = useState(5);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/auth/getAllVehicles')
@@ -24,6 +26,8 @@ function VehicleLis() {
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
+        filteredVehicle = e.target.value;
+        setCurrentPage(1);
     };
 
     const handleFilterChange = (e) => {
@@ -32,7 +36,7 @@ function VehicleLis() {
 
     const navigate = useNavigate();
 
-    const filteredVehicle = vehicles.filter(vehicle => {
+    let filteredVehicle = vehicles.filter(vehicle => {
         if (!searchQuery) return true;
 
         const value = vehicle[filterOption];
@@ -45,6 +49,13 @@ function VehicleLis() {
         navigate(`/login/welcome/vehicleList/view/${id}`);
     }
 
+    const indexOfLastVehicle = currentPage * vehiclesPerPage;
+    const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage;
+    const currentVehicles = filteredVehicle.slice(indexOfFirstVehicle, indexOfLastVehicle);
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+    };
 
     return (
         <div>
@@ -124,7 +135,7 @@ function VehicleLis() {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    {filteredVehicle.map((vehicle, index) => (
+                    {currentVehicles.map((vehicle, index) => (
                         <Grid item xs={12} key={index}>
                             <Button variant='contained'
                                 sx={{
@@ -146,7 +157,16 @@ function VehicleLis() {
                         </Grid>
                     ))}
                 </Grid>
-            </Grid><br /><br />
+            </Grid><br />
+
+            <Pagination
+                count={Math.ceil(filteredVehicle.length / vehiclesPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                variant="outlined"
+                color="primary"
+            />
+
             <FooterIn />
 
 

@@ -21,7 +21,7 @@ const SiteVisitFourEmployee = () => {
   useEffect(() => {
     const fetchSiteVisits = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/siteVisit/getSiteVisit');
+        const response = await axios.get('http://localhost:8080/api/auth/siteVisit/getSiteVisit');
         const currentDate = new Date();
         currentDate.setHours(0, 0, 0, 0); // Set the time to the start of the day for comparison
 
@@ -51,7 +51,7 @@ const SiteVisitFourEmployee = () => {
   const handleStartVisit = async (visitId) => {
     try {
       if (!startedVisits.includes(visitId)) {
-        const response = await axios.post(`http://localhost:8080/api/v1/siteVisitStEd/start/${visitId}`);
+        const response = await axios.post(`http://localhost:8080/api/auth/siteVisitStEd/start/${visitId}`);
         console.log(response.data);
         alert('Site Visit started successfully');
         setStartedVisits([...startedVisits, visitId]);
@@ -71,7 +71,7 @@ const SiteVisitFourEmployee = () => {
   const handleEndVisit = async (visitId) => {
     try {
       if (!endedVisits.includes(visitId)) {
-        const response = await axios.post(`http://localhost:8080/api/v1/siteVisitStEd/end/${visitId}`);
+        const response = await axios.post(`http://localhost:8080/api/auth/siteVisitStEd/end/${visitId}`);
         console.log(response.data);
         alert('Site Visit ended successfully');
         setEndedVisits([...endedVisits, visitId]);
@@ -80,6 +80,7 @@ const SiteVisitFourEmployee = () => {
         const updatedVisits = siteVisits.filter(visit => visit.visitId !== visitId);
         setSiteVisits(updatedVisits);
         setFilteredVisits(updatedVisits);
+        window.location.reload();
       } else {
         alert('You have already ended this site visit.');
       }
@@ -144,7 +145,7 @@ const SiteVisitFourEmployee = () => {
     <NormalHeaderBar/>
      <Grid container className='back-icon'>
         <Grid item xs={12} textAlign="left">
-          <Link to={"/SiteVisitFourEmployee"}>
+          <Link to={"/login/welcome"}>
             <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
              style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px',  left: '10px', top: '10px' }} alt='Back' />
           </Link>

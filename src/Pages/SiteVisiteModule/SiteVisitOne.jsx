@@ -80,29 +80,34 @@ const SiteVisitOne = () => {
 
     try {
       if (todayDate <= scheduleDate.format("YYYY-MM-DD")) {
-        const response = await axios.post(
-          "http://localhost:8080/api/v1/siteVisit/addSiteVisit",
-          newSiteVisit
-        );
-        
-        const visitId = response.data.visitId; // Get site visit ID from response
-        setId(visitId); // Store site visit ID
-        console.log("New Site Visit created:", visitId);
-        alert("Site Visit scheduled successfully!");
-        setIsScheduled(true);
+        if (numberOfEmployees >= 1) {
+          const response = await axios.post(
+            "http://localhost:8080/api/auth/siteVisit/addSiteVisit",
+            newSiteVisit
+          );
 
-        // Reset form fields after successful submission
-        setVehicleNumber("");
-        setLocation("");
-        setJobType("");
-        setEmail("");
-        setCustomerName("");
-        setScheduleDate(null);
-        setSelectedTime(null);
-        setNumberOfEmployees(0);
+          const visitId = response.data.visitId; // Get site visit ID from response
+          setId(visitId); // Store site visit ID
+          console.log("New Site Visit created:", visitId);
+          alert("Site Visit scheduled successfully!");
+          handleCancel();
+          setIsScheduled(true);
 
-        // Navigate after setting the ID
-        navigate(`/GatePass/${visitId}`,{state:{numberOfEmployees}});
+          // Reset form fields after successful submission
+          setVehicleNumber("");
+          setLocation("");
+          setJobType("");
+          setEmail("");
+          setCustomerName("");
+          setScheduleDate(null);
+          setSelectedTime(null);
+          setNumberOfEmployees(0);
+
+          // Navigate after setting the ID
+          navigate(`/GatePass/${visitId}`, { state: { numberOfEmployees } });
+        } else {
+          alert("Number of employees should be greater than or equal to 1");
+        }
       } else {
         alert("Schedule date should be greater than or equal to today's date");
       }
@@ -125,177 +130,182 @@ const SiteVisitOne = () => {
 
   return (
     <>
-    <NormalHeaderBar/>
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <form onSubmit={handleSubmit}>
-        <Grid container spacing={2} justifyContent="center">
-          <Grid item xs={12} style={{ textAlign: "left", margin: "1rem" }}>
-            <Link to={"/SiteVisitDashboard"}>
-            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" 
-            style={{ width: '40px', 
-            height: '40px', 
-            opacity: '0.6', 
-            margin: '15px', 
-            
-            left: '10px', 
-            top: '10px' }} alt='Back' />
-            </Link>
-          </Grid>
-          <Grid item xs={12}>
+      <NormalHeaderBar />
+      <Grid container>
+        <Grid item xs={12} textAlign='left'>
+          <Link to={"/SiteVisitDashboard"}>
+            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+              style={{
+                width: '40px',
+                height: '40px',
+                opacity: '0.6',
+                margin: '15px',
+                left: '10px',
+                top: '10px'
+              }} alt='Back' />
+          </Link>
+        </Grid>
+      </Grid>
+
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2} justifyContent="center">
+
+            <Grid item xs={12}>
+              <Typography
+                variant="h3"
+                style={{
+                  color: "rgb(26, 99, 209)",
+                  fontFamily: "Franklin Gothic Medium",
+                  textAlign: "center",
+                  fontSize: "60px",
+                  marginTop: "-5rem",
+                }}
+              >
+                Scheduling Site Visit
+              </Typography>
+            </Grid>
             <Typography
-              variant="h3"
+              variant="h6"
               style={{
-                color: "rgb(26, 99, 209)",
-                fontFamily: "Franklin Gothic Medium",
                 textAlign: "center",
-                fontSize: "60px",
-                marginTop: "-5rem",
-              }}
-            >
-              Scheduling Site Visit
-            </Typography>
-          </Grid>
-          <Typography
-            variant="h6"
-            style={{
-              textAlign: "center",
-              marginBottom: "2rem",
-              marginTop: "1rem",
-              fontSize: '18px',
-              color: '#547DD1',
-              fontFamily: "Franklin Gothic Medium"
-            }}
-          >
-            Schedule Site Visit Here
-          </Typography>
-          <Grid container justifyContent="center">
-            <Paper
-              elevation={3}
-              style={{
-                padding: "2rem",
                 marginBottom: "2rem",
-                width: "100%",
-                maxWidth: "600px",
+                marginTop: "1rem",
+                fontSize: '18px',
+                color: '#547DD1',
+                fontFamily: "Franklin Gothic Medium"
               }}
             >
-              <Grid container spacing={2} justifyContent="center">
-                <Grid item xs={12} sm={12} md={12}>
-                  <TextField
-                    label="Enter Vehicle Number"
-                    value={vehicleNumber}
-                    onChange={(event) => setVehicleNumber(event.target.value)}
-                    fullWidth
-                  />
+              Schedule Site Visit Here
+            </Typography>
+            <Grid container justifyContent="center">
+              <Paper
+                elevation={3}
+                style={{
+                  padding: "2rem",
+                  marginBottom: "2rem",
+                  width: "100%",
+                  maxWidth: "600px",
+                }}
+              >
+                <Grid container spacing={2} justifyContent="center">
+                  <Grid item xs={12} sm={12} md={12}>
+                    <TextField
+                      label="Enter Vehicle Number"
+                      value={vehicleNumber}
+                      onChange={(event) => setVehicleNumber(event.target.value)}
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={12}>
+                    <TextField
+                      label="Enter Customer Location"
+                      value={location}
+                      onChange={(event) => setLocation(event.target.value)}
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={12}>
+                    <TextField
+                      label="Enter Customer Name"
+                      value={customerName}
+                      onChange={(event) => setCustomerName(event.target.value)}
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={12}>
+                    <TextField
+                      select
+                      label="Select Job Type"
+                      value={jobType}
+                      onChange={(event) => setJobType(event.target.value)}
+                      SelectProps={{ native: true }}
+                      fullWidth
+                    >
+                      <option value=""></option>
+                      {jobTypes.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </TextField>
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={6}>
+                    <TextField
+                      label="Enter Customer Email"
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                      fullWidth
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={6}>
+                    <DatePicker
+                      label="Select Date"
+                      value={scheduleDate}
+                      onChange={(newValue) => setScheduleDate(newValue)}
+                      renderInput={(params) => <TextField {...params} fullWidth />}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={6}>
+                    <Time
+                      selectedTime={selectedTime}
+                      onTimeChange={setSelectedTime}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={6}>
+                    <TextField
+                      label="Selected no of Employees"
+                      type="number"
+                      value={numberOfEmployees}
+                      onChange={(event) => setNumberOfEmployees(event.target.value)}
+                      fullWidth
+                    />
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} sm={12} md={12}>
-                  <TextField
-                    label="Enter Customer Location"
-                    value={location}
-                    onChange={(event) => setLocation(event.target.value)}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={12} md={12}>
-                  <TextField
-                    label="Enter Customer Name"
-                    value={customerName}
-                    onChange={(event) => setCustomerName(event.target.value)}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={12} md={12}>
-                  <TextField
-                    select
-                    label="Select Job Type"
-                    value={jobType}
-                    onChange={(event) => setJobType(event.target.value)}
-                    SelectProps={{ native: true }}
-                    fullWidth
-                  >
-                    <option value=""></option>
-                    {jobTypes.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </TextField>
-                </Grid>
-                <Grid item xs={12} sm={6} md={6}>
-                  <TextField
-                    label="Enter Customer Email"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6} md={6}>
-                  <DatePicker
-                    label="Select Date"
-                    value={scheduleDate}
-                    onChange={(newValue) => setScheduleDate(newValue)}
-                    renderInput={(params) => <TextField {...params} fullWidth />}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6} md={6}>
-                  <Time
-                    selectedTime={selectedTime}
-                    onTimeChange={setSelectedTime}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6} md={6}>
-                  <TextField
-                    label="Selected no of Employees"
-                    type="number"
-                    value={numberOfEmployees}
-                    onChange={(event) => setNumberOfEmployees(event.target.value)}
-                    fullWidth
-                  />
-                </Grid>
-              </Grid>
-            </Paper>
+              </Paper>
+            </Grid>
+            <Grid container justifyContent="center">
+              <Button
+                variant="contained"
+                type="submit"
+                onClick={handleSubmit}
+                style={{ width: "10rem", marginRight: '1rem', marginBottom: "1rem" }}
+              >
+                Save
+              </Button>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={handleCancel}
+                style={{ width: "10rem", marginBottom: "1rem" }}
+              >
+                Cancel
+              </Button>
+            </Grid>
           </Grid>
+        </form>
+
+        {isScheduled && (
           <Grid container justifyContent="center">
-            <Button
-              variant="contained"
-              type="submit"
-              onClick={handleSubmit}
-              style={{ width: "20rem", marginRight: "1rem",marginBottom:"1rem" }}
-            >
-              Save
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={handleCancel}
-              style={{ width: "20rem" ,marginBottom:"1rem"}}
-            >
-              Cancel
-            </Button>
+            <Grid item xs={12} style={{ marginBottom: "2rem" }}>
+              {/* Optional: Display confirmation message or additional content */}
+            </Grid>
+            <Grid item xs={12} style={{ textAlign: "center" }}>
+              <Button
+                variant="contained"
+                color="primary"
+                component={Link}
+                to={`/GatePass/${id}/${numberOfEmployees}`}
+                style={{ width: "20rem" }}
+              >
+                Generate Gate Pass
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
-      </form>
+        )}
 
-      {isScheduled && (
-        <Grid container justifyContent="center">
-          <Grid item xs={12} style={{ marginBottom: "2rem" }}>
-            {/* Optional: Display confirmation message or additional content */}
-          </Grid>
-          <Grid item xs={12} style={{ textAlign: "center" }}>
-            <Button
-              variant="contained"
-              color="primary"
-              component={Link}
-              to={`/GatePass/${id}/${numberOfEmployees}`}
-              style={{ width: "20rem" }}
-            >
-              Generate Gate Pass
-            </Button>
-          </Grid>
-        </Grid>
-      )}
-
-    </LocalizationProvider><br/><br/>
-    <FooterIn />
+      </LocalizationProvider><br /><br />
+      <FooterIn />
     </>
   );
 };

@@ -31,9 +31,9 @@ const Welcome = () => {
     { label: 'User Group Details', link: '/login/welcome/userGroupList' },
     { label: 'Job Details' },
     // { label: 'Job Allocation' },
-    { label: 'Calendar' },
+    { label: 'Calendar', link: '/base/calendarEmp' },
     { label: 'Service Agreement Details', link: '/ServiceAgreementSix' },
-    { label: 'Site Visit Details', link: '/SiteVisitFour' },
+    { label: 'Site Visit Details', link: '/SiteVisitFourEmployee' },
   ];
 
   // const theme = responsiveFontSizes(createTheme());

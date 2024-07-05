@@ -18,6 +18,7 @@ const Tabs = ({ buttonData }) => {
     accessJob: 'Job Details',
     accessServiceAgreement: 'Service Agreement Details',
     accessCalendar: 'Calendar',
+    accessCalendar: 'Set Reminder',
     accessSiteVisit: 'Site Visit Details',
     // accessJobAllocation: 'Job Allocation',
   };

@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Divider, Grid, Modal, Typography, createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
+import { Box, Button, Divider, Grid, Modal, Typography, createTheme, responsiveFontSizes, ThemeProvider, Pagination } from '@mui/material';
 import { useNavigate } from 'react-router-dom';//useLocation,
 import '../Style/Admcomread.css';
-import { NormalHeaderBar } from '../Components/index';
+import { FooterIn, NormalHeaderBar } from '../Components/index';
 import axios from 'axios';
 import { error } from '../util/Toastify';
-// import axios from 'axios';
-// import { error } from '../util/Toastify';
 
 function ReviewedComplain() {
 
     // const [complaintdatasend, setComplaintdatasend] = useState([]);
     const [openModalIndex, setOpenModalIndex] = useState(null);
     const [complaindata, setComplaindata] = useState([]);
-    // const [complaindata2, setComplaindata2] = useState([]);
-    // const location = useLocation();
+    const [complainPerPage] = useState(10);
+    const [currentPage, setCurrentPage] = useState(1);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -47,6 +45,15 @@ function ReviewedComplain() {
         navigate('/login/complaintread');//, { state: { complaindata, complaintdatasend } }
     };
 
+
+    const indexOfLastEmployee = currentPage * complainPerPage;
+    const indexOfFirstEmployee = indexOfLastEmployee - complainPerPage;
+    const currentComplaints = complaindata.slice(indexOfFirstEmployee, indexOfLastEmployee);
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+    };
+
     return (
         <>
             <NormalHeaderBar />
@@ -57,10 +64,10 @@ function ReviewedComplain() {
                     </Button>
                 </Grid>
             </Grid>
-            <Grid container className="text">
+            <Grid container>
                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign="center">
                     <ThemeProvider theme={responsiveFontSizes(createTheme())}>
-                        <Typography variant="h2" sx={{ fontWeight: 'bold' }}>
+                        <Typography variant="h2" className="text" sx={{ fontWeight: 'bold' }}>
                             Reviewed Complaints
                         </Typography>
                     </ThemeProvider>
@@ -68,7 +75,7 @@ function ReviewedComplain() {
             </Grid>
             <br />
             {/* {complaintdatasend && complaintdatasend.length > 0 ? ( */}
-            {complaindata.map((complaindata, index) => (
+            {currentComplaints.map((complaindata, index) => (
                 <Grid container key={index}>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign={'center'}>
                         <Button
@@ -99,7 +106,7 @@ function ReviewedComplain() {
                                 </Grid>
                                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                                     <ThemeProvider theme={responsiveFontSizes(createTheme())}>
-                                        <Typography variant="h6" component="h2">
+                                        <Typography variant="h6">
                                             {complaindata.reviewedComplain.subject}
                                         </Typography>
                                     </ThemeProvider>
@@ -119,21 +126,21 @@ function ReviewedComplain() {
                                 </Grid>
                                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign='left'>
                                     <ThemeProvider theme={responsiveFontSizes(createTheme())}>
-                                        <Typography variant="h6" component="h2">
+                                        <Typography variant="h6">
                                             From: {complaindata.appUser.username}
                                         </Typography>
                                     </ThemeProvider>
                                 </Grid>
                                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign='left'>
                                     <ThemeProvider theme={responsiveFontSizes(createTheme())}>
-                                        <Typography variant="h6" component="h2">
+                                        <Typography variant="h6">
                                             User Group: {complaindata.appUser.usergroup}
                                         </Typography>
                                     </ThemeProvider>
                                 </Grid>
                                 <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign='left'>
                                     <ThemeProvider theme={responsiveFontSizes(createTheme())}>
-                                        <Typography variant="h6" component="h2">
+                                        <Typography variant="h6">
                                             Email: {complaindata.reviewedComplain.email}
                                         </Typography>
                                     </ThemeProvider>
@@ -154,6 +161,17 @@ function ReviewedComplain() {
                 </Grid>
             )
             } */}
+
+
+            <Pagination
+                position="fixed"
+                count={Math.ceil(complaindata.length / complainPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                variant="outlined"
+                color="primary"
+            />
+            <FooterIn />
         </>
     );
 }

@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import '../Style/Signup.css';
 import { Grid, Typography } from '@mui/material';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
+import { useUser } from '../Context/UserContext';
 
 export default function Signup() {
 
-  // const location = useLocation()
-
+  
+  const {tempdata} = useUser();
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
 
@@ -20,13 +21,19 @@ export default function Signup() {
   return (
     <>
       <NormalHeaderBar />
-      <Grid container spacing={2}>
+
+      <Grid container>
         <Grid item position='fixed'>
-          <Link to={"/login/welcomeadmin"}>
-            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
+          <Link to={tempdata.usergroup === "AdminGroup" ? "/base/dashboard" : "/login/welcomeadmin"}>
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+              style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }}
+              alt='Back'
+            />
           </Link>
         </Grid>
       </Grid>
+
       <Grid container className="text">
         <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
           <ThemeProvider theme={theme}>

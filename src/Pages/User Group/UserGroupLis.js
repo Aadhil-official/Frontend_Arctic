@@ -4,13 +4,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FooterIn, NormalHeaderBar } from '../../Components/index';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SearchIcon from '@mui/icons-material/Search';
-import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
+import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Pagination, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 
 function UserGroupLis() {
 
     const [userGroups, setUserGroups] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filterOption, setFilterOption] = useState('groupName');
+    const [userGroupsPerPage] = useState(5);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/auth/getAllUserGroups')
@@ -32,9 +34,8 @@ function UserGroupLis() {
 
     const navigate = useNavigate();
 
-    const filteredUserGroup = userGroups.filter(userGroup => {
+    let filteredUserGroup = userGroups.filter(userGroup => {
         if (!searchQuery) return true;
-
         const value = userGroup[filterOption];
         return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
     });
@@ -44,6 +45,16 @@ function UserGroupLis() {
     const handleViewUnit = (id) => {
         navigate(`/login/welcome/userGroupList/view/${id}`);
     }
+
+
+    const indexOfLastUsergroup = currentPage * userGroupsPerPage;
+    const indexOfFirstUsergroup = indexOfLastUsergroup - userGroupsPerPage;
+    const currentUsergroup = filteredUserGroup.slice(indexOfFirstUsergroup, indexOfLastUsergroup);
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+    };
+
 
     return (
         <div>
@@ -100,7 +111,7 @@ function UserGroupLis() {
                         </Grid>
                         <Grid item xs={2} sm={2} md={4} lg={9} xl={10}></Grid>
                         <Grid item xs={5} sm={5} md={4} lg={1.5} xl={1}>
-                            
+
                             <TextField
                                 variant="outlined"
                                 InputProps={{
@@ -126,7 +137,7 @@ function UserGroupLis() {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    {filteredUserGroup.map((userGroup, index) => (
+                    {currentUsergroup.map((userGroup, index) => (
                         <Grid item xs={12} key={index}>
                             <Button variant='contained'
                                 sx={{
@@ -148,7 +159,16 @@ function UserGroupLis() {
                         </Grid>
                     ))}
                 </Grid>
-            </Grid><br /><br />
+            </Grid><br />
+
+            <Pagination
+                count={Math.ceil(filteredUserGroup.length / userGroupsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                variant="outlined"
+                color="primary"
+            />
+
             <FooterIn />
 
         </div>

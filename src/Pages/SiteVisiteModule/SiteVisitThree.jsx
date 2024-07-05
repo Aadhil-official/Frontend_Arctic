@@ -20,7 +20,7 @@ function SiteVisitThree() {
     const fetchVisitDetails = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:8080/api/v1/siteVisit/getSiteVisitTwo?id=${id}`);
+        const response = await axios.get(`http://localhost:8080/api/auth/siteVisit/getSiteVisitTwo?id=${id}`);
         setVisitDetails(response.data);
         setLoading(false);
       } catch (error) {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../../Style/Calendar/Reminder.css';
+import { Box } from '@mui/system';
 
 
 function Reminder() {
@@ -38,7 +39,7 @@ if (reminderTime <= currentTime) {
 
   
   return (
-    <div>
+    <div className='box'>
     <h1 className='remindertitle'>Set Reminder</h1>
     <form onSubmit={handleSubmit} className='reminder'>
       <div>

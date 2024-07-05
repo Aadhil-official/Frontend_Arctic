@@ -18,7 +18,7 @@ const ServiceAgreementFive = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/v1/agreementService/fetchAgreementService')
+    axios.get('http://localhost:8080/api/auth/agreementService/fetchAgreementService')
       .then(response => {
         console.log(response.data);
         setServiceAgreements(response.data);

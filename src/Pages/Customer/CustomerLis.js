@@ -1,4 +1,4 @@
-import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
+import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Pagination, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,6 +12,8 @@ function CustomerLis() {
     const [customers, setCustomers] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filterOption, setFilterOption] = useState('customerName');
+    const [customersPerPage] = useState(5);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/auth/getAllCustomers')
@@ -26,6 +28,8 @@ function CustomerLis() {
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
+        filteredCustomer = e.target.value;
+        setCurrentPage(1);
     };
 
     const handleFilterChange = (e) => {
@@ -34,9 +38,8 @@ function CustomerLis() {
 
     const navigate = useNavigate();
 
-    const filteredCustomer = customers.filter(customer => {
+    let filteredCustomer = customers.filter(customer => {
         if (!searchQuery) return true;
-
         const value = customer[filterOption];
         return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
 
@@ -48,6 +51,13 @@ function CustomerLis() {
         navigate(`/login/welcome/customerList/view/${id}`);
     }
 
+    const indexOfLastCustomer = currentPage * customersPerPage;
+    const indexOfFirstCustomer = indexOfLastCustomer - customersPerPage;
+    const currentCustomers = filteredCustomer.slice(indexOfFirstCustomer, indexOfLastCustomer);
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+    };
 
     return (
         <div>
@@ -129,7 +139,7 @@ function CustomerLis() {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    {filteredCustomer.map((customer, index) => (
+                    {currentCustomers.map((customer, index) => (
                         <Grid item xs={12} key={index}>
                             <Button variant='contained'
                                 sx={{
@@ -151,7 +161,16 @@ function CustomerLis() {
                         </Grid>
                     ))}
                 </Grid>
-            </Grid><br /><br />
+            </Grid><br />
+
+            <Pagination
+                count={Math.ceil(filteredCustomer.length / customersPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                variant="outlined"
+                color="primary"
+            />
+
             <FooterIn />
 
 

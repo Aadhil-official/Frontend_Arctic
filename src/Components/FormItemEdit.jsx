@@ -48,7 +48,7 @@ export default function FormItemEdit() {
     }
 
     const handleSubmit = () => {
-        axios.put(`http://localhost:8080/api/v1/agreementService/updateAgreementService`, data)
+        axios.put(`http://localhost:8080/api/auth/agreementService/updateAgreementService`, data)
             .then(() => {
                 console.log("Service agreement updated successfully");
                 navigate('/');

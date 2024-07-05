@@ -3,13 +3,17 @@ import { Link } from 'react-router-dom';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-import { Paper,Grid } from "@mui/material";
+import { Paper, Grid } from "@mui/material";
 //import Footer from "../../Components/Footer";
 
 import { FooterIn, NormalHeaderBar } from '../../Components';
+import { useUser } from '../../Context/UserContext';
 
 
 const SiteVisitDashboard = () => {
+
+    
+    const {tempdata} = useUser();
     const [hoveredButton, setHoveredButton] = useState(null);
     // const [hoveredIcon, setHoveredIcon] = useState(false);
 
@@ -84,7 +88,7 @@ const SiteVisitDashboard = () => {
                     backgroundColor: "transparent", // Transparent background
                 }}
             >
-                 <div style={sectionStyle}>
+                <div style={sectionStyle}>
                     {/* <Link
                         to={-1}
                         style={{
@@ -102,13 +106,18 @@ const SiteVisitDashboard = () => {
                     >
                         <FontAwesomeIcon icon={faArrowLeft} size="2x" style={iconStyle} />
                     </Link>  */}
-        <Grid container className='back-icon'>
-        <Grid item xs={12} textAlign="left">
-          <Link to={"/login/welcomeadmin"}>
-            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px', position: 'absolute', left: '10px', top: '10px' }} alt='Back' />
-          </Link>
-        </Grid>
-      </Grid>
+                    <Grid container>
+                        <Grid item position='fixed'>
+                            <Link to={tempdata.usergroup === "AdminGroup" ? "/base/dashboard" : "/login/welcomeadmin"}>
+                                <img
+                                    src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+                                    style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }}
+                                    alt='Back'
+                                />
+                            </Link>
+                        </Grid>
+                    </Grid>
+
 
 
                     <h1 style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '5rem', color: '#0056b3', marginTop: '20px' }}>

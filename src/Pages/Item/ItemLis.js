@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography, createTheme, responsiveFontSizes } from '@mui/material';
+import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Pagination, Select, TextField, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import { FooterIn, NormalHeaderBar } from '../../Components/index';
 import { Link, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
@@ -14,6 +14,8 @@ const ItemLis = () => {
     const [items, setItems] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filterOption, setFilterOption] = useState('name');
+    const [itemsPerPage] = useState(5);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/auth/getAllItem')
@@ -28,6 +30,8 @@ const ItemLis = () => {
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
+        filteredItem = e.target.value;
+        setCurrentPage(1);
     };
 
     const handleFilterChange = (e) => {
@@ -49,6 +53,15 @@ const ItemLis = () => {
     const handleViewUser = (id) => {
         navigate(`/login/welcome/itemList/view/${id}`);
     }
+
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = filteredItem.slice(indexOfFirstItem, indexOfLastItem);
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+    };
 
     return (
         <>
@@ -129,7 +142,7 @@ const ItemLis = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    {filteredItem.map((item, index) => (
+                    {currentItems.map((item, index) => (
                         <Grid item xs={12} key={index}>
                             <Button variant='contained'
                                 sx={{
@@ -151,8 +164,17 @@ const ItemLis = () => {
                         </Grid>
                     ))}
                 </Grid>
-            </Grid><br/><br/>
-            <FooterIn/>
+            </Grid><br />
+
+            <Pagination
+                count={Math.ceil(filteredItem.length / itemsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                variant="outlined"
+                color="primary"
+            />
+
+            <FooterIn />
 
         </>
     );
