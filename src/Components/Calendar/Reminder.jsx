@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../../Style/Calendar/Reminder.css';
-import { Box } from '@mui/system';
-
 
 function Reminder() {
   const [email, setEmail] = useState('');

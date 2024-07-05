@@ -1,21 +1,25 @@
 import React from 'react';
 import { BsPersonCircle, BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsPersonVcardFill } from 'react-icons/bs';
-import { FaCalendarAlt, FaCar, FaUserEdit } from 'react-icons/fa';
+import { FaCalendarAlt, FaCar, FaExclamationCircle, FaUserEdit } from 'react-icons/fa';
 import { BiDetail } from 'react-icons/bi';
-import { FaBuilding,FaClock } from 'react-icons/fa6';
+import { FaBuilding, FaClock } from 'react-icons/fa6';
 import { RiContractFill } from 'react-icons/ri';
 import { HiMiniUserGroup } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 import { IoIosCloseCircle } from "react-icons/io";
+import { useUser } from '../../Context/UserContext';
 
 
-function Sidebar({isOpen, toggleSidebar }) {
+function Sidebar({ isOpen, toggleSidebar }) {
+
+    const {tempdata} = useUser();
+
     return (
         <div className={`sidebar ${isOpen ? 'open' : ''}`}>
-        <button className="close-btn" onClick={toggleSidebar}><IoIosCloseCircle /></button>
-        <div className="sidebar-content">
-        <BsPersonCircle  className='icon_header'/> Admin
-              </div>
+            <button className="close-btn" onClick={toggleSidebar}><IoIosCloseCircle /></button>
+            <div className="sidebar-content">
+                <BsPersonCircle className='icon_header' /> {tempdata.username.toUpperCase()}
+            </div>
 
             <ul className='sidebar-list'>
                 <li className='sidebar-list-item'>
@@ -30,8 +34,8 @@ function Sidebar({isOpen, toggleSidebar }) {
                     </Link>
                 </li>
                 <li className='sidebar-list-item'>
-                <Link to="/login/welcomeadmin/unitListAd" className='tonavigate'>
-                    <BsFillArchiveFill className='icon' /> Units
+                    <Link to="/login/welcomeadmin/unitListAd" className='tonavigate'>
+                        <BsFillArchiveFill className='icon' /> Units
                     </Link>
                 </li>
                 <li className='sidebar-list-item'>
@@ -40,12 +44,12 @@ function Sidebar({isOpen, toggleSidebar }) {
                     </Link>
                 </li>
                 <li className='sidebar-list-item'>
-                <   Link to="/login/welcomeadmin/customerListAd" className='tonavigate'>
+                    <   Link to="/login/welcomeadmin/customerListAd" className='tonavigate'>
                         <BsPeopleFill className='icon' /> Customers
                     </Link>
                 </li>
                 <li className='sidebar-list-item'>
-                <Link to="/login/welcomeadmin/employeelistad" className='tonavigate'>
+                    <Link to="/login/welcomeadmin/employeelistad" className='tonavigate'>
                         <BsPersonVcardFill className='icon' /> Employees
                     </Link>
                 </li>
@@ -66,7 +70,7 @@ function Sidebar({isOpen, toggleSidebar }) {
                 </li>
                 <li className='sidebar-list-item'>
                     <Link to="/ServiceAgreementSix" className='tonavigate'>
-                       <RiContractFill className='icon' /> Service Agreements
+                        <RiContractFill className='icon' /> Service Agreements
                     </Link>
                 </li>
                 <li className='sidebar-list-item'>
@@ -84,9 +88,14 @@ function Sidebar({isOpen, toggleSidebar }) {
                         <FaClock className='icon' /> Set Reminder
                     </Link>
                 </li>
+                <li className='sidebar-list-item'>
+                    <Link to="/login/complaintread" className='tonavigate'>
+                        <FaExclamationCircle className='icon' /> Complaints
+                    </Link>
+                </li>
             </ul>
 
-    </div>
+        </div>
     );
 }
 

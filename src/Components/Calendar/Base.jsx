@@ -40,7 +40,7 @@ function Create() {
 
   return (
       <div className="app">
-          <Sidebar  
+          <Sidebar
            isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} 
           />
         

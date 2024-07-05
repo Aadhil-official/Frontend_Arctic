@@ -4,8 +4,8 @@ import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 import { useUser } from '../Context/UserContext';
 
-const Tabs = ({ buttonData }) => {
-  const { tempdataGroup } = useUser();
+const Tabs = () => {
+  const { tempdataGroup, buttonData } = useUser();
   const relevantPrivileges = tempdataGroup?.relevantPrivileges || [];
 
   const privilegeToButtonLabel = {

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -17,7 +17,6 @@ export default function Calendar({ selectedDate }) {
     const calendarRef = useRef(null);
     const [events, setEvents] = useState([]);
     const [eventDetails, setEventDetails] = useState('');
-    const [showDatePicker, setShowDatePicker] = useState(false);
     const [startTime, setStartTime] = useState(new Date());
     const [endTime, setEndTime] = useState(new Date());
     const [isAllDay, setIsAllDay] = useState(false);
@@ -50,7 +49,7 @@ export default function Calendar({ selectedDate }) {
         }
     };
 
-    const fetchAgreementEvents = async () => {
+    const fetchAgreementEvents = useCallback(async () => {
         try {
             const response = await axios.get('http://localhost:8080/aggrements');
             return response.data.map(agreementEvent => {
@@ -69,7 +68,7 @@ export default function Calendar({ selectedDate }) {
             console.error('Error fetching agreement events:', error);
             return [];
         }
-    };
+    }, []);
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -114,7 +113,6 @@ export default function Calendar({ selectedDate }) {
     };
 
     const handleDateClick = (info) => {
-        setShowDatePicker(true);
         setStartTime(new Date(info.date));
         setEndTime(new Date(info.date));
         setEventDetails('');
@@ -139,7 +137,6 @@ export default function Calendar({ selectedDate }) {
     };
 
     const handleButtonClick = () => {
-        setShowDatePicker(true);
         setStartTime(new Date());
         setEndTime(new Date());
         setEventDetails('');
@@ -184,7 +181,6 @@ export default function Calendar({ selectedDate }) {
 
             const response = await axios.post('http://localhost:8080/events', newEvent);
             setEvents(prevEvents => [...prevEvents, response.data]); // Update events state correctly
-            setShowDatePicker(false);
             setShowEventModal(false);
             setEventDetails('');
             window.location.reload();
