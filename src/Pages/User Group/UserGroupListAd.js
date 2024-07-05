@@ -4,17 +4,19 @@ import SearchIcon from '@mui/icons-material/Search';
 import '../../Style/Lists/ItemList.css'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
+import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Pagination, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import { FooterIn, NormalHeaderBar } from '../../Components/index';
 import { useUser } from '../../Context/UserContext';
 
 function UserGroupListAd() {
 
-    
-    const {tempdata} = useUser();
+
+    const { tempdata } = useUser();
     const [userGroups, setUserGroups] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filterOption, setFilterOption] = useState('groupName');
+    const [userGroupsPerPage] = useState(5);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/auth/getAllUserGroups')
@@ -28,6 +30,8 @@ function UserGroupListAd() {
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
+        filteredUserGroup = e.target.value;
+        setCurrentPage(1);
     };
 
     const handleFilterChange = (e) => {
@@ -40,9 +44,8 @@ function UserGroupListAd() {
         navigate('/login/welcomeadmin/userGroupListAd/addUserGroup');
     }
 
-    const filteredUserGroup = userGroups.filter(userGroup => {
+    let filteredUserGroup = userGroups.filter(userGroup => {
         if (!searchQuery) return true;
-
         const value = userGroup[filterOption];
         return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
 
@@ -55,7 +58,14 @@ function UserGroupListAd() {
         navigate(`/login/welcomeadmin/userGroupListAd/edit/${id}`);
     }
 
-
+    const indexOfLastUsergroup = currentPage * userGroupsPerPage;
+    const indexOfFirstUsergroup = indexOfLastUsergroup - userGroupsPerPage;
+    const currentUsergroup = filteredUserGroup.slice(indexOfFirstUsergroup, indexOfLastUsergroup);
+  
+    const handlePageChange = (event, value) => {
+      setCurrentPage(value);
+    };
+  
 
     return (
         <div>
@@ -73,7 +83,7 @@ function UserGroupListAd() {
                     </Button>
                 </Grid>
             </Grid>
-            
+
             <Grid container>
                 <Grid item position='fixed'>
                     <Link to={tempdata.usergroup === "AdminGroup" ? "/base/dashboard" : "/login/welcomeadmin"}>
@@ -156,7 +166,7 @@ function UserGroupListAd() {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    {filteredUserGroup.map((userGroup, index) => (
+                    {currentUsergroup.map((userGroup, index) => (
                         <Grid item xs={12} key={index}>
                             <Button variant='contained'
                                 sx={{
@@ -178,7 +188,16 @@ function UserGroupListAd() {
                         </Grid>
                     ))}
                 </Grid>
-            </Grid><br /><br />
+            </Grid><br />
+
+            <Pagination
+                count={Math.ceil(filteredUserGroup.length / userGroupsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                variant="outlined"
+                color="primary"
+            />
+
             <FooterIn />
 
 

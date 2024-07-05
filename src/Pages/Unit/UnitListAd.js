@@ -1,4 +1,4 @@
-import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
+import { Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, OutlinedInput, Pagination, Select, TextField, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,10 +10,12 @@ import { useUser } from '../../Context/UserContext';
 
 function UnitListAd() {
 
-    const {tempdata} = useUser();
+    const { tempdata } = useUser();
     const [units, setUnits] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filterOption, setFilterOption] = useState('modelName');
+    const [unitsPerPage] = useState(5);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/auth/getAllUnits')
@@ -27,6 +29,8 @@ function UnitListAd() {
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
+        filteredUnit = e.target.value;
+        setCurrentPage(1);
     };
 
     const handleFilterChange = (e) => {
@@ -39,9 +43,8 @@ function UnitListAd() {
         navigate('/login/welcomeadmin/unitListAd/addUnit');
     }
 
-    const filteredUnit = units.filter(unit => {
+    let filteredUnit = units.filter(unit => {
         if (!searchQuery) return true;
-
         const value = unit[filterOption];
         return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
 
@@ -53,6 +56,15 @@ function UnitListAd() {
         console.log(id)
         navigate(`/login/welcomeadmin/unitListAd/edit/${id}`);
     }
+
+
+    const indexOfLastUnit = currentPage * unitsPerPage;
+    const indexOfFirstUnit = indexOfLastUnit - unitsPerPage;
+    const currentUnits = filteredUnit.slice(indexOfFirstUnit, indexOfLastUnit);
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
+    };
 
     return (
         <div>
@@ -156,7 +168,7 @@ function UnitListAd() {
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                    {filteredUnit.map((unit, index) => (
+                    {currentUnits.map((unit, index) => (
                         <Grid item xs={12} key={index}>
                             <Button variant='contained'
                                 sx={{
@@ -178,7 +190,16 @@ function UnitListAd() {
                         </Grid>
                     ))}
                 </Grid>
-            </Grid><br /><br />
+            </Grid><br />
+
+            <Pagination
+                count={Math.ceil(filteredUnit.length / unitsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                variant="outlined"
+                color="primary"
+            />
+
             <FooterIn />
 
         </div>
