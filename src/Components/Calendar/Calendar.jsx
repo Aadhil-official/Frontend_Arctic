@@ -26,6 +26,22 @@ export default function Calendar({ selectedDate }) {
     const [mode, setMode] = useState('create');
     const [recurrenceFrequency, setRecurrenceFrequency] = useState('none');
 
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const internalEvents = await axios.get('http://localhost:8080/events');
+                const externalEvents = await fetchExternalEvents();
+                const agreementEvents = await fetchAgreementEvents();
+                setEvents([...internalEvents.data, ...externalEvents, ...agreementEvents]);
+            } catch (error) {
+                console.error('Error fetching events:', error);
+            }
+        };
+
+        fetchEvents();
+    }, []);
+
     useEffect(() => {
         if (calendarRef.current) {
             const calendarApi = calendarRef.current.getApi();
@@ -71,23 +87,6 @@ export default function Calendar({ selectedDate }) {
         }
     };
 
-    useEffect(() => {
-        const fetchEvents = async () => {
-            try {
-                const internalEvents = await axios.get('http://localhost:8080/events');
-                const externalEvents = await fetchExternalEvents();
-                const agreementEvents = await fetchAgreementEvents();
-                setEvents([...internalEvents.data, ...externalEvents, ...agreementEvents]);
-            } catch (error) {
-                console.error('Error fetching events:', error);
-            }
-        };
-
-        fetchEvents();
-    }, [fetchAgreementEvents]);
-
-
-
     const generateAgreementRrule = (type, date) => {
         if (!date) {
             console.error("Start date is undefined");
@@ -122,7 +121,7 @@ export default function Calendar({ selectedDate }) {
         setRecurrenceFrequency('none');
         setMode('create');
         setShowEventModal(true);
-
+       
     };
 
     const handleEventClick = (info) => {
@@ -135,7 +134,7 @@ export default function Calendar({ selectedDate }) {
         setRecurrenceFrequency(event.extendedProps.rrule?.freq || 'none');
         setMode('update');
         setShowEventModal(true);
-
+        
     };
 
     const handleButtonClick = () => {
@@ -147,7 +146,7 @@ export default function Calendar({ selectedDate }) {
         setCurrentEvent(null);
         setMode('create');
         setShowEventModal(true);
-
+       
     };
 
     const handleSaveOrUpdateEvent = async (e) => {
@@ -181,7 +180,7 @@ export default function Calendar({ selectedDate }) {
                 recurrenceFrequency: recurrenceFrequency,
                 rrule: recurrenceFrequency !== 'none' ? generateInternalEventRrule(recurrenceFrequency, startTime) : null,
             };
-
+    
             const response = await axios.post('http://localhost:8080/events', newEvent);
             setEvents(prevEvents => [...prevEvents, response.data]); // Update events state correctly
             setShowDatePicker(false);
@@ -192,12 +191,12 @@ export default function Calendar({ selectedDate }) {
             console.error('Error creating event:', error);
         }
     };
-
-
-
+    
+    
+    
 
     const handleUpdateEvent = async () => {
-        if (currentEvent.extendedProps.source === 'external' || currentEvent.extendedProps.source === 'agreement') {
+        if (currentEvent.extendedProps.source === 'external' || currentEvent.extendedProps.source === 'agreement' ) {
             alert('External events cannot be updated.');
             return;
         }
@@ -213,7 +212,7 @@ export default function Calendar({ selectedDate }) {
                 description: eventDetails,
                 recurrenceFrequency: recurrenceFrequency,
                 rrule: recurrenceFrequency !== 'none' ? generateInternalEventRrule(recurrenceFrequency, startTime) : null,
-
+               
             };
 
             await axios.put(`http://localhost:8080/events/${currentEvent.id}`, updatedEvent);
@@ -345,7 +344,7 @@ export default function Calendar({ selectedDate }) {
                                 onChange={handleAllDayChange}
                             />
                             <label htmlFor="allDayCheckbox">All Day</label>
-
+                            
                             <div>
                                 <label>Repeat: </label>
                                 <select value={recurrenceFrequency} onChange={(e) => setRecurrenceFrequency(e.target.value)}>
@@ -356,8 +355,8 @@ export default function Calendar({ selectedDate }) {
                                     <option value="yearly">Yearly</option>
                                 </select>
                             </div>
-
-
+                            
+                            
                         </div>
                         <div className="button2-container">
                             <div className="button2" onClick={handleSaveOrUpdateEvent}>
