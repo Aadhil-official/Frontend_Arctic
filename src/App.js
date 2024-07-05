@@ -26,8 +26,8 @@ import { AddUnit, UnitEdit, UnitLis, UnitListAd, UnitView } from './Pages/Unit/I
 import { AddVehicle, VehicleEdit, VehicleLis, VehicleListAd, VehicleView } from './Pages/Vehicle/Index';
 import { AddCustomer, CustomerEdit, CustomerLis, CustomerListAd, CustomerView } from './Pages/Customer/index';
 import { AddUserGroup, UserGroupEdit, UserGroupLis, UserGroupListAd, UserGroupView } from './Pages/User Group/index';
-import Base from "./Components/Calendar/Base";
-import Calendar from "./Components/Calendar/Calendar";
+// import Base from "./Components/Calendar/Base";
+// import Calendar from "./Components/Calendar/Calendar";
 
 function App() {
   return (
@@ -120,8 +120,9 @@ function App() {
           <Route path='/login/welcomeadmin/userGroupListAd/edit/:id' element={<UserGroupEdit />} />
 
           {/* Calendar-related routes */}
-          <Route path="/base/*" element={<Base />} />
-          <Route path="/base/calendarEmp" element={<Calendar/>}/>
+          {/* <Route path="/base/*" element={<Base />} /> */}
+          {/* <Route path="/base/calendarEmp" element={<Calendar/>}/> */}
+
 
         </Routes>
       </BrowserRouter>
