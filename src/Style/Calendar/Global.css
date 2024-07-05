@@ -1,0 +1,13 @@
+.base {
+    display: flex;
+}
+
+.main-content {
+    transition: margin-left 0.3s;
+    margin-left: 0;
+    width: 100%;
+}
+
+.sidebar-open .main-content {
+    margin-left: 250px; /* Adjust according to the sidebar width */
+}

@@ -6,18 +6,16 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TextField } from '@mui/material';
 import dayjs from 'dayjs';
 import { useLocation } from 'react-router-dom'; // Import useLocation
-import { BsJustify } from 'react-icons/bs';
+import { FaBars } from "react-icons/fa";
 
 
-export default function Header({ selectedDate, handleDatePickerChange, OpenSidebar }) {
+export default function Header({ selectedDate, handleDatePickerChange, toggleSidebar }) {
     const location = useLocation(); // Get the current location
 
     return (
         <div>
-                <header className='header'>
-                    <div className='menu-icon'>
-                        <BsJustify className='icon' onClick={OpenSidebar} />
-                    </div>
+                <header className="header">
+      <button className="toggle-btn" onClick={toggleSidebar}> <FaBars /></button>
                 </header>
                 <br />
 
