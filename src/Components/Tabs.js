@@ -9,23 +9,28 @@ const Tabs = ({ buttonData }) => {
   const relevantPrivileges = tempdataGroup?.relevantPrivileges || [];
 
   const privilegeToButtonLabel = {
-    accessEmployee: 'Employee Details',
-    accessItem: 'Item Details',
-    accessUnit: 'Unit Details',
-    accessVehicle: 'Vehicle Details',
-    accessCustomer: 'Customer Details',
-    accessUserGroup: 'User Group Details',
-    accessJob: 'Job Details',
-    accessServiceAgreement: 'Service Agreement Details',
-    accessCalendar: 'Calendar',
-    accessCalendar: 'Set Reminder',
-    accessSiteVisit: 'Site Visit Details',
+    accessEmployee: ['Employee Details'],
+    accessItem: ['Item Details'],
+    accessUnit: ['Unit Details'],
+    accessVehicle: ['Vehicle Details'],
+    accessCustomer: ['Customer Details'],
+    accessUserGroup: ['User Group Details'],
+    accessJob: ['Job Details'],
+    accessServiceAgreement: ['Service Agreement Details'],
+    accessCalendar: ['Calendar', 'Set Reminder'],
+    accessSiteVisit: ['Site Visit Details'],
     // accessJobAllocation: 'Job Allocation',
   };
 
+  const privilegeSet = new Set(relevantPrivileges);
+
   const filteredButtonData = buttonData.filter(button =>
-    relevantPrivileges.some(privilege => privilegeToButtonLabel[privilege] === button.label)
+    Object.keys(privilegeToButtonLabel).some(privilege =>
+      privilegeSet.has(privilege) &&
+      privilegeToButtonLabel[privilege].includes(button.label)
+    )
   );
+
 
   console.log("Filtered Button Data in Tabs:", filteredButtonData);
 
