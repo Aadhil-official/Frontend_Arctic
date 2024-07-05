@@ -36,7 +36,7 @@ function UnitLis() {
 
     const navigate = useNavigate();
 
-    const filteredUnit = units.filter(unit => {
+    let filteredUnit = units.filter(unit => {
         if (!searchQuery) return true;
 
         const value = unit[filterOption];

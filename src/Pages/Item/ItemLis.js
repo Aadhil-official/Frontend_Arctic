@@ -40,7 +40,7 @@ const ItemLis = () => {
 
     const navigate = useNavigate();
 
-    const filteredItem = items.filter(item => {
+    let filteredItem = items.filter(item => {
         if (!searchQuery) return true;
 
         const value = item[filterOption];
