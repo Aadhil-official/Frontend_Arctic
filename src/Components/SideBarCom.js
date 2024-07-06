@@ -58,12 +58,12 @@ function SidebarCom({ isOpen, toggleSidebar }) {
 
             <ul className='sidebar-list'>
                 {filteredButtonData.map((button, index) => (
-                    <li className='sidebar-list-item' key={index}>
-                        <Link to={button.link || '/'} className='tonavigate'>
+                    <Link to={button.link || '/'} className='tonavigate'>
+                        <li className='sidebar-list-item' key={index}>
                             {/* {getIconForItem(button.label)}  */}
                             {button.label}
-                        </Link>
-                    </li>
+                        </li>
+                    </Link>
                 ))}
             </ul>
 

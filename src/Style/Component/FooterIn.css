@@ -1,7 +1,8 @@
 .foot1 {
-    background-color: rgb(25,118,210);
+    background-color: rgb(25, 118, 210);
     padding: 15px;
     /* margin-top: -10px; */
+    /* width: 200%; */
     color: white;
 }
 

@@ -2,12 +2,15 @@
     display: flex;
 }
 
-.main-content {
+.main-content,
+.main-contentum {
     transition: margin-left 0.3s;
     margin-left: 0;
     width: 100%;
 }
 
-.sidebar-open .main-content {
-    margin-left: 250px; /* Adjust according to the sidebar width */
+.sidebar-open .main-content,
+.sidebar-open .main-contentum {
+    margin-left: 250px;
+    /* Adjust according to the sidebar width */
 }

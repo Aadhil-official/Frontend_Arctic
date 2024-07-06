@@ -3,7 +3,9 @@ import axios from 'axios';
 import { Button, Grid, Typography, Box, Pagination, InputAdornment, TextField } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
-import { FooterIn, NormalHeaderBar } from '../../Components';
+import { FooterIn } from '../../Components';
+import NormalHeaderIn from '../../Components/NormalHeaderIn';
+import SidebarCom from '../../Components/SideBarCom';
 
 const SiteVisitFourEmployee = () => {
   const [siteVisits, setSiteVisits] = useState([]);
@@ -15,6 +17,8 @@ const SiteVisitFourEmployee = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [visitsPerPage] = useState(4); // Number of site visits per page
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -140,17 +144,27 @@ const SiteVisitFourEmployee = () => {
     setCurrentPage(value);
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <>
-    <NormalHeaderBar/>
-     <Grid container className='back-icon'>
-        <Grid item xs={12} textAlign="left">
-          <Link to={"/login/welcome"}>
-            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
-             style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px',  left: '10px', top: '10px' }} alt='Back' />
-          </Link>
+      <NormalHeaderIn toggleSidebar={toggleSidebar} />
+      {/* {tempdata.usergroup === 'AdminGroup' && <br/>} */}
+      <SidebarCom
+        isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}
+      />
+      <div className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
+
+        <Grid container className='back-icon'>
+          <Grid item xs={12} textAlign="left">
+            <Link to={"/login/welcome"}>
+              <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+                style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px', left: '10px', top: '10px' }} alt='Back' />
+            </Link>
+          </Grid>
         </Grid>
-      </Grid>
         <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'} className='text'>
           <Typography variant='h3' sx={{ marginTop: '-3rem', color: 'rgb(26, 99, 209)', fontFamily: "Franklin Gothic Medium", textAlign: "center", fontSize: "60px" }}>{/*,marginTop:"1rem"*/}
             Scheduled Site Visits
@@ -288,8 +302,9 @@ const SiteVisitFourEmployee = () => {
             color="primary"
           />
         </Grid>
-      {/* </Grid> */}
-      <FooterIn />
+        {/* </Grid> */}
+        <FooterIn />
+      </div>
     </>
   );
 };

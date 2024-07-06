@@ -1,6 +1,8 @@
 /* /Header.css/ */
 
 .header {
+  /* width: 100%; */
+  /* position: absolute; */
   cursor: 'pointer';
   grid-area: header;
   height: 50px;
@@ -14,6 +16,7 @@
   margin-top: 0px;
     padding: 10px 20px;
   }
+
   .toggle-btn {
     background: none;
     border: none;

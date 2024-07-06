@@ -19,7 +19,8 @@ body {
   flex-direction: column;
   height: 120vh;
   text-align: center;
-  align-items: center; /* Center the children horizontally */
+  align-items: center;
+  /* Center the children horizontally */
 }
 
 .headerToolbar {
@@ -71,8 +72,10 @@ body {
 .eventdetails {
   margin-bottom: 20px;
   margin-top: 20px;
-  width: 80%; /* Adjust width */
-  margin: 0 auto; /* Center horizontally */
+  width: 80%;
+  /* Adjust width */
+  margin: 0 auto;
+  /* Center horizontally */
 }
 
 /* Center button containers */
@@ -109,6 +112,7 @@ body {
   color: white;
 }
 
+.modal-contentum,
 .modal-content {
   background-color: black;
   padding: 20px;

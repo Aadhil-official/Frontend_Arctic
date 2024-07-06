@@ -87,7 +87,7 @@ const EmployeeListAd = () => {
       />}
       {tempdata.usergroup !== 'AdminGroup' && <SidebarCom
         isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />}
-      <div className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
+      <div className={`content ${isSidebarOpen ? 'shifted' : ''}`} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
 
 
         <Grid container>

@@ -5,17 +5,21 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import { FooterIn, NormalHeaderBar } from '../../Components';
+import { FooterIn } from '../../Components';
 import { useUser } from '../../Context/UserContext';
+import NormalHeaderIn from '../../Components/NormalHeaderIn';
+import Sidebar from '../../Components/Calendar/Sidebar';
+import SidebarCom from '../../Components/SideBarCom';
 
 const ServiceAgreementSix = () => {
 
-  const {tempdata} = useUser();
+  const { tempdata } = useUser();
   const [serviceAgreements, setServiceAgreements] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterOption, setFilterOption] = useState('customerName');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -69,176 +73,192 @@ const ServiceAgreementSix = () => {
     setCurrentPage(pageNumber);
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
+
     <ThemeProvider theme={theme}>
-      <NormalHeaderBar />
-
-      <Grid container>
-        <Grid item position='fixed'>
-          <Link to={tempdata.usergroup === "AdminGroup" ? "/base/dashboard" : "/login/welcomeadmin"}>
-            <img
-              src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
-              style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }}
-              alt='Back'
-            />
-          </Link>
-        </Grid>
-      </Grid>
 
 
-      <Box sx={{ maxWidth: '1200px', margin: '0 auto', padding: '20px', marginBottom: '60px' }}>
-        <Grid container textAlign='center' justifyContent='center'>
-          <Grid item xs={12}>
-            <Typography variant='h' sx={{
-              color: "rgb(26, 99, 209)",
-              fontFamily: "Franklin Gothic ",
-              textAlign: "center",
-              fontSize: "60px",
-              marginBottom: '1rem',
-            }}>
-              Service Agreement
-            </Typography>
+      <NormalHeaderIn toggleSidebar={toggleSidebar} />
+      {/* {tempdata.usergroup === 'AdminGroup' && <br/>} */}
+      {tempdata.usergroup === 'AdminGroup' && <Sidebar
+        isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}
+      />}
+      {tempdata.usergroup !== 'AdminGroup' && <SidebarCom
+        isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />}
+      <div className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
+
+
+        <Grid container>
+          <Grid item position='fixed'>
+            <Link to={tempdata.usergroup === "AdminGroup" ? "/base/dashboard" : "/login/welcomeadmin"}>
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+                style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }}
+                alt='Back'
+              />
+            </Link>
           </Grid>
-          <Grid container justifyContent="center" sx={{ paddingTop: '0rem' }}>
-            <Grid item>
+        </Grid>
+
+
+        <Box sx={{ maxWidth: '1200px', margin: '0 auto', padding: '20px', marginBottom: '60px' }}>
+          <Grid container textAlign='center' justifyContent='center'>
+            <Grid item xs={12}>
               <Typography variant='h' sx={{
-                fontWeight: 'bold',
-                marginBottom: '2rem',
-                fontSize: '15px',
-                color: '#547DD1',
-                fontFamily: 'Franklin Gothic',
+                color: "rgb(26, 99, 209)",
+                fontFamily: "Franklin Gothic ",
+                textAlign: "center",
+                fontSize: "60px",
+                marginBottom: '1rem',
               }}>
-                View Existing Service Agreements & Add new Service Agreement
+                Service Agreement
               </Typography>
             </Grid>
-          </Grid>
-
-          <Grid container spacing={4} alignItems="center" sx={{ margin: '10px 0' }}>
-            <Grid item xs={12} sm={4}>
-              <FormControl variant="outlined" fullWidth sx={{ maxWidth: '300px' }}>
-                <InputLabel>Filter By</InputLabel>
-                <Select
-                  value={filterOption}
-                  onChange={handleFilterChange}
-                  input={
-                    <OutlinedInput
-                      startAdornment={
-                        <InputAdornment position="start">
-                          <FilterAltIcon />
-                        </InputAdornment>
-                      }
-                      label="Filter By"
-                      sx={{ borderRadius: '50px' }}
-                    />
-                  }
-                >
-                  <MenuItem value="customerName">Customer Name</MenuItem>
-                  <MenuItem value="location">Location</MenuItem>
-                  <MenuItem value="item">Item</MenuItem>
-                  <MenuItem value="agreementType">Agreement Type</MenuItem>
-                  <MenuItem value="period">Period of Agreement</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12} sm={4} sx={{ textAlign: 'center' }}>
-              <Button
-                variant="outlined"
-                sx={{
-                  marginBottom: '1rem',
-                  marginRight: '1rem',
-                  backgroundColor: 'rgb(26, 99, 209)',
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: 'rgb(21, 80, 178)',
-                  },
-                }}
-              >
-                <Link to="/ServiceAgreementOne" style={{
-                  textDecoration: 'none',
-                  color: 'inherit',
+            <Grid container justifyContent="center" sx={{ paddingTop: '0rem' }}>
+              <Grid item>
+                <Typography variant='h' sx={{
+                  fontWeight: 'bold',
+                  marginBottom: '2rem',
+                  fontSize: '15px',
+                  color: '#547DD1',
                   fontFamily: 'Franklin Gothic',
-                  fontSize: '18px',
                 }}>
-                  Add new Service Agreement
-                </Link>
-              </Button>
-              <Button
-                variant="outlined"
-                sx={{ marginBottom: '1rem' }}
-                onClick={() => navigate(-1)}
-              >
-                Go Back
-              </Button>
+                  View Existing Service Agreements & Add new Service Agreement
+                </Typography>
+              </Grid>
             </Grid>
 
-            <Grid item xs={12} sm={4} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                sx={{ maxWidth: '300px' }}
-                InputProps={{
-                  style: {
-                    borderRadius: '50px',
-                  },
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <SearchIcon />
-                    </InputAdornment>
-                  ),
-                }}
-                label="Search"
-                value={searchQuery}
-                onChange={handleSearchChange}
-              />
-            </Grid>
-          </Grid>
+            <Grid container spacing={4} alignItems="center" sx={{ margin: '10px 0' }}>
+              <Grid item xs={12} sm={4}>
+                <FormControl variant="outlined" fullWidth sx={{ maxWidth: '300px' }}>
+                  <InputLabel>Filter By</InputLabel>
+                  <Select
+                    value={filterOption}
+                    onChange={handleFilterChange}
+                    input={
+                      <OutlinedInput
+                        startAdornment={
+                          <InputAdornment position="start">
+                            <FilterAltIcon />
+                          </InputAdornment>
+                        }
+                        label="Filter By"
+                        sx={{ borderRadius: '50px' }}
+                      />
+                    }
+                  >
+                    <MenuItem value="customerName">Customer Name</MenuItem>
+                    <MenuItem value="location">Location</MenuItem>
+                    <MenuItem value="item">Item</MenuItem>
+                    <MenuItem value="agreementType">Agreement Type</MenuItem>
+                    <MenuItem value="period">Period of Agreement</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
 
-          <Grid item xs={8}>
-            {currentItems.map((agreement, index) => (
-              <Grid item xs={12} key={index} sx={{ textAlign: 'center', marginBottom: '10px' }}>
-                <Box
+              <Grid item xs={12} sm={4} sx={{ textAlign: 'center' }}>
+                <Button
+                  variant="outlined"
                   sx={{
-                    // boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.1)',
-                    boxShadow: 3,
-                    borderRadius: 2,
-                    p: 2,
-                    // mb: 2,
-                    display: 'inline-block',
-                    width: '100%',
+                    marginBottom: '1rem',
+                    marginRight: '1rem',
+                    backgroundColor: 'rgb(26, 99, 209)',
+                    color: 'white',
+                    '&:hover': {
+                      backgroundColor: 'rgb(21, 80, 178)',
+                    },
                   }}
                 >
-                  <Button
-                    variant="contained"
-                    sx={{
-                      backgroundColor: '#6C94F8',
+                  <Link to="/ServiceAgreementOne" style={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    fontFamily: 'Franklin Gothic',
+                    fontSize: '18px',
+                  }}>
+                    Add new Service Agreement
+                  </Link>
+                </Button>
+                <Button
+                  variant="outlined"
+                  sx={{ marginBottom: '1rem' }}
+                  onClick={() => navigate(-1)}
+                >
+                  Go Back
+                </Button>
+              </Grid>
 
-                      color: 'white',
-                      '&:hover': {
-                        backgroundColor: '#547DD1',
-                      },
+              <Grid item xs={12} sm={4} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  sx={{ maxWidth: '300px' }}
+                  InputProps={{
+                    style: {
+                      borderRadius: '50px',
+                    },
+                    startAdornment: (
+                      <InputAdornment position='start'>
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  label="Search"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                />
+              </Grid>
+            </Grid>
+
+            <Grid item xs={8}>
+              {currentItems.map((agreement, index) => (
+                <Grid item xs={12} key={index} sx={{ textAlign: 'center', marginBottom: '10px' }}>
+                  <Box
+                    sx={{
+                      // boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.1)',
+                      boxShadow: 3,
+                      borderRadius: 2,
+                      p: 2,
+                      // mb: 2,
+                      display: 'inline-block',
                       width: '100%',
                     }}
-                    onClick={() => handleEditAgreement(agreement.id)}
                   >
-                    {filterOption === 'customerName' ? agreement.customerName : agreement[filterOption]}
-                  </Button>
-                </Box>
-              </Grid>
-            ))}
+                    <Button
+                      variant="contained"
+                      sx={{
+                        backgroundColor: '#6C94F8',
+
+                        color: 'white',
+                        '&:hover': {
+                          backgroundColor: '#547DD1',
+                        },
+                        width: '100%',
+                      }}
+                      onClick={() => handleEditAgreement(agreement.id)}
+                    >
+                      {filterOption === 'customerName' ? agreement.customerName : agreement[filterOption]}
+                    </Button>
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
+            <Grid container justifyContent="center" sx={{ marginTop: '20px' }}>
+              {filteredItems.length > itemsPerPage && (
+                <Grid item>
+                  {Array.from({ length: Math.ceil(filteredItems.length / itemsPerPage) }, (_, index) => (
+                    <Button key={index} onClick={() => paginate(index + 1)} sx={{ margin: '5px' }}>{index + 1}</Button>
+                  ))}
+                </Grid>
+              )}
+            </Grid>
           </Grid>
-          <Grid container justifyContent="center" sx={{ marginTop: '20px' }}>
-            {filteredItems.length > itemsPerPage && (
-              <Grid item>
-                {Array.from({ length: Math.ceil(filteredItems.length / itemsPerPage) }, (_, index) => (
-                  <Button key={index} onClick={() => paginate(index + 1)} sx={{ margin: '5px' }}>{index + 1}</Button>
-                ))}
-              </Grid>
-            )}
-          </Grid>
-        </Grid>
-      </Box>
-      <FooterIn />
+        </Box>
+        <FooterIn />
+      </div>
     </ThemeProvider>
   );
 };

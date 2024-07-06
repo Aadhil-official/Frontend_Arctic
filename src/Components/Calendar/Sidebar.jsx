@@ -12,7 +12,7 @@ import { useUser } from '../../Context/UserContext';
 
 function Sidebar({ isOpen, toggleSidebar }) {
 
-    const {tempdata} = useUser();
+    const { tempdata } = useUser();
 
     return (
         <div className={`sidebar ${isOpen ? 'open' : ''}`}>
@@ -22,77 +22,77 @@ function Sidebar({ isOpen, toggleSidebar }) {
             </div>
 
             <ul className='sidebar-list'>
-                <li className='sidebar-list-item'>
-                    <Link to="/signup" className='tonavigate'>
+                <Link to="/signup" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <FaUserEdit className='icon' /> Create user
-                    </Link>
-                </li>
+                    </li>
+                </Link>
 
-                <li className='sidebar-list-item'>
-                    <Link to="/base/dashboard" className='tonavigate'>
+                <Link to="/base/dashboard" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <BsGrid1X2Fill className='icon' /> Summary
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/login/welcomeadmin/unitListAd" className='tonavigate'>
+                    </li>
+                </Link>
+                <Link to="/login/welcomeadmin/unitListAd" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <BsFillArchiveFill className='icon' /> Units
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/login/welcomeadmin/itemListAd" className='tonavigate'>
+                    </li>
+                </Link>
+                <Link to="/login/welcomeadmin/itemListAd" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <BsFillGrid3X3GapFill className='icon' /> Items
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <   Link to="/login/welcomeadmin/customerListAd" className='tonavigate'>
+                    </li>
+                </Link>
+                <   Link to="/login/welcomeadmin/customerListAd" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <BsPeopleFill className='icon' /> Customers
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/login/welcomeadmin/employeelistad" className='tonavigate'>
+                    </li>
+                </Link>
+                <Link to="/login/welcomeadmin/employeelistad" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <BsPersonVcardFill className='icon' /> Employees
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/" className='tonavigate'>
+                    </li>
+                </Link>
+                <Link to="/" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <BiDetail className='icon' /> Job Details
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/login/welcomeadmin/userGroupListAd" className='tonavigate'>
+                    </li>
+                </Link>
+                <Link to="/login/welcomeadmin/userGroupListAd" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <HiMiniUserGroup className='icon' /> User Groups
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/login/welcomeadmin/vehicleListAd" className='tonavigate'>
+                    </li>
+                </Link>
+                <Link to="/login/welcomeadmin/vehicleListAd" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <FaCar className='icon' /> Vehicle
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/ServiceAgreementSix" className='tonavigate'>
+                    </li>
+                </Link>
+                <Link to="/ServiceAgreementSix" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <RiContractFill className='icon' /> Service Agreements
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/SiteVisitDashboard" className='tonavigate'>
+                    </li>
+                </Link>
+                <Link to="/SiteVisitDashboard" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <FaBuilding className='icon' /> Site Visits
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/base/calendar" className='tonavigate'>
+                    </li>
+                </Link>
+                <Link to="/base/calendar" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <FaCalendarAlt className='icon' /> Calendar
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/base/reminder" className='tonavigate'>
+                    </li>
+                </Link>
+                <Link to="/base/reminder" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <FaClock className='icon' /> Set Reminder
-                    </Link>
-                </li>
-                <li className='sidebar-list-item'>
-                    <Link to="/login/complaintread" className='tonavigate'>
+                    </li>
+                </Link>
+                <Link to="/login/complaintread" className='tonavigate'>
+                    <li className='sidebar-list-item'>
                         <FaExclamationCircle className='icon' /> Complaints
-                    </Link>
-                </li>
+                    </li>
+                </Link>
             </ul>
 
         </div>

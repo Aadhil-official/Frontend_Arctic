@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
 import Reminder from './Reminder';
+import CalenderEmp from './CalenderEmp';
 
 function Create() {
   const [events, setEvents] = useState([]);
@@ -39,32 +40,33 @@ function Create() {
   };
 
   return (
-      <div className="app">
-          <Sidebar
-           isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} 
-          />
-        
-          <header className="header">
-            <Header 
-              selectedDate={selectedDate}
-              handleDatePickerChange={handleDatePickerChange}
-              toggleSidebar={toggleSidebar}
-            />
-          </header>
+    <div className="app">
+      <Sidebar
+        isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}
+      />
 
-          <main className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
-          <Routes>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/calendar" element={<Calendar 
-                          selectedDate={selectedDate.toDate()}
-                          events={events}
-                          updateEvents={updateEvents}/>} />
-              <Route path="/reminder" element={<Reminder />} />
-            </Routes>
-          </main>
-      </div>
-   
-);
+      {/* <header className="header" > */}
+      <Header
+        selectedDate={selectedDate}
+        handleDatePickerChange={handleDatePickerChange}
+        toggleSidebar={toggleSidebar}
+      />
+      {/* </header> */}
+
+      <main className={`contentum ${isSidebarOpen ? 'shiftedum' : ''}`}>
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/calendar" element={<Calendar
+            selectedDate={selectedDate.toDate()}
+            events={events}
+            updateEvents={updateEvents} />} />
+          <Route path="/reminder" element={<Reminder />} />
+          <Route path='/calendarem' element={<CalenderEmp />} />
+        </Routes>
+      </main>
+    </div>
+
+  );
 
 }
 

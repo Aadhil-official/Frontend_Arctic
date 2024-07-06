@@ -6,15 +6,20 @@ import { Link } from 'react-router-dom';
 import { Paper, Grid } from "@mui/material";
 //import Footer from "../../Components/Footer";
 
-import { FooterIn, NormalHeaderBar } from '../../Components';
+import { FooterIn } from '../../Components';
 import { useUser } from '../../Context/UserContext';
+import NormalHeaderIn from '../../Components/NormalHeaderIn';
+import Sidebar from '../../Components/Calendar/Sidebar';
+import SidebarCom from '../../Components/SideBarCom';
 
 
 const SiteVisitDashboard = () => {
 
-    
-    const {tempdata} = useUser();
+
+    const { tempdata } = useUser();
     const [hoveredButton, setHoveredButton] = useState(null);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
     // const [hoveredIcon, setHoveredIcon] = useState(false);
 
     const handleMouseEnter = (buttonLabel) => {
@@ -76,20 +81,32 @@ const SiteVisitDashboard = () => {
         position: 'relative', // Ensure position is relative for absolute positioning of icon
     };
 
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
     return (
         <>
-            <NormalHeaderBar />
-            <Paper
-                elevation={3}
-                style={{
-                    padding: "0", // No padding
-                    margin: "0", // No margin
-                    boxShadow: "none", // No shadow on the outer container
-                    backgroundColor: "transparent", // Transparent background
-                }}
-            >
-                <div style={sectionStyle}>
-                    {/* <Link
+            <NormalHeaderIn toggleSidebar={toggleSidebar} />
+            {/* {tempdata.usergroup === 'AdminGroup' && <br/>} */}
+            {tempdata.usergroup === 'AdminGroup' && <Sidebar
+                isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}
+            />}
+            {tempdata.usergroup !== 'AdminGroup' && <SidebarCom
+                isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />}
+            <div className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
+
+                <Paper
+                    elevation={3}
+                    style={{
+                        padding: "0", // No padding
+                        margin: "0", // No margin
+                        boxShadow: "none", // No shadow on the outer container
+                        backgroundColor: "transparent", // Transparent background
+                    }}
+                >
+                    <div style={sectionStyle}>
+                        {/* <Link
                         to={-1}
                         style={{
                             background: 'none',
@@ -106,47 +123,47 @@ const SiteVisitDashboard = () => {
                     >
                         <FontAwesomeIcon icon={faArrowLeft} size="2x" style={iconStyle} />
                     </Link>  */}
-                    <Grid container>
-                        <Grid item position='fixed'>
-                            <Link to={tempdata.usergroup === "AdminGroup" ? "/base/dashboard" : "/login/welcomeadmin"}>
-                                <img
-                                    src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
-                                    style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }}
-                                    alt='Back'
-                                />
-                            </Link>
+                        <Grid container>
+                            <Grid item position='fixed'>
+                                <Link to={tempdata.usergroup === "AdminGroup" ? "/base/dashboard" : "/login/welcomeadmin"}>
+                                    <img
+                                        src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+                                        style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }}
+                                        alt='Back'
+                                    />
+                                </Link>
+                            </Grid>
                         </Grid>
-                    </Grid>
 
 
 
-                    <h1 style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '5rem', color: '#0056b3', marginTop: '20px' }}>
-                        Site Visit - Admin </h1>
-                </div>
-            </Paper>
+                        <h1 style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '5rem', color: '#0056b3', marginTop: '20px' }}>
+                            Site Visit - Admin </h1>
+                    </div>
+                </Paper>
 
-            <Paper
-                elevation={3}
-                style={{
-                    padding: "2rem",
-                    margin: "0", // No margin
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Shadow effect
-                    borderRadius: '5px', // Rounded corners
-                    backgroundColor: "white", // White background
-                }}
-            >
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', marginTop: '20px' }}>
-                        <Link
-                            to="/SiteVisitOne"
-                            style={hoveredButton === "Scheduling Site Visit" ? hoveredButtonStyle : buttonStyle}
-                            onMouseEnter={() => handleMouseEnter("Scheduling Site Visit")}
-                            onMouseLeave={handleMouseLeave}
+                <Paper
+                    elevation={3}
+                    style={{
+                        padding: "2rem",
+                        margin: "0", // No margin
+                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Shadow effect
+                        borderRadius: '5px', // Rounded corners
+                        backgroundColor: "white", // White background
+                    }}
+                >
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', marginTop: '20px' }}>
+                            <Link
+                                to="/SiteVisitOne"
+                                style={hoveredButton === "Scheduling Site Visit" ? hoveredButtonStyle : buttonStyle}
+                                onMouseEnter={() => handleMouseEnter("Scheduling Site Visit")}
+                                onMouseLeave={handleMouseLeave}
 
-                        >
-                            Scheduling Site Visit
-                        </Link>
-                        {/* <Link
+                            >
+                                Scheduling Site Visit
+                            </Link>
+                            {/* <Link
                             to="/SiteVisitFour"
                             style={hoveredButton === "Start Site Visit" ? hoveredButtonStyle : buttonStyle}
                             onMouseEnter={() => handleMouseEnter("Start Site Visit")}
@@ -154,15 +171,15 @@ const SiteVisitDashboard = () => {
                         >
                             Start/End/Feedback of Site Visit
                         </Link> */}
-                        <Link
-                            to="/SiteVisitSix"
-                            style={hoveredButton === "End Site Visit" ? hoveredButtonStyle : buttonStyle}
-                            onMouseEnter={() => handleMouseEnter("End Site Visit")}
-                            onMouseLeave={handleMouseLeave}
-                        >
-                            Update Site Visit Details
-                        </Link>
-                        {/* <Link
+                            <Link
+                                to="/SiteVisitSix"
+                                style={hoveredButton === "End Site Visit" ? hoveredButtonStyle : buttonStyle}
+                                onMouseEnter={() => handleMouseEnter("End Site Visit")}
+                                onMouseLeave={handleMouseLeave}
+                            >
+                                Update Site Visit Details
+                            </Link>
+                            {/* <Link
                             to="/update-site-visit"
                             style={hoveredButton === "Update Site Visit" ? hoveredButtonStyle : buttonStyle}
                             onMouseEnter={() => handleMouseEnter("Update Site Visit")}
@@ -170,7 +187,7 @@ const SiteVisitDashboard = () => {
                         >
                             Update Site Visit
                         </Link> */}
-                        {/* <Link
+                            {/* <Link
                             to="/gate-pass"
                             style={hoveredButton === "Gate Pass" ? hoveredButtonStyle : buttonStyle}
                             onMouseEnter={() => handleMouseEnter("Gate Pass")}
@@ -178,16 +195,16 @@ const SiteVisitDashboard = () => {
                         >
                             Gate Pass
                         </Link> */}
+                        </div>
                     </div>
-                </div>
-            </Paper>
+                </Paper>
 
-            <br></br>
-            <br></br>
-            {/* <Footer/> */}
+                <br></br>
+                <br></br>
+                {/* <Footer/> */}
 
-            <FooterIn />
-
+                <FooterIn />
+            </div>
         </>
     );
 }
