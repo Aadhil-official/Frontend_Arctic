@@ -28,6 +28,12 @@ import { AddCustomer, CustomerEdit, CustomerLis, CustomerListAd, CustomerView } 
 import { AddUserGroup, UserGroupEdit, UserGroupLis, UserGroupListAd, UserGroupView } from './Pages/User Group/index';
 import Base from "./Components/Calendar/Base";
 import Calendar from "./Components/Calendar/Calendar";
+import Printjob from "./Pages/Job/Printjob";
+import NewJob from "./Pages/Job/NewJob";
+import Email from "./Pages/Job/SendEmailandPrintout";
+import JobListnew from "./Pages/Job/JobListnew";
+import SendEmailandPrintout from "./Pages/Job/SendEmailandPrintout";
+import Joblist from "./Pages/Job/Joblist";
 
 function App() {
   return (
@@ -123,6 +129,13 @@ function App() {
           <Route path="/base/*" element={<Base />} />
           <Route path="/base/calendarEmp" element={<Calendar/>}/>
 
+{/* Job */}
+<Route path='/sep' element={<SendEmailandPrintout/>}></Route>
+<Route path='/jln' element={<JobListnew/>}></Route>
+<Route path='/jl' element={<Joblist/>}></Route>
+<Route path='/nj' element={<NewJob/>}></Route>
+<Route path='/pj' element={<Printjob/>}></Route>
+<Route path='/e' element={<Email/>}></Route>
 
         </Routes>
       </BrowserRouter>
