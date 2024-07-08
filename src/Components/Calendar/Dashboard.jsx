@@ -192,7 +192,6 @@ function Home() {
                 
                 <div className='chart-inner'>
                     <h3 className='pieTopic'>NO OF SITE VISITS: {getCurrentMonthName()} </h3>
-                    {/* <h3 className='pieTopic1'>Distribution</h3> */}
                     <Pie data={visitData} options={options} />
                     <SiTestcafe className='img1'/>
                 </div>

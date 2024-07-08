@@ -27,7 +27,7 @@ import { AddVehicle, VehicleEdit, VehicleLis, VehicleListAd, VehicleView } from 
 import { AddCustomer, CustomerEdit, CustomerLis, CustomerListAd, CustomerView } from './Pages/Customer/index';
 import { AddUserGroup, UserGroupEdit, UserGroupLis, UserGroupListAd, UserGroupView } from './Pages/User Group/index';
 import Base from "./Components/Calendar/Base";
-import Calendar from "./Components/Calendar/Calendar";
+
 import Printjob from "./Pages/Job/Printjob";
 import NewJob from "./Pages/Job/NewJob";
 import Email from "./Pages/Job/SendEmailandPrintout";
@@ -127,7 +127,7 @@ function App() {
 
           {/* Calendar-related routes */}
           <Route path="/base/*" element={<Base />} />
-          <Route path="/base/calendarEmp" element={<Calendar/>}/>
+          {/* <Route path="/base/calendarEmp" element={<CalendarEmp/>}/> */}
 
 {/* Job */}
 <Route path='/sep' element={<SendEmailandPrintout/>}></Route>

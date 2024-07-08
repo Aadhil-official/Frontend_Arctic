@@ -19,7 +19,8 @@ function Sidebar({ isOpen, toggleSidebar }) {
         <div className={`sidebar ${isOpen ? 'open' : ''}`}>
             <button className="close-btn" onClick={toggleSidebar}><IoIosCloseCircle /></button>
             <div className="sidebar-content">
-                <BsPersonCircle className='icon_header' /> {tempdata.username.toUpperCase()}
+                <BsPersonCircle className='icon_header' /> 
+                {tempdata.username.toUpperCase()}
             </div>
 
             <ul className='sidebar-list'>
@@ -92,6 +93,11 @@ function Sidebar({ isOpen, toggleSidebar }) {
                 <Link to="/login/complaintread" className='tonavigate'>
                     <li className='sidebar-list-item'>
                         <FaExclamationCircle className='icon' /> Complaints
+                    </li>
+                </Link>
+                <Link to="/base/calendarEmp" className='tonavigate'>
+                    <li className='sidebar-list-item'>
+                        <FaExclamationCircle className='icon' /> EmpCal
                     </li>
                 </Link>
             </ul>

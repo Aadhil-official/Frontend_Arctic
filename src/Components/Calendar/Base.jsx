@@ -59,7 +59,7 @@ function Create() {
                           events={events}
                           updateEvents={updateEvents}/>} />
               <Route path="/reminder" element={<Reminder />} />
-              <Route path="/CalendarEmp" element={<CalendarEmp selectedDate={selectedDate.toDate()}
+              <Route path="/calendarEmp" element={<CalendarEmp selectedDate={selectedDate.toDate()}
                           events={events}/>} />
 
             </Routes>

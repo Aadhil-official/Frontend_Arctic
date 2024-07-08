@@ -61,7 +61,7 @@ background-color: rgb(25,118,210);
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-form {
+.reminder {
   padding: 15px;
 }
 
