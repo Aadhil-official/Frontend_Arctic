@@ -1,0 +1,115 @@
+.tab-labels {
+    background:rgb(102, 148, 235);
+    list-style: none;
+    height: 80px; 
+    width:100%;
+    color: white;
+    display: flex;
+    align-items: center; 
+   
+  }
+   /*footer text*/
+   .footer-text{  
+    font-family: 'calibri', Times, serif !important;  
+    color: white;
+    position: absolute;
+  margin-left: 40%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 30px;
+
+  }
+  
+  .footer {
+    background: linear-gradient(to bottom,  rgba(31, 127, 237, 0.758), rgb(3, 27, 65));
+    list-style: none;
+    height: 80px; 
+    width:100%;
+    color: white;
+    display: flex;
+    align-items: center; 
+    }
+    
+    /* title */
+    .title{
+      margin-top: 80px;
+      font-size: 50px;
+      text-align: center;
+      color:rgb(102, 148, 235);
+      font-weight: bold;
+      font-family: 'calibri', Times, serif !important;
+    }
+    
+    
+       
+.abc{
+    margin: 0 auto;
+    justify-content: center;
+    margin-left: 400px;
+}
+
+/* buttons */
+.column1 {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+padding:10px;
+cursor: pointer;
+margin-bottom: -220%;
+margin-left: 20%;
+}
+
+.column2 {
+float: right;
+  width: 10%;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+padding:10px;
+cursor: pointer;
+margin-bottom: 20%;
+}
+
+
+/* box */
+
+.formleft {
+  float: left;
+  width: 400px;
+  height: 550px;
+ align-items:center ;
+margin-left: 20%;
+}
+.formleftcus {
+  float: left;
+  width: 400px;
+  height: 550px;
+ align-items:center ;
+margin-left: 15%;
+}
+.formright {
+  float: right;
+  width: 400px;
+  height: 550px;
+  align-items:center ;
+margin-left: 90%;
+}
+.formrightemp {
+  float: right;
+  width: 400px;
+  height: 550px;
+  align-items:center ;
+margin-left: -15%;
+}
+
+/* form-fields */
+.form-fields{
+    margin-right: 400px;
+}
+
+.textField{
+    margin-left: 250px !important;
+}

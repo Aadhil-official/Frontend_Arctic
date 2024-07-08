@@ -132,67 +132,44 @@ const ProfilesAdmin = () => {
   theme = responsiveFontSizes(theme);
 
   return (
-    <div>
-      <AppBar position="static">
-        <Toolbar className='topbarpa' >
-
-          <Grid container justifyContent='center' textAlign='center'>
-            <ThemeProvider theme={theme}>
-              <Grid item xl={5} lg={5} md={5} sm={3.4} xs={2.8}>
-                <Typography className='welcomead' variant="h5">
-                  HI, {tempdata.username.toUpperCase()}!
-                  {/* Welcome! */}
-                </Typography>
-              </Grid>
-              {/* <Grid item md={2.3} xs={2.8} sm={3.4}> */}
-              {/* <Typography variant="h4" sx={{ fontWeight: '450', textTransform: 'uppercase' }}> */}
-              {/* ADMIN */}
-              {/* {username.current} */}
-              {/* {tempdata?.username} */}
-              {/* </Typography> */}
-              {/* </Grid> */}
-            </ThemeProvider>
-          </Grid>
-        </Toolbar>
-
-        {/* {console.log(tempdata)} */}
+    <>
+      <AppBar position="static" className='topbarem'>
         <Grid container spacing={2} sx={{ position: 'absolute' }}>
-          <Grid item lg={4.9} md={5} sm={4.5} xs={4}>
+          <Grid item xs={6} textAlign='left'>
             <Link to={"/"}>
               <HomeIcon color='action' fontSize='large' sx={{ width: '40px', height: '40px', margin: '5px', marginLeft: '20px' }} alt='Back' />
             </Link>
           </Grid>
           {/* <ThemeProvider theme={theme}> */}
-          <Grid item lg={2} md={2} sm={1.6} xs={0.4}></Grid>
+          {/* <Grid item lg={2} md={2} sm={1.9} xs={2.25}></Grid> */}
           {/* </ThemeProvider> */}
-          <Grid item lg={1.9} md={1.5} sm={0.7} xs={0.9}></Grid>
-          {!relevantPrivileges.includes("createUser") && (
-            <Grid item lg={1} md={1.61} sm={2.4} xs={3.15}></Grid>
-          )}
+          {/* <Grid item lg={3.4} md={2.3} sm={1.5} xs={1}></Grid> */}
+          {/* <Grid item lg={0.7} md={0.8} sm={1.2} xs={1.5} >
+            <Typography variant="h5" sx={{ marginTop: '12px', marginBottom: '20px' }}>logout</Typography>
+          </Grid> */}
 
-          <Grid item lg={0.5} md={0.5} sm={0.7} xs={1} sx={{ marginTop: '15px' }}>
+          <Grid item xs={6} textAlign='right' sx={{ marginTop: '10px' }}>
             {relevantPrivileges.includes("complain") && (
               <Link to={'/login/complaintread'} onClick={handleNotificationClick}>
-                <Notify fontSize='medium' sx={{ color: '#244FD9', position: 'absolute', marginTop: '2px' }} />
-                <NotificationsIcon fontSize='small' sx={{ color: iconColor, marginBottom: '10px', marginLeft: '10px', position: 'absolute' }} />
+                <NotificationsIcon fontSize='small' sx={{ marginTop: '-5px', color: iconColor, position: 'absolute', marginBottom: '-10px', marginLeft: '10px' }} />
+                <Notify fontSize='medium' sx={{ color: '#244FD9', marginRight: '20px' }} />
               </Link>
             )}
-          </Grid>
 
-          {relevantPrivileges.includes("createUser") && (
-            <Grid item lg={1.4} md={1.7} sm={2.45} xs={3.15}>
+            {relevantPrivileges.includes("createUser") && (
               <Link to={'/signup'}>
                 <Button
-                  sx={{ backgroundColor: '#6C94F8', marginTop: '15px' }}
+                  sx={{ backgroundColor: '#6C94F8', marginRight: '10px' }}
                   variant="contained" size='small'>
                   Create User
                 </Button>
               </Link>
-              {/* <Typography variant="h5" sx={{ marginTop: '12px' }}>logout</Typography> */}
-            </Grid>
-          )}
+            )}
 
-          <Grid item lg={1.2} md={1.3} sm={1.85} xs={2.5}>
+            {/* </Grid>
+
+
+<Grid item lg={1.2} md={1.3} sm={2.2} xs={2.5}> */}
             {/* <Switch
               checked={checked}
               onChange={handleChange}
@@ -216,23 +193,36 @@ const ProfilesAdmin = () => {
                 },
                 '& .MuiSwitch-switchBase + .MuiSwitch-track': {
                   backgroundColor: '#E0E0E0', // Default track color for unchecked state
-                },
+                }
               }}
             /> */}
-            {/* <Link to={'/signup'}> */}
-            <Button onClick={handleChange} sx={{ backgroundColor: '#6C94F8', marginTop: '15px' }} variant="contained" size='small'>
+            <Button onClick={handleChange} sx={{ backgroundColor: '#6C94F8', marginLeft: '10px', marginRight: '10px' }} variant="contained" size='small'>
               Log out
             </Button>
-            {/* </Link> */}
           </Grid>
+
+        </Grid>
+        <Grid container justifyContent='center' textAlign='center' sx={{ padding: '15px' }}>
+          <ThemeProvider theme={theme}>
+            <Grid item xl={5} lg={5} md={5} sm={3.4} xs={2.8}>
+              <Typography variant="h5" sx={{ fontWeight: '500' }}>
+                <div className='onsmall'></div>
+                <span className='welcomeem'>HI, {tempdata.username.toUpperCase()}!</span>
+              </Typography>
+            </Grid>
+            {/* <Grid item md={2.3} xs={2.8} sm={3.4}>
+              <Typography variant="h4" sx={{ fontWeight: '450', textTransform: 'uppercase' }}>
+                {username}
+              </Typography>
+            </Grid> */}
+          </ThemeProvider>
         </Grid>
         {/* <Grid container sx={{ marginTop: '12px' }}>
-          <Grid item xl={12} lg={12} md={12} sm={12} xs={12} textAlign={'right'} sx={{ marginBottom: '10px', marginRight: '20px' }}>
+          <Grid item lg={10.5} md={10.6} sm={10} xs={9.3}></Grid> */}
 
-          </Grid>
-        </Grid> */}
+        {/* </Grid> */}
       </AppBar>
-    </div >
+    </ >
   );
 }
 

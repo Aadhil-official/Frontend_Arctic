@@ -66,28 +66,28 @@ export default function MenuAppBar() {
     <>
       <AppBar position="static" className='topbarem'>
         <Grid container spacing={2} sx={{ position: 'absolute' }}>
-          <Grid item lg={4.9} md={5} sm={4.5} xs={4}>
+          <Grid item xs={6} textAlign='left'>
             <Link to={"/"}>
               <HomeIcon color='action' fontSize='large' sx={{ width: '40px', height: '40px', margin: '5px', marginLeft: '20px' }} alt='Back' />
             </Link>
           </Grid>
           {/* <ThemeProvider theme={theme}> */}
-          <Grid item lg={2} md={2} sm={1.9} xs={2.25}></Grid>
+          {/* <Grid item lg={2} md={2} sm={1.9} xs={2.25}></Grid> */}
           {/* </ThemeProvider> */}
-          <Grid item lg={3.4} md={2.3} sm={1.5} xs={1}></Grid>
+          {/* <Grid item lg={3.4} md={2.3} sm={1.5} xs={1}></Grid> */}
           {/* <Grid item lg={0.7} md={0.8} sm={1.2} xs={1.5} >
             <Typography variant="h5" sx={{ marginTop: '12px', marginBottom: '20px' }}>logout</Typography>
           </Grid> */}
 
-          <Grid item lg={1} md={1.2} sm={1.9} xs={2.2} >
+          <Grid item xs={6} textAlign='right'>
             {relevantPrivileges.includes("complain") && (
               <Link to={'/login/complaint'}>
                 {/* state={{ tempdata }} */}
                 <ButtonComplain />
               </Link>
             )}
-          </Grid>
-          <Grid item lg={1.2} md={1.3} sm={2.2} xs={2.5}>
+          {/* </Grid>
+          <Grid item lg={1.2} md={1.3} sm={2.2} xs={2.5}> */}
             {/* <Switch
               checked={checked}
               onChange={handleChange}
@@ -114,7 +114,7 @@ export default function MenuAppBar() {
                 }
               }}
             /> */}
-            <Button onClick={handleChange} sx={{ backgroundColor: '#6C94F8', marginTop: '15px' }} variant="contained" size='small'>
+            <Button onClick={handleChange} sx={{ backgroundColor: '#6C94F8', marginTop: '15px',marginLeft:'10px',marginLeft:'10px' }} variant="contained" size='small'>
               Log out
             </Button>
           </Grid>

@@ -9,13 +9,14 @@ import { dismiss, error, loading, success } from '../util/Toastify';
 
 export default function FormUpdate({ user }) {
 
-    
+
     const [id] = useState(user ? user.id : '');
     const [username, setUsername] = useState(user ? user.username : ''); // Initialize with user.username if user exists
     const [email, setEmail] = useState(user ? user.email : '');
     const [role, setRole] = useState(user && user.roles ? user.roles[0].name.toLowerCase() : [' ']); // Check if user and user.roles exist
     const [address, setAddress] = useState(user ? user.address : '');
     const [usergroup, setUsergroup] = useState([]);
+    const [usergroupup, setUsergroupup] = useState(user ? user.usergroup : '');
     const [tel, setTel] = useState(user ? user.tel : '');
 
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ export default function FormUpdate({ user }) {
 
 
     useEffect(() => {
-        if (usergroup === 'AdminGroup') {
+        if (usergroupup === 'AdminGroup') {
             setRole('admin');
         }
         axios.get("http://localhost:8080/api/auth/getAllUserGroups")
@@ -40,11 +41,11 @@ export default function FormUpdate({ user }) {
             .catch((error) => {
                 console.error("Error fetching user groups:", error);
             });
-    }, [usergroup]);
+    }, [usergroupup]);
 
 
     // if (user) {
-        // console.log("user is there",test);
+    // console.log("user is there",test);
     // }
     // navigate('/');
     const handleSubmit = () => {
@@ -68,7 +69,6 @@ export default function FormUpdate({ user }) {
 
         // console.log("id of role is..........." + role.toUpperCase());
 
-        const userId = user.roles[0].id;
         const roleName = role.toUpperCase();
 
         const updatedUser = {
@@ -76,9 +76,9 @@ export default function FormUpdate({ user }) {
             username: username,
             email: email,
             address: address,
-            usergroup: usergroup,
+            usergroup: usergroupup,
             tel: tel,
-            roles: [{ id: userId, name: roleName }] // Send role as an array containing the selected role
+            roles: [{ name: roleName }] // Send role as an array containing the selected role
         };
 
 
@@ -100,7 +100,10 @@ export default function FormUpdate({ user }) {
                         dismiss(loadingId);
                         success("User updated successfully");
                         navigate('/login/welcomeadmin/employeelistad');
-                    }).catch(() => error("Username or email already exist!"))
+                    }).catch(() => {
+                        dismiss(loadingId);
+                        error("Check the internet")
+                    })
             } else {
                 dismiss(loadingId);
                 error("No changes detected!");
@@ -158,8 +161,8 @@ export default function FormUpdate({ user }) {
                 <TextField
                     select
                     label="User group"
-                    value={usergroup}
-                    onChange={(e) => setUsergroup(e.target.value)}
+                    value={usergroupup}
+                    onChange={(e) => setUsergroupup(e.target.value)}
                     SelectProps={{ native: true }}
                 >
                     <option value={user.usergroup}>{user.usergroup}</option>
