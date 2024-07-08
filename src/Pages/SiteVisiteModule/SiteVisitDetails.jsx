@@ -17,7 +17,7 @@ function SiteVisitDetails() {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:8080/api/v1/siteVisit/getSiteVisitTwo?id=${id}`
+          `http://localhost:8080/api/auth/siteVisit/getSiteVisitTwo?id=${id}`
         );
         setVisitDetails(response.data);
         setUpdatedVisitDetails(response.data); // Initialize updatedVisitDetails with fetched data
@@ -41,7 +41,7 @@ function SiteVisitDetails() {
   const handleUpdate = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:8080/api/v1/siteVisit/updateSiteVisit`,
+        `http://localhost:8080/api/auth/siteVisit/updateSiteVisit`,
         updatedVisitDetails
       );
       console.log("Visit details updated successfully:", response.data);

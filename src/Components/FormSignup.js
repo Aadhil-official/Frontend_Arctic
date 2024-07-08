@@ -19,9 +19,15 @@ export default function FormSignup() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (usergroup === 'AdminGroup') {
+
+    if (role === "user" && usergroup === 'AdminGroup') {
+      setUsergroup("");
+      error("If role is user you can't select AdminGroup as user group!...");
+    } else if (usergroup === 'AdminGroup') {
+      success("AdminGroup is only for admin role!..")
       setRole('admin');
     }
+
     axios.get("http://localhost:8080/api/auth/getAllUserGroups")
       .then((response) => {
         setUsergroups(response.data);
@@ -29,7 +35,7 @@ export default function FormSignup() {
       .catch((error) => {
         console.error("Error fetching user groups:", error);
       });
-  }, [usergroup]);
+  }, [usergroup, role]);
 
   const handleSubmit = () => {
 
@@ -165,7 +171,11 @@ export default function FormSignup() {
         >
           <option value=""></option>
           {usergroups.map((group, index) => (
-            <option key={index} value={group.groupName}>{group.groupName}</option>
+            role === "user" && group.groupName === "AdminGroup" ? (
+              <option key={index} value=""></option>
+            ) : (
+              <option key={index} value={group.groupName}>{group.groupName}</option>
+            )
           ))}
         </TextField>
 

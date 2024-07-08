@@ -13,22 +13,37 @@ export const UserProvider = ({ children }) => {
     return storedData ? JSON.parse(storedData) : null;
   });
 
+  const [buttonData, setButtonData] = useState(() => {
+    const storedData = sessionStorage.getItem('buttonData');
+    return storedData ? JSON.parse(storedData) : null;
+  });
+
   useEffect(() => {
+    console.log("Updating sessionStorage with new context values");
+
     if (tempdata) {
       sessionStorage.setItem('tempdata', JSON.stringify(tempdata));
     } else {
       sessionStorage.removeItem('tempdata');
     }
-    
+
     if (tempdataGroup) {
       sessionStorage.setItem('tempdataGroup', JSON.stringify(tempdataGroup));
     } else {
       sessionStorage.removeItem('tempdataGroup');
     }
-  }, [tempdataGroup,tempdata]);
+
+    if (buttonData) {
+      sessionStorage.setItem('buttonData', JSON.stringify(buttonData));
+    } else {
+      sessionStorage.removeItem('buttonData');
+    }
+
+    console.log('Session Storage Updated:', buttonData);
+  }, [tempdataGroup, tempdata, buttonData]);
 
   return (
-    <UserContext.Provider value={{ tempdata, setTempdata,tempdataGroup,setTempdataGroup }}>
+    <UserContext.Provider value={{ tempdata, setTempdata, tempdataGroup, setTempdataGroup, buttonData, setButtonData }}>
       {children}
     </UserContext.Provider>
   );

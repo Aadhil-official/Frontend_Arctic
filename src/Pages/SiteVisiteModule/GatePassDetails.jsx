@@ -28,7 +28,7 @@ function GatePassDetails() {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:8080/api/v1/gatePass/getGatePass?id=${id}`
+          `http://localhost:8080/api/auth/gatePass/getGatePass?id=${id}`
         );
         setGatePassDetails(response.data);
         setLoading(false);

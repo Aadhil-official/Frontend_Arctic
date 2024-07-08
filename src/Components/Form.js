@@ -11,7 +11,7 @@ import { useUser } from '../Context/UserContext';
 
 export default function FormPropsTextFields() {
 
-  const { setTempdata,setTempdataGroup } = useUser();
+  const { setTempdata, setTempdataGroup, setButtonData, tempdata } = useUser();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,6 +21,34 @@ export default function FormPropsTextFields() {
     password: z.string().min(8, { message: 'Password must be at least 8 characters long' }),
   });
 
+  const buttonDataAd = [
+    { label: 'Create user', link: '/signup' },
+    { label: 'Complaints', link: '/login/complaintread' },
+    { label: 'Employee Details', link: '/login/welcomeadmin/employeelistad' },
+    { label: 'Item Details', link: '/login/welcomeadmin/itemListAd' },
+    { label: 'Unit Details', link: '/login/welcomeadmin/unitListAd' },
+    { label: 'Vehicle Details', link: '/login/welcomeadmin/vehicleListAd' },
+    { label: 'Customer Details', link: '/login/welcomeadmin/customerListAd' },
+    { label: 'User Group Details', link: '/login/welcomeadmin/userGroupListAd' },
+    { label: 'Job Details' },
+    { label: 'Calendar', link: '/base/calendar' },
+    { label: 'Set Reminder', link: '/base/reminder' },
+    { label: 'Service Agreement Details', link: '/ServiceAgreementSix' },
+    { label: 'Site Visit Details', link: '/SiteVisitDashboard' }
+  ];
+
+  const buttonDataEmp = [
+    { label: 'Employee Details', link: '/login/welcome/employeelist' },
+    { label: 'Item Details', link: '/login/welcome/itemList' },
+    { label: 'Unit Details', link: '/login/welcome/unitList' },
+    { label: 'Vehicle Details', link: '/login/welcome/vehicleList' },
+    { label: 'Customer Details', link: '/login/welcome/customerList' },
+    { label: 'User Group Details', link: '/login/welcome/userGroupList' },
+    { label: 'Job Details' },
+    { label: 'Calendar', link: '/base/calendarEmp' },
+    { label: 'Service Agreement Details', link: '/ServiceAgreementFive' },//hgjj
+    { label: 'Site Visit Details', link: '/SiteVisitFourEmployee' },
+  ];
 
   const handleSubmit = () => {
 
@@ -36,9 +64,9 @@ export default function FormPropsTextFields() {
       axios.post('http://localhost:8080/api/auth/signin', data)
         .then((response) => {
           dismiss(loadingId);
-          const tempdata = response.data;
-          setTempdata(tempdata.userInfo);
-          setTempdataGroup(tempdata.userGroup);
+          const tempdata1 = response.data;
+          setTempdata(tempdata1.userInfo);
+          setTempdataGroup(tempdata1.userGroup);
           // const token = tempdata.token;
 
           // if (token) {
@@ -48,15 +76,20 @@ export default function FormPropsTextFields() {
           //   console.error('No token found in response');
           // }
 
-          const role = tempdata.userInfo.roles[0]; // This will be 'ADMIN'
+          const role = tempdata1.userInfo.roles[0]; // This will be 'ADMIN'
 
-          if (role === 'ADMIN') {
-            // checkForNewComplaints();
+          if (role === 'ADMIN' && tempdata.usergroup === "AdminGroup") {
+            setButtonData(buttonDataAd);
+            navigate('/base/dashboard');
+            success('Login successful!');
+          } else if (role === 'ADMIN') {
+            setButtonData(buttonDataAd);
             navigate('/login/welcomeadmin');
-            success('Login successful!')
+            success('Login successful!');
           } else {
+            setButtonData(buttonDataEmp);
             navigate('/login/welcome');
-            success('Login successful!')
+            success('Login successful!');
           }
         })
         .catch(() => {

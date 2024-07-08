@@ -28,7 +28,7 @@ const GatePassList = () => {
   //       });
   //   }, []);
 
-  axios.get('http://localhost:8080/api/v1/gatePass/fetchGatePass')
+  axios.get('http://localhost:8080/api/auth/gatePass/fetchGatePass')
     .then(response => {
       console.log(response.data);
       setGatePasses(response.data);

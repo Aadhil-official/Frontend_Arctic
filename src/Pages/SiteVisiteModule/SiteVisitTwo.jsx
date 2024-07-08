@@ -53,7 +53,7 @@ const SiteVisitTwo = () => {
     console.log("newSiteVisit:", newSiteVisit);
 
     try {
-      const response = await axios.post("http://localhost:8080/api/v1/siteVisit/addSiteVisit", newSiteVisit);
+      const response = await axios.post("http://localhost:8080/api/auth/siteVisit/addSiteVisit", newSiteVisit);
       console.log("New Site Visit created:", response.data);
       alert("Site Visit scheduled successfully!");
 

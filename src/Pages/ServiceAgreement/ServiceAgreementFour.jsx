@@ -16,7 +16,7 @@ function ServiceAgreementFour() {
   useEffect(() => {
     const fetchAgreementService = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/v1/agreementService/getAgreementServiceTwo?id=${id}`);
+        const response = await axios.get(`http://localhost:8080/api/auth/agreementService/getAgreementServiceTwo?id=${id}`);
         setAgreement(response.data);
         setLoading(false);
       } catch (e) {

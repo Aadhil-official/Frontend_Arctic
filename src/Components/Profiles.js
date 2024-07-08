@@ -10,10 +10,11 @@ import axios from 'axios';
 import HomeIcon from '@mui/icons-material/Home';
 import { success } from '../util/Toastify';
 import { useUser } from '../Context/UserContext';
+import '../Style/Component/ProfAd.css'
 
 export default function MenuAppBar() {
 
-  
+
   const { tempdata, tempdataGroup } = useUser();
 
   const relevantPrivileges = tempdataGroup?.relevantPrivileges || [];  // const [checked, setChecked] = React.useState(true);
@@ -63,7 +64,7 @@ export default function MenuAppBar() {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="static" className='topbarem'>
         <Grid container spacing={2} sx={{ position: 'absolute' }}>
           <Grid item lg={4.9} md={5} sm={4.5} xs={4}>
             <Link to={"/"}>
@@ -79,12 +80,12 @@ export default function MenuAppBar() {
           </Grid> */}
 
           <Grid item lg={1} md={1.2} sm={1.9} xs={2.2} >
-          {relevantPrivileges.includes("complain") && (
-            <Link to={'/login/complaint'}>
-              {/* state={{ tempdata }} */}
-              <ButtonComplain />
-            </Link>
-          )}
+            {relevantPrivileges.includes("complain") && (
+              <Link to={'/login/complaint'}>
+                {/* state={{ tempdata }} */}
+                <ButtonComplain />
+              </Link>
+            )}
           </Grid>
           <Grid item lg={1.2} md={1.3} sm={2.2} xs={2.5}>
             {/* <Switch
@@ -121,9 +122,10 @@ export default function MenuAppBar() {
         </Grid>
         <Grid container justifyContent='center' textAlign='center' sx={{ padding: '15px' }}>
           <ThemeProvider theme={theme}>
-            <Grid item md={2.3} sm={3.4} xs={2.8}>
+            <Grid item xl={5} lg={5} md={5} sm={3.4} xs={2.8}>
               <Typography variant="h5" sx={{ fontWeight: '500' }}>
-                HI, {tempdata.username.toUpperCase()}!
+                <div className='onsmall'></div>
+                <span className='welcomeem'>HI, {tempdata.username.toUpperCase()}!</span>
               </Typography>
             </Grid>
             {/* <Grid item md={2.3} xs={2.8} sm={3.4}>

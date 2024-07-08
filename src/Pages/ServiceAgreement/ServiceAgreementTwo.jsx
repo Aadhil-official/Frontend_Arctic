@@ -21,7 +21,7 @@ function ServiceAgreementTwo() {
         const fetchAgreementService = async () => {
             try {
                 // Make a GET request to fetch the agreement details
-                const response = await axios.get(`http://localhost:8080/api/v1/agreementService/getAgreementServiceTwo?id=${id}`);
+                const response = await axios.get(`http://localhost:8080/api/auth/agreementService/getAgreementServiceTwo?id=${id}`);
                 setAgreement(response.data); // Set the response data to the agreement state
                 console.log("Agreement Details:", response.data); // Log the agreement details
                 setLoading(false); // Set loading to false as the data is fetched

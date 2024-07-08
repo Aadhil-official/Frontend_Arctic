@@ -21,7 +21,7 @@ export default function SerAgTwoInputContainer() {
 
     }
   const handleSave=() => {
-    axios.put("http://localhost:8080/api/v1/agreementService/ServiceAgreement",data)
+    axios.put("http://localhost:8080/api/auth/agreementService/ServiceAgreement",data)
 
   } 
       return (

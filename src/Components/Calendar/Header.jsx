@@ -19,6 +19,7 @@ export default function Header({ selectedDate, handleDatePickerChange, toggleSid
                 </button>
             </header>
             <br />
+
             {location.pathname === '/base/calendar' && (
                 <div className="pick">
                     <div className="date-picker-container">

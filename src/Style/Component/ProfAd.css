@@ -10,16 +10,39 @@
     }
 } */
 
-@media(max-width:880px) {
+.welcomeem {
+    padding: 10px;
+    font-weight: 500;
+}
+
+@media(max-width:899.5px) {
     .welcomead {
         display: none;
     }
 
     .topbarpa {
-    padding: 5px;
+        padding: 5px;
     }
 }
 
+/* .topbarem {
+    padding-bottom: -10px;
+} */
+
+.onsmall {
+    display: none;
+    padding: 13.9px;
+}
+
+@media(max-width:599.5px) {
+    .welcomeem {
+        display: none;
+    }
+
+    .onsmall {
+        display: flex;
+    }
+}
 
 /* @media(max-width:400px) {
     .welcomead {

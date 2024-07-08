@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -17,7 +17,6 @@ export default function Calendar({ selectedDate }) {
     const calendarRef = useRef(null);
     const [events, setEvents] = useState([]);
     const [eventDetails, setEventDetails] = useState('');
-    const [showDatePicker, setShowDatePicker] = useState(false);
     const [startTime, setStartTime] = useState(new Date());
     const [endTime, setEndTime] = useState(new Date());
     const [isAllDay, setIsAllDay] = useState(false);
@@ -25,22 +24,6 @@ export default function Calendar({ selectedDate }) {
     const [currentEvent, setCurrentEvent] = useState(null);
     const [mode, setMode] = useState('create');
     const [recurrenceFrequency, setRecurrenceFrequency] = useState('none');
-
-
-    useEffect(() => {
-        const fetchEvents = async () => {
-            try {
-                const internalEvents = await axios.get('http://localhost:8080/events');
-                const externalEvents = await fetchExternalEvents();
-                const agreementEvents = await fetchAgreementEvents();
-                setEvents([...internalEvents.data, ...externalEvents, ...agreementEvents]);
-            } catch (error) {
-                console.error('Error fetching events:', error);
-            }
-        };
-
-        fetchEvents();
-    }, []);
 
     useEffect(() => {
         if (calendarRef.current) {
@@ -66,7 +49,7 @@ export default function Calendar({ selectedDate }) {
         }
     };
 
-    const fetchAgreementEvents = async () => {
+    const fetchAgreementEvents = useCallback(async () => {
         try {
             const response = await axios.get('http://localhost:8080/aggrements');
             return response.data.map(agreementEvent => {
@@ -85,7 +68,24 @@ export default function Calendar({ selectedDate }) {
             console.error('Error fetching agreement events:', error);
             return [];
         }
-    };
+    }, []);
+
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                const internalEvents = await axios.get('http://localhost:8080/events');
+                const externalEvents = await fetchExternalEvents();
+                const agreementEvents = await fetchAgreementEvents();
+                setEvents([...internalEvents.data, ...externalEvents, ...agreementEvents]);
+            } catch (error) {
+                console.error('Error fetching events:', error);
+            }
+        };
+
+        fetchEvents();
+    }, [fetchAgreementEvents]);
+
+
 
     const generateAgreementRrule = (type, date) => {
         if (!date) {
@@ -113,7 +113,6 @@ export default function Calendar({ selectedDate }) {
     };
 
     const handleDateClick = (info) => {
-        setShowDatePicker(true);
         setStartTime(new Date(info.date));
         setEndTime(new Date(info.date));
         setEventDetails('');
@@ -121,7 +120,7 @@ export default function Calendar({ selectedDate }) {
         setRecurrenceFrequency('none');
         setMode('create');
         setShowEventModal(true);
-       
+
     };
 
     const handleEventClick = (info) => {
@@ -134,11 +133,10 @@ export default function Calendar({ selectedDate }) {
         setRecurrenceFrequency(event.extendedProps.rrule?.freq || 'none');
         setMode('update');
         setShowEventModal(true);
-        
+
     };
 
     const handleButtonClick = () => {
-        setShowDatePicker(true);
         setStartTime(new Date());
         setEndTime(new Date());
         setEventDetails('');
@@ -146,7 +144,7 @@ export default function Calendar({ selectedDate }) {
         setCurrentEvent(null);
         setMode('create');
         setShowEventModal(true);
-       
+
     };
 
     const handleSaveOrUpdateEvent = async (e) => {
@@ -180,10 +178,9 @@ export default function Calendar({ selectedDate }) {
                 recurrenceFrequency: recurrenceFrequency,
                 rrule: recurrenceFrequency !== 'none' ? generateInternalEventRrule(recurrenceFrequency, startTime) : null,
             };
-    
+
             const response = await axios.post('http://localhost:8080/events', newEvent);
             setEvents(prevEvents => [...prevEvents, response.data]); // Update events state correctly
-            setShowDatePicker(false);
             setShowEventModal(false);
             setEventDetails('');
             window.location.reload();
@@ -191,12 +188,12 @@ export default function Calendar({ selectedDate }) {
             console.error('Error creating event:', error);
         }
     };
-    
-    
-    
+
+
+
 
     const handleUpdateEvent = async () => {
-        if (currentEvent.extendedProps.source === 'external' || currentEvent.extendedProps.source === 'agreement' ) {
+        if (currentEvent.extendedProps.source === 'external' || currentEvent.extendedProps.source === 'agreement') {
             alert('External events cannot be updated.');
             return;
         }
@@ -212,7 +209,7 @@ export default function Calendar({ selectedDate }) {
                 description: eventDetails,
                 recurrenceFrequency: recurrenceFrequency,
                 rrule: recurrenceFrequency !== 'none' ? generateInternalEventRrule(recurrenceFrequency, startTime) : null,
-               
+
             };
 
             await axios.put(`http://localhost:8080/events/${currentEvent.id}`, updatedEvent);
@@ -344,7 +341,7 @@ export default function Calendar({ selectedDate }) {
                                 onChange={handleAllDayChange}
                             />
                             <label htmlFor="allDayCheckbox">All Day</label>
-                            
+
                             <div>
                                 <label>Repeat: </label>
                                 <select value={recurrenceFrequency} onChange={(e) => setRecurrenceFrequency(e.target.value)}>
@@ -355,8 +352,8 @@ export default function Calendar({ selectedDate }) {
                                     <option value="yearly">Yearly</option>
                                 </select>
                             </div>
-                            
-                            
+
+
                         </div>
                         <div className="button2-container">
                             <div className="button2" onClick={handleSaveOrUpdateEvent}>

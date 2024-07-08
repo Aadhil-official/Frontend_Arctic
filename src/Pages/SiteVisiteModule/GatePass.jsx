@@ -23,7 +23,7 @@ const GatePass = () => {
   }, [numberOfEmployees, location.state]);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/v1/siteVisit/getSiteVisitTwo?id=${id}`)
+    axios.get(`http://localhost:8080/api/auth/siteVisit/getSiteVisitTwo?id=${id}`)
       .then(response => {
         if (response.data) {
           setVehicleNumber(response.data.vehicleNumber || "");
@@ -56,7 +56,7 @@ const GatePass = () => {
 
   const handleSave = async () => {
     try {
-      await axios.post(`http://localhost:8080/api/v1/gatePass/addGatePass`, gatePassData);
+      await axios.post(`http://localhost:8080/api/auth/gatePass/addGatePass`, gatePassData);
       alert("Employee names saved successfully!");
       navigate("/SiteVisitFive");
     } catch (error) {
