@@ -3,7 +3,7 @@
   width: 100%;
   max-width: 1200px; /* Adjust this value as needed */
   height: 90vh;
-  color: black;
+  color: black ;
   text-align: center;
   margin-top: 50px;
   margin-left: auto;
@@ -21,7 +21,7 @@ body {
   flex-direction: column;
   height: 100vh;
   text-align: center;
-  align-items: center;
+  align-items: center; 
 }
 
 .headerToolbar {
