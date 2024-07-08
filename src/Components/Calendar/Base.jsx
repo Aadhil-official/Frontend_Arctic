@@ -8,8 +8,13 @@ import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
 import Reminder from './Reminder';
 import CalenderEmp from './CalenderEmp';
+import { useUser } from '../../Context/UserContext';
+import SidebarCom from '../SideBarCom';
+// import NormalHeaderIn from '../NormalHeaderIn';
+// import HeaderCom from './HeaderCom';
 
 function Create() {
+  const { tempdata } = useUser();
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -41,17 +46,32 @@ function Create() {
 
   return (
     <div className="app">
-      <Sidebar
+
+      {tempdata.usergroup === "AdminGroup" && <Sidebar
         isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}
-      />
+      />}
+      {tempdata.usergroup !== "AdminGroup" && <SidebarCom
+        isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}
+      />}
 
       {/* <header className="header" > */}
+      {/* {tempdata.usergroup === "AdminGroup" &&  */}
       <Header
         selectedDate={selectedDate}
         handleDatePickerChange={handleDatePickerChange}
         toggleSidebar={toggleSidebar}
       />
+
+      {/* <HeaderCom
+        selectedDate={selectedDate}
+        handleDatePickerChange={handleDatePickerChange}
+        toggleSidebar={toggleSidebar}
+      /> */}
+
+      {/* // } */}
       {/* </header> */}
+
+      {/* {tempdata.usergroup !== "AdminGroup" && <NormalHeaderIn toggleSidebar={toggleSidebar} />} */}
 
       <main className={`contentum ${isSidebarOpen ? 'shiftedum' : ''}`}>
         <Routes>
@@ -61,7 +81,10 @@ function Create() {
             events={events}
             updateEvents={updateEvents} />} />
           <Route path="/reminder" element={<Reminder />} />
-          <Route path='/calendarem' element={<CalenderEmp />} />
+          <Route path='/base/calendarem' element={<CalenderEmp
+            selectedDate={selectedDate.toDate()}
+            events={events}
+            updateEvents={updateEvents} />} />
         </Routes>
       </main>
     </div>

@@ -10,7 +10,7 @@ import 'tippy.js/dist/tippy.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../Style/Calendar/Calendar.css';
 
-export default function CalenderEmp({ selectedDate = new Date() }) {
+export default function Calendar({ selectedDate }) {
     const calendarRef = useRef(null);
     const [events, setEvents] = useState([]);
 
@@ -21,7 +21,6 @@ export default function CalenderEmp({ selectedDate = new Date() }) {
                 const externalEvents = await fetchExternalEvents();
                 const agreementEvents = await fetchAgreementEvents();
                 setEvents([...internalEvents.data, ...externalEvents, ...agreementEvents]);
-                console.log('Fetched events:', [...internalEvents.data, ...externalEvents, ...agreementEvents]);
             } catch (error) {
                 console.error('Error fetching events:', error);
             }
@@ -33,33 +32,21 @@ export default function CalenderEmp({ selectedDate = new Date() }) {
     useEffect(() => {
         if (calendarRef.current) {
             const calendarApi = calendarRef.current.getApi();
-            const date = new Date(selectedDate);
-            if (!isNaN(date.getTime())) { // Ensure selectedDate is valid
-                calendarApi.gotoDate(date);
-            }
-            console.log('Selected date:', date);
+            calendarApi.gotoDate(selectedDate);
         }
     }, [selectedDate]);
 
     const fetchExternalEvents = async () => {
         try {
             const response = await axios.get('http://localhost:8080/job');
-            return response.data
-                .map(externalEvent => {
-                    const startDate = new Date(externalEvent.date);
-                    if (!isNaN(startDate.getTime())) {
-                        return {
-                            id: `external-${externalEvent.id}`,
-                            title: `${externalEvent.companyName}`,
-                            start: startDate,
-                            allDay: false,
-                            description: ` <br>Company: ${externalEvent.companyName} <br> Issue: ${externalEvent.issue}`,
-                            source: 'external',
-                        };
-                    }
-                    return null; // Filter out invalid dates
-                })
-                .filter(event => event !== null); // Filter out null values
+            return response.data.map(externalEvent => ({
+                id: `external-${externalEvent.id}`,
+                title: `${externalEvent.companyName}`,
+                start: externalEvent.date,
+                allDay: false,
+                description: `<br>Company: ${externalEvent.companyName} <br> Issue: ${externalEvent.issue}`,
+                source: 'external',
+            }));
         } catch (error) {
             console.error('Error fetching external events:', error);
             return [];
@@ -69,22 +56,16 @@ export default function CalenderEmp({ selectedDate = new Date() }) {
     const fetchAgreementEvents = async () => {
         try {
             const response = await axios.get('http://localhost:8080/aggrements');
-            return response.data
-                .map(agreementEvent => {
-                    const startDate = new Date(agreementEvent.date);
-                    if (!isNaN(startDate.getTime())) {
-                        return {
-                            id: `agreement-${agreementEvent.id}`,
-                            title: agreementEvent.companyName,
-                            start: startDate,
-                            allDay: true,
-                            description: agreementEvent.companyName,
-                            source: 'agreement',
-                        };
-                    }
-                    return null; // Filter out invalid dates
-                })
-                .filter(event => event !== null); // Filter out null values
+            return response.data.map(agreementEvent => {
+                return {
+                    id: `agreement-${agreementEvent.id}`,
+                    title: agreementEvent.companyName,
+                    start: agreementEvent.date,
+                    allDay: true,
+                    description: agreementEvent.companyName,
+                    source: 'agreement',
+                };
+            });
         } catch (error) {
             console.error('Error fetching agreement events:', error);
             return [];
@@ -92,7 +73,7 @@ export default function CalenderEmp({ selectedDate = new Date() }) {
     };
 
     const handleMouseEnter = (info) => {
-        const start = info.event.start ? new Date(info.event.start).toLocaleString() : 'No start time';
+        const start = new Date(info.event.start).toLocaleString();
         const end = info.event.end ? new Date(info.event.end).toLocaleString() : 'No end time';
         const description = info.event.extendedProps.description || 'No details provided';
 
@@ -128,7 +109,6 @@ export default function CalenderEmp({ selectedDate = new Date() }) {
                         end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
                     }}
                     height={'90vh'}
-                    // Add additional configuration as needed
                 />
             )}
         </div>
