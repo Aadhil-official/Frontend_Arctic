@@ -8,6 +8,7 @@ import { HiMiniUserGroup } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 import { IoIosCloseCircle } from "react-icons/io";
 import '../../Style/Calendar/dashboard.css';
+import { useUser } from '../../Context/UserContext';
 
 
 function Sidebar({ isOpen, toggleSidebar }) {
