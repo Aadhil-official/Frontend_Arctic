@@ -27,12 +27,12 @@ import { AddVehicle, VehicleEdit, VehicleLis, VehicleListAd, VehicleView } from 
 import { AddCustomer, CustomerEdit, CustomerLis, CustomerListAd, CustomerView } from './Pages/Customer/index';
 import { AddUserGroup, UserGroupEdit, UserGroupLis, UserGroupListAd, UserGroupView } from './Pages/User Group/index';
 import Base from "./Components/Calendar/Base";
-import Printjob from "./Pages/Job/Printjob";
-import NewJob from "./Pages/Job/NewJob";
-import Email from "./Pages/Job/SendEmailandPrintout";
-import JobListnew from "./Pages/Job/JobListnew";
-import SendEmailandPrintout from "./Pages/Job/SendEmailandPrintout";
-import Joblist from "./Pages/Job/Joblist";
+// import Printjob from "./Pages/Job/Printjob";
+// import NewJob from "./Pages/Job/NewJob";
+// import Email from "./Pages/Job/SendEmailandPrintout";
+// import JobListnew from "./Pages/Job/JobListnew";
+// import SendEmailandPrintout from "./Pages/Job/SendEmailandPrintout";
+// import Joblist from "./Pages/Job/Joblist";
 
 
 function App() {
