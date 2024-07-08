@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Button, Divider, Grid, Modal, Typography, createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
-import { Link, useLocation } from 'react-router-dom';//, useLocation 
+import { Link } from 'react-router-dom';//, useLocation 
 import '../Style/Admcomread.css';
 // import DeleteIcon from '@mui/icons-material/Delete';
 import { NormalHeaderBar } from '../Components/index'
@@ -11,10 +11,10 @@ function Admcomred() {
 
   const [complaindata, setComplaindata] = React.useState([]);
   const [openModalIndex, setOpenModalIndex] = useState(null);
-  const [tempdata, setTempdata] = useState([]);
+  // const [tempdata, setTempdata] = useState([]);
   // const [complaintdatasend, setComplaintdatasend] = useState([]);
   // const [complaindata, setComplaindata] = useState([]);
-  const location = useLocation();
+  // const location = useLocation();
   // const complaindata = location.state.complaintdata;
 
   useEffect(() => {
@@ -27,16 +27,16 @@ function Admcomred() {
         console.error('Error fetching complaints:', error);
       });
     // handleView1();
-    if (location.state && location.state.tempdata) {
-      setTempdata(location.state.tempdata);
-    }
+    // if (location.state && location.state.tempdata) {
+    //   setTempdata(location.state.tempdata);
+    // }
     // if (location.state && location.state.complaintdata) {
     //   setComplaindata(location.state.complaintdata);
     // }
     // if (location.state && location.state.complaintdatasend) {
     //   setComplaintdatasend(location.state.complaintdatasend);
     // }
-  }, [location.state]);//location.state
+  }, []);//location.state
 
   const handleView = () => {
     axios.post('http://localhost:8080/api/auth/findcomplaint')
@@ -110,7 +110,6 @@ function Admcomred() {
       <NormalHeaderBar />
       <Grid container spacing={2} sx={{ position: 'fixed', alignItems: 'center' }}>
         <Grid item xs={6} sx={{ alignItems: 'center' }}>
-          {console.log("just checking....",tempdata)}
           <Link to={"/login/welcomeadmin"} >{/* state={{ tempdata }}*/}
             <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
           </Link>

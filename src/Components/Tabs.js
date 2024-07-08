@@ -22,12 +22,11 @@ const Tabs = ({ buttonData }) => {
     // accessJobAllocation: 'Job Allocation',
   };
 
-  // Define a mapping between privileges and button labels
-  // Filter the buttons based on the user's privileges
   const filteredButtonData = buttonData.filter(button =>
     relevantPrivileges.some(privilege => privilegeToButtonLabel[privilege] === button.label)
   );
 
+  console.log("Filtered Button Data in Tabs:", filteredButtonData);
 
   return (
     <Grid
