@@ -9,7 +9,7 @@ import { dismiss, error, loading, success } from '../util/Toastify';
 
 export default function FormUpdate({ user }) {
 
-    
+
     const [id] = useState(user ? user.id : '');
     const [username, setUsername] = useState(user ? user.username : ''); // Initialize with user.username if user exists
     const [email, setEmail] = useState(user ? user.email : '');
@@ -44,7 +44,7 @@ export default function FormUpdate({ user }) {
 
 
     // if (user) {
-        // console.log("user is there",test);
+    // console.log("user is there",test);
     // }
     // navigate('/');
     const handleSubmit = () => {
@@ -100,7 +100,10 @@ export default function FormUpdate({ user }) {
                         dismiss(loadingId);
                         success("User updated successfully");
                         navigate('/login/welcomeadmin/employeelistad');
-                    }).catch(() => error("Username or email already exist!"))
+                    }).catch(() => {
+                        dismiss(loadingId);
+                        error("Check the internet")
+                    })
             } else {
                 dismiss(loadingId);
                 error("No changes detected!");
