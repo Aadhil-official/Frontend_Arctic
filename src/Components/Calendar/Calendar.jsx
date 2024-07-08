@@ -334,6 +334,8 @@ export default function Calendar({ selectedDate }) {
                                     style={{ width: '300px', height: '50px', borderRadius: '10px' }}
                                 />
                             </div>
+                            <br></br>
+
                             <input
                                 type="checkbox"
                                 id="allDayCheckbox"
@@ -341,6 +343,8 @@ export default function Calendar({ selectedDate }) {
                                 onChange={handleAllDayChange}
                             />
                             <label htmlFor="allDayCheckbox">All Day</label>
+                            <br></br>
+                            <br></br>
 
                             <div>
                                 <label>Repeat: </label>
@@ -356,8 +360,8 @@ export default function Calendar({ selectedDate }) {
 
                         </div>
                         <div className="button2-container">
-                            <div className="button2" onClick={handleSaveOrUpdateEvent}>
-                                {mode === 'create' ? 'Save' : 'Update'}
+                        <div className={`button2 ${mode === 'create' ? 'save-button' : ''}`} onClick={handleSaveOrUpdateEvent}>
+                        {mode === 'create' ? 'Save' : 'Update'}
                             </div>
                             {mode === 'update' && (
                                 <div style={{ margin: '20px 175px' }} className="button4" onClick={handleDeleteEvent}>
