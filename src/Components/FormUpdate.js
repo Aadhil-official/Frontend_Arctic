@@ -15,11 +15,10 @@ export default function FormUpdate({ user }) {
     const [role, setRole] = useState(user && user.roles ? user.roles[0].name.toLowerCase() : [' ']); // Check if user and user.roles exist
     const [address, setAddress] = useState(user ? user.address : '');
     const [usergroup, setUsergroup] = useState([]);
+    const [usergroupup, setUsergroupup] = useState(user ? user.usergroup : '');
     const [tel, setTel] = useState(user ? user.tel : '')
 
-    const navigate = useNavigate();
-
-    // console.log("Starting of my form......." + user);
+    const navigate = useNavigate();  // console.log("Starting of my form......." + user);
     // console.log("username:", username);
     // console.log("email:", email);
     // console.log("role:", role);
@@ -29,9 +28,13 @@ export default function FormUpdate({ user }) {
 
 
     useEffect(() => {
-        if (usergroup === 'AdminGroup') {
+        if (usergroupup === 'AdminGroup') {
             setRole('admin');
         }
+
+        // if (usergroupup !== "") {
+        //     setUsergroup();
+        // }
         axios.get("http://localhost:8080/api/auth/getAllUserGroups")
             .then((response) => {
                 setUsergroup(response.data);
@@ -66,7 +69,9 @@ export default function FormUpdate({ user }) {
 
         // console.log("id of role is..........." + role.toUpperCase());
 
-        const userId = user.roles[0].id;
+        // const userId = user.roles[0].id;
+        // const roleName = role.toUpperCase();
+
         const roleName = role.toUpperCase();
 
         const updatedUser = {
@@ -74,11 +79,10 @@ export default function FormUpdate({ user }) {
             username: username,
             email: email,
             address: address,
-            usergroup: usergroup,
+            usergroup: usergroupup,
             tel: tel,
-            roles: [{ id: userId, name: roleName }] // Send role as an array containing the selected role
+            roles: [{ name: roleName }] // Send role as an array containing the selected role
         };
-
 
         // console.log("thisklkdklwejdlkwed"+email);
         // console.log("thisklkdklwejdlkwed", updatedUser);
@@ -89,7 +93,7 @@ export default function FormUpdate({ user }) {
                 user.username !== updatedUser.username ||
                 user.email !== updatedUser.email ||
                 user.address !== updatedUser.address ||
-                user.usergroup !== updatedUser.usergroup ||
+                usergroupup !== user.usergroup ||
                 user.tel !== updatedUser.tel ||
                 user.roles[0].name.toLowerCase() !== updatedUser.roles[0].name.toLowerCase()
             ) {
@@ -98,7 +102,10 @@ export default function FormUpdate({ user }) {
                         dismiss(loadingId);
                         success("User updated successfully");
                         navigate('/login/welcomeadmin/employeelistad');
-                    }).catch(() => error("Username or email already exist!"))
+                    }).catch(() => {
+                        dismiss(loadingId);
+                        error("Username or email already exist!")
+                    })
             } else {
                 dismiss(loadingId);
                 error("No changes detected!");
@@ -156,8 +163,8 @@ export default function FormUpdate({ user }) {
                 <TextField
                     select
                     label="User group"
-                    value={usergroup}
-                    onChange={(e) => setUsergroup(e.target.value)}
+                    value={usergroupup}
+                    onChange={(e) => setUsergroupup(e.target.value)}
                     SelectProps={{ native: true }}
                 >
                     <option value={user.usergroup}>{user.usergroup}</option>
@@ -187,7 +194,7 @@ export default function FormUpdate({ user }) {
                     onChange={(e) => setRole(e.target.value)}
                     value={role}
                     InputProps={{
-                        readOnly: usergroup === 'AdminGroup'
+                        readOnly: usergroupup === 'AdminGroup'
                     }}
                     // onChange={(e) => setRole(e.target.value.JSON.stringify(e))}
                     SelectProps={{ native: true }}
