@@ -7,7 +7,7 @@ import { RiContractFill } from 'react-icons/ri';
 import { HiMiniUserGroup } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 import { IoIosCloseCircle } from "react-icons/io";
-import { useUser } from '../../Context/UserContext';
+import '../../Style/Calendar/dashboard.css';
 
 
 function Sidebar({ isOpen, toggleSidebar }) {

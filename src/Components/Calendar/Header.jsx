@@ -5,21 +5,21 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TextField } from '@mui/material';
 import dayjs from 'dayjs';
-import { useLocation } from 'react-router-dom'; // Import useLocation
+import { useLocation } from 'react-router-dom';
 import { FaBars } from "react-icons/fa";
 
-
 export default function Header({ selectedDate, handleDatePickerChange, toggleSidebar }) {
-    const location = useLocation(); // Get the current location
+    const location = useLocation();
 
     return (
         <div>
             <header className="header">
-                <button className="toggle-btn" onClick={toggleSidebar}> <FaBars /></button>
+                <button className="toggle-btn" onClick={toggleSidebar}>
+                    <FaBars />
+                </button>
             </header>
             <br />
 
-            {/* Conditionally render the search bar based on the current path */}
             {location.pathname === '/base/calendar' && (
                 <div className="pick">
                     <div className="date-picker-container">

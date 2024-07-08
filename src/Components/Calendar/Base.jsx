@@ -7,7 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
 import Reminder from './Reminder';
-import CalenderEmp from './CalenderEmp';
+import CalendarEmp from './CalendarEmp';
 
 function Create() {
   const [events, setEvents] = useState([]);
@@ -40,33 +40,33 @@ function Create() {
   };
 
   return (
-    <div className="app">
-      <Sidebar
-        isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}
-      />
+      <div className="app">
+          <Sidebar  
+           isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} 
+          />
+        
+            <Header 
+              selectedDate={selectedDate}
+              handleDatePickerChange={handleDatePickerChange}
+              toggleSidebar={toggleSidebar}
+            />
 
-      {/* <header className="header" > */}
-      <Header
-        selectedDate={selectedDate}
-        handleDatePickerChange={handleDatePickerChange}
-        toggleSidebar={toggleSidebar}
-      />
-      {/* </header> */}
+          <main className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
+          <Routes>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/calendar" element={<Calendar 
+                          selectedDate={selectedDate.toDate()}
+                          events={events}
+                          updateEvents={updateEvents}/>} />
+              <Route path="/reminder" element={<Reminder />} />
+              <Route path="/CalendarEmp" element={<CalendarEmp selectedDate={selectedDate.toDate()}
+                          events={events}/>} />
 
-      <main className={`contentum ${isSidebarOpen ? 'shiftedum' : ''}`}>
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/calendar" element={<Calendar
-            selectedDate={selectedDate.toDate()}
-            events={events}
-            updateEvents={updateEvents} />} />
-          <Route path="/reminder" element={<Reminder />} />
-          <Route path='/calendarem' element={<CalenderEmp />} />
-        </Routes>
-      </main>
-    </div>
-
-  );
+            </Routes>
+          </main>
+      </div>
+   
+);
 
 }
 

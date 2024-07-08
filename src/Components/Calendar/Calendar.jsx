@@ -360,7 +360,7 @@ export default function Calendar({ selectedDate }) {
                                 {mode === 'create' ? 'Save' : 'Update'}
                             </div>
                             {mode === 'update' && (
-                                <div style={{ margin: '20px 135px' }} className="button2" onClick={handleDeleteEvent}>
+                                <div style={{ margin: '20px 175px' }} className="button4" onClick={handleDeleteEvent}>
                                     Delete
                                 </div>
                             )}
