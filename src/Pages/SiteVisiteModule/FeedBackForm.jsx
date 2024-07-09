@@ -40,7 +40,7 @@ function FeedbackForm() {
   const handleFeedbackSubmit = async () => {
     try {
       // Assuming you have an endpoint to save feedback
-      const response = await axios.post(`http://localhost:8080/api/v1/feedBack/saveFeedback`, {
+      const response = await axios.post(`http://localhost:8080/api/auth/feedBack/saveFeedback`, {
         visitId: visitDetails.visitId,
         feedback: feedback
       });
@@ -156,17 +156,7 @@ function FeedbackForm() {
                   readOnly: true,
                 }}
               />
-              {/* <TextField
-                fullWidth
-                id="groupName"
-                label="Group Name"
-                value={visitDetails.groupName}
-                variant="outlined"
-                margin="normal"
-                InputProps={{
-                  readOnly: true,
-                }}
-              /> */}
+         
               <TextField
                 fullWidth
                 id="jobType"
