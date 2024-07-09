@@ -37,7 +37,7 @@ const JobListnew = () => {
 
   // Fetch jobs data
   useEffect(() => {
-    axios.get('http://localhost:8080/api/displayJob')
+    axios.get('http://localhost:8080/api/auth/displayJob')
       .then(response => {
         setJobs(response.data);
         setFilteredJobs(response.data);
@@ -80,7 +80,7 @@ const JobListnew = () => {
 
   //  Event handlers
   const handleSaveJob = () => {
-    axios.put(`http://localhost:8080/displayJob/updatedjob/${editJobId}`, editJobData)
+    axios.put(`http://localhost:8080/api/auth/displayJob/updatedjob/${editJobId}`, editJobData)
       .then(response => {
         setJobs(jobs.map(job => job.id === editJobId ? editJobData : job));
         setFilteredJobs(filteredJobs.map(job => job.id === editJobId ? editJobData : job));
@@ -94,7 +94,7 @@ const JobListnew = () => {
 
   //  Event handlers
   const handleDeleteJob = (jobId) => {
-    axios.delete(`http://localhost:8080/displayJob/deleteJob/${jobId}`)
+    axios.delete(`http://localhost:8080/api/auth/displayJob/deleteJob/${jobId}`)
       .then(response => {
         setJobs(jobs.filter(job => job.id !== jobId));
         setFilteredJobs(filteredJobs.filter(job => job.id !== jobId));

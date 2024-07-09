@@ -41,7 +41,7 @@ const Welcome = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:8080/counts')
+    axios.get('http://localhost:8080/api/auth/Counts')
       .then(response => {
         setCounts(response.data);
       })

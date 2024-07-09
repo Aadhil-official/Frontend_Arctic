@@ -283,15 +283,13 @@ function App() {
           {/* <Route path="/base/calendarEmp" element={<CalendarEmp/>}/> */}
 
           {/* Job related roots*/}
-          <Route
-            path="/emailAndPrintButtons"
-            element={<SendEmailandPrintout />}
-          ></Route>
-          <Route path="/jobListForUser" element={<JobListnew />}></Route>
-          <Route path="/jobListForAdmin" element={<Joblist />}></Route>
-          <Route path="/newJob" element={<NewJob />}></Route>
-          <Route path="/printJob" element={<Printjob />}></Route>
-          <Route path="/email" element={<Email />}></Route>
+          <Route path='/emailAndPrintButtons' element={<SendEmailandPrintout />}></Route>
+          <Route path='/jobListForUser' element={<JobListnew />}></Route>
+          <Route path='/jobListForAdmin' element={<Joblist />}></Route>
+          <Route path='/newJob' element={<NewJob />}></Route>
+          <Route path='/printJob' element={<Printjob />}></Route>
+          <Route path='/email' element={<Email />}></Route>
+
         </Routes>
       </BrowserRouter>
     </>
