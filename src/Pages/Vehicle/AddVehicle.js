@@ -49,7 +49,7 @@ function AddVehicle() {
           <FormAddVehicle />
 
         </Grid>
-        <Grid item xl={2} lg={3} md={3} xs={0.5} sm={2}></Grid>
+        {/* <Grid item xl={2} lg={3} md={3} xs={0.5} sm={2}></Grid> */}
       </Grid><br />
       <Grid container>
         <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
