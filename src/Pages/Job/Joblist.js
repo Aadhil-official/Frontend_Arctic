@@ -123,7 +123,6 @@ const JobListnew = () => {
       [name]: value
     }));
   };
-
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -131,7 +130,7 @@ const JobListnew = () => {
   return (
     <>
       <NormalHeaderIn toggleSidebar={toggleSidebar} />
-      {/* {tempdata.usergroup === 'AdminGroup' && <br/>} */}
+      {tempdata.usergroup === 'AdminGroup' && <br/>}
       {tempdata.usergroup === 'AdminGroup' && <Sidebar
         isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}
       />}
