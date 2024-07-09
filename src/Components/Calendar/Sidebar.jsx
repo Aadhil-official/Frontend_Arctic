@@ -115,7 +115,7 @@ function Sidebar({ isOpen, toggleSidebar }) {
                         <FaExclamationCircle className='icon' /> Complaints
                     </li>
                 </Link>
-                <li className='sidebar-list-item' style={{ color: 'black' }} onClick={handleChange}>
+                <li className='sidebar-list-item' style={{ color: '#800000', fontWeight: 'bolder' }} onClick={handleChange}>
                     <FaSignOutAlt className='icon' /> Sign out
                 </li>
             </ul>

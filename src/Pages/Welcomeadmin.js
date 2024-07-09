@@ -79,7 +79,7 @@ function Welcomeadmin() {
       </Grid>
 
 
-      <Grid container justifyContent='center' textAlign='center' className='main-cards'>
+      {/* <Grid container justifyContent='center' textAlign='center' className='main-cards'>
         <Grid item xs={12} sm={12} md={3} lg={2.5} xl={1} className='card'>
           <div style={gapStyle} className='card-inner'>
             <h3>ITEMS</h3>
@@ -104,7 +104,7 @@ function Welcomeadmin() {
           <h1>{counts.units || 0}</h1>
         </Grid>
 
-      </Grid><br /><br />
+      </Grid><br /><br /> */}
 
 
       <Grid container>

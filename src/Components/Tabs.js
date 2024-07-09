@@ -32,7 +32,7 @@ const Tabs = () => {
   );
 
 
-  console.log("Filtered Button Data in Tabs:", filteredButtonData);
+  // console.log("Filtered Button Data in Tabs:", filteredButtonData);
 
   return (
     <Grid

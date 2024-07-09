@@ -17,12 +17,12 @@
     }
   }
 
-
+/* 
   .box{
     width: 170%;
     height: 75%;
     background-color: white;
-    /* border: 1px solid black; */
+    border: 1px solid black;
     margin: 0 auto;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -31,6 +31,6 @@
    margin-left: -40%;
     margin-bottom: 30%;
     float: center;
-  }
+  } */
   
  

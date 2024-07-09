@@ -3,13 +3,12 @@ import { BsPersonCircle } from 'react-icons/bs';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoIosCloseCircle } from "react-icons/io";
 import { useUser } from '../Context/UserContext';
-import { createTheme } from '@mui/system';
+import { Box, createTheme } from '@mui/system';
 import { responsiveFontSizes, Typography } from '@mui/material';
 import { ThemeProvider } from 'styled-components';
-import { FaSignOutAlt } from 'react-icons/fa';
 import axios from 'axios';
 import { success } from '../util/Toastify';
-import { RiLogoutBoxFill } from 'react-icons/ri';
+import '../Style/Component/Sidebar.css'
 
 
 // import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsPersonVcardFill } from 'react-icons/bs';
@@ -112,16 +111,20 @@ function SidebarCom({ isOpen, toggleSidebar }) {
                 <Typography variant='body2'>
                     <ul className='sidebar-list'>
                         {filteredButtonData.map((button, index) => (
-                            <Link to={button.link || '/'} className='tonavigate'>
-                                <li className='sidebar-list-item' key={index}>
-                                    {/* {getIconForItem(button.label)}  */}
-                                    {button.label}
-                                </li>
-                            </Link>
+                            <Box className="sidebartext">
+                                <Link to={button.link || '/'} className='tonavigate'>
+                                    <li className='sidebar-list-item' key={index}>
+                                        {/* {getIconForItem(button.label)}  */}
+                                        {button.label}
+                                    </li>
+                                </Link>
+                            </Box>
                         ))}
-                        <li className='sidebar-list-item' style={{ color: 'black' }} onClick={handleChange}>
-                            <RiLogoutBoxFill className='icon' /> Sign out
-                        </li>
+                        <Box className="sidebartext">
+                            <li className='sidebar-list-item' style={{ color: '#800000', fontWeight: 'bolder' }} onClick={handleChange}>
+                                Sign out
+                            </li>
+                        </Box>
                     </ul>
                 </Typography>
             </ThemeProvider>
