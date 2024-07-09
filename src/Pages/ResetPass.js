@@ -43,12 +43,12 @@ function ResetPass() {
         <br />
   
   
-        <Grid container>
-          <Grid item xl={4.75} lg={4.65} md={4} xs={1} sm={3}></Grid>
-          <Grid item xl={1.5} lg={2.7} md={4} xs={10.5} sm={6} className="box">
+        <Grid container justifyContent='center' textAlign='center'>
+          {/* <Grid item xl={4.75} lg={4.65} md={4} xs={1} sm={3}></Grid> */}
+          <Grid item xl={4} lg={5} md={4} xs={10.5} sm={6} className="box">
             <FormResetPass/>
             </Grid>
-          <Grid item xl={2} lg={3} md={4} xs={0.5} sm={3}></Grid>
+          {/* <Grid item xl={2} lg={3} md={4} xs={0.5} sm={3}></Grid> */}
         </Grid><br />
   
   
