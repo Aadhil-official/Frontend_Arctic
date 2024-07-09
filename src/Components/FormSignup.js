@@ -68,7 +68,8 @@ export default function FormSignup() {
       axios.post('http://localhost:8080/api/auth/signup', userData)
         .then(() => {
           dismiss(loadingId);
-          navigate('/login/welcomeadmin');
+          handleReset();
+          // navigate('/login/welcomeadmin');
           success('User created successfully!')
         })
         .catch(() => {

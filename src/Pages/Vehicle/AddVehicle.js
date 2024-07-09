@@ -41,10 +41,10 @@ function AddVehicle() {
         </ThemeProvider>
       </Grid>
 
-      <br />
-      <Grid container>
-        <Grid item xl={5.25} lg={4.65} md={3} xs={1} sm={2}></Grid>
-        <Grid item xl={3} lg={4} md={6} xs={10.5} sm={8} className="box">
+      <br />           
+      <Grid container textAlign='center' justifyContent='center'>
+        {/* <Grid item xl={5.25} lg={4.65} md={3} xs={1} sm={2}></Grid> */}
+        <Grid item xl={4} lg={5} md={4} xs={10.5} sm={6} className="box">
 
           <FormAddVehicle />
 

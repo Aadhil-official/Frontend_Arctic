@@ -53,7 +53,7 @@ export default function Signup() {
       <br />
       <Grid container justifyContent='center' textAlign='center'>
         {/* <Grid item xl={5.25} lg={4.65} md={3} xs={1} sm={2}></Grid> */}
-        <Grid item xl={1.5} lg={2.7} md={6} xs={10.5} sm={8} className="box">
+        <Grid item xl={4} lg={5} md={6} xs={10.5} sm={8} className="box">
 
           <FormSignup />
 
