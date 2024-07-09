@@ -3,6 +3,17 @@ import { BsPersonCircle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { IoIosCloseCircle } from "react-icons/io";
 import { useUser } from '../Context/UserContext';
+import { createTheme } from '@mui/system';
+import { responsiveFontSizes, Typography } from '@mui/material';
+import { ThemeProvider } from 'styled-components';
+
+
+// import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsPersonVcardFill } from 'react-icons/bs';
+// import { FaCalendarAlt, FaCar, FaUserEdit } from 'react-icons/fa';
+// import { BiDetail } from 'react-icons/bi';
+// import { FaBuilding } from 'react-icons/fa6';
+// import { RiContractFill } from 'react-icons/ri';
+// import { HiMiniUserGroup } from 'react-icons/hi2';
 
 function SidebarCom({ isOpen, toggleSidebar }) {
 
@@ -30,6 +41,7 @@ function SidebarCom({ isOpen, toggleSidebar }) {
         accessSiteVisit: ['Site Visit Details'],
         // accessJobAllocation: 'Job Allocation',
     };
+
     const relevantPrivileges = tempdataGroup?.relevantPrivileges || [];
     const privilegeSet = new Set(relevantPrivileges);
 
@@ -41,13 +53,32 @@ function SidebarCom({ isOpen, toggleSidebar }) {
     ) : [];
 
     // const getIconForItem = (label) => {
-    //     const iconKeys = Object.keys(Icons);
-    //     // Use some logic to map label to an index or hash
-    //     const index = label.length % iconKeys.length; // Just an example, you can use any logic to determine index
-    //     const iconKey = iconKeys[index];
-    //     const IconComponent = Icons[iconKey];
-    //     return <IconComponent className='icon' />;
+    //     const iconMap = {
+    //         'createUser': FaUserEdit,
+    //         'complain': FaCalendarAlt,
+    //         'accessEmployee': BsPersonVcardFill,
+    //         'accessItem': BsFillGrid3X3GapFill,
+    //         'accessUnit': BsFillArchiveFill,
+    //         'accessVehicle': FaCar,
+    //         'accessCustomer': BsPeopleFill,
+    //         'accessUserGroup': HiMiniUserGroup,
+    //         'accessJob': BiDetail,
+    //         'accessServiceAgreement': RiContractFill,
+    //         'accessCalendar': FaCalendarAlt,
+    //         'accessSiteVisit': FaBuilding,
+    //     };
+
+    //     for (let [key] of Object.entries(privilegeToButtonLabel)) {
+    //         if (privilegeToButtonLabel[key].includes(label)) {
+    //             const IconComponent = iconMap[key];
+    //             return <IconComponent className='icon' />;
+    //         }
+    //     }
+    //     return null;
     // };
+
+    let theme = createTheme();
+    theme = responsiveFontSizes(theme);
 
     return (
         <div className={`sidebar ${isOpen ? 'open' : ''}`}>
@@ -56,17 +87,20 @@ function SidebarCom({ isOpen, toggleSidebar }) {
                 <BsPersonCircle className='icon_header' /> {tempdata.username.toUpperCase()}
             </div>
 
-            <ul className='sidebar-list'>
-                {filteredButtonData.map((button, index) => (
-                    <Link to={button.link || '/'} className='tonavigate'>
-                        <li className='sidebar-list-item' key={index}>
-                            {/* {getIconForItem(button.label)}  */}
-                            {button.label}
-                        </li>
-                    </Link>
-                ))}
-            </ul>
-
+            <ThemeProvider theme={theme}>
+                <Typography variant='body2'>
+                    <ul className='sidebar-list'>
+                        {filteredButtonData.map((button, index) => (
+                            <Link to={button.link || '/'} className='tonavigate'>
+                                <li className='sidebar-list-item' key={index}>
+                                    {/* {getIconForItem(button.label)}  */}
+                                    {button.label}
+                                </li>
+                            </Link>
+                        ))}
+                    </ul>
+                </Typography>
+            </ThemeProvider>
         </div>
     );
 }

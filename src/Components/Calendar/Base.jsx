@@ -8,8 +8,11 @@ import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
 import Reminder from './Reminder';
 import CalendarEmp from './CalendarEmp';
+import { useUser } from '../../Context/UserContext';
+import SidebarCom from '../SideBarCom';
 
 function Create() {
+  const { tempdata } = useUser();
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -40,33 +43,37 @@ function Create() {
   };
 
   return (
-      <div className="app">
-          <Sidebar  
-           isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} 
-          />
-        
-            <Header 
-              selectedDate={selectedDate}
-              handleDatePickerChange={handleDatePickerChange}
-              toggleSidebar={toggleSidebar}
-            />
+    <div className="app">
+      {tempdata.usergroup === "AdminGroup" && <Sidebar
+        isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}
+      />}
 
-          <main className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
-          <Routes>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/calendar" element={<Calendar 
-                          selectedDate={selectedDate.toDate()}
-                          events={events}
-                          updateEvents={updateEvents}/>} />
-              <Route path="/reminder" element={<Reminder />} />
-              <Route path="/calendarEmp" element={<CalendarEmp selectedDate={selectedDate.toDate()}
-                          events={events}/>} />
+      {tempdata.usergroup !== "AdminGroup" && <SidebarCom
+        isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}
+      />}
 
-            </Routes>
-          </main>
-      </div>
-   
-);
+      <Header
+        selectedDate={selectedDate}
+        handleDatePickerChange={handleDatePickerChange}
+        toggleSidebar={toggleSidebar}
+      />
+
+      <main className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/calendar" element={<Calendar
+            selectedDate={selectedDate.toDate()}
+            events={events}
+            updateEvents={updateEvents} />} />
+          <Route path="/reminder" element={<Reminder />} />
+          <Route path="/calendarEmp" element={<CalendarEmp selectedDate={selectedDate.toDate()}
+            events={events} />} />
+
+        </Routes>
+      </main>
+    </div>
+
+  );
 
 }
 

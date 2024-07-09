@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Divider, Grid, Modal, Typography, createTheme, responsiveFontSizes, ThemeProvider, Pagination } from '@mui/material';
+import { Button, Divider, Grid, Modal, Typography, createTheme, responsiveFontSizes, Pagination } from '@mui/material';
 import { Link } from 'react-router-dom';//, useLocation 
 import '../Style/Admcomread.css';
 // import DeleteIcon from '@mui/icons-material/Delete';
@@ -10,6 +10,7 @@ import { useUser } from '../Context/UserContext';
 import Sidebar from '../Components/Calendar/Sidebar';
 import NormalHeaderIn from '../Components/NormalHeaderIn';
 import SidebarCom from '../Components/SideBarCom';
+import { ThemeProvider } from 'styled-components';
 
 function Admcomred() {
 

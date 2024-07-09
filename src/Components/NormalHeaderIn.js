@@ -11,9 +11,9 @@ function NormalHeaderIn({ toggleSidebar }) {
             {/* <AppBar position="sticky"> */}
             <Toolbar sx={{ background: 'rgb(25,118,210)', position: "sticky" }} >
                 <Grid container>
-                    <Grid item xs={6} textAlign='left'>
+                    <Grid item xs={6} textAlign='left' sx={{marginTop:'10px'}}>
                         {/* <div className="header"> */}
-                        <button className="toggle-btn" onClick={toggleSidebar}> <FaBars /></button>
+                        <button className="toggle-btn" onClick={toggleSidebar}> <FaBars fontSize='large'/></button>
                         {/* </div> */}
                     </Grid>
                     <Grid item xs={6} textAlign='right'>

@@ -95,11 +95,6 @@ function Sidebar({ isOpen, toggleSidebar }) {
                         <FaExclamationCircle className='icon' /> Complaints
                     </li>
                 </Link>
-                <Link to="/base/calendarEmp" className='tonavigate'>
-                    <li className='sidebar-list-item'>
-                        <FaExclamationCircle className='icon' /> EmpCal
-                    </li>
-                </Link>
             </ul>
 
         </div>
