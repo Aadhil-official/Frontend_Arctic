@@ -32,9 +32,9 @@ function FormResetPass() {
 
   const handleSubmit = () => {
 
-    
+
     const loadingId = loading("Updating password");
-    
+
     const data = {
       email: email,
       otp: otp,
@@ -76,7 +76,7 @@ function FormResetPass() {
       <Box
         component="form"
         sx={{
-          '& .MuiTextField-root': { m: 1, width: '25ch' },
+          '& .MuiTextField-root': { m: 1 },
           textAlign: 'center',
           mt: 3
         }}
@@ -88,6 +88,7 @@ function FormResetPass() {
           id="email"
           label="Email"
           type='email'
+          fullWidth
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         /><br />
@@ -96,6 +97,7 @@ function FormResetPass() {
           id="otp"
           label="OTP"
           type='text'
+          fullWidth
           value={otp}
           onChange={(e) => setOtp(e.target.value)}
         /><br />
@@ -104,6 +106,7 @@ function FormResetPass() {
           id="newpass"
           label="New password"
           type='password'
+          fullWidth
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
         /><br />
@@ -112,6 +115,7 @@ function FormResetPass() {
           id="conformpass"
           label="Conform password"
           type='password'
+          fullWidth
           value={conformpass}
           onChange={(e) => setConformpass(e.target.value)}
         /><br /><br />

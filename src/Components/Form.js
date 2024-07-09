@@ -81,22 +81,22 @@ export default function FormPropsTextFields() {
             setButtonData(buttonDataAd);
             success('Login successful!');
             setTimeout(() => {
-                navigate('/base/dashboard');
+              navigate('/base/dashboard');
             }, 1000); // 1 second delay
-        } else if (role === 'ADMIN') {
+          } else if (role === 'ADMIN') {
             setButtonData(buttonDataAd);
             success('Login successful!');
             setTimeout(() => {
-                navigate('/login/welcomeadmin');
+              navigate('/login/welcomeadmin');
             }, 1000); // 1 second delay
-        } else {
+          } else {
             setButtonData(buttonDataEmp);
             success('Login successful!');
             setTimeout(() => {
-                navigate('/login/welcome');
+              navigate('/login/welcome');
             }, 1000); // 1 second delay
-        }
-                
+          }
+
         })
         .catch(() => {
           dismiss(loadingId);
@@ -128,7 +128,7 @@ export default function FormPropsTextFields() {
       <Box
         component="form"
         sx={{
-          '& .MuiTextField-root': { m: 1, width: '25ch' },
+          '& .MuiTextField-root': { m: 1 },
           textAlign: 'center',
           mt: 3
         }}
@@ -139,13 +139,15 @@ export default function FormPropsTextFields() {
         <TextField
           label="Name"
           type='text'
+          fullWidth
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-        />
+        /><br/>
 
         <TextField
           label="Password"
           type="password"
+          fullWidth
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         /><br /><br />

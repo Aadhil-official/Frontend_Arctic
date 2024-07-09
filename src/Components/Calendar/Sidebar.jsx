@@ -1,25 +1,45 @@
 import React from 'react';
 import { BsPersonCircle, BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsPersonVcardFill } from 'react-icons/bs';
-import { FaCalendarAlt, FaCar, FaExclamationCircle, FaUserEdit } from 'react-icons/fa';
+import { FaCalendarAlt, FaCar, FaExclamationCircle, FaSignOutAlt, FaUserEdit } from 'react-icons/fa';
 import { BiDetail } from 'react-icons/bi';
 import { FaBuilding, FaClock } from 'react-icons/fa6';
 import { RiContractFill } from 'react-icons/ri';
 import { HiMiniUserGroup } from 'react-icons/hi2';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoIosCloseCircle } from "react-icons/io";
 import '../../Style/Calendar/dashboard.css';
 import { useUser } from '../../Context/UserContext';
+import axios from 'axios';
+import { success } from '../../util/Toastify';
 
 
 function Sidebar({ isOpen, toggleSidebar }) {
 
     const { tempdata } = useUser();
 
+    const navigate = useNavigate();
+
+    const handleChange = async () => {
+        // console.log("Switch toggled");
+        // setChecked(event.target.checked);
+        // if (!event.target.checked) {
+        // setTimeout(async () => {
+        try {
+            await axios.post('http://localhost:8080/api/auth/signout', { checked: false });
+            success("Signed out!");
+            navigate('/');
+        } catch (error) {
+            console.error('Sign out error:', error);
+        }
+        // }, 500); // 500ms delay
+        // }
+    };
+
     return (
         <div className={`sidebar ${isOpen ? 'open' : ''}`}>
             <button className="close-btn" onClick={toggleSidebar}><IoIosCloseCircle /></button>
             <div className="sidebar-content">
-                <BsPersonCircle className='icon_header' /> 
+                <BsPersonCircle className='icon_header' />
                 {tempdata.username.toUpperCase()}
             </div>
 
@@ -95,6 +115,9 @@ function Sidebar({ isOpen, toggleSidebar }) {
                         <FaExclamationCircle className='icon' /> Complaints
                     </li>
                 </Link>
+                <li className='sidebar-list-item' style={{ color: 'black' }} onClick={handleChange}>
+                    <FaSignOutAlt className='icon' /> Sign out
+                </li>
             </ul>
 
         </div>
