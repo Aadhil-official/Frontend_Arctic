@@ -44,6 +44,12 @@ function Sidebar({ isOpen, toggleSidebar }) {
             </div>
 
             <ul className='sidebar-list'>
+
+                <Link to="/login/complaintread" className='tonavigate'>
+                    <li className='sidebar-list-item'>
+                        <FaExclamationCircle className='icon' /> Complaints
+                    </li>
+                </Link>
                 <Link to="/signup" className='tonavigate'>
                     <li className='sidebar-list-item'>
                         <FaUserEdit className='icon' /> Create user
@@ -108,11 +114,6 @@ function Sidebar({ isOpen, toggleSidebar }) {
                 <Link to="/base/reminder" className='tonavigate'>
                     <li className='sidebar-list-item'>
                         <FaClock className='icon' /> Set Reminder
-                    </li>
-                </Link>
-                <Link to="/login/complaintread" className='tonavigate'>
-                    <li className='sidebar-list-item'>
-                        <FaExclamationCircle className='icon' /> Complaints
                     </li>
                 </Link>
                 <li className='sidebar-list-item' style={{ color: '#800000', fontWeight: 'bolder' }} onClick={handleChange}>
