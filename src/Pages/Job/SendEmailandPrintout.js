@@ -44,7 +44,7 @@ const Email = () => {
   };
 
   const handleNavigate = () => {
-    navigate(`/pj?Members=${Members}`);
+    navigate(`/printJob?Members=${Members}`);
   };
 
   return (

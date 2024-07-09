@@ -169,7 +169,7 @@ const AnewjobWireframe24 = () => {
 
       <Grid container spacing={2}>
         <Grid item position='fixed'>
-          <Link to={"/jl"}>
+          <Link to={"/jobListForAdmin"}>
             <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
           </Link>
         </Grid>
@@ -354,7 +354,7 @@ const AnewjobWireframe24 = () => {
 
 
           <div id="cancel-button" style={{ flex: '1', display: 'flex', justifyContent: 'flex-end', marginRight: '160px' }}>
-            <Link to="/jl">
+            <Link to="/jobListForAdmin">
               <Button variant="contained" sx={{ width: '200px' }} endIcon={<CancelIcon />}>Cancel</Button>
             </Link>
           </div>
