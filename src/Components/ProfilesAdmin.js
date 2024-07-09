@@ -196,7 +196,7 @@ const ProfilesAdmin = () => {
                 }
               }}
             /> */}
-            <Button onClick={handleChange} sx={{ backgroundColor: '#6C94F8', marginLeft: '10px', marginRight: '10px' }} variant="contained" size='small'>
+            <Button onClick={handleChange} sx={{ backgroundColor: '#6C94F8', marginRight: '10px' }} variant="contained" size='small'>
               Log out
             </Button>
           </Grid>

@@ -55,7 +55,7 @@ function Sidebar({ isOpen, toggleSidebar }) {
                         <BsPersonVcardFill className='icon' /> Employees
                     </li>
                 </Link>
-                <Link to="/" className='tonavigate'>
+                <Link to="/jl" className='tonavigate'>
                     <li className='sidebar-list-item'>
                         <BiDetail className='icon' /> Job Details
                     </li>

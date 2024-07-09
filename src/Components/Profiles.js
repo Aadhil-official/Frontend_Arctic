@@ -114,7 +114,7 @@ export default function MenuAppBar() {
                 }
               }}
             /> */}
-            <Button onClick={handleChange} sx={{ backgroundColor: '#6C94F8', marginTop: '15px',marginLeft:'10px',marginLeft:'10px' }} variant="contained" size='small'>
+            <Button onClick={handleChange} sx={{ backgroundColor: '#6C94F8', marginTop: '15px',marginLeft:'10px',marginRight:'10px' }} variant="contained" size='small'>
               Log out
             </Button>
           </Grid>

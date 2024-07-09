@@ -8,7 +8,7 @@ import {
   Typography,
   Box,
   TextField,
-  
+
   Table,
   TableBody,
   TableCell,
@@ -19,15 +19,25 @@ import {
   InputAdornment,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useUser } from '../../Context/UserContext';
+import { FooterIn } from '../../Components';
+import NormalHeaderIn from '../../Components/NormalHeaderIn';
+import Sidebar from '../../Components/Calendar/Sidebar';
+import SidebarCom from '../../Components/SideBarCom';
 
 const JobListnew = () => {
+
+  const { tempdata } = useUser();
+
   const [jobs, setJobs] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterOption, setFilterOption] = useState('customername');
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [editJobId, setEditJobId] = useState(null);
   const [editJobData, setEditJobData] = useState({});
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const navigate = useNavigate();
 
   // Fetch jobs data
@@ -114,169 +124,194 @@ const JobListnew = () => {
     }));
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <Box>
-      {/* Title */}
-      <Grid container textAlign='center' justifyContent='center'>
-        <Grid item xl={12} lg={12} md={12} xs={12} sm={12}>
-          <div className="title">
-            <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Job List</Typography>
-          </div>
-        </Grid>
-      </Grid>
+    <>
+      <NormalHeaderIn toggleSidebar={toggleSidebar} />
+      {/* {tempdata.usergroup === 'AdminGroup' && <br/>} */}
+      {tempdata.usergroup === 'AdminGroup' && <Sidebar
+        isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}
+      />}
+      {tempdata.usergroup !== 'AdminGroup' && <SidebarCom
+        isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />}
+      <div className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
 
-      {/* Search and Filter */}
-      <Grid container spacing={2} alignItems="center" justifyContent="center" mt={2}>
-        <Grid item>
-          <TextField
-            variant="outlined"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-       
-      </Grid>
 
-      {/* Add Job Button */}
-      <Grid container justifyContent='center' spacing={2} style={{ marginTop: '20px' }}>
-        <Grid item>
-          <Button variant="contained" endIcon={<AddIcon />} onClick={handleAddJob}>Add a new job</Button>
-        </Grid>
-      </Grid>
+        <Box>
+          {/* Title */}
 
-      {/* Job List Table */}
-      <TableContainer component={Paper} mt={4}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Job ID</TableCell>
-              <TableCell>Customer Name</TableCell>
-              <TableCell>Date</TableCell>
-              <TableCell>Vehicle Number</TableCell>
-              <TableCell>Team Members</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredJobs.map((job) => (
-              <TableRow key={job.id}>
-                <TableCell>{job.id}</TableCell>
-                <TableCell>
-                  {editJobId === job.id ? (
-                    <TextField
-                      name="customerName"
-                      value={editJobData.customerName}
-                      onChange={handleEditInputChange}
-                    />
-                  ) : (
-                    job.customerName
-                  )}
-                </TableCell>
-                <TableCell>
-                  {editJobId === job.id ? (
-                    <TextField
-                      name="date"
-                      value={editJobData.date}
-                      onChange={handleEditInputChange}
-                    />
-                  ) : (
-                    job.date
-                  )}
-                </TableCell>
-                <TableCell>
-                  {editJobId === job.id ? (
-                    <TextField
-                      name="vehicleNumber"
-                      value={editJobData.vehicleNumber}
-                      onChange={handleEditInputChange}
-                    />
-                  ) : (
-                    job.vehicleNumber
-                  )}
-                </TableCell>
-                <TableCell>
-                  {editJobId === job.id ? (
-                    <TextField
-                      name="teamMembers"
-                      value={editJobData.teamMembers}
-                      onChange={handleEditInputChange}
-                    />
-                  ) : (
-                    job.teamMembers
-                  )}
-                </TableCell>
-                <TableCell>
-                  {editJobId === job.id ? (
-                    <TextField
-                      name="status"
-                      value={editJobData.status}
-                      onChange={handleEditInputChange}
-                    />
-                  ) : (
-                    job.status
-                  )}
-                </TableCell>
-                <TableCell>
-                  {editJobId === job.id ? (
-                    <>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleSaveJob}
-                      >
-                        Save
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={handleCancelEdit}
-                        style={{ marginLeft: '10px' }}
-                      >
-                        Cancel
-                      </Button>
-                    </>
-                  ) : (
-                    <>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleEditJob(job.id)}
-                      >
-                        Edit
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={() => handleDeleteJob(job.id)}
-                        style={{ marginLeft: '10px' }}
-                      >
-                        Delete
-                      </Button>
-                    </>
-                  )}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          <Grid container>
+            <Grid item position='fixed'>
+              <Link to={tempdata.usergroup === "AdminGroup" ? "/base/dashboard" : "/login/welcomeadmin"}>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+                  style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }}
+                  alt='Back'
+                />
+              </Link>
+            </Grid>
+          </Grid>
 
-      {/* Footer */}
-      <div className="footer">
-        <div className="footer-text">
-          <center>© 2023 - All Rights Reserved</center>
-        </div>
+          <Grid container textAlign='center' justifyContent='center'>
+            <Grid item xl={12} lg={12} md={12} xs={12} sm={12}>
+              <div className="title">
+                <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Job List</Typography>
+              </div>
+            </Grid>
+          </Grid>
+
+          {/* Search and Filter */}
+          <Grid container spacing={2} alignItems="center" justifyContent="center" mt={2}>
+            <Grid item>
+              <TextField
+                variant="outlined"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+
+          </Grid>
+
+          {/* Add Job Button */}
+          <Grid container justifyContent='center' spacing={2} style={{ marginTop: '20px' }}>
+            <Grid item>
+              <Button variant="contained" endIcon={<AddIcon />} onClick={handleAddJob}>Add a new job</Button>
+            </Grid>
+          </Grid>
+
+          {/* Job List Table */}
+          <TableContainer component={Paper} mt={4}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Job ID</TableCell>
+                  <TableCell>Customer Name</TableCell>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Vehicle Number</TableCell>
+                  <TableCell>Team Members</TableCell>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Actions</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {filteredJobs.map((job) => (
+                  <TableRow key={job.id}>
+                    <TableCell>{job.id}</TableCell>
+                    <TableCell>
+                      {editJobId === job.id ? (
+                        <TextField
+                          name="customerName"
+                          value={editJobData.customerName}
+                          onChange={handleEditInputChange}
+                        />
+                      ) : (
+                        job.customerName
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {editJobId === job.id ? (
+                        <TextField
+                          name="date"
+                          value={editJobData.date}
+                          onChange={handleEditInputChange}
+                        />
+                      ) : (
+                        job.date
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {editJobId === job.id ? (
+                        <TextField
+                          name="vehicleNumber"
+                          value={editJobData.vehicleNumber}
+                          onChange={handleEditInputChange}
+                        />
+                      ) : (
+                        job.vehicleNumber
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {editJobId === job.id ? (
+                        <TextField
+                          name="teamMembers"
+                          value={editJobData.teamMembers}
+                          onChange={handleEditInputChange}
+                        />
+                      ) : (
+                        job.teamMembers
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {editJobId === job.id ? (
+                        <TextField
+                          name="status"
+                          value={editJobData.status}
+                          onChange={handleEditInputChange}
+                        />
+                      ) : (
+                        job.status
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {editJobId === job.id ? (
+                        <>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleSaveJob}
+                          >
+                            Save
+                          </Button>
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={handleCancelEdit}
+                            style={{ marginLeft: '10px' }}
+                          >
+                            Cancel
+                          </Button>
+                        </>
+                      ) : (
+                        <>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => handleEditJob(job.id)}
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={() => handleDeleteJob(job.id)}
+                            style={{ marginLeft: '10px' }}
+                          >
+                            Delete
+                          </Button>
+                        </>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
+
+        <FooterIn />
       </div>
-    </Box>
+    </>
   );
 };
 

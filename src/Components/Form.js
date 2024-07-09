@@ -30,7 +30,7 @@ export default function FormPropsTextFields() {
     { label: 'Vehicle Details', link: '/login/welcomeadmin/vehicleListAd' },
     { label: 'Customer Details', link: '/login/welcomeadmin/customerListAd' },
     { label: 'User Group Details', link: '/login/welcomeadmin/userGroupListAd' },
-    { label: 'Job Details' },
+    { label: 'Job Details', link: '/jl' },
     { label: 'Calendar', link: '/base/calendar' },
     { label: 'Set Reminder', link: '/base/reminder' },
     { label: 'Service Agreement Details', link: '/ServiceAgreementSix' },
@@ -44,7 +44,7 @@ export default function FormPropsTextFields() {
     { label: 'Vehicle Details', link: '/login/welcome/vehicleList' },
     { label: 'Customer Details', link: '/login/welcome/customerList' },
     { label: 'User Group Details', link: '/login/welcome/userGroupList' },
-    { label: 'Job Details' },
+    { label: 'Job Details', link: '/jln' },
     { label: 'Calendar', link: '/base/calendarEmp' },
     { label: 'Service Agreement Details', link: '/ServiceAgreementFive' },
     { label: 'Site Visit Details', link: '/SiteVisitFourEmployee' },
@@ -77,20 +77,26 @@ export default function FormPropsTextFields() {
           // }
 
           const role = tempdata1.userInfo.roles[0]; // This will be 'ADMIN'
-
           if (role === 'ADMIN' && tempdata.usergroup === "AdminGroup") {
             setButtonData(buttonDataAd);
-            navigate('/base/dashboard');
             success('Login successful!');
-          } else if (role === 'ADMIN') {
+            setTimeout(() => {
+                navigate('/base/dashboard');
+            }, 1000); // 1 second delay
+        } else if (role === 'ADMIN') {
             setButtonData(buttonDataAd);
-            navigate('/login/welcomeadmin');
             success('Login successful!');
-          } else {
+            setTimeout(() => {
+                navigate('/login/welcomeadmin');
+            }, 1000); // 1 second delay
+        } else {
             setButtonData(buttonDataEmp);
-            navigate('/login/welcome');
             success('Login successful!');
-          }
+            setTimeout(() => {
+                navigate('/login/welcome');
+            }, 1000); // 1 second delay
+        }
+                
         })
         .catch(() => {
           dismiss(loadingId);

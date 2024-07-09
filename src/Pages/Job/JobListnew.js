@@ -19,7 +19,10 @@ import {
   InputAdornment,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { FooterIn } from '../../Components';
+import NormalHeaderIn from '../../Components/NormalHeaderIn';
+import SidebarCom from '../../Components/SideBarCom';
 
 const JobListnew = () => {
   const [jobs, setJobs] = useState([]);
@@ -28,6 +31,8 @@ const JobListnew = () => {
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [editJobId, setEditJobId] = useState(null);
   const [editJobData, setEditJobData] = useState({});
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const navigate = useNavigate();
 
   // Fetch jobs data
@@ -117,125 +122,148 @@ const JobListnew = () => {
     }));
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
-    <Box>
-      {/* Title */}
-      <Grid container textAlign='center' justifyContent='center'>
-        <Grid item xl={12} lg={12} md={12} xs={12} sm={12}>
-          <div className="title">
-            <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Job List</Typography>
-          </div>
-        </Grid>
-      </Grid>
+    <>
+      <NormalHeaderIn toggleSidebar={toggleSidebar} />
+      <SidebarCom
+        isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}
+      />
 
-      {/* Search and Filter */}
-      <Grid container spacing={2} alignItems="center" justifyContent="center" mt={2}>
-        <Grid item>
-          <TextField
-            variant="outlined"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Grid>
-        
-      </Grid>
+      <div className={`content ${isSidebarOpen ? 'shifted' : ''}`}>
+
+        <Box>
+          {/* Title */}
+          <Grid container spacing={2}>
+            <Grid item position='fixed'>
+              <Link to={"/login/welcome"}>
+                <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" style={{ width: '40px', height: '40px', opacity: '0.6', margin: '5px' }} alt='Back' />
+              </Link>
+            </Grid>
+          </Grid>
+
+          <Grid container textAlign='center' justifyContent='center'>
+            <Grid item xl={12} lg={12} md={12} xs={12} sm={12}>
+              <div className="title">
+                <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Job List</Typography>
+              </div>
+            </Grid>
+          </Grid>
+
+          {/* Search and Filter */}
+          <Grid container spacing={2} alignItems="center" justifyContent="center" mt={2}>
+            <Grid item>
+              <TextField
+                variant="outlined"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+
+          </Grid>
 
 
-      {/* Job List Table */}
-      <TableContainer component={Paper} mt={4}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Job ID</TableCell>
-              <TableCell>Customer Name</TableCell>
-              <TableCell>Date</TableCell>
-              <TableCell>Vehicle Number</TableCell>
-              <TableCell>Team Members</TableCell>
-              <TableCell>Status</TableCell>
-             
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredJobs.map((job) => (
-              <TableRow key={job.id}>
-                <TableCell>{job.id}</TableCell>
-                <TableCell>
-                  {editJobId === job.id ? (
-                    <TextField
-                      name="customerName"
-                      value={editJobData.customerName}
-                      onChange={handleEditInputChange}
-                    />
-                  ) : (
-                    job.customerName
-                  )}
-                </TableCell>
-                <TableCell>
-                  {editJobId === job.id ? (
-                    <TextField
-                      name="date"
-                      value={editJobData.date}
-                      onChange={handleEditInputChange}
-                    />
-                  ) : (
-                    job.date
-                  )}
-                </TableCell>
-                <TableCell>
-                  {editJobId === job.id ? (
-                    <TextField
-                      name="vehicleNumber"
-                      value={editJobData.vehicleNumber}
-                      onChange={handleEditInputChange}
-                    />
-                  ) : (
-                    job.vehicleNumber
-                  )}
-                </TableCell>
-                <TableCell>
-                  {editJobId === job.id ? (
-                    <TextField
-                      name="teamMembers"
-                      value={editJobData.teamMembers}
-                      onChange={handleEditInputChange}
-                    />
-                  ) : (
-                    job.teamMembers
-                  )}
-                </TableCell>
-                <TableCell>
-                  {editJobId === job.id ? (
-                    <TextField
-                      name="status"
-                      value={editJobData.status}
-                      onChange={handleEditInputChange}
-                    />
-                  ) : (
-                    job.status
-                  )}
-                </TableCell>
-              
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          {/* Job List Table */}
+          <TableContainer component={Paper} mt={4}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Job ID</TableCell>
+                  <TableCell>Customer Name</TableCell>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Vehicle Number</TableCell>
+                  <TableCell>Team Members</TableCell>
+                  <TableCell>Status</TableCell>
 
-      {/* Footer */}
-      <div className="footer">
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {filteredJobs.map((job) => (
+                  <TableRow key={job.id}>
+                    <TableCell>{job.id}</TableCell>
+                    <TableCell>
+                      {editJobId === job.id ? (
+                        <TextField
+                          name="customerName"
+                          value={editJobData.customerName}
+                          onChange={handleEditInputChange}
+                        />
+                      ) : (
+                        job.customerName
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {editJobId === job.id ? (
+                        <TextField
+                          name="date"
+                          value={editJobData.date}
+                          onChange={handleEditInputChange}
+                        />
+                      ) : (
+                        job.date
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {editJobId === job.id ? (
+                        <TextField
+                          name="vehicleNumber"
+                          value={editJobData.vehicleNumber}
+                          onChange={handleEditInputChange}
+                        />
+                      ) : (
+                        job.vehicleNumber
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {editJobId === job.id ? (
+                        <TextField
+                          name="teamMembers"
+                          value={editJobData.teamMembers}
+                          onChange={handleEditInputChange}
+                        />
+                      ) : (
+                        job.teamMembers
+                      )}
+                    </TableCell>
+                    <TableCell>
+                      {editJobId === job.id ? (
+                        <TextField
+                          name="status"
+                          value={editJobData.status}
+                          onChange={handleEditInputChange}
+                        />
+                      ) : (
+                        job.status
+                      )}
+                    </TableCell>
+
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+          {/* Footer */}
+          {/* <div className="footer">
         <div className="footer-text">
           <center>© 2023 - All Rights Reserved</center>
         </div>
-      </div>
-    </Box>
+      </div> */}
+        </Box>
+        <FooterIn />
+      </div >
+    </>
   );
 };
 
