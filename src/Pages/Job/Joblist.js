@@ -42,7 +42,7 @@ const JobListnew = () => {
 
   // Fetch jobs data
   useEffect(() => {
-    axios.get('http://localhost:8080/api/displayJob')
+    axios.get('http://localhost:8080/api/displayJob/getList')
       .then(response => {
         setJobs(response.data);
         setFilteredJobs(response.data);
