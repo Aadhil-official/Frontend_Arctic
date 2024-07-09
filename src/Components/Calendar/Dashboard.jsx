@@ -28,7 +28,7 @@ function Home() {
 
     useEffect(() => {
         
-        axios.get('http://localhost:8080/counts')
+        axios.get('http://localhost:8080/api/auth/Counts')
         .then(response => {
             setCounts(response.data);
         })
@@ -37,7 +37,7 @@ function Home() {
         });
          
         
-        axios.get('http://localhost:8080/visits')
+        axios.get('http://localhost:8080/api/auth/getVisits')
         .then(response => {
             console.log('Visits Counts Data:', response.data); // Debugging
             setVisitsCounts(response.data);
@@ -46,7 +46,7 @@ function Home() {
             console.error('Error fetching visits counts:', error);
         });
 
-        axios.get('http://localhost:8080/jobs')
+        axios.get('http://localhost:8080/api/auth/jobCurrent')
             .then(response => {
                 setJob_type(response.data);
             })

@@ -30,7 +30,7 @@ if (reminderTime <= currentTime) {
 }
 
     const reminder = { email, title, startTime, endTime, reminderTime };
-    await axios.post('http://localhost:8080/api/reminders', reminder);
+    await axios.post('http://localhost:8080/api/auth/createReminder', reminder);
     alert('Reminder set!');
     window.location.reload();
 
