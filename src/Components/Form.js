@@ -79,10 +79,10 @@ export default function FormPropsTextFields() {
           const role = tempdata1.userInfo.roles[0]; // This will be 'ADMIN'
           if (role === 'ADMIN' && tempdata.usergroup === "AdminGroup") {
             setButtonData(buttonDataAd);
-            success('Login successful!');
             setTimeout(() => {
-              navigate('/base/dashboard');
+              success('Login successful!');
             }, 1000); // 1 second delay
+            navigate('/base/dashboard');
           } else if (role === 'ADMIN') {
             setButtonData(buttonDataAd);
             success('Login successful!');
@@ -142,7 +142,7 @@ export default function FormPropsTextFields() {
           fullWidth
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-        /><br/>
+        /><br />
 
         <TextField
           label="Password"

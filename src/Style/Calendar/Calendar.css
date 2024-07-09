@@ -1,9 +1,10 @@
 /* Ensure FullCalendar container takes full width but limits the max width */
 .fc {
   width: 100%;
-  max-width: 1200px; /* Adjust this value as needed */
+  max-width: 1200px;
+  /* Adjust this value as needed */
   height: 90vh;
-  color: black ;
+  color: black;
   text-align: center;
   margin-top: 50px;
   margin-left: auto;
@@ -21,7 +22,7 @@ body {
   flex-direction: column;
   height: 100vh;
   text-align: center;
-  align-items: center; 
+  align-items: center;
 }
 
 .headerToolbar {
@@ -94,8 +95,10 @@ body {
 .eventdetails {
   margin-bottom: 20px;
   margin-top: 20px;
-  width: 80%; /* Adjust width */
-  margin: 0 auto; /* Center horizontally */
+  width: 80%;
+  /* Adjust width */
+  margin: 0 auto;
+  /* Center horizontally */
 }
 
 /* Center button containers */
