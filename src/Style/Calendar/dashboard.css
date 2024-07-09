@@ -343,3 +343,11 @@ padding: 20px;
 .content.shifted {
 margin-left: 250px; /* Width of the sidebar */
 }
+
+.contentmy {
+  transition: margin-left 0.3s;
+  }
+  
+  .contentmy.shifted {
+  margin-left: 240px; /* Width of the sidebar */
+  }

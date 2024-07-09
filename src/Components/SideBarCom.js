@@ -3,6 +3,7 @@ import { BsPersonCircle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { IoIosCloseCircle } from "react-icons/io";
 import { useUser } from '../Context/UserContext';
+import '../Style/Component/Sidebar.css'
 
 function SidebarCom({ isOpen, toggleSidebar }) {
 
