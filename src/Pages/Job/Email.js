@@ -16,7 +16,7 @@ const Email = () => {
     };
 
     // Send email
-    const response = await fetch('http://localhost:8080/email/send', {
+    const response = await fetch('http://localhost:8080/api/auth/email/send', {
       method: 'POST',
       headers: {
         'Accept': '*/*',

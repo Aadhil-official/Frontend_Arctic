@@ -11,7 +11,7 @@ export default function JobAllocationCard() {
 
   // Fetch data from API
   useEffect(() => {
-    axios.get('your-api-endpoint')
+    axios.get('')
       .then(response => {
         const apiData = response.data.rows.map((row, index) => ({ id: index, ...row }));
 
