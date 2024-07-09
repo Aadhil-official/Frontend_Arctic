@@ -126,7 +126,7 @@ function SiteVisitDetails() {
                 fontSize: "18px",
               }}
             >
-              You can edit Vehicle Number, Location, Group name, Schedule date &
+              You can edit Vehicle Number, Location, Schedule date &
               Time details only
             </Typography>
           </ThemeProvider>

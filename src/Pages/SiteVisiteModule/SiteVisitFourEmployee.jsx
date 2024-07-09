@@ -274,20 +274,7 @@ const SiteVisitFourEmployee = () => {
                     End
                   </Button>
                 </Grid>
-                {/* <Grid item xs={12} sm={2}>
-                  <Button
-                    variant="outlined"
-                    sx={{
-                      width: '100%',
-                      //backgroundColor: canceledVisits.includes(visit.visitId) ? '#6C94F8' : undefined,
-                      //color: canceledVisits.includes(visit.visitId) ? 'white' : undefined,
-                    }}
-                    onClick={() => handleCancelVisit(visit.visitId, visit)}
-                    disabled={canceledVisits.includes(visit.visitId)}
-                  >
-                    Feed Back Form
-                  </Button>
-                </Grid> */}
+                
               </Grid>
             ))}
           </Box>
