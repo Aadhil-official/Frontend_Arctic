@@ -1,0 +1,34 @@
+/*footer text*/
+.footer-text{
+    color: white;
+    position: absolute;
+  margin-left: 40%;
+  margin-bottom: 30px;
+  font-family: 'calibri', Times, serif !important;
+  }
+  
+  .footer {
+    background: linear-gradient(to bottom, rgba(31, 127, 237, 0.758), rgb(3, 27, 65));
+    list-style: none;
+    height: 80px; 
+    width:100%;
+    color: white;
+    display: flex;
+    align-items: center; 
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+
+  .Button{
+    margin-left: 700px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .Left{
+    float: left;
+  }
+  .Right{
+    float: right;
+  }
