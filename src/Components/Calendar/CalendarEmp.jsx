@@ -17,7 +17,7 @@ export default function Calendar({ selectedDate }) {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const internalEvents = await axios.get('http://localhost:8080/events');
+                const internalEvents = await axios.get('http://localhost:8080/api/auth/events');
                 const externalEvents = await fetchExternalEvents();
                 const agreementEvents = await fetchAgreementEvents();
                 setEvents([...internalEvents.data, ...externalEvents, ...agreementEvents]);
@@ -38,7 +38,7 @@ export default function Calendar({ selectedDate }) {
 
     const fetchExternalEvents = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/job');
+            const response = await axios.get('http://localhost:8080/api/auth/jobEvents');
             return response.data.map(externalEvent => ({
                 id: `external-${externalEvent.id}`,
                 title: externalEvent.companyName,
@@ -55,7 +55,7 @@ export default function Calendar({ selectedDate }) {
 
     const fetchAgreementEvents = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/aggrements');
+            const response = await axios.get('http://localhost:8080/api/auth/getAgreementEvent');
             return response.data.map(agreementEvent => ({
                 id: `agreement-${agreementEvent.id}`,
                 title: agreementEvent.companyName,

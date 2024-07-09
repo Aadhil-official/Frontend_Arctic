@@ -20,7 +20,7 @@ function Create() {
   useEffect(() => {
     const getEvents = async () => {
       try {
-        const response = await axios.get('/events');
+        const response = await axios.get('/api/auth/events');
         setEvents(response.data);
       } catch (error) {
         console.error(error);

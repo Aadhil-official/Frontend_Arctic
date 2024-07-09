@@ -34,7 +34,7 @@ export default function Calendar({ selectedDate }) {
 
     const fetchExternalEvents = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/job');
+            const response = await axios.get('http://localhost:8080/api/auth/jobEvents');
             return response.data.map(externalEvent => ({
                 id: `external-${externalEvent.id}`,
                 title: `${externalEvent.companyName}`,
@@ -51,7 +51,7 @@ export default function Calendar({ selectedDate }) {
 
     const fetchAgreementEvents = useCallback(async () => {
         try {
-            const response = await axios.get('http://localhost:8080/aggrements');
+            const response = await axios.get('http://localhost:8080/api/auth/getAgreementEvent');
             return response.data.map(agreementEvent => {
                 const rrule = generateAgreementRrule(agreementEvent.type, agreementEvent.date);
                 return {
@@ -73,7 +73,7 @@ export default function Calendar({ selectedDate }) {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const internalEvents = await axios.get('http://localhost:8080/events');
+                const internalEvents = await axios.get('http://localhost:8080/api/auth/events');
                 const externalEvents = await fetchExternalEvents();
                 const agreementEvents = await fetchAgreementEvents();
                 setEvents([...internalEvents.data, ...externalEvents, ...agreementEvents]);
@@ -179,7 +179,7 @@ export default function Calendar({ selectedDate }) {
                 rrule: recurrenceFrequency !== 'none' ? generateInternalEventRrule(recurrenceFrequency, startTime) : null,
             };
 
-            const response = await axios.post('http://localhost:8080/events', newEvent);
+            const response = await axios.post('http://localhost:8080/api/auth/addEvent', newEvent);
             setEvents(prevEvents => [...prevEvents, response.data]); // Update events state correctly
             setShowEventModal(false);
             setEventDetails('');
@@ -212,7 +212,7 @@ export default function Calendar({ selectedDate }) {
 
             };
 
-            await axios.put(`http://localhost:8080/events/${currentEvent.id}`, updatedEvent);
+            await axios.put(`http://localhost:8080/api/auth/updateEvent/${currentEvent.id}`, updatedEvent);
             setEvents(events.map(event => (event.id === currentEvent.id ? updatedEvent : event)));
             setShowEventModal(false);
             setCurrentEvent(null);
@@ -228,7 +228,7 @@ export default function Calendar({ selectedDate }) {
         }
 
         try {
-            await axios.delete(`http://localhost:8080/events/${currentEvent.id}`);
+            await axios.delete(`http://localhost:8080/api/auth/deleteEvent/${currentEvent.id}`);
             setEvents(events.filter(event => event.id !== currentEvent.id));
             setShowEventModal(false);
             setCurrentEvent(null);
