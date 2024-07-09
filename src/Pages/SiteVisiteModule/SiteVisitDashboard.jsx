@@ -137,7 +137,7 @@ const SiteVisitDashboard = () => {
 
 
 
-                        <h1 style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '5rem', color: '#0056b3', marginTop: '20px' }}>
+                        <h1 style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '5rem', color: '#0056b3', marginTop: '20px'}}>
                             Site Visit - Admin </h1>
                     </div>
                 </Paper>
@@ -199,6 +199,7 @@ const SiteVisitDashboard = () => {
                     </div>
                 </Paper>
 
+                <br></br>
                 <br></br>
                 <br></br>
                 {/* <Footer/> */}
