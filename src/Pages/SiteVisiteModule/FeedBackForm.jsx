@@ -12,6 +12,13 @@ function FeedbackForm() {
   // const location = useLocation();
 
   const [feedback, setFeedback] = useState('');
+  // const [groupName, setGroupName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [jobType, setJobType] = useState('');
+  // const [location, setLocation] = useState('');
+  // const [scheduleDate, setScheduleDate] = useState('');
+  // const [selectedTime, setSelectedTime] = useState('');
+  // const [vehicleNumber, setVehicleNumber] = useState('');
   const [visitDetails, setVisitDetails] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -41,8 +48,16 @@ function FeedbackForm() {
     try {
       // Assuming you have an endpoint to save feedback
       const response = await axios.post(`http://localhost:8080/api/auth/feedBack/saveFeedback`, {
-        visitId: visitDetails.visitId,
-        feedback: feedback
+
+        email: visitDetails.email,
+        feedback: feedback,
+        groupName: visitDetails.groupName,
+        jobType: visitDetails.jobType,
+        location: visitDetails.location,
+        scheduleDate: visitDetails.scheduleDate,
+        selectedTime: visitDetails.selectedTime,
+        vehicleNumber: visitDetails.vehicleNumber,
+        visitId: visitDetails.visitId
       });
       console.log(response.data); // Log the response from MongoDB
       alert('Feedback submitted successfully!');
@@ -65,14 +80,16 @@ function FeedbackForm() {
       <Grid container justifyContent="center">
         <Grid item xs={12} textAlign="center">
           <Link to={"/SiteVisitFourEmployee"}>
-          <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" 
-            style={{ width: '40px', 
-            height: '40px', 
-            opacity: '0.6', 
-            margin: '15px', 
-            float:'left',
-            left: '10px', 
-            top: '10px' }} alt='Back' />         </Link>
+            <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png"
+              style={{
+                width: '40px',
+                height: '40px',
+                opacity: '0.6',
+                margin: '15px',
+                float: 'left',
+                left: '10px',
+                top: '10px'
+              }} alt='Back' />         </Link>
         </Grid>
       </Grid>
 

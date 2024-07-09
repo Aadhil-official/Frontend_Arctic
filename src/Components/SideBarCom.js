@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 import { BsPersonCircle } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoIosCloseCircle } from "react-icons/io";
 import { useUser } from '../Context/UserContext';
 import { createTheme } from '@mui/system';
 import { responsiveFontSizes, Typography } from '@mui/material';
 import { ThemeProvider } from 'styled-components';
+import { FaSignOutAlt } from 'react-icons/fa';
+import axios from 'axios';
+import { success } from '../util/Toastify';
+import { RiLogoutBoxFill } from 'react-icons/ri';
 
 
 // import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsPersonVcardFill } from 'react-icons/bs';
@@ -19,12 +23,29 @@ function SidebarCom({ isOpen, toggleSidebar }) {
 
     const { tempdataGroup, buttonData, tempdata } = useUser();
 
+    const navigate = useNavigate();
     // console.log("Button Data:", buttonData);
 
     useEffect(() => {
         console.log("SidebarCom mounted or updated");
         console.log("Button Data:", buttonData);
     }, [buttonData]);
+
+    const handleChange = async () => {
+        // console.log("Switch toggled");
+        // setChecked(event.target.checked);
+        // if (!event.target.checked) {
+        // setTimeout(async () => {
+        try {
+            await axios.post('http://localhost:8080/api/auth/signout', { checked: false });
+            success("Signed out!");
+            navigate('/');
+        } catch (error) {
+            console.error('Sign out error:', error);
+        }
+        // }, 500); // 500ms delay
+        // }
+    };
 
     const privilegeToButtonLabel = {
         createUser: ['/signup'],
@@ -98,6 +119,9 @@ function SidebarCom({ isOpen, toggleSidebar }) {
                                 </li>
                             </Link>
                         ))}
+                        <li className='sidebar-list-item' style={{ color: 'black' }} onClick={handleChange}>
+                            <RiLogoutBoxFill className='icon' /> Sign out
+                        </li>
                     </ul>
                 </Typography>
             </ThemeProvider>
