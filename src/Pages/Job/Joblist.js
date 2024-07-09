@@ -113,7 +113,7 @@ const JobListnew = () => {
   };
 
   const handleAddJob = () => {
-    navigate('/nj');
+    navigate('/newJob');
   };
 
   const handleEditInputChange = (e) => {
