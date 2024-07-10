@@ -58,7 +58,7 @@
 .social {
   font-size: 18px;
   font-weight: medium;
-  font-style: italic;
+  /* font-style: italic; */
   color: rgb(9, 6, 110);
   margin-left: 10px;
 }

@@ -23,7 +23,7 @@ export default function Header({ selectedDate, handleDatePickerChange, toggleSid
             {location.pathname === '/base/calendar' && (
                 <div className="pick">
                     <div className="date-picker-container">
-                        <label htmlFor="date-picker">Search:</label>
+                        <label htmlFor="date-picker" >Search:</label>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
                                 id="date-picker"

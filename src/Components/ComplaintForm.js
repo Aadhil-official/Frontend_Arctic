@@ -76,9 +76,10 @@ function ComplaintForm() {
       <Box
         component="form"
         sx={{
-          '& .MuiTextField-root': { m: 1, width: '25ch' },
+          '& .MuiTextField-root': { m: 1 },
           textAlign: 'center',
-          mt: 3
+          mt: 3,
+          marginRight:2
         }}
         noValidate
         autoComplete="off"
@@ -87,6 +88,7 @@ function ComplaintForm() {
           id="subject"
           label="Subject"
           type='text'
+          fullWidth
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
         />
@@ -105,6 +107,7 @@ function ComplaintForm() {
           label="Complaints"
           type='text'
           value={object}
+          fullWidth
           // id="outlined-required"
           // value={roles}
           onChange={(e) => setObject(e.target.value)}

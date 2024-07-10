@@ -47,8 +47,8 @@ function SidebarCom({ isOpen, toggleSidebar }) {
     };
 
     const privilegeToButtonLabel = {
-        createUser: ['/signup'],
-        complain: ['/login/complaintread'],
+        complain: ['Complaints'],
+        createUser: ['Create user'],
         accessEmployee: ['Employee Details'],
         accessItem: ['Item Details'],
         accessUnit: ['Unit Details'],

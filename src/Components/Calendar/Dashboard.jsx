@@ -10,6 +10,7 @@ import { HiMiniUserGroup } from "react-icons/hi2";
 import { FaBuilding } from "react-icons/fa6";
 import { SiTestcafe } from "react-icons/si";
 import '../../Style/Calendar/dashboard.css';
+import FooterIn from '../FooterIn';
 
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
@@ -27,24 +28,24 @@ function Home() {
     };
 
     useEffect(() => {
-        
+
         axios.get('http://localhost:8080/api/auth/Counts')
-        .then(response => {
-            setCounts(response.data);
-        })
-        .catch(error => {
-            console.error('Error fetching counts:', error);
-        });
-         
-        
+            .then(response => {
+                setCounts(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching counts:', error);
+            });
+
+
         axios.get('http://localhost:8080/api/auth/getVisits')
-        .then(response => {
-            console.log('Visits Counts Data:', response.data); // Debugging
-            setVisitsCounts(response.data);
-        })
-        .catch(error => {
-            console.error('Error fetching visits counts:', error);
-        });
+            .then(response => {
+                console.log('Visits Counts Data:', response.data); // Debugging
+                setVisitsCounts(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching visits counts:', error);
+            });
 
         axios.get('http://localhost:8080/api/auth/jobCurrent')
             .then(response => {
@@ -55,7 +56,7 @@ function Home() {
             });
     }, []);
 
-    
+
     const visitData = {
         labels: Object.keys(visitsCounts),
         datasets: [
@@ -107,17 +108,17 @@ function Home() {
             animateScale: true,
             animateRotate: true,
         },
-        radius: 150, 
-        cutout: '25%', 
-        hoverOffset: 20, 
+        radius: 150,
+        cutout: '25%',
+        hoverOffset: 20,
         elements: {
             arc: {
                 borderWidth: 5, // Border width for the arcs     
-                          
+
             }
         }
     };
-    
+
 
     return (
         <main className='main-container'>
@@ -186,14 +187,14 @@ function Home() {
                 </div>
 
             </div>
-            
+
 
             <div className='chart-container'>
-                
+
                 <div className='chart-inner'>
                     <h3 className='pieTopic'>NO OF SITE VISITS: {getCurrentMonthName()} </h3>
                     <Pie data={visitData} options={options} />
-                    <SiTestcafe className='img1'/>
+                    <SiTestcafe className='img1' />
                 </div>
 
                 <div className='chart-inner'>
@@ -202,6 +203,7 @@ function Home() {
                     <BiDetail className='img2' />
                 </div>
             </div>
+            <FooterIn />
         </main>
     );
 }

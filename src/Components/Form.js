@@ -77,25 +77,25 @@ export default function FormPropsTextFields() {
           // }
 
           const role = tempdata1.userInfo.roles[0]; // This will be 'ADMIN'
-          if (role === 'ADMIN' && tempdata.usergroup === "AdminGroup") {
+          if (tempdata.usergroup === "AdminGroup" && role === 'ADMIN') {
             setButtonData(buttonDataAd);
             setTimeout(() => {
               success('Login successful!');
             }, 1000); // 1 second delay
-            
+
             navigate('/base/dashboard');
           } else if (role === 'ADMIN') {
             setButtonData(buttonDataAd);
-            success('Login successful!');
             setTimeout(() => {
-              navigate('/login/welcomeadmin');
+              success('Login successful!');
             }, 1000); // 1 second delay
+            navigate('/login/welcomeadmin');
           } else {
             setButtonData(buttonDataEmp);
-            success('Login successful!');
             setTimeout(() => {
-              navigate('/login/welcome');
+              success('Login successful!');
             }, 1000); // 1 second delay
+            navigate('/login/welcome');
           }
 
         })
