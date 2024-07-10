@@ -126,8 +126,8 @@ function CustomerLis() {
                                     </Select>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={2} sm={2} md={4} lg={9} xl={10}></Grid>
-                            <Grid item xs={5} sm={5} md={4} lg={1.5} xl={1}>
+                            <Grid item xs={2} sm={2} md={4} lg={8} xl={10}></Grid>
+                            <Grid item xs={5} sm={5} md={4} lg={2.5} xl={1}>
                                 <TextField
                                     variant="outlined"
                                     InputProps={{

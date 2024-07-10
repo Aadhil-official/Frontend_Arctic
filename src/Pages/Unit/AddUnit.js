@@ -27,7 +27,7 @@ function AddUnit() {
             <Grid container className="text">
                 <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
                     <ThemeProvider theme={theme}>
-                        <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Add New Vehicle</Typography>
+                        <Typography variant='h3' sx={{ fontWeight: 'bold' }}>Add New Unit</Typography>
                     </ThemeProvider>
                 </Grid>
             </Grid>
@@ -35,7 +35,7 @@ function AddUnit() {
             <Grid container>
                 <ThemeProvider theme={theme}>
                     <Grid item xl={12} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
-                        <Typography variant='h6' sx={{ marginTop: '-25px' }}>Enter vehicle details</Typography>
+                        <Typography variant='h6' sx={{ marginTop: '-25px' }}>Enter unit details</Typography>
                     </Grid>
                 </ThemeProvider>
             </Grid>

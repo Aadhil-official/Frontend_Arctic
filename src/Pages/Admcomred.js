@@ -140,7 +140,7 @@ function Admcomred() {
         <Grid container position='absolute'>
           <Grid item xs={12} justifyContent='right' textAlign='right'>
             <Link to={'/login/complaintread/reviewedcomplain'} >{/*, tempdata,state={{ complaintdatasend, complaindata }} */}
-              <Button variant='contained' sx={{ margin: '5px' }}>
+              <Button variant='contained' sx={{ marginRight: '30px' }}>
                 Reviewed Complaints
               </Button>
             </Link>
