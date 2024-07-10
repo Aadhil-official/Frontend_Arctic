@@ -108,9 +108,9 @@ const AnewjobWireframe24 = () => {
 
   //Function to validate the form fields
   const validateForm = () => {
-    const phoneRegex = `/^[0-9]{10}$/`;
-    const emailRegex = `/^[^\s@]+@[^\s@]+\.[^\s@]+$/`;
-    const vehicleNumberRegex = `/^[A-Za-z0-9]{1,}$/`;
+    const phoneRegex = /^[0-9]{10}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const vehicleNumberRegex = /^[A-Za-z0-9]{1,}$/;
 
     if (!job.customerName || !job.customerPhone || !job.customerAddress || !selectedDate || !teamMembers[0].employeeName || !teamMembers[0].employeePhone || !teamMembers[0].employeeDesignation || !teamMembers[0].employeeEmail || !job.vehicleNumber || !job.invoiced) {
       setWarning('Please fill all required fields.');
