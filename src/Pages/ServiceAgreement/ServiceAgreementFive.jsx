@@ -68,7 +68,7 @@ const ServiceAgreementFive = () => {
         <Grid container spacing={5}>
           <Grid item xs={12}>
             <Box sx={{ textAlign: 'left' }}>
-              <Link to={"/"}>
+              <Link to={"/login/welcome"}>
               <img src="https://cdn-icons-png.flaticon.com/128/3031/3031796.png" 
             style={{ width: '40px', 
             height: '40px', 

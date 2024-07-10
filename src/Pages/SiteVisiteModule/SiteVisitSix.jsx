@@ -43,10 +43,13 @@ const SiteVisitSix = () => {
         return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
     });
 
+    // Reverse the order of site visits to show the most recent first
+    const reversedSiteVisits = filteredSiteVisits.reverse();
+
     // Pagination logic
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = filteredSiteVisits.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = reversedSiteVisits.slice(indexOfFirstItem, indexOfLastItem);
 
     // Change page function
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -58,7 +61,7 @@ const SiteVisitSix = () => {
 
     // Pagination component
     const renderPageNumbers = [];
-    for (let i = 1; i <= Math.ceil(filteredSiteVisits.length / itemsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(reversedSiteVisits.length / itemsPerPage); i++) {
         renderPageNumbers.push(
             <Button key={i} onClick={() => paginate(i)} sx={{ margin: '5px' }}>
                 {i}
