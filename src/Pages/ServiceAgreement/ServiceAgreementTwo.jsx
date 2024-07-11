@@ -76,7 +76,7 @@ function ServiceAgreementTwo() {
             {/* Subtitle */}
             <Grid container justifyContent="center" sx={{ paddingTop: '0rem' }}>
                 <Grid item>
-                    <h3 style={{ fontSize: '18px', color: '#547DD1', fontFamily: 'Franklin Gothic', }}>View Service Agreement Details</h3>
+                    <h3 style={{ fontSize: '18px', color: '#547DD1', fontFamily: 'Franklin Gothic', }}>You can edit Service Agreement start date and end date only </h3>
                 </Grid>
             </Grid>
 

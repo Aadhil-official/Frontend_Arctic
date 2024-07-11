@@ -76,6 +76,9 @@ export default function FormViewOne({ agreement }) {
                     type='text'
                     value={customerName}
                     onChange={handleChange(setCustomerName)}
+                    InputProps={{
+                        readOnly: true,
+                      }}
                 />
 
                 <TextField
@@ -83,6 +86,9 @@ export default function FormViewOne({ agreement }) {
                     type="text"
                     value={location}
                     onChange={handleChange(setLocation)}
+                    InputProps={{
+                        readOnly: true,
+                      }}
                 />
 
                 <TextField
@@ -90,6 +96,9 @@ export default function FormViewOne({ agreement }) {
                     type="text"
                     value={item}
                     onChange={handleChange(setItem)}
+                    InputProps={{
+                        readOnly: true,
+                      }}
                 />
 
                 <TextField
@@ -97,6 +106,9 @@ export default function FormViewOne({ agreement }) {
                     type='text'
                     value={agreementType}
                     onChange={handleChange(setAgreementType)}
+                    InputProps={{
+                        readOnly: true,
+                      }}
                 />
 
                 <TextField
@@ -104,6 +116,9 @@ export default function FormViewOne({ agreement }) {
                     type='text'
                     value={periodOfTheAgreement}
                     onChange={handleChange(setPeriodOfTheAgreement)}
+                    InputProps={{
+                        readOnly: true,
+                      }}
                 />
                 <TextField
                     label="Start Date"

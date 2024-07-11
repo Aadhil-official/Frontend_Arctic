@@ -73,11 +73,11 @@ export default function FormPropsTextFields() {
           //   localStorage.removeItem('jwtToken');
           //   // localStorage.setItem('jwtToken', token); // Store token in localStorage
           // } else {
-          //   console.error('No token found in response');
+            console.log('No token found in response',tempdata1.userInfo.roles[0]);
           // }
 
           const role = tempdata1.userInfo.roles[0]; // This will be 'ADMIN'
-          if (tempdata.usergroup === "AdminGroup" && role === 'ADMIN') {
+          if (role === 'ADMIN' && tempdata.usergroup === "AdminGroup" ) {
             setButtonData(buttonDataAd);
             setTimeout(() => {
               success('Login successful!');
@@ -93,9 +93,9 @@ export default function FormPropsTextFields() {
           } else {
             setButtonData(buttonDataEmp);
             setTimeout(() => {
+              navigate('/login/welcome');
               success('Login successful!');
             }, 1000); // 1 second delay
-            navigate('/login/welcome');
           }
 
         })
