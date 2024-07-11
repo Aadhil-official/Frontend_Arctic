@@ -42,7 +42,7 @@ export default function FormUpdate({ user }) {
             .catch((error) => {
                 console.error("Error fetching user groups:", error);
             });
-    }, [usergroup]);
+    }, [usergroupup]);
 
     // if (user) {
     //     console.log("user is there");
