@@ -13,6 +13,7 @@ function FormAddJob() {
     const [date, setDate] = useState(' ');
     const [teamMembers, setTeamMembers] = useState([]);
     const [newTeamMember, setNewTeamMember] = useState('');
+    const [customerNumber, setCustomerNumber] = useState('');
     const navigate = useNavigate();
 
     const handleSubmit = () => {
@@ -23,11 +24,13 @@ function FormAddJob() {
             status: z.string().min(1, { message: "Enter job status" }),
             teamMembers: z.array(z.string()).min(1, { message: "Team members can't be empty" }),
             customerName: z.string().min(1, { message: "Enter customer name" }),
-            date: z.string().date().min(1, { message: "Enter allocated jobs date" })
+            customerNumber: z.string().min(1, { message: "Enter customer name" }),
+            date: z.string().min(1, { message: "Enter allocated jobs date" })
         });
 
         const jobData = {
             vehicleNumber: vehicleNumber,
+            customerNumber: customerNumber,
             status: status,
             customerName: customerName,
             date: date,
@@ -43,7 +46,7 @@ function FormAddJob() {
                     success('User group added successfully!')
                 })
                 .catch(() => {
-                    error("Invalid team members!")
+                    error("Team members not exist or customer number already exists")
                     dismiss(loadingId);
                 })
         } else {
@@ -59,6 +62,8 @@ function FormAddJob() {
                 error(String(formattedError.date?._errors));
             } else if (formattedError.teamMembers?._errors) {
                 error(String(formattedError.teamMembers?._errors));
+            } else if (formattedError.customerNumber?._errors) {
+                error(String(formattedError.customerNumber?._errors));
             }
         }
 
@@ -88,6 +93,7 @@ function FormAddJob() {
 
     const handleReset = () => {
         setCustomerName('');
+        setCustomerNumber('');
         setVehicleNumber('');
         setTeamMembers([]);
         setDate('');
@@ -114,6 +120,14 @@ function FormAddJob() {
                     fullWidth
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
+                />
+
+                <TextField
+                    label="Customer Number"
+                    type='text'
+                    fullWidth
+                    value={customerNumber}
+                    onChange={(e) => setCustomerNumber(e.target.value)}
                 />
 
                 <TextField

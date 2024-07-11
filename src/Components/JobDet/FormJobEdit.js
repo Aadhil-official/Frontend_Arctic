@@ -15,6 +15,7 @@ function FormJobEdit({ job }) {
     const [date, setDate] = useState(job ? job.date : '');
     const [teamMembers, setTeamMembers] = useState(job ? job.teamMembers : []);
     const [newTeamMember, setNewTeamMember] = useState('');
+    const [customerNumber, setCustomerNumber] = useState('');
 
     const navigate = useNavigate();
 
@@ -36,7 +37,8 @@ function FormJobEdit({ job }) {
             status: z.string().min(1, { message: "Enter job status" }),
             teamMembers: z.array(z.string()).min(1, { message: "Team members can't be empty" }),
             customerName: z.string().min(1, { message: "Enter customer name" }),
-            date: z.string().date().min(1, { message: "Enter allocated jobs date" })
+            customerNumber: z.string().min(1, { message: "Enter customer name" }),
+            date: z.string().min(1, { message: "Enter allocated jobs date" })
         });
         // console.log("id of role is..........." + role.toUpperCase());
 
@@ -46,6 +48,7 @@ function FormJobEdit({ job }) {
             vehicleNumber: vehicleNumber,
             status: status,
             customerName: customerName,
+            customerNumber: customerNumber,
             date: date,
             teamMembers: teamMembers
         };
@@ -65,7 +68,8 @@ function FormJobEdit({ job }) {
             job.status !== updatedJobData.status ||
             !arraysEqual(job.teamMembers, updatedJobData.teamMembers) ||
             job.date !== updatedJobData.date ||
-            job.customerName !== updatedJobData.customerName
+            job.customerName !== updatedJobData.customerName ||
+            job.customerNumber !== updatedJobData.customerNumber
         ) {
             axios.put(`http://localhost:8080/api/auth/updateJob`, updatedJobData)
                 .then(() => {
@@ -86,6 +90,8 @@ function FormJobEdit({ job }) {
                         error(String(formattedError.date?._errors));
                     } else if (formattedError.vehicleNumber?._errors) {
                         error(String(formattedError.vehicleNumber?._errors));
+                    } else if (formattedError.customerNumber?._errors) {
+                        error(String(formattedError.customerNumber?._errors));
                     }
                 })
         }
@@ -120,6 +126,15 @@ function FormJobEdit({ job }) {
                     fullWidth
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
+                />
+
+
+                <TextField
+                    label="Customer Number"
+                    type='text'
+                    fullWidth
+                    value={customerNumber}
+                    onChange={(e) => setCustomerNumber(e.target.value)}
                 />
 
                 <TextField

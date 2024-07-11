@@ -38,7 +38,7 @@ function FormAddUnit() {
             indoorSerial: z.string().min(1, { message: "Enter indoor serial" }),
             outdoorSerial: z.string().min(1, { message: "Enter outdoor serial" }),
             modelName: z.string().min(1, { message: "Enter model name" }),
-            commissionedDate: z.string().date().min(1, { message: "Enter commissioned date" }),
+            commissionedDate: z.string().min(1, { message: "Enter commissioned date" }),
             owner: z.string().min(1, { message: "Enter owner" }),
             warrantyPeriod: z.string().min(1, { message: "Enter warranty period" }),
             unitPrice: z.string().min(1, { message: "Enter unit price" })

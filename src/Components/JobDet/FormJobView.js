@@ -30,6 +30,15 @@ function FormJobView({ job }) {
                     />
 
                     <TextField
+                        label="Customer Number"
+                        type='text'
+                        value={job.customerNumber}
+                        InputProps={{
+                            readOnly: true
+                        }}
+                    />
+
+                    <TextField
                         label="Job Data"
                         type="date"
                         value={job.date}
@@ -58,7 +67,7 @@ function FormJobView({ job }) {
                         }}
                     />
 
-                    
+
                     <Typography variant="h6" sx={{ mt: 2 }}>
                         Team Members
                     </Typography>
