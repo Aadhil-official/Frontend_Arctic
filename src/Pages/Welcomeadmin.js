@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import '../Style/Welcome.css';
 import { ProfilesAdmin, FooterIn, Tabs } from '../Components/index';
 // import { createTheme, Grid, responsiveFontSizes, ThemeProvider, Typography } from '@mui/material';
-import { BsFillGrid3X3GapFill, BsPeopleFill, BsPersonVcardFill } from 'react-icons/bs';
-import axios from 'axios';
+// import { BsFillGrid3X3GapFill, BsPeopleFill, BsPersonVcardFill } from 'react-icons/bs';
+// import axios from 'axios';
 import { Grid } from '@mui/material';
 // import ViewListPdf from './ViewListPdf';
 // import { useLocation } from 'react-router-dom';
 
 function Welcomeadmin() {
-  const [counts, setCounts] = useState({});
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  // const [counts, setCounts] = useState({});
+  // const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   // const [tempdata, setTempdata] = useState([]);
   // const location = useLocation();
@@ -37,37 +37,37 @@ function Welcomeadmin() {
   //   { label: 'Site Visit Details', link: '/SiteVisitDashboard' }
   // ];
 
-  useEffect(() => {
-    axios.get('http://localhost:8080/api/auth/Counts')
-      .then(response => {
-        setCounts(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching counts:', error);
-      });
-  })
+  // useEffect(() => {
+  //   axios.get('http://localhost:8080/api/auth/Counts')
+  //     .then(response => {
+  //       setCounts(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching counts:', error);
+  //     });
+  // })
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 899);
-    };
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setIsSmallScreen(window.innerWidth <= 899);
+  //   };
 
-    // Initial check on component mount
-    handleResize();
+  //   // Initial check on component mount
+  //   handleResize();
 
-    // Event listener for window resize
-    window.addEventListener('resize', handleResize);
+  //   // Event listener for window resize
+  //   window.addEventListener('resize', handleResize);
 
-    // Clean up event listener on component unmount
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  //   // Clean up event listener on component unmount
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, []);
 
 
-  const gapStyle = {
-    gap: isSmallScreen ? '50px' : '20px'
-  };
+  // const gapStyle = {
+  //   gap: isSmallScreen ? '50px' : '20px'
+  // };
 
   return (
     <>

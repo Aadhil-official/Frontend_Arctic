@@ -79,6 +79,7 @@ import Base from "./Components/Calendar/Base";
 // import JobListnew from "./Pages/Job/JobListnew";
 // import SendEmailandPrintout from "./Pages/Job/SendEmailandPrintout";
 // import Joblist from "./Pages/Job/Joblist";
+import { AddJob, JobEdit, JobLis, JobListAd, JobView } from './Pages/JobDet';
 
 function App() {
   return (
