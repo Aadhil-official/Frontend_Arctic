@@ -79,17 +79,20 @@ function JobListAd() {
     }
 
     const handleCleareJob = () => {
-        const loadingId = loading("Clearing all the jobs.....");
-        axios.delete('http://localhost:8080/api/auth/clearAllJobs')
-            .then(() => {
-                dismiss(loadingId);
-                success("All Job are successfully deleted");
-                window.location.reload();
-            })
-            .catch(error => {
-                dismiss(loadingId);
-                console.error('Error deleting jobs:', error);
-            });
+        const isConfirmed = window.confirm("Are you sure you want to clear all jobs?");
+        if (isConfirmed) {
+            const loadingId = loading("Clearing all the jobs.....");
+            axios.delete('http://localhost:8080/api/auth/clearAllJobs')
+                .then(() => {
+                    dismiss(loadingId);
+                    success("All Job are successfully deleted");
+                    window.location.reload();
+                })
+                .catch(error => {
+                    dismiss(loadingId);
+                    console.error('Error deleting jobs:', error);
+                });
+        }
     }
 
 

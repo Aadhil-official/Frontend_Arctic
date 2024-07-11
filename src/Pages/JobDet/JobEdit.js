@@ -30,17 +30,20 @@ function JobEdit() {
     }, [id]);
 
     const handleDeleteJob = () => {
-        const loadingId = loading("Deleting job.....");
-        axios.delete(`http://localhost:8080/api/auth/dltJob?id=${id}`)
-            .then(() => {
-                dismiss(loadingId);
-                success("Job successfully deleted");
-                window.location.href = "/jobs";
-            })
-            .catch(error => {
-                dismiss(loadingId);
-                console.error('Error deleting jobs:', error);
-            });
+        const isConfirmed = window.confirm("Are you sure you want to delete this job?");
+        if (isConfirmed) {
+            const loadingId = loading("Deleting job.....");
+            axios.delete(`http://localhost:8080/api/auth/dltJob?id=${id}`)
+                .then(() => {
+                    dismiss(loadingId);
+                    success("Job successfully deleted");
+                    window.location.href = "/jobs";
+                })
+                .catch(error => {
+                    dismiss(loadingId);
+                    console.error('Error deleting jobs:', error);
+                });
+        }
     }
 
     let theme = createTheme();
