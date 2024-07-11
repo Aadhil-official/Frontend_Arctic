@@ -185,9 +185,9 @@ function FormAddUserGroup() {
                             <FormControlLabel
                                 control={
                                     <Checkbox
-                                        checked={relevantPrivileges.includes('accessGroup')}
+                                        checked={relevantPrivileges.includes('accessUserGroup')}
                                         onChange={handleCheckboxChange}
-                                        value="accessGroup"
+                                        value="accessUserGroup"
                                     />
                                 }
                                 label="Access Group"

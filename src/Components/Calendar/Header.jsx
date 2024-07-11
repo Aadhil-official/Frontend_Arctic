@@ -42,6 +42,29 @@ export default function Header({ selectedDate, handleDatePickerChange, toggleSid
                     </div>
                 </div>
             )}
+
+            {location.pathname === '/base/calendarEmp' && (
+                <div className="pick">
+                    <div className="date-picker-container">
+                        <label htmlFor="date-picker" >Search:</label>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker
+                                id="date-picker"
+                                value={dayjs(selectedDate)}
+                                onChange={(date) => handleDatePickerChange(date)}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        variant="outlined"
+                                        size="small"
+                                        style={{ height: '100%', color: 'white' }}
+                                    />
+                                )}
+                            />
+                        </LocalizationProvider>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
