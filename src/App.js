@@ -73,12 +73,12 @@ import {
 } from "./Pages/User Group/index";
 import Base from "./Components/Calendar/Base";
 
-import Printjob from "./Pages/Job/Printjob";
-import NewJob from "./Pages/Job/NewJob";
-import Email from "./Pages/Job/SendEmailandPrintout";
-import JobListnew from "./Pages/Job/JobListnew";
-import SendEmailandPrintout from "./Pages/Job/SendEmailandPrintout";
-import Joblist from "./Pages/Job/Joblist";
+// import Printjob from "./Pages/Job/Printjob";
+// import NewJob from "./Pages/Job/NewJob";
+// import Email from "./Pages/Job/SendEmailandPrintout";
+// import JobListnew from "./Pages/Job/JobListnew";
+// import SendEmailandPrintout from "./Pages/Job/SendEmailandPrintout";
+// import Joblist from "./Pages/Job/Joblist";
 
 function App() {
   return (
@@ -150,7 +150,7 @@ function App() {
             path="/GatePassDetailsEmployee/:id"
             element={<GatePassDetailsEmployee />}
           ></Route>
-          
+
 
 
           <Route path="/SiteVisitTwo" element={<SiteVisitTwo />}></Route>
@@ -283,12 +283,19 @@ function App() {
           {/* <Route path="/base/calendarEmp" element={<CalendarEmp/>}/> */}
 
           {/* Job related roots*/}
-          <Route path='/emailAndPrintButtons' element={<SendEmailandPrintout />}></Route>
+          {/* <Route path='/emailAndPrintButtons' element={<SendEmailandPrintout />}></Route>
           <Route path='/jobListForUser' element={<JobListnew />}></Route>
           <Route path='/jobListForAdmin' element={<Joblist />}></Route>
           <Route path='/newJob' element={<NewJob />}></Route>
           <Route path='/printJob' element={<Printjob />}></Route>
-          <Route path='/email' element={<Email />}></Route>
+          <Route path='/email' element={<Email />}></Route> */}
+
+          <Route path='/login/welcome/jobList' element={<JobLis />} />
+          <Route path='/login/welcomeadmin/jobListAd' element={<JobListAd />} />
+          <Route path='/login/welcomeadmin/jobListAd/addjob' element={<AddJob />} />
+          <Route path='/login/welcome/jobList/view/:id' element={<JobView />} />
+          <Route path='/login/welcomeadmin/jobListAd/edit/:id' element={<JobEdit />} />
+
 
         </Routes>
       </BrowserRouter>
