@@ -129,8 +129,8 @@ const ItemLis = () => {
                                     </Select>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={2} sm={2} md={4} lg={8} xl={10}></Grid>
-                            <Grid item xs={5} sm={5} md={4} lg={2.5} xl={1}>
+                            <Grid item xs={2} sm={2} md={4} lg={8} xl={9}></Grid>
+                            <Grid item xs={5} sm={5} md={4} lg={2.5} xl={2}>
                                 <TextField
                                     variant="outlined"
                                     InputProps={{

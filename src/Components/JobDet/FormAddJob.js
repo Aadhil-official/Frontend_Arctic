@@ -100,7 +100,7 @@ function FormAddJob() {
             <Box
                 component="form"
                 sx={{
-                    '& .MuiTextField-root': { m: 1, width: '80%' },
+                    '& .MuiTextField-root': { m: 1 },
                     textAlign: 'center',
                     mt: 3
                 }}
@@ -111,6 +111,7 @@ function FormAddJob() {
                 <TextField
                     label="Customer Name"
                     type='text'
+                    fullWidth
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
                 />
@@ -118,26 +119,29 @@ function FormAddJob() {
                 <TextField
                     label="Job Data"
                     type="date"
+                    fullWidth
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                 />
 
                 <Grid container textAlign='center' justifyContent='center'>
-                    <Grid item xs={7} textAlign='left' sx={{ opacity: '0.5' }}>
+                    <Grid item xs={12} sx={{ opacity: '0.5' }}>
                         <TextField
                             label="Enter Team Members"
                             type='text'
+                            fullWidth
                             value={teamMembers.join(', ')}
                             sx={{ display: 'none' }}
                         />
                     </Grid>
-                    <Grid item xs={2.7}></Grid>
-                    <Grid item xs={6}>
+                    {/* <Grid item xs={2.7}></Grid> */}
+                    <Grid item xs={12}>
                         <FormGroup>
                             {teamMembers.map((member, index) => (
                                 <TextField
                                     label={`Member ${index + 1}`}
                                     type='text'
+                                    fullWidth
                                     key={index}
                                     value={member}
                                     onChange={(e) => handleTeamMemberChange(index, e.target.value)}
@@ -150,6 +154,7 @@ function FormAddJob() {
                 <TextField
                     label="+ New Team Member"
                     type='text'
+                    fullWidth
                     value={newTeamMember}
                     onChange={(e) => setNewTeamMember(e.target.value)}
                 />
@@ -163,6 +168,7 @@ function FormAddJob() {
                 <TextField
                     label="Vehicle Number"
                     type='text'
+                    fullWidth
                     value={vehicleNumber}
                     onChange={(e) => setVehicleNumber(e.target.value)}
                 />
@@ -171,6 +177,7 @@ function FormAddJob() {
                     select
                     label="Job Status"
                     value={status}
+                    fullWidth
                     onChange={(e) => setStatus(e.target.value)}
                     SelectProps={{ native: true }}
                 >
