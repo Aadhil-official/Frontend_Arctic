@@ -64,45 +64,53 @@ function FormUnitEdit({ unit }) {
 
 
         const result = validateForm.safeParse(updatedUnit);
-
-        if (
-            unit.indoorSerial !== updatedUnit.indoorSerial ||
-            unit.outdoorSerial !== updatedUnit.outdoorSerial ||
-            unit.modelName !== updatedUnit.modelName ||
-            unit.commissionedDate !== updatedUnit.commissionedDate ||
-            unit.owner !== updatedUnit.owner ||
-            unit.warrantyPeriod !== updatedUnit.warrantyPeriod ||
-            unit.unitPrice !== updatedUnit.unitPrice
-        ) {
-            if (todaydate <= commissionedDate || unit.commissionedDate === updatedUnit.commissionedDate) {
-                axios.put(`http://localhost:8080/api/auth/updateUnit`, updatedUnit)
-                    .then(() => {
-                        dismiss(loadingId);
-                        success("Unit updated successfully");
-                        navigate('/login/welcomeadmin/unitListAd');
-                    })
-                    .catch(() => {
-                        dismiss(loadingId);
-                        const formattedError = result.error.format();
-                        if (formattedError.indoorSerial?._errors) {
-                            error(String(formattedError.indoorSerial?._errors));
-                        } else if (formattedError.outdoorSerial?._errors) {
-                            error(String(formattedError.outdoorSerial?._errors));
-                        } else if (formattedError.modelName?._errors) {
-                            error(String(formattedError.modelName?._errors));
-                        } else if (formattedError.commissionedDate?._errors) {
-                            error(String(formattedError.commissionedDate?._errors));
-                        } else if (formattedError.owner?._errors) {
-                            error(String(formattedError.owner?._errors));
-                        } else if (formattedError.warrantyPeriod?._errors) {
-                            error(String(formattedError.warrantyPeriod?._errors));
-                        } else if (formattedError.unitPrice?._errors) {
-                            error(String(formattedError.unitPrice?._errors));
-                        }
-                    })
+        if (result.success) {
+            if (
+                unit.indoorSerial !== updatedUnit.indoorSerial ||
+                unit.outdoorSerial !== updatedUnit.outdoorSerial ||
+                unit.modelName !== updatedUnit.modelName ||
+                unit.commissionedDate !== updatedUnit.commissionedDate ||
+                unit.owner !== updatedUnit.owner ||
+                unit.warrantyPeriod !== updatedUnit.warrantyPeriod ||
+                unit.unitPrice !== updatedUnit.unitPrice
+            ) {
+                if (todaydate <= commissionedDate || unit.commissionedDate === updatedUnit.commissionedDate) {
+                    axios.put(`http://localhost:8080/api/auth/updateUnit`, updatedUnit)
+                        .then(() => {
+                            dismiss(loadingId);
+                            success("Unit updated successfully");
+                            navigate('/login/welcomeadmin/unitListAd');
+                        })
+                        .catch(() => {
+                            dismiss(loadingId);
+                            error("Unit already exist!");
+                        })
+                } else {
+                    dismiss(loadingId);
+                    error("Date must be presant or future...!");
+                }
             } else {
                 dismiss(loadingId);
-                error("Date must be presant or future...!");
+                error("No changes ditected!..");
+                navigate('/login/welcomeadmin/unitListAd');
+            }
+        } else {
+            dismiss(loadingId);
+            const formattedError = result.error.format();
+            if (formattedError.indoorSerial?._errors) {
+                error(String(formattedError.indoorSerial?._errors));
+            } else if (formattedError.outdoorSerial?._errors) {
+                error(String(formattedError.outdoorSerial?._errors));
+            } else if (formattedError.modelName?._errors) {
+                error(String(formattedError.modelName?._errors));
+            } else if (formattedError.commissionedDate?._errors) {
+                error(String(formattedError.commissionedDate?._errors));
+            } else if (formattedError.owner?._errors) {
+                error(String(formattedError.owner?._errors));
+            } else if (formattedError.warrantyPeriod?._errors) {
+                error(String(formattedError.warrantyPeriod?._errors));
+            } else if (formattedError.unitPrice?._errors) {
+                error(String(formattedError.unitPrice?._errors));
             }
         }
     };

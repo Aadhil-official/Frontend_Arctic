@@ -45,7 +45,7 @@ function FormCustomerEdit({ customer }) {
 
         const updatedCustomer = {
             id: id,
-            customerName:customerName,
+            customerName: customerName,
             address: address,
             contactNumber: contactNumber,
             email: email,
@@ -53,38 +53,46 @@ function FormCustomerEdit({ customer }) {
         };
 
         const result = validateForm.safeParse(updatedCustomer);
-        
-        console.log("thisklkdklwejdlkwed", updatedCustomer);
-        if (
-            customer.customerName !== updatedCustomer.customerName ||
-            customer.address !== updatedCustomer.address ||
-            customer.contactNumber !== updatedCustomer.contactNumber ||
-            customer.email !== updatedCustomer.email ||
-            customer.location !== updatedCustomer.location
-        ) {
-            axios.put(`http://localhost:8080/api/auth/updateCustomer`, updatedCustomer)
-                .then(() => {
-                    dismiss(loadingId);
-                    success("Customer updated successfully");
-                    navigate('/login/welcomeadmin/customerListAd');
-                })
-                .catch(() => {
-                    dismiss(loadingId);
-                    const formattedError = result.error.format();
-                    if (formattedError.customerName?._errors) {
-                        error(String(formattedError.customerName?._errors));
-                    } else if (formattedError.address?._errors) {
-                        error(String(formattedError.address?._errors));
-                    } else if (formattedError.contactNumber?._errors) {
-                        error(String(formattedError.contactNumber?._errors));
-                    } else if (formattedError.email?._errors) {
-                        error(String(formattedError.email?._errors));
-                    } else if (formattedError.location?._errors) {
-                        error(String(formattedError.location?._errors));
-                    } else {
-                        error("Undefined Customer!")
-                    }
-                })
+
+        if (result.success) {
+            if (
+                customer.customerName !== updatedCustomer.customerName ||
+                customer.address !== updatedCustomer.address ||
+                customer.contactNumber !== updatedCustomer.contactNumber ||
+                customer.email !== updatedCustomer.email ||
+                customer.location !== updatedCustomer.location
+            ) {
+                axios.put(`http://localhost:8080/api/auth/updateCustomer`, updatedCustomer)
+                    .then(() => {
+                        dismiss(loadingId);
+                        success("Customer updated successfully");
+                        navigate('/login/welcomeadmin/customerListAd');
+                    })
+                    .catch(() => {
+                        dismiss(loadingId);
+                        error("Customer already exist!");
+                    })
+            } else {
+                dismiss(loadingId);
+                error("No changes ditected!..");
+                navigate('/login/welcomeadmin/customerListAd');
+            }
+        } else {
+            dismiss(loadingId);
+            const formattedError = result.error.format();
+            if (formattedError.customerName?._errors) {
+                error(String(formattedError.customerName?._errors));
+            } else if (formattedError.address?._errors) {
+                error(String(formattedError.address?._errors));
+            } else if (formattedError.contactNumber?._errors) {
+                error(String(formattedError.contactNumber?._errors));
+            } else if (formattedError.email?._errors) {
+                error(String(formattedError.email?._errors));
+            } else if (formattedError.location?._errors) {
+                error(String(formattedError.location?._errors));
+            } else {
+                error("Undefined Customer!")
+            }
         }
     };
 

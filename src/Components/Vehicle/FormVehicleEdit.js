@@ -36,29 +36,37 @@ function FormVehicleEdit({ vehicle }) {
 
 
         const result = validateForm.safeParse(updatedVehicle);
-
-        if (
-            vehicle.vehicleType !== updatedVehicle.vehicleType ||
-            vehicle.vehicleNumber !== updatedVehicle.vehicleNumber ||
-            vehicle.noOfPassengers !== updatedVehicle.noOfPassengers
-        ) {
-            axios.put(`http://localhost:8080/api/auth/updateVehicle`, updatedVehicle)
-                .then(() => {
-                    dismiss(loadingId);
-                    success("Vehicle updated successfully");
-                    navigate('/login/welcomeadmin/vehicleListAd');
-                })
-                .catch(() => {
-                    dismiss(loadingId);
-                    const formattedError = result.error.format();
-                    if (formattedError.vehicleType?._errors) {
-                        error(String(formattedError.vehicleType?._errors));
-                    } else if (formattedError.vehicleNumber?._errors) {
-                        error(String(formattedError.vehicleNumber?._errors));
-                    } else if (formattedError.noOfPassengers?._errors) {
-                        error(String(formattedError.noOfPassengers?._errors));
-                    }
-                })
+        if (result.success) {
+            if (
+                vehicle.vehicleType !== updatedVehicle.vehicleType ||
+                vehicle.vehicleNumber !== updatedVehicle.vehicleNumber ||
+                vehicle.noOfPassengers !== updatedVehicle.noOfPassengers
+            ) {
+                axios.put(`http://localhost:8080/api/auth/updateVehicle`, updatedVehicle)
+                    .then(() => {
+                        dismiss(loadingId);
+                        success("Vehicle updated successfully");
+                        navigate('/login/welcomeadmin/vehicleListAd');
+                    })
+                    .catch(() => {
+                        dismiss(loadingId);
+                        error("Vehicle already exist!..");
+                        navigate('/login/welcomeadmin/vehicleListAd');
+                    })
+            } else {
+                dismiss(loadingId);
+                error("No changes ditected!..");
+            }
+        } else {
+            dismiss(loadingId);
+            const formattedError = result.error.format();
+            if (formattedError.vehicleType?._errors) {
+                error(String(formattedError.vehicleType?._errors));
+            } else if (formattedError.vehicleNumber?._errors) {
+                error(String(formattedError.vehicleNumber?._errors));
+            } else if (formattedError.noOfPassengers?._errors) {
+                error(String(formattedError.noOfPassengers?._errors));
+            }
         }
     };
 

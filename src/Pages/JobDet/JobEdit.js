@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FooterIn, NormalHeaderBar } from '../../Components/index';
 import { Button, Grid, ThemeProvider, Typography, createTheme, responsiveFontSizes } from '@mui/material';
 import { dismiss, error, success } from '../../util/Toastify';
@@ -12,6 +12,8 @@ function JobEdit() {
 
     const [job, setJob] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchJob = async () => {
@@ -33,11 +35,12 @@ function JobEdit() {
         const isConfirmed = window.confirm("Are you sure you want to delete this job?");
         if (isConfirmed) {
             const loadingId = loading("Deleting job.....");
+            
             axios.delete(`http://localhost:8080/api/auth/dltJob?id=${id}`)
                 .then(() => {
                     dismiss(loadingId);
                     success("Job successfully deleted");
-                    window.location.href = "/jobs";
+                    navigate("/login/welcomeadmin/jobListAd");
                 })
                 .catch(error => {
                     dismiss(loadingId);

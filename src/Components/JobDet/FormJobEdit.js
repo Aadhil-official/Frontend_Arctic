@@ -15,7 +15,7 @@ function FormJobEdit({ job }) {
     const [date, setDate] = useState(job ? job.date : '');
     const [teamMembers, setTeamMembers] = useState(job ? job.teamMembers : []);
     const [newTeamMember, setNewTeamMember] = useState('');
-    const [customerNumber, setCustomerNumber] = useState('');
+    const [customerNumber, setCustomerNumber] = useState(job ? job.customerNumber : '');
 
     const navigate = useNavigate();
 
@@ -29,6 +29,7 @@ function FormJobEdit({ job }) {
         }
     };
 
+
     const handleSubmit = () => {
         const loadingId = loading("Updating details.....");
 
@@ -37,7 +38,7 @@ function FormJobEdit({ job }) {
             status: z.string().min(1, { message: "Enter job status" }),
             teamMembers: z.array(z.string()).min(1, { message: "Team members can't be empty" }),
             customerName: z.string().min(1, { message: "Enter customer name" }),
-            customerNumber: z.string().min(1, { message: "Enter customer name" }),
+            customerNumber: z.string().regex(/^\+?\d{10,12}$/, { message: "Invalid phone number" }),
             date: z.string().min(1, { message: "Enter allocated jobs date" })
         });
         // console.log("id of role is..........." + role.toUpperCase());
@@ -61,39 +62,60 @@ function FormJobEdit({ job }) {
             return true;
         };
 
+        const phoneNumberPattern = /^(\+?\d{10,12}|\d{10}|\-\d{12}|^0\d{9})$/;
+
+
         const result = validateForm.safeParse(updatedJobData);
 
-        if (
-            job.vehicleNumber !== updatedJobData.vehicleNumber ||
-            job.status !== updatedJobData.status ||
-            !arraysEqual(job.teamMembers, updatedJobData.teamMembers) ||
-            job.date !== updatedJobData.date ||
-            job.customerName !== updatedJobData.customerName ||
-            job.customerNumber !== updatedJobData.customerNumber
-        ) {
-            axios.put(`http://localhost:8080/api/auth/updateJob`, updatedJobData)
-                .then(() => {
+        if (result.success) {
+            if (
+                job.vehicleNumber !== updatedJobData.vehicleNumber ||
+                job.status !== updatedJobData.status ||
+                !arraysEqual(job.teamMembers, updatedJobData.teamMembers) ||
+                job.date !== updatedJobData.date ||
+                job.customerName !== updatedJobData.customerName ||
+                job.customerNumber !== updatedJobData.customerNumber
+            ) {
+                if (!phoneNumberPattern.test(customerNumber)) {
                     dismiss(loadingId);
-                    success("Job updated successfully");
-                    navigate('/login/welcomeadmin/jobListAd');
-                })
-                .catch(() => {
-                    dismiss(loadingId);
-                    const formattedError = result.error.format();
-                    if (formattedError.customerName?._errors) {
-                        error(String(formattedError.customerName?._errors));
-                    } else if (formattedError.status?._errors) {
-                        error(String(formattedError.status?._errors));
-                    } else if (formattedError.teamMembers?._errors) {
-                        error(String(formattedError.teamMembers?._errors));
-                    } else if (formattedError.date?._errors) {
-                        error(String(formattedError.date?._errors));
-                    } else if (formattedError.vehicleNumber?._errors) {
-                        error(String(formattedError.vehicleNumber?._errors));
-                    } else if (formattedError.customerNumber?._errors) {
-                        error(String(formattedError.customerNumber?._errors));
-                    }
-                })
+                    error("Invalid telephone number");
+                } else {
+                    axios.put(`http://localhost:8080/api/auth/updateJob`, updatedJobData)
+                        .then(() => {
+                            dismiss(loadingId);
+                            success("Job updated successfully");
+                            navigate('/login/welcomeadmin/jobListAd');
+                        })
+                        .catch((err) => {
+                            dismiss(loadingId);
+                            if (err.response?.data.includes("User not found")) {
+                                error("Team members not exist!..");
+                            } else {
+                                error("Customer number already exists!..");
+                            }
+                        })
+                }
+            } else {
+                dismiss(loadingId);
+                error("No changes ditected!..");
+                navigate("/login/welcomeadmin/jobListAd");
+            }
+        } else {
+            dismiss(loadingId);
+            const formattedError = result.error.format();
+            if (formattedError.customerName?._errors) {
+                error(String(formattedError.customerName?._errors));
+            } else if (formattedError.status?._errors) {
+                error(String(formattedError.status?._errors));
+            } else if (formattedError.teamMembers?._errors) {
+                error(String(formattedError.teamMembers?._errors));
+            } else if (formattedError.date?._errors) {
+                error(String(formattedError.date?._errors));
+            } else if (formattedError.vehicleNumber?._errors) {
+                error(String(formattedError.vehicleNumber?._errors));
+            } else if (formattedError.customerNumber?._errors) {
+                error(String(formattedError.customerNumber?._errors));
+            }
         }
     };
 

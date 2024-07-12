@@ -49,7 +49,7 @@ function FormAddUserGroup() {
                     })
                     .catch(() => {
                         dismiss(loadingId);
-                        error("User group already exist!")
+                        error("User group already exist!");
                     })
             }
         } else {

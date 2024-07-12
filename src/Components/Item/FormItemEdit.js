@@ -52,96 +52,104 @@ export default function FormItemEdit({ item }) {
         const result = validateForm.safeParse(updatedItem);
         // if (!result.success) {
         console.log("thisklkdklwejdlkwed", updatedItem);
-        if (
-            item.name !== updatedItem.name ||
-            item.indoorMod !== updatedItem.indoorMod ||
-            item.outdoorMod !== updatedItem.outdoorMod ||
-            item.manufacturer !== updatedItem.manufacturer ||
-            item.capacity !== updatedItem.capacity
-        ) {
-            axios.put(`http://localhost:8080/api/auth/updateItem`, updatedItem)
-                .then(() => {
-                    dismiss(loadingId);
-                    success("Item updated successfully");
-                    navigate('/login/welcomeadmin/itemListAd');
-                })
-                .catch(() => {
-                    dismiss(loadingId);
-                    const formattedError = result.error.format();
-                    if (formattedError.name?._errors) {
-                        error(String(formattedError.name?._errors));
-                    } else if (formattedError.indoorMod?._errors) {
-                        error(String(formattedError.indoorMod?._errors));
-                    } else if (formattedError.outdoorMod?._errors) {
-                        error(String(formattedError.outdoorMod?._errors));
-                    } else if (formattedError.manufacturer?._errors) {
-                        error(String(formattedError.manufacturer?._errors));
-                    } else if (formattedError.capacity?._errors) {
-                        error(String(formattedError.capacity?._errors));
-                    } else {
-                        error("Undefined Item!")
-                    }
-                })
+        if (result.success) {
+            if (
+                item.name !== updatedItem.name ||
+                item.indoorMod !== updatedItem.indoorMod ||
+                item.outdoorMod !== updatedItem.outdoorMod ||
+                item.manufacturer !== updatedItem.manufacturer ||
+                item.capacity !== updatedItem.capacity
+            ) {
+                axios.put(`http://localhost:8080/api/auth/updateItem`, updatedItem)
+                    .then(() => {
+                        dismiss(loadingId);
+                        success("Item updated successfully");
+                        navigate('/login/welcomeadmin/itemListAd');
+                    })
+                    .catch(() => {
+                        dismiss(loadingId);
+                        error("Undefined Item!");
+                    })
+            } else {
+                dismiss(loadingId);
+                error("No changes ditected!..");
+                navigate('/login/welcomeadmin/itemListAd');
+            }
+        } else {
+            dismiss(loadingId);
+            const formattedError = result.error.format();
+            if (formattedError.name?._errors) {
+                error(String(formattedError.name?._errors));
+            } else if (formattedError.indoorMod?._errors) {
+                error(String(formattedError.indoorMod?._errors));
+            } else if (formattedError.outdoorMod?._errors) {
+                error(String(formattedError.outdoorMod?._errors));
+            } else if (formattedError.manufacturer?._errors) {
+                error(String(formattedError.manufacturer?._errors));
+            } else if (formattedError.capacity?._errors) {
+                error(String(formattedError.capacity?._errors));
+
+            }
         }
     };
 
-    return (
-        <>
-            <Box
-                component="form"
-                sx={{
-                    '& .MuiTextField-root': { m: 1, width: '80%' },
-                    textAlign: 'center',
-                    mt: 3
-                }}
-                noValidate
-                autoComplete="off"
-            >
+        return (
+            <>
+                <Box
+                    component="form"
+                    sx={{
+                        '& .MuiTextField-root': { m: 1, width: '80%' },
+                        textAlign: 'center',
+                        mt: 3
+                    }}
+                    noValidate
+                    autoComplete="off"
+                >
 
-                <TextField
-                    label="Item Name"
-                    type='text'
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
+                    <TextField
+                        label="Item Name"
+                        type='text'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
 
-                <TextField
-                    label="Indoor Modal"
-                    type="text"
-                    value={indoorMod}
-                    onChange={(e) => setIndoorMod(e.target.value)}
-                />
+                    <TextField
+                        label="Indoor Modal"
+                        type="text"
+                        value={indoorMod}
+                        onChange={(e) => setIndoorMod(e.target.value)}
+                    />
 
-                <TextField
-                    label="Outdoor Modal"
-                    type="text"
-                    value={outdoorMod}
-                    onChange={(e) => setOutdoorMod(e.target.value)}
-                />
-
-
-                <TextField
-                    label="Manufacturer"
-                    type='text'
-                    value={manufacturer}
-                    onChange={(e) => setManufacturer(e.target.value)}
-                />
-
-                <TextField
-                    label="Capacity"
-                    type='text'
-                    value={capacity}
-                    onChange={(e) => setCapacity(e.target.value)}
-                />
-
-                <br /><br />
-                <Button variant="contained" onClick={handleSubmit}>
-                    Update
-                </Button><br /><br />
-            </Box>
+                    <TextField
+                        label="Outdoor Modal"
+                        type="text"
+                        value={outdoorMod}
+                        onChange={(e) => setOutdoorMod(e.target.value)}
+                    />
 
 
-        </>
+                    <TextField
+                        label="Manufacturer"
+                        type='text'
+                        value={manufacturer}
+                        onChange={(e) => setManufacturer(e.target.value)}
+                    />
 
-    );
-}
+                    <TextField
+                        label="Capacity"
+                        type='text'
+                        value={capacity}
+                        onChange={(e) => setCapacity(e.target.value)}
+                    />
+
+                    <br /><br />
+                    <Button variant="contained" onClick={handleSubmit}>
+                        Update
+                    </Button><br /><br />
+                </Box>
+
+
+            </>
+
+        );
+    }

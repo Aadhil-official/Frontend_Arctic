@@ -58,32 +58,40 @@ function FormUserGroupEdit({ userGroup }) {
         };
 
         const result = validateForm.safeParse(updatedGroupData);
-
-        if (
-            userGroup.groupName !== updatedGroupData.groupName ||
-            userGroup.groupDescription !== updatedGroupData.groupDescription ||
-            !arraysEqual(userGroup.relevantPrivileges, updatedGroupData.relevantPrivileges) ||
-            userGroup.allocatedJobs !== updatedGroupData.allocatedJobs
-        ) {
-            axios.put(`http://localhost:8080/api/auth/updateUserGroup`, updatedGroupData)
-                .then(() => {
-                    dismiss(loadingId);
-                    success("User group updated successfully");
-                    navigate('/login/welcomeadmin/userGroupListAd');
-                })
-                .catch(() => {
-                    dismiss(loadingId);
-                    const formattedError = result.error.format();
-                    if (formattedError.groupName?._errors) {
-                        error(String(formattedError.groupName?._errors));
-                    } else if (formattedError.groupDescription?._errors) {
-                        error(String(formattedError.groupDescription?._errors));
-                    } else if (formattedError.relevantPrivileges?._errors) {
-                        error(String(formattedError.relevantPrivileges?._errors));
-                    } else if (formattedError.allocatedJobs?._errors) {
-                        error(String(formattedError.allocatedJobs?._errors));
-                    }
-                })
+        if (result.success) {
+            if (
+                userGroup.groupName !== updatedGroupData.groupName ||
+                userGroup.groupDescription !== updatedGroupData.groupDescription ||
+                !arraysEqual(userGroup.relevantPrivileges, updatedGroupData.relevantPrivileges) ||
+                userGroup.allocatedJobs !== updatedGroupData.allocatedJobs
+            ) {
+                axios.put(`http://localhost:8080/api/auth/updateUserGroup`, updatedGroupData)
+                    .then(() => {
+                        dismiss(loadingId);
+                        success("User group updated successfully");
+                        navigate('/login/welcomeadmin/userGroupListAd');
+                    })
+                    .catch(() => {
+                        dismiss(loadingId);
+                        error("User group already exist!");
+                    })
+            } else {
+                dismiss(loadingId);
+                error("No changes ditected!..");
+                navigate('/login/welcomeadmin/userGroupListAd');
+            }
+        } else {
+            dismiss(loadingId);
+            const formattedError = result.error.format();
+            if (formattedError.groupName?._errors) {
+                error(String(formattedError.groupName?._errors));
+            } else if (formattedError.groupDescription?._errors) {
+                error(String(formattedError.groupDescription?._errors));
+            } else if (formattedError.relevantPrivileges?._errors) {
+                error(String(formattedError.relevantPrivileges?._errors));
+            } else if (formattedError.allocatedJobs?._errors) {
+                error(String(formattedError.allocatedJobs?._errors));
+            }
         }
     };
 
@@ -148,7 +156,7 @@ function FormUserGroupEdit({ userGroup }) {
                                     }
                                     label="Create User"
                                 />
-                                
+
                                 <FormControlLabel
                                     control={
                                         <Checkbox
