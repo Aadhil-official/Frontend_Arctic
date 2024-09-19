@@ -52,7 +52,6 @@ function CustomerListAd() {
         if (!searchQuery) return true;
         const value = customer[filterOption];
         return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
-
     });
 
     const theme = responsiveFontSizes(createTheme());

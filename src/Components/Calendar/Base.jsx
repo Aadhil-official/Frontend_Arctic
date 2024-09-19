@@ -20,7 +20,7 @@ function Create() {
   useEffect(() => {
     const getEvents = async () => {
       try {
-        const response = await axios.get('/api/auth/events');
+        const response = await axios.get('http://localhost:8080/api/auth/events');
         setEvents(response.data);
       } catch (error) {
         console.error(error);
@@ -66,7 +66,8 @@ function Create() {
             events={events}
             updateEvents={updateEvents} />} />
           <Route path="/reminder" element={<Reminder />} />
-          <Route path="/calendarEmp" element={<CalendarEmp selectedDate={selectedDate.toDate()}
+          <Route path="/calendarEmp" element={<CalendarEmp
+            selectedDate={selectedDate.toDate()}
             events={events} />} />
 
         </Routes>

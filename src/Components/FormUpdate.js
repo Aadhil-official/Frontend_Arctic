@@ -100,9 +100,15 @@ export default function FormUpdate({ user }) {
                         dismiss(loadingId);
                         success("User updated successfully");
                         navigate('/login/welcomeadmin/employeelistad');
-                    }).catch(() => {
+                    }).catch((err) => {
                         dismiss(loadingId);
-                        error("Check the internet")
+                        if (err.response?.data.includes("Username is already exists")) {
+                            error("Username is already exist!..");
+                        } else if (err.response?.data.includes("Email is already exists")) {
+                            error("Email is already exist!..");
+                        } else {
+                            error("Check the internet");
+                        }
                     })
             } else {
                 dismiss(loadingId);

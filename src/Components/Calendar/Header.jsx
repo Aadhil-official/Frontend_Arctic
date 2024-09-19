@@ -28,7 +28,7 @@ export default function Header({ selectedDate, handleDatePickerChange, toggleSid
                             <DatePicker
                                 id="date-picker"
                                 value={dayjs(selectedDate)}
-                                onChange={(date) => handleDatePickerChange(date)}
+                                onChange={(date) => handleDatePickerChange(date ? date.toDate() : null)}
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
@@ -51,7 +51,7 @@ export default function Header({ selectedDate, handleDatePickerChange, toggleSid
                             <DatePicker
                                 id="date-picker"
                                 value={dayjs(selectedDate)}
-                                onChange={(date) => handleDatePickerChange(date)}
+                                onChange={(date) => handleDatePickerChange(date ? date.toDate() : null)}
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}

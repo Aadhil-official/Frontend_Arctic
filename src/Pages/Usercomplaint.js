@@ -42,7 +42,7 @@ function Usercomplaint() {
       <br />
       <Grid container justifyContent='center' textAlign='center'>
         {/* <Grid item xl={5.25} lg={4.65} md={4} xs={1} sm={3}></Grid> */}
-        <Grid item xl={3} lg={4} md={4} xs={10.5} sm={6} className="box">
+        <Grid item xl={5.5} lg={6} md={8} xs={11} sm={8} className="box">
           <ComplaintForm />
         </Grid>
         {/* <Grid item xl={2} lg={3} md={4} xs={0.5} sm={3}></Grid> */}
