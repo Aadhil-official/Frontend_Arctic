@@ -77,6 +77,7 @@ function FormResetPass() {
         component="form"
         sx={{
           '& .MuiTextField-root': { m: 1 },
+          width:'97%',
           textAlign: 'center',
           mt: 3
         }}

@@ -19,7 +19,7 @@ export default function Logins() {
     <>
       <NormalHeaderBar />
 
-      <Grid container>
+      <Grid container justifyContent='center' >
         <Grid item className="text" xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
           <ThemeProvider theme={theme}>
             <Typography variant='h3' sx={{ marginTop: '-15px', marginBottom: '-25px', fontWeight: 'bold' }}>
@@ -46,7 +46,7 @@ export default function Logins() {
         </Grid>
         {/* <Grid item xl={2} lg={3} md={4} xs={0.5} sm={3}></Grid> */}
       </Grid><br />
-      <Grid container>
+      <Grid container justifyContent='center' >
         <Grid item xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
           <ThemeProvider theme={theme}>
             <Typography variant='h5' fontWeight='bold'>

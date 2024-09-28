@@ -25,13 +25,13 @@ function ForPassword() {
         </Grid>
       </Grid>
 
-      <Grid container>
+      <Grid container justifyContent='center'>
         <Grid item xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
-          <img src="https://cdn-icons-png.flaticon.com/128/3000/3000482.png" style={{marginTop:'40px'}} width="60px" height="60px" align="center" alt='' />
+          <img src="https://cdn-icons-png.flaticon.com/128/3000/3000482.png" style={{ marginTop: '40px' }} width="60px" height="60px" align="center" alt='' />
         </Grid>
       </Grid>
       <br />
-      <Grid container className="textfp">
+      <Grid container className="textfp" justifyContent='center'>
         <Grid item xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
           <ThemeProvider theme={theme}>
             <Typography variant='h3' sx={{ fontWeight: 'bold' }}>
@@ -40,7 +40,7 @@ function ForPassword() {
           </ThemeProvider>
         </Grid>
       </Grid>
-      <Grid container>
+      <Grid container justifyContent='center'>
         <ThemeProvider theme={theme}>
           <Grid item xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
             <Typography variant='h6'>
@@ -55,14 +55,17 @@ function ForPassword() {
 
       <Grid container justifyContent='center' textAlign='center'>
         {/* <Grid item xl={4.75} lg={4.65} md={4} xs={1} sm={3}></Grid> */}
+        {/* <Grid item xl={5} lg={4} md={12} xs={12}></Grid> */}
+        {/* <center> */}
         <Grid item xl={4} lg={5} md={4} xs={10.5} sm={6} className="box">
           <FormForgotPass />
         </Grid>
+        {/* </center> */}
         {/* <Grid item xl={2} lg={3} md={4} xs={0.5} sm={3}></Grid> */}
       </Grid><br />
 
 
-      <Grid container>
+      <Grid container justifyContent='center'>
         <Grid item xl={11} lg={12} md={12} xs={12} sm={12} textAlign={'center'}>
           <ThemeProvider theme={theme}>
             <Typography variant='h5' fontWeight='bold'>

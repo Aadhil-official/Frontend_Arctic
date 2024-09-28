@@ -56,7 +56,7 @@ function Home() {
             });
     }, []);
 
-
+console.log('alll.....',counts);
     const visitData = {
         labels: Object.keys(visitsCounts),
         datasets: [
@@ -175,7 +175,7 @@ function Home() {
                         <h3>USER GROUPS</h3>
                         <HiMiniUserGroup className='card_icon' />
                     </div>
-                    <h1>{counts.usergroups || 0}</h1>
+                    <h1>{counts.userGroup || 0}</h1>
                 </div>
 
                 <div className='card'>
